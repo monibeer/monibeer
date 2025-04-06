@@ -1,0 +1,135 @@
+*{
+  @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+  font-family: "Barlow", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+body{
+  margin: 0;
+}
+
+.home{
+  background: linear-gradient(to right,rgba(20, 8, 2, 0.951),rgba(20, 8, 2, 0.945), rgba(22, 6, 2, 0.892), rgba(0, 0, 1, 0.84), rgba(0, 0, 0, 0.321), rgba(0, 0, 1, 0.425), rgba(0, 0, 0, 0)), 
+  url(../assets/Leonardo_Phoenix_10_A_rustic_craft_brewery_with_stainless_stee_2\ 1.png);
+  width: 100%;
+  height: 700px;  
+  background-repeat: no-repeat;
+  background-size:  100% 100%; 
+}
+
+
+
+.header{
+  width: 100%;
+  height: 100px;
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  padding-left: 5%;
+  padding-right: 5%;
+  background: linear-gradient(rgba(0, 0, 0, 0.897), rgba(0, 0, 0, 0.568),rgba(0, 0, 0, 0)); /* Gradiente corrigido */
+}
+
+.header .container img{
+  width: 90px; 
+  height: auto;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  width: 60%;
+  list-style: none;
+  
+}
+.navbar li{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 30px;
+  
+}
+.header .container .navbar a{
+  font-weight: 500;
+  color: aliceblue;
+  text-decoration: none;
+  font-size: 15px;
+}
+.menu-center {
+  display: flex;
+  justify-content: center; 
+}
+
+.menu-right {
+  display: flex;
+  justify-content: flex-end; /* Alinha os itens à direita */
+  align-items: center;
+}
+
+#home{
+  font-weight: 700;
+}
+
+#login{
+  color: #ffffff;
+  padding: 5px 20px;
+  border-radius: 7px;
+  border: #DCAB20 solid 3px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Banner*/
+.banner {
+  display: flex;
+  justify-content: flex-start;
+  width: 50%;
+  align-items: center;
+  padding-top: 7%;
+  padding-left: 4%;
+
+}
+
+.banner h1{
+  color:#FFFACC;
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 1.2  ;
+}
+.banner p{
+  color: rgb(255, 255, 255);
+  width: 85%;
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+button{
+  margin-top: 35px;
+  background-color:#DCAB20;
+  width: 135px;
+  height: 36px;
+  border: none;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #2A1110;
+}
