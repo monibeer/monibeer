@@ -1,12 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<!-- Header -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
-</head>
-<body>
+    <link rel="stylesheet" href="./css/assets/main.css">
+    <link rel="stylesheet" href="./css/cadastro.css">
 
+    <title>Cadastro - Monibeer</title>
+</head>
+
+<body>
+    <div class="cadastro">
+        <div class="header">
+            <div class="container">
+                <img src="../public/assets/Monibeer (1) 1.png" alt="Logo Monibeer">
+            </div>
+        </div>
+
+        <!-- Container com os dados informados -->
+
+
+        <div class="container-cadastro">
+            <div class="card"> <!-- estou criando aqui o balão de cadastro -->
+                <h2>Cadastro</h2>
+                <br><br>
+                <div class="card-campo">
+                    <div class="campo">
+                        <span>Nome da Empresa</span>
+                        <br><br>
+                        <input type="text" id="input_nome" placeholder="Nome Empresa"> <br><br>
+                    </div>
+                    <div class="campo">
+                        <span>E-mail</span>
+                        <br><br>
+                        <input type="text" id="input_email" placeholder="meuemail@provedor.com"> <br><br>
+                    </div>
+                    <div class="campo">
+                        <span>CNPJ</span>
+                        <br><br>
+                        <input type="text" id="input_cnpj" placeholder="00.000.000/0000-00"> <br><br>
+                    </div>
+                    <div class="campo">
+                        <span>Representante da Empresa</span>
+                        <br><br>
+                        <input type="text" id="input_representante" placeholder="Nome Representante"> <br><br>
+                    </div>
+                    <div class="campo">
+                        <span>Senha</span>
+                        <br><br>
+                        <input type="password" id="input_senha" placeholder="*******"> <br><br>
+                    </div>
+                    <div class="campo">
+                        <span>Quantidade de Fermentadoras</span>
+                        <br><br>
+                        <input type="number" id="input_fermentadora" placeholder="00"> <br><br>
+                    </div>
+                    <button class="botao">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
+<div class="footer">
+    <div class="container">
+    </div>
 </html>
