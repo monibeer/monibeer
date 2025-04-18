@@ -9,22 +9,34 @@
     <link rel="stylesheet" href="./css/indexDashboard.css">
 </head>
 <section class="dashboard">
-    <div class="header">
+    <div class="sidebar">
         <div class="logotipo">
-            <img src="./assets/Monibeer (1) 1.png" alt="">
+            <img src="./assets/monibeer-logo.png" alt="">
         </div>
 
-        <div class="profile">
-            <img src="./assets/image.png" alt="" class="profile-img">
+        <!-- <div class="profile">
+            <div class="circle-profile">
+                <img src="./assets/image.png" alt="" class="profile-img">
+            </div>
             <h3>Rodrigo Souza</h3>
             <p>Administrador</p>
-        </div>
+        </div> -->
 
         <div class="buttons-navegation">
             <div class="container-item">
-                <div class="navigation-item">
+                <div class="navigation-item active">
                     <i class="fa-solid fa-house"></i>
-                    <p>Dashboard-Home</p>
+                    <p>Home</p>
+                </div>
+
+                <div class="navigation-item">
+                    <i class="fa-solid fa-chart-column"></i>
+                    <p>Dashboard (IPA e Pilsen)</p>
+                </div>
+
+                <div class="navigation-item">
+                    <i class="fa-solid fa-gear"></i>
+                    <p>Configurações</p>
                 </div>
             </div>
 
@@ -36,8 +48,47 @@
     </div>
 
     <div class="container-dashboard">
-        <h3>Dashboard</h3>
-        <hr>
+        <div class="header">
+            <div class="container-searchBarGroup">
+                <i class="fa-solid fa-bars"></i>
+
+                <h3>Home</h3>
+                <!-- <div class="container-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search..">
+                </div> -->
+            </div>
+
+
+            <div class="container-actions">
+                <div class="container-theme-dark-light">
+                    <img src="https://static-00.iconduck.com/assets.00/sun-symbol-emoji-512x512-qjm8vnpc.png" alt="">
+                </div>
+                <i class="fa-solid fa-bell"></i>
+                <span>|</span>
+                <div class="container-mini-profile">
+                    <img src="./assets/image.png" alt="">
+                    <p>Rodrigo Souza</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="datatime">
+            <p>18/04/2025 - 17:56:02</p>
+        </div>
+
+        <div class="container-info-fermenter">
+            <div class="info">
+                <div class="kpis"></div>
+
+                <div class="grafics">
+                    <canvas></canvas>
+                    <canvas></canvas>
+                </div>
+
+            </div>
+            <div class="notifications"></div>
+        </div>
     </div>
 </section>
 
