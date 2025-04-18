@@ -1,0 +1,51 @@
+html, body {
+    height: 100%;
+}
+
+.dashboard {
+    height: 100%;
+    display: flex;
+    background-color: rgb(94, 8, 8);
+}
+
+.header {
+    background-color: rgb(45, 143, 0);
+    width: 280px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    align-items: center;
+}
+
+.header .logotipo {
+    width: 100%;
+    height: 90px;
+    background-color: purple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logotipo img {
+    height: 100%;
+}
+
+.profile {}
+
+.profile-img {}
+
+.buttons-navegation {}
+
+.container-item {}
+
+.navigation-item {}
+
+.logout-item {}
+
+.container-dashboard {
+    flex: 1;
+    background-color: white;
+    border-radius: 12px 0px 0px 12px;
+    padding: 30px;
+}
