@@ -17,6 +17,16 @@
         <div class="header">
             <div class="container">
                 <img src="../public/assets/Monibeer (1) 1.png" alt="Logo Monibeer">
+                <div class="navbar">
+                    <ul class="menu-center">
+                        <li><a id="home" href="index.html">Home</a></li>
+                        <li><a href="#sobre">Sobre Nós</a></li>
+                    </ul>
+                    <ul class="menu-right">
+                        <li><a id="login" href="login.html">Login</a></li>
+                        <li><a id="cadastro" href="cadastro.html">Cadastro</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -29,58 +39,96 @@
                 <br><br>
                 <div class="card-campo">
                     <form id="formCadastro">
-                    <div class="campo">
-                        <span>Nome da Empresa</span>
-                        <br><br>
-                        <input type="text" id="input_nome"> <br><br>
-                    </div>
-                    <div class="campo">
-                        <span>E-mail</span>
-                        <br><br>
-                        <input type="text" id="input_email"> <br><br>
-                    </div>
-                    <div class="campo">
-                        <span>CNPJ</span>
-                        <br><br>
-                        <input type="text" id="input_cnpj"> <br><br>
-                    </div>
-                    <div class="campo">
-                        <span>Representante da Empresa</span>
-                        <br><br>
-                        <input type="text" id="input_representante"> <br><br>
-                    </div>
-                    <div class="campo">
-                        <span>Senha</span>
-                        <br><br>
-                        <input type="password" id="input_senha"> <br><br>
-                    </div>
-                    <div class="campo">
-                        <span>Quantidade de Fermentadoras</span>
-                        <br><br>
-                        <input type="number" id="input_fermentadora"> <br><br>
-                    </div>
-                    <div class="confbotao">
-                        <button onclick="analisar(event)" class="botao">Cadastrar</button>
-                    </div>
+                        <div class="campo">
+                            <span>Nome da Empresa</span>
+                            <br><br>
+                            <input type="text" id="input_nome"> <br><br><br>
+                        </div>
+                        <div class="campo">
+                            <span>E-mail</span>
+                            <br><br>
+                            <input type="text" id="input_email"> <br><br><br>
+                        </div>
+                        <div class="campo">
+                            <span>CNPJ</span>
+                            <br><br>
+                            <input type="text" id="input_cnpj"> <br><br><br>
+                        </div>
+                        <div class="campo">
+                            <span>Representante da Empresa</span>
+                            <br><br>
+                            <input type="text" id="input_representante"> <br><br><br>
+                        </div>
+                        <div class="campo">
+                            <span>Senha</span>
+                            <br><br>
+                            <input type="password" id="input_senha"> <br><br><br>
+                        </div>
+                        <div class="campo">
+                            <span>Quantidade de Fermentadoras</span>
+                            <br><br>
+                            <input type="number" id="input_fermentadora"> <br><br>
+                        </div>
+                        <div class="confbotao">
+                            <button onclick="analisar(event)" class="botao">Cadastrar</button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="footer-end">
+                <img src="./assets/Monibeer (1) 1.png" alt="Logo_MoniBeer" height="90px"> <br>
+                <span>Copyright © 2025 | MoniBeer</span> <br>
+                <span> <img src="./assets/brasil_logo.png" alt="Logo Brasil" height="22px">Brasil Português</span>
+            </div>
+            <div class="redes-sociais">
+                <h3>REDES SOCIAIS</h3> <br>
+                <span><img src="./assets/instagram_icon.png" alt="Instagram" height="30px"> @moni_beer_insta</span>
+                <br><br>
+                <span><img src="./assets/facebook_icon.png" alt="Facebook" height="30px"> @moni_beer_face</span>
+                <br><br>
+                <span><img src="./assets/youtube_icon.png" alt="Youtube" height="25px"> moni_beer_yt</span> <br><br>
+            </div>
+            <div class="contato">
+                <h3>CONTATO </h3> <br>
+                <span><img src="./assets/telefone_icon.png" alt="Telefone" height="30px">+55 11 967603378</span>
+                <br><br>
+                <span><img src="./assets/email_icon.png" alt="Email" height="30px">monibeer@gmail.com</span> <br><br>
+            </div>
+            <div class="campo">
+                <h3>EMPRESA</h3> <br>
+                <span style="text-decoration: underline;"><a href="./index.html">home</a></span> <br><br>
+                <span style="text-decoration: underline;"><a href="./index-dashboard.html">dashboard</a></span> <br><br>
+                <span style="text-decoration: underline;">historico</span> <br><br>
+                <span style="text-decoration: underline;">configurações</span> <br><br>
+            </div>
+            <div class="campo">
+                <h3>MAPA DO SITE</h3> <br>
+                <span style="text-decoration: underline;"> <a href="./cadastro.html">Voltar ao topo</a></span> <br><br>
+                <span style="text-decoration: underline;">Sobre Nós</span> <br><br>
+                <span style="text-decoration: underline;">Como surgiu</span> <br><br>
+                <span style="text-decoration: underline;">Problemática</span> <br><br>
+                <span style="text-decoration: underline;">Solução</span> <br><br>
+                <span style="text-decoration: underline;">Contato</span> <br><br>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="div_mensagem"></div>
 </body>
-
-<div class="footer">
-    <div class="container">
-</div>
-
-<div id="div_mensagem"></div>
 
 </html>
 
 
 <!-- JAVA SCRIPT -->
 <script>
-    function analisar(event){
+    function analisar(event) {
         event.preventDefault(); // Impede o recarregamento da página
 
         var nome = input_nome.value;
@@ -90,18 +138,18 @@
         var senha = input_senha.value;
         var fermentadora = input_fermentadora.value;
 
-        if (email == "" || cnpj == "" || senha == "" || representante == ""){
-            alert (`Preencha todos os campos obrigatórios`)
-            
-        } else if (!email.includes("@")){
-            alert (`Preencha um E-mail válido`)
+        if (email == "" || cnpj == "" || senha == "" || representante == "") {
+            alert(`Preencha todos os campos obrigatórios`)
+
+        } else if (!email.includes("@")) {
+            alert(`Preencha um E-mail válido`)
 
         } else {
-            alert (`Cadastro Realizado com Sucesso!`)
-           
+            alert(`Cadastro Realizado com Sucesso!`)
+
             window.location.href = "./login.html"; //faz a navegação automática
-      
+
         }
     }
-    
+
 </script>
