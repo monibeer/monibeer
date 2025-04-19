@@ -10,101 +10,102 @@
 
 <body>
 
-    <h1><u>Calculadora Financeira de Redução de Perdas No Processo De Fermentação</u></h1>
+    <div class="container">
+        <div class="container-logo">
+            <img src="./assets/monibeer-logo.png" alt="empresa monibeer logo">
+        </div>
 
-    <h2> Quantos litros são produzidos por mês? </h2>
-    <input id="input_litros" type="number">
+        <h3>Simulador de perdas no processo de fermentação</h3>
 
-    <h2>Percentual de perdas por conta da falta de monitoramento de temperatura no processo de fermentação?</h2>
-    <input id="input_prejuizo" type="number">
+        <div class="container-select">
+            <h4> Selecione o tipo da cerveja </h4>
+            <select id="select_cerveja">
+                <option value="#"> </option>
+                <option value="1">PILSEN</option>
+                <option value="2">IPA</option>
+            </select>
+        </div>
 
-    <h2> Qual é o custo de cada litro na fabricação? </h2>
-    <input id="input_valor" type="number">
-    <br>
-    <br>
-    <button onclick="calcular()"> Calcular Perdas</button>
+        <div>
+            <h4> Litros produzidos por mês </h4>
+            <input id="litros_mes" type="number">
+        </div>
 
-    <br> <br>
+        <div>
+            <h4>Percentual de perdas sem monitoramento </h4>
+            <input id="percentual_perdas" type="number">
+        </div>
 
-    <div id="div_mensagem"></div>
+
+        <div>
+            <h4> Custo por litro </h4>
+            <input id="custo_litro" type="number">
+        </div>
+
+        <br>
+        <button onclick="calcular()">Calcular Perdas</button>
+
+        <div id="msg"></div>
+
+    </div>
+
+
 
 </body>
 
 </html>
 <script>
     function calcular() {
-        // coleta de dados
-        var totalDeLitros = Number(input_litros.value);
-        var prejuizoEmPorcentagem = Number(input_prejuizo.value);
-        var valorPorLitro = Number(input_valor.value);
 
-        // calculo de perda total(litros e reais) 
-        var perdaDeLitros = (prejuizoEmPorcentagem / 100) * totalDeLitros;
-        var perdaFinanceira = perdaDeLitros * valorPorLitro
+        var tipoCerveja = select_cerveja.value;
+        var totalLitros = Number(litros_mes.value);
+        var perdas = Number(percentual_perdas.value);
+        var valorLitro = Number(custo_litro.value);
+        var mensagem = "";
 
-        if (0 <= prejuizoEmPorcentagem && prejuizoEmPorcentagem <= 100 && valorPorLitro > 0 && totalDeLitros > 0) { //caso dados sejam válidos
+        var perdaLitros = (perdas / 100) * totalLitros; // quantidade de litros perdidos
+        var prejuizo = perdaLitros * valorLitro; // valor perdido
 
-            div_mensagem.innerHTML = `<h3>Nosso sistema de monitoramento tem expectativa de ocasionar uma redução das perdas de 10% a 25%. </h3>`
+        if (tipoCerveja == "#" || totalLitros == "" || perdas == "" || valorLitro == "") {
+            mensagem = `Preencha todos os campos.`;
 
-            // calculo de redução de perdas, economia(litros e reais)
-            var reducaoDasPerdas = 10
-            var economiaDosLitros = (perdaDeLitros * (reducaoDasPerdas / 100));
-            var economiaTotalEmReais = (economiaDosLitros * valorPorLitro);
+        } else if ((tipoCerveja == "1" || tipoCerveja == "2") && perdas >= 0 && perdas <= 100 && valorLitro > 0 && totalLitros > 0) {
 
-            var totalDeCusto = totalDeLitros * valorPorLitro
-            div_mensagem.innerHTML += `
-            <p>Com total de <b>${totalDeLitros}L</b> a preço unitário de <b>R$${valorPorLitro}</b> , totalizaria <b>R$${totalDeCusto}</b> de custo  </p>
-            <p>Com perda de <b>${prejuizoEmPorcentagem}%</b> o prejuizo  atual é de  <b style='color:red'>${perdaDeLitros}L</b> e a financeira de <b style='color:red'>R$${perdaFinanceira}</b></p>
+            mensagem = `<h3>Nosso sistema visa ocasionar uma redução das perdas de 10% a 25%. </h3>`
+
+            // redução mínima de 10% das perdas
+            var valorReducao = 10;
+            var economiaLitro = (perdaLitros * (valorReducao / 100)); // litros economizados
+            var economiaTotal = (economiaLitro * valorLitro); // valor economizado
+
+            var totalCusto = totalLitros * valorLitro;
+            mensagem += `
+            <p>Com total de <b>${totalLitros.toFixed(2)}L</b> a preço unitário de <b>R$${valorLitro.toFixed(2)}</b>,
+                totalizaria <b>R$${totalCusto.toFixed(2)}</b> de custo  </p>
+            <p>Com perda de <b>${perdas}%</b> o prejuízo atual é de  <b style='color:red'>${perdaLitros.toFixed(2)}L</b>
+                e a financeira de <b style='color:red'>R$${prejuizo.toFixed(2)}</b></p>
             <p> 
-                Com redução de <b>${reducaoDasPerdas}%</b>, a perda cairá de ${perdaDeLitros}L para <b style='color:green'>${(perdaDeLitros - economiaDosLitros)}L</b> (${economiaDosLitros}L de redução), totalizando <b style='color:green'>R$${(perdaFinanceira - economiaTotalEmReais)}</b> (R$${economiaTotalEmReais} de redução).
-            </p>
-                `
+                Com redução de <b>${valorReducao}%</b>, a perda cairá de ${perdaLitros.toFixed(2)}L para
+                <b style='color:green'>${(perdaLitros - economiaLitro).toFixed(2)}L</b>
+                (${economiaLitro.toFixed(2)}L de redução), totalizando <b style='color:green'>
+                    R$${(prejuizo - economiaTotal).toFixed(2)}</b> (R$${economiaTotal.toFixed(2)} de redução).
+            </p>`;
 
-            // calculo de redução de perdas, economia(litros e reais)
-            reducaoDasPerdas = 25;
-            economiaDosLitros = perdaDeLitros * (reducaoDasPerdas / 100)
-            economiaTotalEmReais = economiaDosLitros * valorPorLitro
+            // redução máxima de 25% das perdas
+            valorReducao = 25;
+            economiaLitro = perdaLitros * (valorReducao / 100); // litros economizados
+            economiaTotal = economiaLitro * valorLitro; // valor economizado
 
-            div_mensagem.innerHTML += `
-            <p>Com redução de <b>${reducaoDasPerdas}%</b>, a perda cairá de ${perdaDeLitros}L para <b style='color:green'>${(perdaDeLitros - economiaDosLitros)}L</b> (${economiaDosLitros}L de redução), totalizando <b style='color:green'>R$${(perdaFinanceira - economiaTotalEmReais)}</b> (R$${economiaTotalEmReais} de redução).</p>
-                `
+            mensagem += `
+            <p>Com redução de <b>${valorReducao}%</b>, a perda cairá de ${perdaLitros.toFixed(2)}L para 
+                <b style='color:green'>${(perdaLitros - economiaLitro).toFixed(2)}L</b> 
+            (${economiaLitro.toFixed(2)}L de redução), totalizando <b style='color:green'>
+                R$${(prejuizo - economiaTotal).toFixed(2)}</b> (R$${economiaTotal.toFixed(2)} de redução).</p>`;
         }
-        else { // caso dados inválidos
-            div_mensagem.innerHTML = `insira dados Válidos`
+        else {
+            mensagem = `Insira valores válidos.`;
         }
+
+        msg.innerHTML = mensagem;
     }
 </script>
-
-
-
-
-    <!-- 
-        <p> Se as temperaturas estiverem muito altas, aumentam a produção de ésteres frutados que podem resultar em aromas
-        indesejáveis, como solvente ou álcool forte.
-    </p>
-
-    <p> Se a temperatura estiver muito abaixo do indicado, a atividade das leveduras pode diminuir ou até parar,
-        deixando açúcares não fermentados e comprometendo o teor alcoólico desejado.
-    </p>
-
-    -->
-    <!-- 
-    <p>
-        <b>PRINCIPAIS IMPACTOS NA QUALIDADE DA FERMENTAÇÃO
-            CERVEJEIRA(<i>iza maria gomes dos santos</i>)</b>: <br>
-        <i>https://repositorio.ufpb.br/jspui/bitstream/123456789/25006/1/Principais%20impactos%20na%20qualidade%20da%20fermenta%C3%A7%C3%A3o%20cervejeira.pdf</i>
-    </p>
-    <p>
-        <b>REDUÇÃO DE PERDAS DE EXTRATO NO PROCESSO DE FABRICAÇÃO DE
-            CERVEJA NA ÁREA DA FERMENTAÇÃO ( <i>denilson da ilva Vaz</i> )</b>:<br>
-        <i>https://aprepro.org.br/conbrepro/2019/anais/arquivos/09242019_160922_5d8a74aa9a367.pdf</i>
-    </p>
-    <p>
-
-        <b>COMO MELHORAR O
-            RENDIMENTO NO
-            PROCESSO CERVEJEIRO( <i>prozyn biosolutions for life</i> )</b> :<br>
-        <i>https://www.agraria.com.br/extranet_2016/uploads/AgromalteArquivo/palestra_8___produzindo_mais_com_menos_1596199309457.pdf</i>
-    </p>
-    
--->

@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    font-family: "Barlow", sans-serif;
+}
+
+body {
+    /* https://www.w3schools.com/css/css3_gradients.asp */
+    background: linear-gradient(to bottom, #FF9640, #FF7235);
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    background-color: #441F0A;
+    width: 550px;
+    margin: auto;
+    padding: 30px 20px;
+    border-radius: 15px;
+    border: #F7A620 2px solid;
+    color: #FFFFFF;
+}
+
+.container-logo {
+    display: flex;
+    justify-content: center;
+}
+
+.container-logo img {
+    width: 200px;
+}
+
+h3 {
+    text-align: center;
+    color: #F7A620;
+}
+
+h4 {
+    color: #FFFFFF;
+    margin-bottom: 5px;
+}
+
+input,
+select {
+    width: 530px;
+    height: 12px;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+select {
+    width: 546px;
+    height: 28px;
+    font-size: 12px;
+}
+
+button {
+    width: 100%;
+    background-color: #F08C00;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+button:hover {
+    /*https://www.w3schools.com/cssref/sel_hover.php */
+    background-color: #cf7200;
+}
+
+#msg {
+    background-color: #5A2B0D;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+#msg h3,
+#msg p {
+    margin: 10px 0;
+}
+
+b {
+    color: #F7A620;
+}
