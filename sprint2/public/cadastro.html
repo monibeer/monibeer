@@ -28,37 +28,41 @@
                 <h2>Cadastro</h2>
                 <br><br>
                 <div class="card-campo">
+                    <form id="formCadastro">
                     <div class="campo">
                         <span>Nome da Empresa</span>
                         <br><br>
-                        <input type="text" id="input_nome" placeholder="Nome Empresa"> <br><br>
+                        <input type="text" id="input_nome"> <br><br>
                     </div>
                     <div class="campo">
                         <span>E-mail</span>
                         <br><br>
-                        <input type="text" id="input_email" placeholder="meuemail@provedor.com"> <br><br>
+                        <input type="text" id="input_email"> <br><br>
                     </div>
                     <div class="campo">
                         <span>CNPJ</span>
                         <br><br>
-                        <input type="text" id="input_cnpj" placeholder="00.000.000/0000-00"> <br><br>
+                        <input type="text" id="input_cnpj"> <br><br>
                     </div>
                     <div class="campo">
                         <span>Representante da Empresa</span>
                         <br><br>
-                        <input type="text" id="input_representante" placeholder="Nome Representante"> <br><br>
+                        <input type="text" id="input_representante"> <br><br>
                     </div>
                     <div class="campo">
                         <span>Senha</span>
                         <br><br>
-                        <input type="password" id="input_senha" placeholder="*******"> <br><br>
+                        <input type="password" id="input_senha"> <br><br>
                     </div>
                     <div class="campo">
                         <span>Quantidade de Fermentadoras</span>
                         <br><br>
-                        <input type="number" id="input_fermentadora" placeholder="00"> <br><br>
+                        <input type="number" id="input_fermentadora"> <br><br>
                     </div>
-                    <button class="botao">Cadastrar</button>
+                    <div class="confbotao">
+                        <button onclick="analisar(event)" class="botao">Cadastrar</button>
+                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -67,5 +71,37 @@
 
 <div class="footer">
     <div class="container">
-    </div>
+</div>
+
+<div id="div_mensagem"></div>
+
 </html>
+
+
+<!-- JAVA SCRIPT -->
+<script>
+    function analisar(event){
+        event.preventDefault(); // Impede o recarregamento da página
+
+        var nome = input_nome.value;
+        var email = input_email.value;
+        var cnpj = input_cnpj.value;
+        var representante = input_representante.value;
+        var senha = input_senha.value;
+        var fermentadora = input_fermentadora.value;
+
+        if (email == "" || cnpj == "" || senha == "" || representante == ""){
+            alert (`Preencha todos os campos obrigatórios`)
+            
+        } else if (!email.includes("@")){
+            alert (`Preencha um E-mail válido`)
+
+        } else {
+            alert (`Cadastro Realizado com Sucesso!`)
+           
+            window.location.href = "./login.html"; //faz a navegação automática
+      
+        }
+    }
+    
+</script>

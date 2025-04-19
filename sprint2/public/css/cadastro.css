@@ -1,106 +1,145 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: 0;
-    text-decoration: none;
-}
+    /* -------HEADER------- */
 
-body {
-    margin: 0;
-}
+    body {
+        margin: 0;
+    }
 
-.cadastro {
-    background-image: url("../assets/background.png");
-    width: 100%;
-    height: 700px;
-    background-size: 100%;
+    .cadastro {
+        background-image: url("../assets/background.png");
+        width: 100%;
+        height: 700px;
+        background-size: 100%;
+    }
 
-}
+    .header {
+        height: 40px;
+    }
 
-.header {
-    height: 60px;
-}
-
-.header .container img {
-    width: 90px;
-    height: auto;
-    padding-top: 1%;
-    padding-left: 5%;
-}
+    .header .container img {
+        width: 90px;
+        height: auto;
+        padding-top: 1%;
+        padding-left: 5%;
+    }
 
 
 
-/* CONTAINER CADASTRO */
-
-.container-cadastro {
-
-    display: flex;
-    justify-content: center;
-    /*max-width: 100%;*/
-    align-items: center;
-    min-height: center; /* Garante que ocupe toda a altura da tela */
-    padding: 20px;
-    color: aliceblue;
-    height: auto;
-    /*width: 60%;*/
-
-}
-
-.card {
-
-    background-color: rgba(42, 17, 16, 0.95);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 40%;
-    height: auto;
-    margin: auto;
-    border-radius: 10px;
-    padding: 10px;
-    line-height: 12px;
-
-}
-
-.card .card-campo{
-    display: flex;
-    flex-direction: column;
-    width: auto;
-    padding: 35px;
- 
-}
-
-.card h2 {
-    display: flex;
-    align-items: center;
-    padding-left: 36%;
-    color: #f7f4d9;
-    font-weight: 600;
-    font-size: 34px;
-    line-height: 1.8;
-
-}
-
-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background-color: #DCAB20;
-    width: 135px;
-    height: 36px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #ffffff;
-    opacity: 100%;
-}
 
 
 
-/* FOOTER */
+    /* --------CONTAINER CADASTRO-------- */
 
-.footer {
-    display: flex;
-}
+    .container-cadastro {
 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: aliceblue;
+        height: auto;
+        
+    }
+
+
+
+
+
+    /* -----Balão de Cadastro------*/
+
+    .card {
+        background-color: rgba(42, 17, 16, 0.95);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 38%;
+        border-radius: 10px;
+        padding: 10px;
+        line-height: 0;
+    }
+
+    .card .card-campo {
+        display: flex;
+        flex-direction: column;
+        width: auto;
+        padding: 40px;
+        padding-top: 0px;
+        line-height: 0.6;
+        /*margin: 10px;*/
+
+    }
+
+
+
+
+    /*------Configuração das input(campos)-----*/
+
+    .card-campo input {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        border: 0;
+        border-bottom: 2px solid rgb(200, 200, 200);
+    
+    }
+
+    .card-campo .campo {
+        width: 100%;
+        
+        /* Garante que cada campo ocupe 100% da largura disponível */
+    }
+
+    .card h2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #f7f4d9;
+        font-weight: 600;
+        font-size: 40px;
+        line-height: 3.0;
+    }
+
+    input {
+        background-color: transparent;
+        color: #ffffff;
+        transition: 0.5s ease-in-out;
+        border: 0;
+        border-bottom: 2px solid rgb(200, 200, 200);
+    }
+
+    span {
+        font-weight: 400;
+    }
+
+
+    /* ---- Configuração Botão de Cadastro -------*/
+    .confbotao {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 30px;
+       
+    }
+
+    button {
+        background-color: #DCAB20;
+        width: 135px;
+        height: 36px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #ffffff;
+        opacity: 100%;
+    }
+
+
+
+
+
+    /* --------FOOTER---------- */
+
+    .footer {
+        display: flex;
+    }
