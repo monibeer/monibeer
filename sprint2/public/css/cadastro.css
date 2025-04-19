@@ -192,14 +192,14 @@
          justify-content: space-around;
          color: #eeeded;
          background-color: black;
-         height: 400px;
+         height: 390px;
      }
 
      .footer .container {
          display: flex;
          justify-content: space-around;
          width: 100%;
-         padding-top: 70px;
+         padding-top: 65px;
          line-height: 1.0;
      }
 
@@ -216,7 +216,7 @@
      }
 
      .footer h3 {
-         font-size: 22px;
+         font-size: 18px;
          font-weight: 600;
      }
 
@@ -232,4 +232,10 @@
      .footer .footer-end span {
          display: flex;
          align-items: center;
+         font-size: 12px;
+         gap: 8px;
+     }
+
+     .footer span {
+        font-size: 14px;
      }
