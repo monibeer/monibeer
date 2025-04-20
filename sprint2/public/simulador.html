@@ -15,37 +15,42 @@
             <img src="./assets/monibeer-logo.png" alt="empresa monibeer logo">
         </div>
 
-        <h3>Simulador de perdas no processo de fermentação</h3>
+        <div class="form">
 
-        <div class="container-select">
-            <h4> Selecione o tipo da cerveja </h4>
-            <select id="select_cerveja">
-                <option value="#"> </option>
-                <option value="1">PILSEN</option>
-                <option value="2">IPA</option>
-            </select>
+            <h3>Simulador de perdas no processo de fermentação</h3>
+
+            <div class="container-select">
+                <h4> <img src="./assets/chopp.svg" class="icon" alt=""> Selecione o tipo da cerveja </h4>
+                <select id="select_cerveja">
+                    <option value="#"> </option>
+                    <option value="1">PILSEN</option>
+                    <option value="2">IPA</option>
+                </select>
+            </div>
+
+            <div>
+                <h4> <img src="./assets/liters.svg" class="icon" alt=""> Litros produzidos por mês </h4>
+                <input id="litros_mes" type="number">
+            </div>
+
+            <div>
+                <h4> <img src="./assets/percentage.svg" class="icon" alt=""> Percentual de perdas sem monitoramento
+                </h4>
+                <input id="percentual_perdas" type="number">
+            </div>
+
+            <div>
+                <h4> <img src="./assets/money.svg" class="icon" alt=""> Custo por litro </h4>
+                <input id="custo_litro" type="number">
+            </div>
+
+            <button onclick="calcular()">
+                <img src="./assets/calculator1.svg" class="icon" alt="">
+                Calcular Perdas
+            </button>
+            <div id="msg"></div>
+
         </div>
-
-        <div>
-            <h4> Litros produzidos por mês </h4>
-            <input id="litros_mes" type="number">
-        </div>
-
-        <div>
-            <h4>Percentual de perdas sem monitoramento </h4>
-            <input id="percentual_perdas" type="number">
-        </div>
-
-
-        <div>
-            <h4> Custo por litro </h4>
-            <input id="custo_litro" type="number">
-        </div>
-
-        <br>
-        <button onclick="calcular()">Calcular Perdas</button>
-
-        <div id="msg"></div>
 
     </div>
 
@@ -71,7 +76,10 @@
 
         } else if ((tipoCerveja == "1" || tipoCerveja == "2") && perdas >= 0 && perdas <= 100 && valorLitro > 0 && totalLitros > 0) {
 
-            mensagem = `<h3>Nosso sistema visa ocasionar uma redução das perdas de 10% a 25%. </h3>`
+            mensagem = `<h3>
+                <img src="./assets/reducao.svg" class="icon" alt="">
+                Meta de redução entre 10% até 25%
+                </h3>`
 
             // redução mínima de 10% das perdas
             var valorReducao = 10;
@@ -101,8 +109,7 @@
                 <b style='color:green'>${(perdaLitros - economiaLitro).toFixed(2)}L</b> 
             (${economiaLitro.toFixed(2)}L de redução), totalizando <b style='color:green'>
                 R$${(prejuizo - economiaTotal).toFixed(2)}</b> (R$${economiaTotal.toFixed(2)} de redução).</p>`;
-        }
-        else {
+        } else {
             mensagem = `Insira valores válidos.`;
         }
 
