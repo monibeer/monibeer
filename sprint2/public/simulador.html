@@ -54,7 +54,9 @@
 
     </div>
 
+    <div>
 
+    </div>
 
 </body>
 
@@ -72,13 +74,13 @@
         var prejuizo = perdaLitros * valorLitro; // valor perdido
 
         if (tipoCerveja == "#" || totalLitros == "" || perdas == "" || valorLitro == "") {
-            mensagem = `Preencha todos os campos.`;
+            mensagem = `<p class="msg-erro">Por favor, preencha todos os campos.</p>`;
 
         } else if ((tipoCerveja == "1" || tipoCerveja == "2") && perdas >= 0 && perdas <= 100 && valorLitro > 0 && totalLitros > 0) {
 
             mensagem = `<h3>
                 <img src="./assets/reducao.svg" class="icon" alt="">
-                Meta de redução entre 10% até 25%
+                Meta de redução entre 10% e 25%
                 </h3>`
 
             // redução mínima de 10% das perdas
@@ -88,15 +90,15 @@
 
             var totalCusto = totalLitros * valorLitro;
             mensagem += `
-            <p>Com total de <b>${totalLitros.toFixed(2)}L</b> a preço unitário de <b>R$${valorLitro.toFixed(2)}</b>,
-                totalizaria <b>R$${totalCusto.toFixed(2)}</b> de custo  </p>
-            <p>Com perda de <b>${perdas}%</b> o prejuízo atual é de  <b style='color:red'>${perdaLitros.toFixed(2)}L</b>
-                e a financeira de <b style='color:red'>R$${prejuizo.toFixed(2)}</b></p>
-            <p> 
-                Com redução de <b>${valorReducao}%</b>, a perda cairá de ${perdaLitros.toFixed(2)}L para
-                <b style='color:green'>${(perdaLitros - economiaLitro).toFixed(2)}L</b>
-                (${economiaLitro.toFixed(2)}L de redução), totalizando <b style='color:green'>
-                    R$${(prejuizo - economiaTotal).toFixed(2)}</b> (R$${economiaTotal.toFixed(2)} de redução).
+            <p>Com o total de <b>${totalLitros.toFixed(2)}L</b> e o valor do litro a <b>R$${valorLitro.toFixed(2)}</b>,
+                o custo mensal é de <b>R$${totalCusto.toFixed(2)}</b></p>
+            <p>Com percentual de perdas de <b>${perdas}%</b> há perda de <b class="valor-negativo">${perdaLitros.toFixed(2)}L</b>
+                e prejuízo de <b class="valor-negativo">R$${prejuizo.toFixed(2)}</b></p>
+            <p>
+                Aplicando redução de <b>${valorReducao}%</b>, as perdas diminuem para 
+                <b class="valor-positivo">${(perdaLitros - economiaLitro).toFixed(2)}L</b>
+                (economia de ${economiaLitro.toFixed(2)}L), reduzindo o prejuízo para <b class="valor-positivo">
+                    R$${(prejuizo - economiaTotal).toFixed(2)}</b> (economia de R$${economiaTotal.toFixed(2)}).
             </p>`;
 
             // redução máxima de 25% das perdas
@@ -105,12 +107,12 @@
             economiaTotal = economiaLitro * valorLitro; // valor economizado
 
             mensagem += `
-            <p>Com redução de <b>${valorReducao}%</b>, a perda cairá de ${perdaLitros.toFixed(2)}L para 
-                <b style='color:green'>${(perdaLitros - economiaLitro).toFixed(2)}L</b> 
-            (${economiaLitro.toFixed(2)}L de redução), totalizando <b style='color:green'>
-                R$${(prejuizo - economiaTotal).toFixed(2)}</b> (R$${economiaTotal.toFixed(2)} de redução).</p>`;
+            <p> Aplicando redução de <b>${valorReducao}%</b>, as perdas diminuem para 
+            <b class="valor-positivo">${(perdaLitros - economiaLitro).toFixed(2)}L</b> 
+            (economia de ${economiaLitro.toFixed(2)}L), reduzindo o prejuízo para <b class="valor-positivo">
+                R$${(prejuizo - economiaTotal).toFixed(2)}</b> (economia de R$${economiaTotal.toFixed(2)}). </p>`;
         } else {
-            mensagem = `Insira valores válidos.`;
+            mensagem = `<p class="msg-erro">Por favor, insira apenas valores válidos.</p>`;
         }
 
         msg.innerHTML = mensagem;
