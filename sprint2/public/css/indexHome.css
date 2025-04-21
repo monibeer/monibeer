@@ -231,7 +231,7 @@ section .sobre{
   border-bottom: 4px solid #DCAB20;
   display: inline-block;
   padding-bottom: 5px;
-  font-size: 64px;
+  font-size: 48px;
   font-weight: 700;
 }
 
@@ -251,14 +251,9 @@ section .sobre{
   text-align: center;
 }
 
-.heroi-texto h3 {
-  font-size: 1.2rem;
-  color: #fff;
-  font-weight: 400;
-}
 
-.heroi-texto h1 {
-  font-size: 2.8rem;
+.heroi-texto h2 {
+  font-size: 48px;
   font-weight: bold;
   margin: 10px 0;
   border-bottom: 3px solid #c9a14a;
@@ -269,7 +264,7 @@ section .sobre{
 .heroi-texto p {
   max-width: 800px;
   margin: 20px auto;
-  font-size: 1.1rem;
+  font-size: 20px;
   line-height: 1.6;
 }
 
@@ -278,9 +273,6 @@ section .sobre{
   justify-content: center;
   gap: 40px;
   padding: 100px 40px 60px;
-  position: relative;
-  
-  z-index: 1;
 }
 
 .card {
@@ -289,7 +281,6 @@ section .sobre{
   border-radius: 10px;
   padding: 60px 30px 30px;
   max-width: 300px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
   text-align: center;
   position: relative;
 }
@@ -314,15 +305,15 @@ section .sobre{
   height: auto;
 }
 
-.card h4 {
-  font-size: 1.2rem;
+.card h3 {
+  font-size: 24px;
   color: #2c0e0c;
   font-weight: bold;
   margin: 20px 0 10px;
 }
 
 .card p {
-  font-size: 0.95rem;
+  font-size: 20px;
   color: #333;
   line-height: 1.4;
 }
@@ -335,7 +326,8 @@ section .sobre{
 }
 
 .contato h2 {
-  font-size: 2.2rem;
+  font-size: 48px;
+  font-weight: 700;
   margin-bottom: 20px;
   border-bottom: 3px solid #c9a14a;
   display: inline-block;
@@ -343,7 +335,6 @@ section .sobre{
 }
 
 .formulario {
-  max-width: 800px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -358,7 +349,7 @@ section .sobre{
 .formulario input,
 .formulario textarea {
   padding: 15px;
-  font-size: 1rem;
+  font-size: 20px;
   border: none;
   border-radius: 5px;
   width: 100%;
@@ -374,9 +365,4 @@ section .sobre{
   font-weight: bold;
   align-self: flex-start;
   cursor: pointer;
-  transition: 0.3s;
-}
-
-.formulario button:hover {
-  background-color: #b68d38;
 }
