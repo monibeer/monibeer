@@ -368,60 +368,44 @@ section .sobre{
 }
 
 /* Footer */
-.footer {
+.footer{
   display: flex;
-  justify-content: space-around;
-  color: #eeeded;
-  background-color: black;
-  height: 390px;
+  flex-direction: column;
+  background-color: #000;
+  color: white;
+  padding: 60px 40px;
 }
 
-.footer a {
+.container-footer-top{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.container-footer-top .contato span,
+.container-footer-top .redes-sociais span{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.container-footer-bottom{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container-footer-bottom span{
+  display: flex;
+  gap: 8px;
+}
+.footer a{
   color: white;
   text-decoration: none;
 }
 
-.footer .container {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  padding-top: 65px;
-  line-height: 1.0;
-}
-
-.footer .redes-sociais span {
-  display: flex;
-  align-items: center;
-  gap: 8px; 
-}
-
-.footer .contato span {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.footer h3 {
-  font-size: 18px;
+.footer h3{
   font-weight: 600;
-}
-
-.footer .footer-end {
-  position: absolute;
-  z-index: 0; 
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-  padding-top: 220px;
-}
-
-.footer .footer-end span {
-  display: flex;
-  align-items: center;
-  font-size: 12px;
-  gap: 8px;
-}
-
-.footer span {
- font-size: 14px;
 }
