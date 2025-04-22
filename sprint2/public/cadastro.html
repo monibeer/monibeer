@@ -35,41 +35,37 @@
 
         <div class="container-cadastro">
             <div class="card"> <!-- estou criando aqui o balão de cadastro -->
-                <h2>Cadastro</h2>
+                <h2>Cadastre Sua Empresa</h2>
                 <br><br>
                 <div class="card-campo">
                     <div class="campo">
-                        <span>Nome da Empresa</span>
+                        <span>Razão Social</span>
                         <br><br>
                         <input type="text" id="input_nome"> <br><br><br>
                     </div>
                     <div class="campo">
-                        <span>E-mail</span>
+                        <span>E-mail*</span>
                         <br><br>
                         <input type="text" id="input_email"> <br><br><br>
                     </div>
                     <div class="campo">
-                        <span>CNPJ</span>
+                        <span>CNPJ*</span>
                         <br><br>
-                        <input type="text" id="input_cnpj"> <br><br><br>
+                        <input type="number" id="input_cnpj"> <br><br><br>
                     </div>
                     <div class="campo">
-                        <span>Representante da Empresa</span>
+                        <span>Telefone*</span>
                         <br><br>
-                        <input type="text" id="input_representante"> <br><br><br>
+                        <input type="number" id="input_telefone"> <br><br><br>
                     </div>
                     <div class="campo">
-                        <span>Senha</span>
+                        <span> Cadastrar Senha:*</span>
                         <br><br>
                         <input type="password" id="input_senha"> <br><br><br>
                     </div>
-                    <div class="campo">
-                        <span>Quantidade de Fermentadoras</span>
-                        <br><br>
-                        <input type="number" id="input_fermentadora"> <br><br>
-                    </div>
+                
                     <div class="confbotao">
-                        <button onclick="analisar(event)" class="botao">Cadastrar</button>
+                        <button onclick="analisar(event)" class="botao">Cadastro Empresa</button>
                     </div>
                 </div>
             </div>
@@ -90,20 +86,19 @@
         var nome = input_nome.value;
         var email = input_email.value;
         var cnpj = input_cnpj.value;
-        var representante = input_representante.value;
+        var telefone = input_telefone.value;
         var senha = input_senha.value;
-        var fermentadora = input_fermentadora.value;
 
-        if (email == "" || cnpj == "" || senha == "" || representante == "") {
+        if (email == "" || cnpj == "" || senha == "" || telefone == "") {
             alert(`Preencha todos os campos obrigatórios`)
 
         } else if (!email.includes("@")) {
             alert(`Preencha um E-mail válido`)
 
         } else {
-            alert(`Cadastro Realizado com Sucesso!`)
+            alert(`Cadastro de Empresa - Realizado com Sucesso!`)
 
-            window.location.href = "./login.html"; //faz a navegação automática
+            window.location.href = "./cadastro-usuario.html"; //faz a navegação automática
 
         }
     }

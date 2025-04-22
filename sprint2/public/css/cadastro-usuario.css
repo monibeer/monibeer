@@ -104,7 +104,6 @@
         align-items: center;
         color: aliceblue;
         height: auto;
-        padding-top: 40px;
     }
 
      .card {
@@ -133,12 +132,11 @@
      .card-campo input {
          width: 100%;
          padding: 10px;
-         font-size: 16px;
-         font-weight: 510;
+         font-size: 14px;
          border-radius: 4px;
          box-sizing: border-box;
          border: 0;
-         border-bottom: 2px solid rgb(255, 255, 255);
+         border-bottom: 2px solid rgb(200, 200, 200);
          background-color: transparent;
          color: #ffffff;
          transition: 0.5s ease-in-out;
@@ -173,7 +171,7 @@
 
      button {
          background-color: #DCAB20;
-         width: 180px;
+         width: 135px;
          height: 36px;
          border: none;
          border-radius: 5px;
