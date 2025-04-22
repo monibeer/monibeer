@@ -116,16 +116,16 @@ button:hover {
 }
 
 b {
-   color: #FFFACC;;
+   color: #FED722;
 }
 
 .valor-negativo {
-    color: #FED722;
+    color: #FF5252;
     font-weight: bold;
 }
 
 .valor-positivo {
-    color:#A9D18E;
+    color:#00E676;
     font-weight: bold;
 }
 
