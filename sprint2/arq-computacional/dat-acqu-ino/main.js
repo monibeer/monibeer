@@ -25,6 +25,17 @@ const serial = async (
       port: 3307,
     })
     .promise();
+<<<<<<< HEAD
+=======
+  // lista as portas seriais disponíveis e procura pelo Arduino
+  const portas = await serialport.SerialPort.list();
+  const portaArduino = portas.find(
+    (porta) => porta.vendorId == 2341 && porta.productId == 43
+  );
+  if (!portaArduino) {
+    throw new Error("O arduino não foi encontrado em nenhuma porta serial");
+  }
+>>>>>>> 315f95722baae2482c7c2473bf64aee7c0f7d369
 
   // configura a porta serial com o baud rate especificado
   const arduino = new serialport.SerialPort({
@@ -64,6 +75,7 @@ const serial = async (
         console.log("valores inseridos no banco: ", sensorAnalogico);
       }
     });
+<<<<<<< HEAD
 
     // processa os dados recebidos do Arduino
     arduino.pipe(new serialport.ReadlineParser({ delimiter: '\r\n' })).on('data', async (data) => {
@@ -91,6 +103,9 @@ const serial = async (
 
     });
 
+=======
+  
+>>>>>>> 315f95722baae2482c7c2473bf64aee7c0f7d369
     // evento para lidar com erros na comunicação serial
     arduino.on('error', (mensagem) => {
         console.error(`Erro no arduino (Mensagem: ${mensagem}`)
