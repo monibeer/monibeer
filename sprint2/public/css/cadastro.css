@@ -188,54 +188,8 @@
 
      /* --------FOOTER---------- */
      .footer {
-         display: flex;
-         justify-content: space-around;
-         color: #eeeded;
          background-color: black;
-         height: 390px;
+         height: 50px;
      }
 
-     .footer .container {
-         display: flex;
-         justify-content: space-around;
-         width: 100%;
-         padding-top: 65px;
-         line-height: 1.0;
-     }
-
-     .footer .redes-sociais span {
-         display: flex;
-         align-items: center;
-         gap: 8px; /* Espaço entre o ícone e o texto */
-     }
-
-     .footer .contato span {
-         display: flex;
-         align-items: center;
-         gap: 8px;
-     }
-
-     .footer h3 {
-         font-size: 18px;
-         font-weight: 600;
-     }
-
-     .footer .footer-end {
-         position: absolute;
-         z-index: 0; /* define a ordem de empilhamento dos elementos na tela.*/
-         display: flex;
-         width: 100%;
-         justify-content: space-around;
-         padding-top: 220px;
-     }
-
-     .footer .footer-end span {
-         display: flex;
-         align-items: center;
-         font-size: 12px;
-         gap: 8px;
-     }
-
-     .footer span {
-        font-size: 14px;
-     }
+     
