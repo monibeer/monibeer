@@ -25,8 +25,7 @@ const serial = async (
       port: 3307,
     })
     .promise();
-<<<<<<< HEAD
-=======
+  
   // lista as portas seriais disponíveis e procura pelo Arduino
   const portas = await serialport.SerialPort.list();
   const portaArduino = portas.find(
@@ -35,8 +34,7 @@ const serial = async (
   if (!portaArduino) {
     throw new Error("O arduino não foi encontrado em nenhuma porta serial");
   }
->>>>>>> 315f95722baae2482c7c2473bf64aee7c0f7d369
-
+  
   // configura a porta serial com o baud rate especificado
   const arduino = new serialport.SerialPort({
     path: portaArduino.path,
@@ -69,43 +67,12 @@ const serial = async (
         // este insert irá inserir os dados na tabela "medida"
         await poolBancoDados.execute(
           //'INSERT INTO medida (sensor_analogico, sensor_digital) VALUES (?, ?)',
-          "INSERT INTO captura (idfermentadora , temperatura) VALUES ( 1 ,?)",
+          "INSERT INTO captura (idfermentadora , temperatura) VALUES (1, ?)",
           [sensorAnalogico]
         );
         console.log("valores inseridos no banco: ", sensorAnalogico);
       }
     });
-<<<<<<< HEAD
-
-    // processa os dados recebidos do Arduino
-    arduino.pipe(new serialport.ReadlineParser({ delimiter: '\r\n' })).on('data', async (data) => {
-        console.log(data);
-        const valores = data.split(';');
-        // const sensorDigital = parseInt(valores[0]);
-        // const sensorAnalogico = parseFloat(valores[1]);
-        const sensorAnalogico = parseFloat(valores[0]);
-
-        // armazena os valores dos sensores nos arrays correspondentes
-        valoresSensorAnalogico.push(sensorAnalogico);
-        // valoresSensorDigital.push(sensorDigital);
-
-        // insere os dados no banco de dados (se habilitado)
-        if (HABILITAR_OPERACAO_INSERIR) {
-
-            // este insert irá inserir os dados na tabela "medida"
-            await poolBancoDados.execute(
-                //'INSERT INTO medida (sensor_analogico, sensor_digital) VALUES (?, ?)',
-                'INSERT INTO captura (temperatura) VALUES (?)',
-                [sensorAnalogico]
-            );
-            console.log("valores inseridos no banco: ", sensorAnalogico );
-        }
-
-    });
-
-=======
-  
->>>>>>> 315f95722baae2482c7c2473bf64aee7c0f7d369
     // evento para lidar com erros na comunicação serial
     arduino.on('error', (mensagem) => {
         console.error(`Erro no arduino (Mensagem: ${mensagem}`)
