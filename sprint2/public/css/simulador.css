@@ -57,8 +57,7 @@ h4 {
     padding: 0 12px;
 }
 
-input,
-select {
+input {
     width: 97.5%;
     height: 28px;
     padding: 10px;
@@ -71,16 +70,13 @@ select {
     color: #2A1110;
 }
 
-select {
-    width: 100%;
-    height: 45px;
-    font-size: 20px;
-}
-
 button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     background-color: #DCAB20;
-    color: #2A1110;
+    color: #FFFFFF;
     padding: 10px;
     border: none;
     border-radius: 8px;
@@ -90,7 +86,7 @@ button {
 }
 
 button:hover {
-    /*https://www.w3schools.com/cssref/sel_hover.php */
+    /*https://www.w3schools.com/cssref/sel_hover.php*/
     background-color: #FED722;
 }
 
@@ -120,7 +116,7 @@ b {
 }
 
 .valor-negativo {
-    color: #FF5252;
+    color: #FF1744;
     font-weight: bold;
 }
 
