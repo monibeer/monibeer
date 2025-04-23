@@ -6,6 +6,7 @@ const mysql = require("mysql2");
 // constantes para configurações
 const SERIAL_BAUD_RATE = 9600;
 const SERVIDOR_PORTA = 3300;
+
 // habilita ou desabilita a inserção de dados no banco de dados
 const HABILITAR_OPERACAO_INSERIR = true;
 
@@ -24,18 +25,7 @@ const serial = async (
       port: 3307,
     })
     .promise();
-
 <<<<<<< HEAD
-    // conexão com o banco de dados MySQL
-    let poolBancoDados = mysql.createPool(
-        {
-            host: 'localhost',
-            user: 'aluno',
-            password: 'Sptech#2024',
-            database: 'monibeer',
-            port: 3307
-        }
-    ).promise();
 =======
   // lista as portas seriais disponíveis e procura pelo Arduino
   const portas = await serialport.SerialPort.list();
@@ -45,7 +35,7 @@ const serial = async (
   if (!portaArduino) {
     throw new Error("O arduino não foi encontrado em nenhuma porta serial");
   }
->>>>>>> 1fd44c448724b4fd443470645245f4419d00bc59
+>>>>>>> 315f95722baae2482c7c2473bf64aee7c0f7d369
 
   // configura a porta serial com o baud rate especificado
   const arduino = new serialport.SerialPort({
@@ -85,8 +75,8 @@ const serial = async (
         console.log("valores inseridos no banco: ", sensorAnalogico);
       }
     });
-
 <<<<<<< HEAD
+
     // processa os dados recebidos do Arduino
     arduino.pipe(new serialport.ReadlineParser({ delimiter: '\r\n' })).on('data', async (data) => {
         console.log(data);
@@ -113,18 +103,14 @@ const serial = async (
 
     });
 
+=======
+  
+>>>>>>> 315f95722baae2482c7c2473bf64aee7c0f7d369
     // evento para lidar com erros na comunicação serial
     arduino.on('error', (mensagem) => {
         console.error(`Erro no arduino (Mensagem: ${mensagem}`)
     });
 }
-=======
-  // evento para lidar com erros na comunicação serial
-  arduino.on("error", (mensagem) => {
-    console.error(`Erro no arduino (Mensagem: ${mensagem}`);
-  });
-};
->>>>>>> 1fd44c448724b4fd443470645245f4419d00bc59
 
 // função para criar e configurar o servidor web
 const servidor = (

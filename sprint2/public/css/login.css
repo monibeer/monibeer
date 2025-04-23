@@ -1,3 +1,6 @@
+     
+     
+     
      /* -------HEADER------- */
 
     body {
@@ -112,6 +115,7 @@
        align-items: center;
        color: aliceblue;
        height: auto;
+       padding-top: 120px;
    }
 
     .card {
