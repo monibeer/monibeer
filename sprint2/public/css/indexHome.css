@@ -85,7 +85,7 @@ body{
   font-weight: 700;
 }
 
-#login{
+#login, #cadastro{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,7 +96,7 @@ body{
   height: 28px;
   width: 80px;
   border: #DCAB20 solid 3px;
-  transition: background-color 0.3s ease; /* Transição suave de 0.3 segundos */
+  transition: background-color 0.4s ease; 
 
 }
 
@@ -118,6 +118,8 @@ body{
   height: 28px;
   width: 80px;
   border: #DCAB20 solid 3px;
+  transition: background-color 0.4s ease; 
+
 }
 
 #cadastro:hover{
@@ -136,8 +138,6 @@ body{
   align-items: center;
   padding-top: 7%;
   padding-left: 4%;
-
-
 }
 
 .banner h1{
@@ -164,8 +164,10 @@ button{
   border-radius: 6px;
   font-size: 17px;
   font-weight: 700;
-  color: #2A1110;
+  color: #ffffff;
 }
+
+
 
 
 
@@ -181,6 +183,8 @@ button{
   align-items: center;
 
 }
+
+
 
 .sobre .container{
   flex-direction: column;
@@ -209,12 +213,10 @@ button{
 }
 
 
-
-
 /*Projeto Monibber*/
 .projeto{
   padding: 50px;
-
+  
 }
 
 .projeto .container{
@@ -271,8 +273,6 @@ button{
 .contexto{
   background-color: #2D2F25  ;
   display: flex;
-  padding: auto;
-  margin: auto;
 }
 
 .contexto .container{
@@ -352,6 +352,9 @@ button{
   margin-bottom: 10px;
   padding-top: 25px;
 }
+  
+
+
 
 /*Sessão Heroi*/
 .heroi {
@@ -436,6 +439,7 @@ button{
 
 
 
+
 /* Contato*/
 .fale-conosco {
   background-color: #2D2F25;
@@ -479,14 +483,16 @@ button{
 
 .formulario button {
   background-color: #DCAB20;
-  color: #000;
-  padding: 12px 25px;
+  color: #ffffff;
   border: none;
   border-radius: 6px;
   font-weight: bold;
   align-self: flex-start;
   cursor: pointer;
 }
+
+
+
 
 /* Footer */
 .footer{
@@ -496,6 +502,19 @@ button{
   color: white;
   padding: 60px 40px;
 }
+
+.redes-sociais h3{
+  font-weight: 700;
+}
+
+.contato h3{
+  font-weight: 700;
+}
+
+.campo h3{
+  font-weight: 700;
+}
+
 
 .container-footer-top{
   display: flex;
