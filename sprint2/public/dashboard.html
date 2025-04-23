@@ -7,8 +7,9 @@
     <title>Dashboard - Home</title>
     <link rel="stylesheet" href="./css/assets/main.css">
     <link rel="stylesheet" href="./css/assetsDashboard/main.css">
-    <link rel="stylesheet" href="./css/indexDashboard.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 </head>
 
 <section class="dashboard">
@@ -30,14 +31,14 @@
         <div class="buttons-navegation">
             <div class="container-item">
                 <a href="./index-dashboard.html">
-                    <div class="navigation-item active">
+                    <div class="navigation-item">
                         <i class="fa-solid fa-house"></i>
                         <p>Home</p>
                     </div>
                 </a>
 
                 <a href="./dashboard.html">
-                    <div class="navigation-item">
+                    <div class="navigation-item active">
                         <i class="fa-solid fa-chart-column"></i>
                         <p>Dashboard</p>
                     </div>
@@ -63,7 +64,7 @@
             <div class="container-searchBarGroup">
                 <i class="fa-solid fa-bars"></i>
 
-                <h3>Home</h3>
+                <h3>Dashboard</h3>
                 <!-- <div class="container-search">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <input type="text" placeholder="Search..">
@@ -88,45 +89,32 @@
 
         <div class="container-info-fermenter">
             <div class="info">
-                <h2 class="title-info">Visão Geral do Desempenho</h2>
+                <h2 class="title-info">Visão de Desempenho das Fermentadoras de IPA</h2>
                 <div class="kpis">
-                    <div class="kpi temp">
-                        <h3>Fermentadoras em Alerta Crítico</h3>
+                    <div class="kpi temp-media">
+                        <h3>Temperatura Média das Fermentadoras</h3>
                         <div class="container-data">
-                            <p class="data-kpi critical">9</p>
-                            <p class="description">/40</p>
+                            <p class="data-kpi">20.5°C</p>
                         </div>
-                    </div>                    
-
-                    <div class="kpi fermen">
-                        <h3>Total de Fermentadoras que estão Ativas</h3>
+                    </div>
+                    <div class="kpi temp-max">
+                        <h3>Maior Temperatura das Fermentadoras Registrada</h3>
                         <div class="container-data">
-                            <p class="data-kpi">20</p>
-                            <p class="description">/30</p>
+                            <p class="data-kpi">22°C</p>
                         </div>
                     </div>
 
-
-                    <div class="kpi">
-                        <canvas id="graphic-statusFermenter" style="width: 100%; height: 95%;"></canvas>
+                    <div class="kpi temp-min">
+                        <h3>Menor Temperatura das Fermentadoras Registrada</h3>
+                        <div class="container-data">
+                            <p class="data-kpi">18°C</p>
+                        </div>
                     </div>
                 </div>
-
-                <div class="graphics">
-                    <div class="info-graphic">
-                        <h3>Temperatura Média</h3>
-                        <div class="filter-ipa-pilsen">
-                            <button class="check">IPA</button>
-                            <button>Pilsen</button>
-                        </div>
-                    </div>
-                    <canvas id="graphic-tempMediaIPA" style="width: 100%; height: 90%;"></canvas>
-                </div>
-
             </div>
 
             <div class="notifications">
-                <h2 class="title-info">Alerta Previsto e Histórico</h2>
+                <h2 class="title-info">Último Alerta</h2>
 
                 <div class="container-alert">
                     <div class="alert">
@@ -134,52 +122,83 @@
                         <img src="./assets/alert-critico.png" alt="">
                         <div class="info-alert">
                             <h3>Alerta Crítico</h3>
-                            <p>A fermentadora 1 está operando fora da faixa segura (22°C).
+                            <p>A fermentadora 13 está operando fora da faixa segura (22°C).
                                 <span class="alert-danger">Verifique imediatamente!</span>
                             </p>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="container-notification-history">
-                    <div class="info-history">
-                        <h4>Histórico</h4>
-                        <p>Acessar Mais ></p>
-                    </div>
-                    <div class="container-history">
-                        <div class="history">
-                            <img src="https://cdn-icons-png.flaticon.com/512/257/257195.png" alt="">
-                            <div class="data-history">
-                                <h4>Alerta Critico</h4>
-                                <p>A fermentadora 1 está quase fora da faixa...</p>
-                            </div>
+        <div class="graphics">
+            <div class="container-graphic">
+                <div class="info-graphic">
+                    <h3>Temperatura Média de Cada Fermentadoras</h3>
+                </div>
+                <canvas id="graphic-tempMediaIPA" style="width: 100%; height: 100%;"></canvas>
+            </div>
 
-                            <p class="datatime-history">17/04/25 ás 16:58</p>
-                        </div>
+            <div class="container-buttons">
+                <h3>Selecione o Setor:</h3>
+                <div class="select-buttons">
 
-                        <div class="history">
-                            <img src="https://cdn-icons-png.flaticon.com/512/257/257195.png" alt="">
-                            <div class="data-history">
-                                <h4>Alerta Critico</h4>
-                                <p>A fermentadora 1 está quase fora da faixa...</p>
-                            </div>
-
-                            <p class="datatime-history">17/04/25 ás 16:58</p>
-                        </div>
-
-                        <div class="history">
-                            <img src="https://cdn-icons-png.flaticon.com/512/257/257195.png" alt="">
-                            <div class="data-history">
-                                <h4>Alerta Critico</h4>
-                                <p>A fermentadora 1 está quase fora da faixa...</p>
-                            </div>
-
-                            <p class="datatime-history">17/04/25 ás 16:58</p>
-                        </div>
-
-                    </div>
+                    <button class="active">Setor A - Grupo 1</button>
+                    <button>Setor A - Grupo 2</button>
+                    <button>Setor B - Grupo 1</button>
+                    <button>Setor C - Grupo 1</button>
+                    <button>Setor D - Grupo 1</button>
                 </div>
             </div>
+        </div>
+
+        <div class="section-title">
+            <h2 class="">Sessão de Individual da Fermentadora</h2>
+            <div class="bar-style"></div>
+        </div>
+
+        <div class="graphics">
+            <div class="container-buttons">
+                <h3>Selecione o Setor:</h3>
+                <div class="select-buttons">
+                    <button class="active">
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        Setor A - Grupo 1
+                    </button>
+                    <button class="">
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        Setor A - Grupo 1
+                    </button>
+                    <button class="">
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        Setor A - Grupo 1
+                    </button>
+                    <button class="">
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        Setor A - Grupo 1
+                    </button>
+                    <button class="">
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        Setor A - Grupo 1
+                    </button>
+                    <button class="">
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        Setor A - Grupo 1
+                    </button>
+                    <button class="">
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        Setor A - Grupo 1
+                    </button>
+
+                </div>
+            </div>
+            <div class="container-graphic">
+                <div class="info-graphic">
+                    <h3>Temperatura Média de Cada Fermentadoras</h3>
+                </div>
+                <canvas id="graphic-tempIndividualIPA" style="width: 100%; height: 100%;"></canvas>
+            </div>
+
         </div>
     </div>
 </section>
@@ -188,4 +207,4 @@
 </body>
 
 </html>
-<script src="./js/chartJs-Home.js"></script>
+<script src="./js/chartJs-dashboard.js"></script>

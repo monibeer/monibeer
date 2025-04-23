@@ -13,17 +13,17 @@ new Chart(dataGraphicMediaTempIPA, {
             backgroundColor: 'green'
         },
         {
-            label: 'Temp. Max',
+            label: 'Limite Temp. Max',
             data: [22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22],
-            borderWidth: 2,
+            borderWidth: 1,
             borderColor: '#ff0000',
             backgroundColor: '#ff0000',
             pointRadius: 0
         },
         {
-            label: 'Temp. Min',
+            label: 'Limite Temp. Min',
             data: [18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18],
-            borderWidth: 2,
+            borderWidth: 1,
             borderColor: '#0084ff',
             backgroundColor: '#0084ff',
             pointRadius: 0
@@ -39,6 +39,16 @@ new Chart(dataGraphicMediaTempIPA, {
                 max: 23
             }
         },
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    font: {
+                        size: 13,
+                    }
+                }
+            }
+        }
     }
 });
 

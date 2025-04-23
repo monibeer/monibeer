@@ -5,7 +5,7 @@ const mysql = require("mysql2");
 
 // constantes para configurações
 const SERIAL_BAUD_RATE = 9600;
-const SERVIDOR_PORTA = 3300; 
+const SERVIDOR_PORTA = 3300;
 
 // habilita ou desabilita a inserção de dados no banco de dados
 const HABILITAR_OPERACAO_INSERIR = true; /*---------------2° BLOCO------------------*/
@@ -26,6 +26,8 @@ const serial = async (
     })
     .promise();
 
+
+
   // lista as portas seriais disponíveis e procura pelo Arduino
   const portas = await serialport.SerialPort.list(); /*---------------3° BLOCO------------------*/
   const portaArduino = portas.find(
@@ -36,13 +38,14 @@ const serial = async (
   }
 
   // configura a porta serial com o baud rate especificado /*---------------4° BLOCO------------------*/
+
   const arduino = new serialport.SerialPort({
     path: portaArduino.path,
     baudRate: SERIAL_BAUD_RATE,
   });
 
   // evento quando a porta serial é aberta
-  arduino.on("open", () => { 
+  arduino.on("open", () => {
     console.log(
       `A leitura do arduino foi iniciada na porta ${portaArduino.path} utilizando Baud Rate de ${SERIAL_BAUD_RATE}`
     );
@@ -63,21 +66,20 @@ const serial = async (
       // valoresSensorDigital.push(sensorDigital);
 
       // insere os dados no banco de dados (se habilitado)
-      if (HABILITAR_OPERACAO_INSERIR) {  /*---------------6° BLOCO------------------*/
+      if (HABILITAR_OPERACAO_INSERIR) {  /*---------------6° BLOCO------------------*/ 
         // este insert irá inserir os dados na tabela "medida"
         await poolBancoDados.execute(
           //'INSERT INTO medida (sensor_analogico, sensor_digital) VALUES (?, ?)',
-          "INSERT INTO captura (idfermentadora , temperatura) VALUES ( 1 ,?)",
+          "INSERT INTO captura (idfermentadora , temperatura) VALUES (1, ?)",
           [sensorAnalogico]
         );
         console.log("valores inseridos no banco: ", sensorAnalogico);
       }
     });
-
-    // evento para lidar com erros na comunicação serial
-    arduino.on('error', (mensagem) => { 
-        console.error(`Erro no arduino (Mensagem: ${mensagem}`)
-    });
+  // evento para lidar com erros na comunicação serial
+  arduino.on('error', (mensagem) => {
+    console.error(`Erro no arduino (Mensagem: ${mensagem}`)
+  });
 }
 
 // função para criar e configurar o servidor web
