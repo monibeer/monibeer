@@ -9,9 +9,9 @@
      }
 
      .cadastro {
-        width: 100%;
-        height: 712px;
-        background-size: 100%;
+         width: 100%;
+         height: 712px;
+         background-size: 100%;
      }
 
      .header {
@@ -99,12 +99,12 @@
      /* -----Balão de Cadastro------*/
 
      .container-cadastro {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: aliceblue;
-        height: auto;
-    }
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         color: aliceblue;
+         height: auto;
+     }
 
      .card {
          background-color: #2a1110f8;
@@ -180,7 +180,3 @@
          color: #ffffff;
          opacity: 100%;
      }
-
-
-     
-     
