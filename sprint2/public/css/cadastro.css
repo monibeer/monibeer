@@ -9,9 +9,9 @@
      }
 
      .cadastro {
-        width: 100%;
-        height: 712px;
-        background-size: 100%;
+         width: 100%;
+         height: 712px;
+         background-size: 100%;
      }
 
      .header {
@@ -60,6 +60,8 @@
      .menu-center {
          display: flex;
          justify-content: center;
+         width: 0%;
+
      }
 
      .menu-right {
@@ -99,6 +101,14 @@
      /* -----Balão de Cadastro------*/
 
      .container-cadastro {
+<<<<<<< HEAD
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         color: aliceblue;
+         height: auto;
+     }
+=======
         display: flex;
         justify-content: center;
         align-items: center;
@@ -106,6 +116,7 @@
         height: auto;
         padding-top: 40px;
     }
+>>>>>>> ce420e67f33a3f23a06e051844dc6ec25e4cd4b2
 
      .card {
          background-color: #2a1110f8;
@@ -182,7 +193,3 @@
          color: #ffffff;
          opacity: 100%;
      }
-
-
-     
-     
