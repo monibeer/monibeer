@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Home</title>
+    <link rel="stylesheet" href="./css/assets/main.css">
+    <link rel="stylesheet" href="./css/assetsDashboard/main.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+</head>
+
+<section class="dashboard">
+    <div class="sidebar">
+        <a href="./index-dashboard.html">
+            <div class="logotipo">
+                <img src="./assets/monibeer-logo.png" alt="">
+            </div>
+        </a>
+
+        <!-- <div class="profile">
+            <div class="circle-profile">
+                <img src="./assets/image.png" alt="" class="profile-img">
+            </div>
+            <h3>Rodrigo Souza</h3>
+            <p>Administrador</p>
+        </div> -->
+
+        <div class="buttons-navegation">
+            <div class="container-item">
+                <a href="./index-dashboard.html">
+                    <div class="navigation-item">
+                        <i class="fa-solid fa-house"></i>
+                        <p>Home</p>
+                    </div>
+                </a>
+
+                <a href="./dashboard.html">
+                    <div class="navigation-item active">
+                        <i class="fa-solid fa-chart-column"></i>
+                        <p>Dashboard</p>
+                    </div>
+                </a>
+
+                <!-- <div class="navigation-item">
+                    <i class="fa-solid fa-gear"></i>
+                    <p>Configurações</p>
+                </div> -->
+            </div>
+
+            <a href="./login.html">
+                <div class="logout-item navigation-item">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <p>Logout</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="container-dashboard">
+        <div class="header">
+            <div class="container-searchBarGroup">
+                <i class="fa-solid fa-bars"></i>
+
+                <h3>Dashboard</h3>
+                <!-- <div class="container-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search..">
+                </div> -->
+            </div>
+
+
+            <div class="container-actions">
+                <!-- <div class="container-theme-dark-light">
+                    <img src="https://static-00.iconduck.com/assets.00/sun-symbol-emoji-512x512-qjm8vnpc.png" alt="">
+                </div> -->
+                <i class="fa-solid fa-bell"></i>
+                <span>|</span>
+                <div class="container-mini-profile">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="">
+                    <p>Rogério Pires</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="datatime-update">Última Atualização - 25/04/2025 ás 12:40</p>
+
+        <div class="container-info-fermenter">
+            <div class="info">
+                <h2 class="title-info">Visão de Desempenho das Fermentadoras de IPA</h2>
+                <div class="kpis">
+                    <div class="kpi temp-media">
+                        <h3>Temperatura Média das Fermentadoras</h3>
+                        <div class="container-data">
+                            <p class="data-kpi">20.5°C</p>
+                        </div>
+                    </div>
+                    <div class="kpi temp-max">
+                        <h3>Maior Temperatura das Fermentadoras Registrada</h3>
+                        <div class="container-data">
+                            <p class="data-kpi">22°C</p>
+                        </div>
+                    </div>
+
+                    <div class="kpi temp-min">
+                        <h3>Menor Temperatura das Fermentadoras Registrada</h3>
+                        <div class="container-data">
+                            <p class="data-kpi">18°C</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notifications">
+                <h2 class="title-info">Alerta mais recente</h2>
+
+                <div class="container-alert">
+                    <div class="alert">
+                        <div class="alert-indicator"></div>
+                        <img src="./assets/alert-critico.png" alt="">
+                        <div class="info-alert">
+                            <h3>Alerta Crítico</h3>
+                            <p>A fermentadora 1 (IPA) ultrapassou o limite permitido, temperatura em +24°C.
+                                <span class="alert-danger">Verifique imediatamente!</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="graphics">
+            <div class="container-graphic">
+                <div class="info-graphic">
+                    <h3>Temperatura Média de Cada Fermentadoras</h3>
+                </div>
+                <canvas id="graphic-tempMediaIPA" style="width: 100%; height: 100%;"></canvas>
+            </div>
+
+            <div class="container-buttons">
+                <h3>Selecione o Setor:</h3>
+                <div class="select-buttons">
+
+                    <button class="active">Setor A - Grupo 1</button>
+                    <button>Setor A - Grupo 2</button>
+                    <button>Setor B - Grupo 1</button>
+                    <button>Setor C - Grupo 1</button>
+                    <button>Setor D - Grupo 1</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <h2 class="">Sessão de Individual da Fermentadora</h2>
+            <div class="bar-style"></div>
+        </div>
+
+        <div class="graphics">
+            <div class="container-buttons">
+                <h3>Selecione o Setor:</h3>
+                <div class="select-buttons">
+                    <button class="active">
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        Setor A - Grupo 1
+                    </button>
+                    <button class="">
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        Setor A - Grupo 1
+                    </button>
+                    <button class="">
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        Setor A - Grupo 1
+                    </button>
+                    <button class="">
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        Setor A - Grupo 1
+                    </button>
+                    <button class="">
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        Setor A - Grupo 1
+                    </button>
+                    <button class="">
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        Setor A - Grupo 1
+                    </button>
+                    <button class="">
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        Setor A - Grupo 1
+                    </button>
+
+                </div>
+            </div>
+            <div class="container-graphic">
+                <div class="info-graphic">
+                    <h3>Temperatura Média de Cada Fermentadoras</h3>
+                </div>
+                <canvas id="graphic-tempIndividualIPA" style="width: 100%; height: 100%;"></canvas>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<body>
+</body>
+
+</html>
+<script src="./js/chartJs-dashboard.js"></script>

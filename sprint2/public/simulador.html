@@ -4,13 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/assets/main.css">
     <link rel="stylesheet" href="./css/simulador.css">
     <title>Simulador</title>
 </head>
 
 <body>
+    <div class="header">
+        <div class="container">
+            <a href="./index.html">
+                <img src="./assets/monibeer-logo.png" alt="Logo Monibeer">
+            </a>
+            <div class="navbar">
+                <ul class="menu-center">
+                    <li><a id="home" href="./index.html">Home</a></li>
+                    <li><a href="./index.html">Sobre Nós</a></li>
+                    <li><a href="simulador.html">Simulador</a></li>
+                </ul>
+                <ul class="menu-right">
+                    <li><a id="login" href="login.html">Login</a></li>
+                    <li><a id="cadastro" href="cadastro.html">Cadastro</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-    <div class="container">
+    <div class="container-simulador">
         <div class="container-logo">
             <img src="./assets/monibeer-logo.png" alt="empresa monibeer logo">
         </div>
@@ -18,15 +37,6 @@
         <div class="form">
 
             <h3>Simulador de perdas no processo de fermentação</h3>
-
-            <div class="container-select">
-                <h4> <img src="./assets/chopp.svg" class="icon" alt=""> Selecione o tipo da cerveja </h4>
-                <select id="select_cerveja">
-                    <option value="#"> </option>
-                    <option value="1">PILSEN</option>
-                    <option value="2">IPA</option>
-                </select>
-            </div>
 
             <div>
                 <h4> <img src="./assets/liters.svg" class="icon" alt=""> Litros produzidos por mês </h4>
@@ -54,9 +64,45 @@
 
     </div>
 
-    <div>
-
-    </div>
+    <footer class="footer">
+        <div class="container-footer-top">
+            <div class="redes-sociais">
+                <h3>REDES SOCIAIS</h3> <br>
+                <span><img src="./assets/instagram_icon.png" alt="Instagram" height="25px"> @moni_beer_insta</span>
+                <br><br>
+                <span><img src="./assets/facebook_icon.png" alt="Facebook" height="25px"> @moni_beer_face</span>
+                <br><br>
+                <span><img src="./assets/youtube_icon.png" alt="Youtube" height="20px"> moni_beer_yt</span> <br><br>
+            </div>
+            <div class="contato">
+                <h3>CONTATO </h3> <br>
+                <span><img src="./assets/telefone_icon.png" alt="Telefone" height="30px">+55 11 967603378</span>
+                <br><br>
+                <span><img src="./assets/email_icon.png" alt="Email" height="30px">monibeer@gmail.com</span> <br><br>
+            </div>
+            <div class="campo">
+                <h3>EMPRESA</h3> <br>
+                <span><a href="./index.html">home</a></span> <br><br>
+                <span>dashboard</span> <br><br>
+                <span>historico</span> <br><br>
+            </div>
+            <div class="campo">
+                <h3>MAPA DO SITE</h3> <br>
+                <span> <a href="#home">Voltar ao topo</a></span> <br><br>
+                <span><a href="#sobre">Sobre Nó</a>s</span> <br><br>
+                <span>Como surgiu</span> <br><br>
+                <span>Problemática</span> <br><br>
+                <span>Solução</span> <br><br>
+                <span>Contato</span> <br><br>
+            </div>
+        </div>
+        <div class="container-footer-bottom">
+            <img src="./assets/Monibeer (1) 1.png" alt="Logo_MoniBeer" height="90px">
+            <p>Copyright © 2025 | MoniBeer</p>
+            <span> <img src="./assets/brasil_logo.png" alt="Logo Brasil" height="22px">Brasil Português</span>
+        </div>
+        </div>
+    </footer>
 
 </body>
 
@@ -64,7 +110,6 @@
 <script>
     function calcular() {
 
-        var tipoCerveja = select_cerveja.value;
         var totalLitros = Number(litros_mes.value);
         var perdas = Number(percentual_perdas.value);
         var valorLitro = Number(custo_litro.value);
@@ -73,17 +118,17 @@
         var perdaLitros = (perdas / 100) * totalLitros; // quantidade de litros perdidos
         var prejuizo = perdaLitros * valorLitro; // valor perdido
 
-        if (tipoCerveja == "#" || totalLitros == "" || perdas == "" || valorLitro == "") {
+        if (totalLitros == "" || perdas == "" || valorLitro == "") {
             mensagem = `<p class="msg-erro">Por favor, preencha todos os campos.</p>`;
 
-        } else if ((tipoCerveja == "1" || tipoCerveja == "2") && perdas >= 0 && perdas <= 100 && valorLitro > 0 && totalLitros > 0) {
+        } else if (perdas >= 0 && perdas <= 100 && valorLitro > 0 && totalLitros > 0) {
 
             mensagem = `<h3>
                 <img src="./assets/reducao.svg" class="icon" alt="">
                 Meta de redução entre 10% e 25%
                 </h3>`
 
-            // redução mínima de 10% das perdas
+            // redução mínima de 10% das perdas, meta conservadora
             var valorReducao = 10;
             var economiaLitro = (perdaLitros * (valorReducao / 100)); // litros economizados
             var economiaTotal = (economiaLitro * valorLitro); // valor economizado
@@ -95,19 +140,19 @@
             <p>Com percentual de perdas de <b>${perdas}%</b> há perda de <b class="valor-negativo">${perdaLitros.toFixed(2)}L</b>
                 e prejuízo de <b class="valor-negativo">R$${prejuizo.toFixed(2)}</b></p>
             <p>
-                Aplicando redução de <b>${valorReducao}%</b>, as perdas diminuem para 
+                Projetando uma redução de de <b>${valorReducao}%</b>, as perdas diminuem para 
                 <b class="valor-positivo">${(perdaLitros - economiaLitro).toFixed(2)}L</b>
                 (economia de ${economiaLitro.toFixed(2)}L), reduzindo o prejuízo para <b class="valor-positivo">
                     R$${(prejuizo - economiaTotal).toFixed(2)}</b> (economia de R$${economiaTotal.toFixed(2)}).
             </p>`;
 
-            // redução máxima de 25% das perdas
+            // redução máxima de 25% das perdas, meta otimista
             valorReducao = 25;
             economiaLitro = perdaLitros * (valorReducao / 100); // litros economizados
             economiaTotal = economiaLitro * valorLitro; // valor economizado
 
             mensagem += `
-            <p> Aplicando redução de <b>${valorReducao}%</b>, as perdas diminuem para 
+            <p> Projetando uma redução de <b>${valorReducao}%</b>, as perdas diminuem para 
             <b class="valor-positivo">${(perdaLitros - economiaLitro).toFixed(2)}L</b> 
             (economia de ${economiaLitro.toFixed(2)}L), reduzindo o prejuízo para <b class="valor-positivo">
                 R$${(prejuizo - economiaTotal).toFixed(2)}</b> (economia de R$${economiaTotal.toFixed(2)}). </p>`;

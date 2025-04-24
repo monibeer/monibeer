@@ -1,26 +1,20 @@
-
-html{
+html {
   scroll-behavior: smooth;
 }
 
-body{
+body {
   margin: 0;
 
 }
 
-
-
-.home{
-  background: linear-gradient(to right,rgba(20, 8, 2, 0.951),rgba(20, 8, 2, 0.945), rgba(22, 6, 2, 0.892), rgba(0, 0, 1, 0.84), rgba(0, 0, 0, 0.321), rgba(0, 0, 1, 0.425), rgba(0, 0, 0, 0)), 
-  url(../assets/Leonardo_Phoenix_10_A_rustic_craft_brewery_with_stainless_stee_2\ 1.png);
+.home {
+  background: linear-gradient(to right, rgba(20, 8, 2, 0.951), rgba(20, 8, 2, 0.945), rgba(22, 6, 2, 0.892), rgba(0, 0, 1, 0.84), rgba(0, 0, 0, 0.321), rgba(0, 0, 1, 0.425), rgba(0, 0, 0, 0)),
+    url(../assets/Leonardo_Phoenix_10_A_rustic_craft_brewery_with_stainless_stee_2\ 1.png);
   width: 100%;
-  height: 700px;  
+  height: 700px;
   background-repeat: no-repeat;
-  background-size:  100% 100%; 
-
+  background-size: 100% 100%;
 }
-
-
 
 .header{
   width: 100%;
@@ -149,6 +143,7 @@ body{
 
 
 
+
 /*Banner*/
 .banner {
   display: flex;
@@ -159,13 +154,14 @@ body{
   padding-left: 4%;
 }
 
-.banner h1{
-  color:#FFFACC;
+.banner h1 {
+  color: #FFFACC;
   font-weight: 700;
   font-size: 38px;
-  line-height: 1.2  ;
+  line-height: 1.2;
 }
-.banner p{
+
+.banner p {
   color: rgb(255, 255, 255);
   width: 90%;
   font-size: 24px;
@@ -174,7 +170,7 @@ body{
   margin-top: 10px;
 }
 
-button{
+button {
   margin-top: 40px;
   background-color:#DCAB20;
   width: 150px;
@@ -205,7 +201,7 @@ button a{
 
 
 /*Sobre Nós*/
-.sobre{
+.sobre {
   background-color: #555A32;
   padding: 3%;
   height: 500px;
@@ -218,14 +214,14 @@ button a{
 
 
 
-.sobre .container{
+.sobre .container {
   flex-direction: column;
   color: #ffffff;
   margin-left: 50px;
   margin-right: 50px;
 }
 
-.sobre .container h1{
+.sobre .container h1 {
   align-self: flex-start;
   margin-top: 0;
   color: #ffffff;
@@ -234,10 +230,10 @@ button a{
   margin-bottom: 30px;
   font-weight: 600;
   border-bottom: 5px solid #DCAB20;
-  padding-bottom: 25px; 
+  padding-bottom: 25px;
 }
 
-.sobre .container p{
+.sobre .container p {
   width: 100%;
   line-height: 1.6;
   font-weight: 400;
@@ -246,12 +242,12 @@ button a{
 
 
 /*Projeto Monibber*/
-.projeto{
+.projeto {
   padding: 50px;
-  
+
 }
 
-.projeto .container{
+.projeto .container {
   display: flex;
   padding-top: 80px;
   padding-bottom: 80px;
@@ -259,21 +255,21 @@ button a{
   padding-right: 50px;
 }
 
-.projeto .container img{
+.projeto .container img {
   margin-right: 80px;
 }
 
-.projeto .container .texto_projeto h1{
+.projeto .container .texto_projeto h1 {
   margin: 0;
   font-size: 50px;
   width: 500px;
   font-weight: 700;
-  padding-bottom: 25px; 
+  padding-bottom: 25px;
   border-bottom: 5px solid #DCAB20;
 
 }
 
-.texto_projeto p{
+.texto_projeto p {
   font-size: 25px;
   color: #454545;
   width: 95%;
@@ -284,7 +280,7 @@ button a{
 
 }
 
-.projeto button{
+.projeto button {
   background-color: #DCAB20;
   border: none;
   width: 200px;
@@ -295,7 +291,6 @@ button a{
 }
 
 
-
 .projeto button i{
   margin-right: 5px;
 }
@@ -304,25 +299,25 @@ button a{
 
 
 /*Como Surgiu?*/
-.contexto{
-  background-color: #2D2F25  ;
+.contexto {
+  background-color: #2D2F25;
   display: flex;
 }
 
-.contexto .container{
+.contexto .container {
   display: flex;
   justify-content: center;
   align-items: center;
 
 }
 
-.contexto .container .texto{
+.contexto .container .texto {
   margin-left: 80px;
   margin-right: 100px;
   align-items: center;
 }
 
-.contexto .container .texto h1{
+.contexto .container .texto h1 {
   color: #ffffff;
   font-size: 50px;
   font-weight: 700;
@@ -332,7 +327,7 @@ button a{
 
 }
 
-.contexto .container .texto p{
+.contexto .container .texto p {
   color: #ffffff;
   font-size: 23px;
   font-weight: 400;
@@ -340,7 +335,7 @@ button a{
   margin-top: 4%;
 }
 
-.contexto .container .texto button{
+.contexto .container .texto button {
   background-color: #DCAB20;
   border: none;
   margin-top: 25px;
@@ -361,14 +356,15 @@ button a{
 
 
 /*Sessão Problema*/
-.problema{
+.problema {
   display: flex;
-  
+
 }
 
-.problema .container{
+.problema .container {
   display: flex;
 }
+
 .conteudo-texto {
   margin-left: 100px;
   background-color: #fff;
@@ -383,7 +379,7 @@ button a{
   font-size: 50px;
   width: 500px;
   font-weight: 700;
-  padding-bottom: 25px; 
+  padding-bottom: 25px;
   border-bottom: 5px solid #DCAB20;
 }
 
@@ -396,7 +392,7 @@ button a{
   margin-bottom: 10px;
   padding-top: 25px;
 }
-  
+
 
 
 
@@ -413,7 +409,7 @@ button a{
   font-size: 50px;
   width: 700px;
   font-weight: 700;
-  padding-bottom: 25px; 
+  padding-bottom: 25px;
   border-bottom: 5px solid #DCAB20;
 }
 
@@ -430,7 +426,7 @@ button a{
   justify-content: center;
   gap: 40px;
   margin-left: 9.5%;
-  padding: 100px 40px 60px ;
+  padding: 100px 40px 60px;
   position: absolute;
   z-index: 0;
 }
@@ -494,7 +490,7 @@ button a{
   background-color: #2D2F25;
   padding: 150px 40px;
   color: white;
-  
+
 }
 
 .fale-conosco h2 {
@@ -604,3 +600,4 @@ button a{
 .footer p{
   font-weight: 400;
 }
+
