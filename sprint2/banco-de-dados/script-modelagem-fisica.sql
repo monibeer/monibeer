@@ -30,6 +30,7 @@ CREATE TABLE endereco (
 
 CREATE TABLE funcionario (
     idFuncionario INT PRIMARY KEY AUTO_INCREMENT,
+    nomeFuncionario VARCHAR(45) NOT NULL,
     emailUsuario VARCHAR(255) NOT NULL,
     senha VARCHAR(255) NOT NULL,
 	telefone VARCHAR(20),
@@ -41,16 +42,16 @@ CREATE TABLE funcionario (
 );
 
 INSERT INTO funcionario VALUES
-    (NULL, 'silvana.batista@clubedomalte.com.br', 'a123456789b', '(11)91234-5678', 'administrador', 1),
-    (NULL, 'anderson.soares@colorado.com.br', 'c987654321d', '(21)98765-4321', 'administrador', 2),
-    (NULL, 'vitorino.milchen@eisenbahn.com.br', 'e987654321f', '(31)99876-5432' , 'administrador', 3),
-	(NULL, 'rodrigo@hotmail.com', 'Monibeer123', '(11)99234-5678', 'administrador', 4),
-	(NULL, 'juan.bento@ledmont.com.br', 'g987654321h', '(51)99123-4567', 'administrador', 5);
+    (NULL, 'Silvana', 'silvana.batista@clubedomalte.com.br', 'a123456789b', '(11)91234-5678', 'administrador', 1),
+    (NULL, 'Anderson', 'anderson.soares@colorado.com.br', 'c987654321d', '(21)98765-4321', 'administrador', 2),
+    (NULL, 'Vitorino', 'vitorino.milchen@eisenbahn.com.br', 'e987654321f', '(31)99876-5432' , 'administrador', 3),
+	(NULL, 'Rodrigo', 'rodrigo@hotmail.com', 'Monibeer123', '(11)99234-5678', 'administrador', 4),
+	(NULL, 'Juan', 'juan.bento@ledmont.com.br', 'g987654321h', '(51)99123-4567', 'administrador', 5);
 
 CREATE TABLE sensor (
     idSensor INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(10),
-    statusSensor VARCHAR(20),
+    statusSensor VARCHAR(20) NOT NULL,
     CONSTRAINT chk_status CHECK (statusSensor in ('ativo', 'inativo', 'manutenção'))
 );
 
@@ -82,7 +83,8 @@ CREATE TABLE estilo (
     estiloCerveja VARCHAR(45),
     limiteTempMax DECIMAL(4,2),
     limiteTempMin DECIMAL(4,2),
-    CONSTRAINT chk_estilo CHECK (estiloCerveja IN ('ipa', 'pilsen'))
+    CONSTRAINT chk_estilo 
+    CHECK (estiloCerveja IN ('ipa', 'pilsen'))
 );
 
 INSERT INTO estilo (estiloCerveja, limiteTempMin, limiteTempMax) VALUES
@@ -106,6 +108,7 @@ CREATE TABLE fermentadora (
     fkSensor INT,
 	fkEmpresa INT,
 	fkEstilo INT,
+    fkSetor INT,
     CONSTRAINT fkSensorFermentadora 
     FOREIGN KEY (fkSensor) 
     REFERENCES sensor(idSensor),
@@ -121,44 +124,44 @@ CREATE TABLE fermentadora (
 );
 
 INSERT INTO fermentadora (nome, fkSensor, fkEmpresa, fkEstilo, fkSetor) VALUES
-    (DEFAULT, 'Fermentadora 1', 1, 1, 1, 'A'),
-    (DEFAULT, 'Fermentadora 2', 2, 1, 1, 'A'),
-    (DEFAULT, 'Fermentadora 3', 3, 1, 1, 'A'),
-    (DEFAULT, 'Fermentadora 4', 4, 1, 1, 'A'),
-    (DEFAULT, 'Fermentadora 5', 5, 1, 1, 'A'),
-    (DEFAULT, 'Fermentadora 6', 6, 1, 1, 'A'),
-    (DEFAULT, 'Fermentadora 7', 7, 1, 1, 'A'),
-    (DEFAULT, 'Fermentadora 8', 8, 1, 1, 'A'),
-    (DEFAULT, 'Fermentadora 9', 9, 1, 1, 'A'),
-    (DEFAULT, 'Fermentadora 10', 10, 1, 1, 'A'),
-    (DEFAULT, 'Fermentadora 11', 11, 1, 2, 'B'),
-    (DEFAULT, 'Fermentadora 12', 12, 1, 2, 'B'),
-    (DEFAULT, 'Fermentadora 13', 13, 1, 2, 'B'),
-    (DEFAULT, 'Fermentadora 14', 14, 1, 2, 'B'),
-    (DEFAULT, 'Fermentadora 15', 15, 1, 2, 'B'),
-    (DEFAULT, 'Fermentadora 16', 16, 1, 2, 'B'),
-    (DEFAULT, 'Fermentadora 17', 17, 1, 2, 'B'),
-    (DEFAULT, 'Fermentadora 18', 18, 1, 2, 'B'),
-    (DEFAULT, 'Fermentadora 19', 19, 1, 2, 'B'),
-    (DEFAULT, 'Fermentadora 20', 20, 1, 2, 'B');
+    ('Fermentadora 1', 1, 1, 1, '1'),
+    ('Fermentadora 2', 2, 1, 1, '1'),
+    ('Fermentadora 3', 3, 1, 1, '1'),
+    ('Fermentadora 4', 4, 1, 1, '1'),
+    ('Fermentadora 5', 5, 1, 1, '1'),
+    ('Fermentadora 6', 6, 1, 1, '1'),
+    ('Fermentadora 7', 7, 1, 1, '1'),
+    ('Fermentadora 8', 8, 1, 1, '1'),
+    ('Fermentadora 9', 9, 1, 1, '1'),
+    ('Fermentadora 10', 10, 1, 1, '1'),
+    ('Fermentadora 11', 11, 1, 2, '1'),
+    ('Fermentadora 12', 12, 1, 2, '1'),
+    ('Fermentadora 13', 13, 1, 2, '1'),
+    ('Fermentadora 14', 14, 1, 2, '1'),
+    ('Fermentadora 15', 15, 1, 2, '1'),
+    ('Fermentadora 16', 16, 1, 2, '1'),
+    ('Fermentadora 17', 17, 1, 2, '1'),
+    ('Fermentadora 18', 18, 1, 2, '1'),
+    ('Fermentadora 19', 19, 1, 2, '1'),
+    ('Fermentadora 20', 20, 1, 2, '1');
 
 
 CREATE TABLE captura (
     idCaptura INT PRIMARY KEY AUTO_INCREMENT,
     temperatura DECIMAL(4,2),
-    dtHora DATETIME,
+    dtHora DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     fkSensor INT,
     CONSTRAINT fkSensorCaptura 
     FOREIGN KEY (fkSensor) 
     REFERENCES sensor(idSensor)
 );
 
-INSERT INTO captura (temperatura, dtHora, fkSensor) VALUES
-    (18.50, '2025-04-05 05:45:30', 1),
-    (20.45, '2025-02-05 06:10:15', 2),
-    (21.00,  '2025-03-10 14:45:32', 3),
-    (22.45,  '2025-01-05 08:00:00', 4),
-    (18.69, '2025-02-05 16:15:24', 5); 
+INSERT INTO captura (temperatura, fkSensor) VALUES
+    (18.50, 1),
+    (20.45, 2),
+    (21.00, 3),
+    (22.45, 4),
+    (18.69, 5); 
 
 CREATE TABLE alerta (
     idAlerta INT PRIMARY KEY AUTO_INCREMENT,
@@ -188,23 +191,13 @@ SELECT * FROM captura;
 SELECT * FROM alerta;
 SHOW TABLES;
 
+SELECT * FROM fermentadora JOIN sensor
+ON fkSensor = idSensor;
 
-/*
--- Selecionando a tabela fermentadora com o id sendo igual a 01
-SELECT * FROM fermentadora WHERE idFermentadora = 1;
+SELECT empresa.nomeEmpresa as NomeEmpresa,
+	funcionario.nomefuncionario as Funcionario
+    FROM empresa JOIN funcionario
+    ON idEmpresa = fkEmpresa;
 
--- Selecionando o estilo de cerveja da tabela fermentadora com case no estágio de fermentação
-SELECT e.estiloCerveja, 
-    CASE 
-        WHEN f.estagioFermentacao = 'a' THEN 'fermentação inicial' 
-        ELSE 'em outras etapas' 
-    END AS etapaDeFermentacao 
-FROM fermentadora f
-JOIN estilo e ON f.fkEstilo = e.idEstilo;
 
--- Delete de uma empresa
-DELETE FROM empresa WHERE idEmpresa = 6; 
-SELECT * FROM empresa;
 
-SELECT temperatura FROM captura;
-*/
