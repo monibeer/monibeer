@@ -1,13 +1,91 @@
-     /* -------HEADER------- */
+/* -------HEADER------- */
 
-     body {
-         margin: 0;
-         background-image: url("../assets/background.png");
-         width: 100%;
-         height: 740px;
-         background-size: 100%;
-     }
+body {
+    margin: 0;
+    background-image: url("../assets/background.png");
+    width: 100%;
+    height: 740px;
+    background-size: 100%;
+}
 
+<<<<<<< HEAD
+.cadastro {
+    width: 100%;
+    height: 712px;
+    background-size: 100%;
+}
+
+.header {
+    width: 100%;
+    height: 100px;
+}
+
+/*------ Configurações NAVBAR ------*/
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    padding-left: 5%;
+    padding-right: 5%;
+    background: linear-gradient(rgba(0, 0, 0, 0.897), rgba(0, 0, 0, 0.568), rgba(0, 0, 0, 0));
+}
+
+.header .container img {
+    width: 90px;
+    height: auto;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 55%;
+    list-style: none;
+}
+
+.navbar li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.header .container .navbar a {
+    font-weight: 500;
+    color: aliceblue;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.menu-center {
+    display: flex;
+    justify-content: center;
+    width: 0%;
+}
+
+.menu-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#home {
+    font-weight: 700;
+}
+
+#login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #110f0f;
+    background-color: #ffffff;
+    border-radius: 7px;
+    height: 28px;
+    width: 80px;
+    border: #DCAB20 solid 3px;
+}
+=======
      .cadastro {
          width: 100%;
          height: 712px;
@@ -16,7 +94,9 @@
          flex-direction: column;
      }
 
+>>>>>>> 3e5d0687896017f65588c27339e74ab70337c438
 
+<<<<<<< HEAD
      #cadastro {
          display: flex;
          justify-content: center;
@@ -28,7 +108,42 @@
          width: 80px;
          border: #DCAB20 solid 3px;
      }
+=======
+#cadastro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    background-color: #DCAB20;
+    border-radius: 7px;
+    height: 28px;
+    width: 80px;
+    border: #DCAB20 solid 3px;
+}
+>>>>>>> dd2be0b8c745ab9626eac016619a9ce318c9eec5
 
+<<<<<<< HEAD
+/* -----Balão de Cadastro------*/
+
+.container-cadastro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    height: auto;
+}
+
+.card {
+    background-color: #2a1110f8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 36%;
+    border-radius: 10px;
+    padding: 10px;
+    line-height: 0;
+}
+=======
      /* -----Balão de Cadastro------*/
      .caracteristica {
         display: flex;
@@ -46,48 +161,52 @@
          height: auto;
          flex: 1;
      }
+>>>>>>> 3e5d0687896017f65588c27339e74ab70337c438
 
-     .card {
-         background-color: #2a1110f8;
-         display: flex;
-         flex-direction: column;
-         justify-content: center;
-         width: 36%;
-         border-radius: 10px;
-         padding: 10px;
-         line-height: 0;
-     }
+.card .card-campo {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    padding: 60px;
+    padding-bottom: 20px;
+    padding-top: 0px;
+    line-height: 0.4;
+}
 
-     .card .card-campo {
-         display: flex;
-         flex-direction: column;
-         width: auto;
-         padding: 60px;
-         padding-bottom: 20px;
-         padding-top: 0px;
-         line-height: 0.4;
-     }
+/*------Configuração das input(campos)-----*/
+.card-campo input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 510;
+    border-radius: 4px;
+    box-sizing: border-box;
+    border: 0;
+    border-bottom: 2px solid rgb(255, 255, 255);
+    background-color: transparent;
+    color: #ffffff;
+    transition: 0.5s ease-in-out;
+}
 
+.card-campo .campo {
+    width: 100%;
+}
 
-     /*------Configuração das input(campos)-----*/
-     .card-campo input {
-         width: 100%;
-         padding: 10px;
-         font-size: 16px;
-         font-weight: 510;
-         border-radius: 4px;
-         box-sizing: border-box;
-         border: 0;
-         border-bottom: 2px solid rgb(255, 255, 255);
-         background-color: transparent;
-         color: #ffffff;
-         transition: 0.5s ease-in-out;
-     }
+.card h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-weight: 560;
+    font-size: 26px;
+    line-height: 3.4;
+}
 
-     .card-campo .campo {
-         width: 100%;
-     }
+span {
+    font-weight: 550;
+}
 
+<<<<<<< HEAD
      .campo-select {
         display: flex;
         flex-direction: column;
@@ -113,28 +232,24 @@
          font-size: 26px;
          line-height: 3.4;
      }
+=======
+/* ---- Configuração Botão de Cadastro -------*/
+.confbotao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+}
+>>>>>>> dd2be0b8c745ab9626eac016619a9ce318c9eec5
 
-     span {
-         font-weight: 550;
-     }
-
-
-     /* ---- Configuração Botão de Cadastro -------*/
-     .confbotao {
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         padding-top: 30px;
-     }
-
-     button {
-         background-color: #DCAB20;
-         width: 180px;
-         height: 36px;
-         border: none;
-         border-radius: 5px;
-         font-size: 16px;
-         font-weight: 600;
-         color: #ffffff;
-         opacity: 100%;
-     }
+button {
+    background-color: #DCAB20;
+    width: 180px;
+    height: 36px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    opacity: 100%;
+}
