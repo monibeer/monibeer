@@ -15,7 +15,7 @@
      }
 
 
-     #login {
+     #cadastro {
          display: flex;
          justify-content: center;
          align-items: center;
@@ -75,6 +75,15 @@
 
      .card-campo .campo {
          width: 100%;
+     }
+
+     .caracteristica {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background-color: rebeccapurple;
+        margin-bottom: 20px;
+        margin-top: 20px;
      }
 
      .card h2 {

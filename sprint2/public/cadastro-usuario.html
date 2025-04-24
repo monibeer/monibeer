@@ -16,22 +16,22 @@
     <div class="cadastro">
         <div class="header">
             <div class="container">
-              <a href="./index.html">
-                <img src="./assets/monibeer-logo.png" alt="Logo Monibeer">
-              </a>
-              <div class="navbar">
-                <ul class="menu-center">
-                  <li><a id="home" href="./index.html">Home</a></li>
-                  <li><a href="./index.html">Sobre Nós</a></li>
-                  <li><a href="simulador.html">Simulador</a></li>
-                </ul>
-                <ul class="menu-right">
-                  <li><a id="login" href="login.html">Login</a></li>
-                  <li><a id="cadastro" href="cadastro.html">Cadastro</a></li>
-                </ul>
-              </div>
+                <a href="./index.html">
+                    <img src="./assets/monibeer-logo.png" alt="Logo Monibeer">
+                </a>
+                <div class="navbar">
+                    <ul class="menu-center">
+                        <li><a id="home" href="./index.html">Home</a></li>
+                        <li><a href="./index.html">Sobre Nós</a></li>
+                        <li><a href="simulador.html">Simulador</a></li>
+                    </ul>
+                    <ul class="menu-right">
+                        <li><a id="login" href="login.html">Login</a></li>
+                        <li><a id="cadastro" href="cadastro.html">Cadastro</a></li>
+                    </ul>
+                </div>
             </div>
-          </div>
+        </div>
         <!-- Container com os dados informados -->
 
 
@@ -45,6 +45,12 @@
                         <br><br>
                         <input type="text" id="input_nome"> <br><br><br>
                     </div>
+                    <div class="campo campo-select">
+                        <span>Tipo de Usuário</span>
+                        <select id="">
+                            <option value="administrador">administrador</option>
+                        </select>
+                    </div>
                     <div class="campo">
                         <span>E-mail Corporativo*</span>
                         <br><br>
@@ -55,12 +61,19 @@
                         <br><br>
                         <input type="number" id="input_telefone"> <br><br><br>
                     </div>
+
+                    <br>
+                    <div class="caracteristica" id="div_caracteristicas">
+                        <p>● Conter no mínimo uma letra Maiúscula</p>
+                        <p>● Conter no mínimo um Número</p>
+                        <p>● Conter no mínimo 8 caracteres</p>
+                    </div>
                     <div class="campo">
                         <span> Cadastrar Senha:*</span>
                         <br><br>
-                        <input type="password" id="input_senha"> <br><br><br>
+                        <input type="password" id="input_senha" oninput="verificarSenha()"> <br><br><br>
                     </div>
-                
+
                     <div class="confbotao">
                         <button onclick="analisar(event)" class="botao">Cadastrar Funcionário</button>
                     </div>
@@ -68,7 +81,7 @@
             </div>
         </div>
     </div>
-    
+
     <div id="div_mensagem"></div>
 </body>
 
@@ -77,6 +90,56 @@
 
 <!-- JAVA SCRIPT -->
 <script>
+    var verificarSenhaAutenticada = false;
+
+    function verificarSenha() {
+        var senha = input_senha.value
+        var senhaVerificacaoMaiuscula = senha.toLowerCase();
+        var senhaVerificacaoNumero = false;
+        var senhaVerificacaoCaracteres = false;
+
+        div_caracteristicas.innerHTML = '';
+        var mensagem_senha = ''
+
+        if (senha.toLowerCase() != senha) {
+            senhaVerificacaoMaiuscula = true;
+            mensagem_senha += `<p style="color: green">✅ Conter no mínimo uma letra Maiúscula</p>`;
+        } else {
+            mensagem_senha += `<p>● Conter no mínimo uma letra Maiúscula</p>`;
+        }
+
+
+        var temNumeros = 0;
+        for (var contador = 0; contador < senha.length; contador++) {
+            senhaVerificacaoNumero = Number(senha[contador])
+            if (!isNaN(senhaVerificacaoNumero)) {
+                senhaVerificacaoNumero = true;
+                mensagem_senha += `<p style="color: green">✅ Conter no mínimo um Número</p>`;
+                temNumeros++;
+                contador = senha.length;
+            }
+        }
+
+        if (temNumeros == 0) {
+            mensagem_senha += `<p>● Conter no mínimo um Número</p>`;
+        }
+
+        if (senha.length >= 8) {
+            senhaVerificacaoCaracteres = true
+            mensagem_senha += `<p style="color: green">✅ Conter no mínimo 8 caracteres</p>`
+        } else {
+            mensagem_senha += `<p>● Conter no mínimo 8 caracteres</p>`;
+        }
+
+        div_caracteristicas.innerHTML = mensagem_senha;
+
+        if (senhaVerificacaoCaracteres == true && senhaVerificacaoMaiuscula == true && senhaVerificacaoNumero == true) {
+            verificarSenhaAutenticada = true;
+        } else {
+            verificarSenhaAutenticada = false
+        }
+    }
+
     function analisar(event) {
         event.preventDefault(); // Impede o recarregamento da página
 
@@ -87,16 +150,20 @@
 
         if (email == "" || senha == "" || telefone == "") {
             alert(`Preencha todos os campos obrigatórios`)
-
         } else if (!email.includes("@")) {
             alert(`Preencha um E-mail válido`)
-
         } else {
-            alert(`Cadastro Usuário Realizado com Sucesso!`)
+            console.log(verificarSenhaAutenticada)
+            if (verificarSenhaAutenticada == true) {
+                alert(`Cadastro Usuário Realizado com Sucesso!`)
+                window.location.href = "./login.html"; //faz a navegação automática
+            } else {
+                alert('Coloque uma senha válida! Siga todos os requisitos de segurança.')
+            }
 
-            window.location.href = "./login.html"; //faz a navegação automática
 
         }
+
     }
 
 </script>
