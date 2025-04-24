@@ -83,6 +83,25 @@ body{
 
 #home{
   font-weight: 700;
+  transition: 0.3s ease;
+}
+
+#home:hover{
+  font-weight: 800;
+}
+
+#sobre{
+  transition: 0.3s ease;
+}
+#sobre:hover{
+  font-weight: 800;  
+}
+
+#simulador{
+  transition: 0.3s ease;
+}
+#simulador:hover{
+  font-weight: 800;  
 }
 
 #login, #cadastro{
@@ -158,14 +177,27 @@ body{
 button{
   margin-top: 40px;
   background-color:#DCAB20;
-  width: 135px;
-  height: 36px;
+  width: 150px;
+  height: 40px;
   border: none;
   border-radius: 6px;
   font-size: 17px;
   font-weight: 700;
   color: #ffffff;
+  transition: background-color 0.3s ease; 
+  cursor: pointer;
 }
+
+button a{
+  color:  white;
+  font-weight: 600;
+}
+
+.banner button:hover{
+  background-color: #FFFACC;
+  color: #2A1110;
+}
+
 
 
 
@@ -262,6 +294,8 @@ button{
   font-weight: 600;
 }
 
+
+
 .projeto button i{
   margin-right: 5px;
 }
@@ -292,13 +326,17 @@ button{
   color: #ffffff;
   font-size: 50px;
   font-weight: 700;
+  border-bottom: 5px solid #555A32;
+  padding-bottom: 25px;
+  width: 400px;
+
 }
 
 .contexto .container .texto p{
   color: #ffffff;
-  font-size: 22px;
+  font-size: 23px;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.6;
   margin-top: 4%;
 }
 
@@ -312,6 +350,12 @@ button{
   font-size: 18px;
   font-weight: 500;
 }
+
+.contexto .container .texto button a{
+  color: #ffffff;
+  font-weight: 500;
+}
+
 
 
 
@@ -400,6 +444,11 @@ button{
   max-width: 300px;
   text-align: center;
   position: relative;
+  transition: 0.3s ease;
+}
+
+.card:hover{
+  transform: scale(1.1);
 }
 
 .icone-topo {
@@ -452,7 +501,7 @@ button{
   font-size: 48px;
   font-weight: 700;
   margin-left: 50px;
-  margin-bottom: 80px;
+  margin-bottom: 48px;
   border-bottom: 5px solid #DCAB20;
   display: inline-block;
   padding-bottom: 20px;
@@ -505,6 +554,7 @@ button{
 
 .redes-sociais h3{
   font-weight: 700;
+  
 }
 
 .contato h3{
@@ -523,12 +573,15 @@ button{
 }
 
 .container-footer-top .contato span,
+.container-footer-top .campo span,
 .container-footer-top .redes-sociais span{
   display: flex;
   flex-direction: row;
   align-items: center;
+  font-weight: 400;
   gap: 8px;
 }
+
 
 .container-footer-bottom{
   display: flex;
@@ -537,11 +590,17 @@ button{
   align-items: center;
 }
 
+
 .container-footer-bottom span{
   display: flex;
   gap: 8px;
+  font-weight: 400;
 }
 .footer a{
   color: white;
   text-decoration: none;
+}
+
+.footer p{
+  font-weight: 400;
 }

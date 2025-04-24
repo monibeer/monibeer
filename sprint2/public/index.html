@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/assets/main.css">
     <link rel="stylesheet" href="./css/indexHome.css">
-    <link rel="stylesheet" href="./js/scroll.js">
+    <link rel="icon" href="./assets/Monibeer (1) 1.png">
     <title>Home - Monibeer</title>
 </head>
 <body>
@@ -16,8 +16,8 @@
               <div class="navbar">
                   <ul class="menu-center">
                       <li><a id="home" href="#home">Home</a></li>
-                      <li><a href="#sobre">Sobre Nós</a></li>
-                      <li><a href="simulador.html">Simulador</a></li>
+                      <li><a id="sobre" href="#sobre">Sobre Nós</a></li>
+                      <li><a id="simulador" href="simulador.html">Simulador</a></li>
                   </ul>
                   <ul class="menu-right">
                       <li><a id="login" href="login.html">Login</a></li>
@@ -32,7 +32,7 @@
               <p>
                   Uma empresa especializada no monitoramento da temperatura no processo de fermentação em cervejarias artesanais.
               </p>
-              <button>Contate-nos</button>
+              <a href="#monibeer"><button>Saiba Mais</button></a>
           </div>
       </div>
   </section>
@@ -44,17 +44,22 @@
     </div>
   </section>
 
-  <section class="projeto">
+
+
+  
+  <section class="projeto" id="monibeer">
       <div class="container">
           <img src="assets/MONI (5).png" alt="logo Monibeer" width="450px">
           <div class="texto_projeto">
               <h1>Nosso Projeto</h1>
               <p> A MoniBeer é uma solução para o monitoramento da temperatura no processo de fermentação das cervejas artesanais, com o intuito de monitorar a temperatura dentro das fermentadoras em tempo real e assim criando uma dashboard dinâmica conforme as oscilações de temperatura da cerveja.</p>
               
-              <button><i class="fas fa-link"></i>Visite Nosso Projeto</button>
+              <a href="#faleconosco"><button><i class="fas fa-phone"></i>Contate nos</button></a>
           </div>
       </div>
   </section>
+
+
 
   <section class="contexto">
       <div class="container">
@@ -65,14 +70,16 @@
                   que consiste no monitoramento ineficaz da temperatura no processo de fermentação da cerveja,
                   processo esse que é essencial para a qualidade e padronização da cerveja.
               </p>
-              <button><i class="fas fa-phone"></i> contate-nos</button>
+              <!--<button><a href="#faleconosco"><i class="fas fa-phone"></i> contate-nos</a></button>-->
           </div>
-          
           <div class="imagem">
               <img src="assets/fermentadoras.png" alt="" width="600px" height="100%">
           </div>
       </div>
   </section>
+
+
+
 
   <section class="problema">
     <div class="container">
@@ -122,7 +129,7 @@
     </section>
   </section>
 
-  <section class="fale-conosco">
+  <section class="fale-conosco" id="faleconosco">
       <h2>Fale Conosco</h2>
       <form class="formulario">
         <div class="linha">
@@ -153,14 +160,13 @@
       </div>
       <div class="campo">
         <h3>EMPRESA</h3> <br>
-        <span><a href="./index.html">home</a></span> <br><br>
-        <span>dashboard</span> <br><br>
-        <span>historico</span> <br><br>
+        <a href="./index.html"></a><span>home</span></a> <br><br>
+        <span>Simulador</span> <br><br>
       </div>
       <div class="campo">
         <h3>MAPA DO SITE</h3> <br>
-        <span> <a href="#home">Voltar ao topo</a></span> <br><br>
-        <span><a href="#sobre">Sobre Nó</a>s</span> <br><br>
+        <a href="#home"></a><span> Voltar ao topo</span></a> <br><br>
+        <a href="#sobre"></a><span>Sobre Nós</span></a> <br><br>
         <span>Como surgiu</span> <br><br>
         <span>Problemática</span> <br><br>
         <span>Solução</span> <br><br>
