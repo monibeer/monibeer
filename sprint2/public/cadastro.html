@@ -16,10 +16,14 @@
     <div class="cadastro">
         <div class="header">
             <div class="container">
-                <img src="./assets/monibeer-logo.png" alt="Logo Monibeer">
+                <a href="./index.html">
+                    <img src="./assets/monibeer-logo.png" alt="Logo Monibeer">
+                </a>
                 <div class="navbar">
                     <ul class="menu-center">
-                        <li><a id="home" href="index.html">Home</a></li>
+                        <li><a id="home" href="./index.html">Home</a></li>
+                        <li><a href="./index.html">Sobre Nós</a></li>
+                        <li><a href="simulador.html">Simulador</a></li>
                     </ul>
                     <ul class="menu-right">
                         <li><a id="login" href="login.html">Login</a></li>
@@ -57,12 +61,12 @@
                         <br><br>
                         <input type="number" id="input_telefone"> <br><br><br>
                     </div>
-                    <div class="campo">
+                    <!-- <div class="campo">
                         <span> Cadastrar Senha:*</span>
                         <br><br>
                         <input type="password" id="input_senha"> <br><br><br>
-                    </div>
-                
+                    </div> -->
+
                     <div class="confbotao">
                         <button onclick="analisar(event)" class="botao">Cadastro Empresa</button>
                     </div>
@@ -70,7 +74,7 @@
             </div>
         </div>
     </div>
-    
+
     <div id="div_mensagem"></div>
 </body>
 
@@ -86,9 +90,9 @@
         var email = input_email.value;
         var cnpj = input_cnpj.value;
         var telefone = input_telefone.value;
-        var senha = input_senha.value;
+        // var senha = input_senha.value;
 
-        if (email == "" || cnpj == "" || senha == "" || telefone == "") {
+        if (email == "" || cnpj == "" || telefone == "") {
             alert(`Preencha todos os campos obrigatórios`)
 
         } else if (!email.includes("@")) {
@@ -103,4 +107,3 @@
     }
 
 </script>
-

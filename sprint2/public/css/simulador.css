@@ -8,22 +8,26 @@ body {
     /* https://www.w3schools.com/css/css3_gradients.asp */
     background: linear-gradient(to bottom, #2D2F25, #555A32);
     margin: 0;
-    padding: 20px;
 }
 
-.container {
+.container-simulador {
     background-color: #2A1110;
     width: 50%;
     margin: auto;
     padding: 30px 20px;
     border-radius: 15px;
-    border: #DCAB20 2px solid; /*#F7A620*/
+    border: #DCAB20 2px solid;
+    /*#F7A620*/
     color: #FFFFFF;
+    margin-top: 10px;
+    margin-bottom: 100px;
+    transform: scale(0.9);
 }
 
 .container-logo {
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
 }
 
 .container-logo img {
@@ -38,26 +42,33 @@ body {
     filter: brightness(0) invert(1);
 }
 
-h3 {
+.form h3 {
     text-align: center;
-    color: #FED722; /*#F7A620*/
+    color: #FED722;
+    /*#F7A620*/
     font-size: 28px;
+    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 20px;
 }
 
-h4 {
+.form h4 {
     color: #FFFFFF;
     margin-bottom: 10px;
     font-size: 24px;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    font-weight: 700;
 }
 
 .form {
     padding: 0 12px;
 }
 
-input {
+.form input {
     width: 97.5%;
     height: 28px;
     padding: 10px;
@@ -68,9 +79,10 @@ input {
     font-weight: 600;
     background-color: #FFFACC;
     color: #2A1110;
+    margin-bottom: 15px;
 }
 
-button {
+.form button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -85,7 +97,7 @@ button {
     margin-top: 15px;
 }
 
-button:hover {
+.form button:hover {
     /*https://www.w3schools.com/cssref/sel_hover.php*/
     background-color: #FED722;
 }
@@ -112,7 +124,7 @@ button:hover {
 }
 
 b {
-   color: #FED722;
+    color: #FED722;
 }
 
 .valor-negativo {
@@ -121,7 +133,7 @@ b {
 }
 
 .valor-positivo {
-    color:#00E676;
+    color: #00E676;
     font-weight: bold;
 }
 

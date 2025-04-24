@@ -14,63 +14,6 @@
          background-size: 100%;
      }
 
-     .header {
-         width: 100%;
-         height: 100px;
-     }
-
-     /*------ Configurações NAVBAR ------*/
-     .header .container {
-         display: flex;
-         justify-content: space-between;
-         align-items: center;
-         height: 100px;
-         padding-left: 5%;
-         padding-right: 5%;
-         background: linear-gradient(rgba(0, 0, 0, 0.897), rgba(0, 0, 0, 0.568), rgba(0, 0, 0, 0));
-     }
-
-     .header .container img {
-         width: 90px;
-         height: auto;
-     }
-
-     .navbar {
-         display: flex;
-         justify-content: space-between;
-         align-items: center;
-         width: 55%;
-         list-style: none;
-     }
-
-     .navbar li {
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         padding: 0 15px;
-     }
-
-     .header .container .navbar a {
-         font-weight: 500;
-         color: aliceblue;
-         text-decoration: none;
-         font-size: 15px;
-     }
-
-     .menu-center {
-         display: flex;
-         justify-content: center;
-     }
-
-     .menu-right {
-         display: flex;
-         justify-content: flex-end;
-         align-items: center;
-     }
-
-     #home {
-         font-weight: 700;
-     }
 
      #login {
          display: flex;
@@ -78,18 +21,6 @@
          align-items: center;
          color: #110f0f;
          background-color: #ffffff;
-         border-radius: 7px;
-         height: 28px;
-         width: 80px;
-         border: #DCAB20 solid 3px;
-     }
-
-     #cadastro {
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         color: #ffffff;
-         background-color: #DCAB20;
          border-radius: 7px;
          height: 28px;
          width: 80px;

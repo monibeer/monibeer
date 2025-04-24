@@ -46,6 +46,12 @@
     background-color: rgb(238, 255, 253);
 }
 
+
+.kpi.abruptas {
+    border: 1px solid rgb(111, 72, 137);
+    background-color: rgb(249, 238, 255);
+}
+
 .kpi canvas {
     width: 100%;
     height: 100%;
@@ -84,6 +90,12 @@
     margin: 10px 0px;
 }
 
+.container-graphic {
+    display: flex;
+    flex: 1;
+    gap: 20px;
+}
+
 .graphics {
     flex: 1;
     display: flex;
@@ -98,13 +110,15 @@
 .graphics .info-graphic {
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     margin-bottom: 10px;
+    gap: 20px;
 }
 
 .info-graphic h3 {
     font-weight: 500;
-    font-size: 23px;
+    font-size: 18px;
 }
 
 .info-graphic .filter-ipa-pilsen {
@@ -114,11 +128,13 @@
 
 .filter-ipa-pilsen button {
     padding: 5px 20px;
+    height: 33px;
     width: 80px;
     font-weight: 800;
     border-radius: 50px;
     border: 2px solid black;
     background-color: white;
+    cursor: pointer;
 }
 
 .filter-ipa-pilsen button.check {
@@ -281,5 +297,5 @@
     font-weight: 800;
     color: #7e6655;
     text-align: center;
-    width: 60px;
+    width: 50px;
 }
