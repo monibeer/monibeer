@@ -80,7 +80,7 @@
                 <span>|</span>
                 <div class="container-mini-profile">
                     <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="">
-                    <p>Rogério Pires</p>
+                    <p>Rodrigo Silva</p>
                 </div>
             </div>
         </div>
@@ -89,25 +89,27 @@
 
         <div class="container-info-fermenter">
             <div class="info">
-                <h2 class="title-info">Visão de Desempenho das Fermentadoras de IPA</h2>
+                <h2 class="title-info">Desempenho das Fermentadoras de IPA</h2>
                 <div class="kpis">
-                    <div class="kpi temp-media">
-                        <h3>Temperatura Média das Fermentadoras</h3>
+                    <div class="kpi temp-max">
+                        <h3>Total de Alertas de Temperatura nas Últimas 24h</h3>
                         <div class="container-data">
-                            <p class="data-kpi">20.5°C</p>
+                            <p class="data-kpi">15</p>
                         </div>
                     </div>
-                    <div class="kpi temp-max">
-                        <h3>Maior Temperatura das Fermentadoras Registrada</h3>
+
+                    <div class="kpi temp-media">
+                        <h3>Total de Fermentadoras em Alerta Crítico</h3>
                         <div class="container-data">
-                            <p class="data-kpi">22°C</p>
+                            <p class="data-kpi">4</p>
+                            <p class="description">/20</p>
                         </div>
                     </div>
 
                     <div class="kpi temp-min">
-                        <h3>Menor Temperatura das Fermentadoras Registrada</h3>
+                        <h3>Maior Duração fora da Faixa de uma Fermentadora em 24h</h3>
                         <div class="container-data">
-                            <p class="data-kpi">18°C</p>
+                            <p class="data-kpi">1h 10m</p>
                         </div>
                     </div>
                 </div>
@@ -134,20 +136,19 @@
         <div class="graphics">
             <div class="container-graphic">
                 <div class="info-graphic">
-                    <h3>Temperatura Média de Cada Fermentadoras</h3>
+                    <h3>Temperatura Média de Cada Fermentadora</h3>
                 </div>
-                <canvas id="graphic-tempMediaIPA" style="width: 100%; height: 100%;"></canvas>
+                <div class="graphic">
+                    <canvas id="graphic-tempMediaIPA" style="width: 100%; height: 100%;"></canvas>
+                </div>
             </div>
 
             <div class="container-buttons">
                 <h3>Selecione o Setor:</h3>
                 <div class="select-buttons">
 
-                    <button class="active">Setor A - Grupo 1</button>
-                    <button>Setor A - Grupo 2</button>
-                    <button>Setor B - Grupo 1</button>
-                    <button>Setor C - Grupo 1</button>
-                    <button>Setor D - Grupo 1</button>
+                    <button class="active">Setor A</button>
+                    <button>Setor B</button>
                 </div>
             </div>
         </div>
@@ -159,49 +160,63 @@
 
         <div class="graphics">
             <div class="container-buttons">
-                <h3>Selecione o Setor:</h3>
+                <h3>Selecione a Fermentadora:</h3>
                 <div class="select-buttons">
                     <button class="active">
                         <i class="fa-solid fa-beer-mug-empty"></i>
-                        Setor A - Grupo 1
+                        Fermentadora 1
                     </button>
                     <button class="">
                         <i class="fa-solid fa-beer-mug-empty"></i>
-                        Setor A - Grupo 1
+                        Fermentadora 2
                     </button>
                     <button class="">
                         <i class="fa-solid fa-beer-mug-empty"></i>
-                        Setor A - Grupo 1
+                        Fermentadora 3
                     </button>
                     <button class="">
                         <i class="fa-solid fa-beer-mug-empty"></i>
-                        Setor A - Grupo 1
+                        Fermentadora 4
                     </button>
                     <button class="">
                         <i class="fa-solid fa-beer-mug-empty"></i>
-                        Setor A - Grupo 1
+                        Fermentadora 5
                     </button>
                     <button class="">
                         <i class="fa-solid fa-beer-mug-empty"></i>
-                        Setor A - Grupo 1
+                        Fermentadora 6
                     </button>
                     <button class="">
                         <i class="fa-solid fa-beer-mug-empty"></i>
-                        Setor A - Grupo 1
+                        Fermentadora 7
+                    </button>
+                    <button class="">
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        Fermentadora 8
+                    </button>
+                    <button class="">
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        Fermentadora 9
+                    </button>
+                    <button class="">
+                        <i class="fa-solid fa-beer-mug-empty"></i>
+                        Fermentadora 10
                     </button>
 
                 </div>
             </div>
             <div class="container-graphic">
                 <div class="info-graphic">
-                    <h3>Temperatura Média de Cada Fermentadoras</h3>
+                    <h3>Temperatura Atual</h3>
                 </div>
-                <canvas id="graphic-tempIndividualIPA" style="width: 100%; height: 100%;"></canvas>
+                <div class="graphic">
+                    <canvas id="graphic-tempIndividualIPA" style="width: 100%; height: 100%;"></canvas>
+                </div>
             </div>
 
         </div>
     </div>
-</section>
+</section>  
 
 <body>
 </body>
