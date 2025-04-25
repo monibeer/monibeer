@@ -66,10 +66,11 @@ var tempAtual = new Chart(dataGraphicIndividualTempIPA, {
         datasets: [
             {
                 label: 'Temperatura',
-                data: [18, 19, 22, 21, 19, 19, 20, 21, 18, 22, 21, 21, 19, 19, 20, 21],
+                data: [21.0, 21.5, 20.2, 19.8, 19.2, 20.1, 20.1, 19.6, 19.0, 20.0, 19.8, 19.6, 19.8, 20.0, 20.3, 19.9],
                 borderWidth: 2,
                 borderColor: '#b64300',
-                backgroundColor: '#b64300'
+                backgroundColor: '#b64300',
+                tension: 0.3
             },
             {
                 label: 'Limite Temp. Max',
@@ -123,17 +124,17 @@ function setorB() {
 }
 
 function setorA() {
-    chartTempMedia.data.datasets[0].data = [19.2, 20.1, 21.7, 22, 19.6, 25.4, 24.2, 21.1, 19.7, 24.0];
+    chartTempMedia.data.datasets[0].data = [20.2, 21.1, 21.7, 22, 19.6, 25.4, 24.2, 21.1, 19.7, 24.0];
     chartTempMedia.data.labels = ['Fermentadora 1', 'Fermentadora 2', 'Fermentadora 3', 'Fermentadora 4', 'Fermentadora 5', 'Fermentadora 6', 'Fermentadora 7', 'Fermentadora 8', 'Fermentadora 9', 'Fermentadora 10'];
     select_buttons.innerHTML = `
         <button class="active" onclick="setorA()">Setor A</button>
         <button class="" onclick="setorB()">Setor B</button>
     `
-    chartTempMediaMedia.update();
+    chartTempMedia.update();
 }
 
 function fermentadora1() {
-    tempAtual.data.datasets[0].data = [18, 19, 22, 21, 19, 19, 20, 21, 18, 22, 21, 21, 19, 19, 20, 21];
+    tempAtual.data.datasets[0].data = [21.0, 21.5, 20.2, 19.8, 19.2, 20.1, 20.1, 19.6, 19.0, 20.0, 19.8, 19.6, 19.8, 20.0, 20.3, 19.9];
     select_buttons_fermenter.innerHTML = `
         <button class="active" onclick="fermentadora1()"><i class="fa-solid fa-beer-mug-empty"></i> Fermentadora 1</button>
         <button onclick="fermentadora2()"><i class="fa-solid fa-beer-mug-empty"></i> Fermentadora 2</button>
@@ -151,7 +152,7 @@ function fermentadora1() {
 }
 
 function fermentadora2() {
-    tempAtual.data.datasets[0].data = [19, 21, 20, 18, 22, 19, 21, 20, 19, 22, 18, 21, 19, 20, 21, 22];
+    tempAtual.data.datasets[0].data = [21.0, 20.0, 20.3, 20.9, 20.5, 19.6, 20.0, 20.0, 19.6, 20.9, 19.0, 19.7, 19.5, 20.7, 20.0, 20.7];
     select_buttons_fermenter.innerHTML = `
     <button class="" onclick="fermentadora1()"><i class="fa-solid fa-beer-mug-empty"></i> Fermentadora 1</button>
     <button class="active" onclick="fermentadora2()"><i class="fa-solid fa-beer-mug-empty"></i> Fermentadora 2</button>

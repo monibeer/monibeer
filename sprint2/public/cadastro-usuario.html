@@ -147,10 +147,9 @@
 
         var nome = input_nome.value;
         var email = input_email.value;
-        var telefone = input_telefone.value;
         var senha = input_senha.value;
 
-        if (email == "" || senha == "" || telefone == "") {
+        if (nome == "" || email == "" || senha == "") {
             alert(`Preencha todos os campos obrigatórios`)
         } else if (!email.includes("@")) {
             alert(`Preencha um E-mail válido`)
