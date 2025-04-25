@@ -85,7 +85,14 @@
             </div>
         </div>
 
-        <p class="datatime-update">Última Atualização - 25/04/2025 ás 12:40</p>
+        <div class="container-data-filters">
+            <p class="datatime-update">Última Atualização - 25/04/2025 ás 12:40</p>
+            <div class="filter-ipa-pilsen" id="filter_ipa_pilsen">
+                <button class="check" id="btn_ipa">IPA</button>
+                <button class="" id="btn_pilsen">Pilsen</button>
+            </div>
+        </div>
+
 
         <div class="container-info-fermenter">
             <div class="info">
@@ -137,11 +144,10 @@
             </div>
 
             <div class="container-buttons">
-                <h3>Selecione o Setor:</h3>
-                <div class="select-buttons">
-
-                    <button class="active">Setor A</button>
-                    <button>Setor B</button>
+                <h3>Selecione um Setor:</h3>
+                <div class="select-buttons" id="select_buttons">
+                    <button class="active" onclick="setorA()">Setor A</button>
+                    <button onclick="setorB()" >Setor B</button>
                 </div>
             </div>
         </div>
@@ -155,11 +161,12 @@
             <div class="bloco-infos-e-status">
                 <div class="container-infos">
                     <div class="img-fermenter">
-                        <img src="https://img.freepik.com/vetores-premium/maquina-de-fabricacao-de-cerveja-vintage-conceito-de-processamento-de-cerveja-equipamento-de-maquinas-simbolo-adequado-para_93083-5636.jpg" alt="">
+                        <img src="https://img.freepik.com/vetores-premium/maquina-de-fabricacao-de-cerveja-vintage-conceito-de-processamento-de-cerveja-equipamento-de-maquinas-simbolo-adequado-para_93083-5636.jpg"
+                            alt="">
                     </div>
                     <div class="info-fermenter">
                         <div class="fermenter-header">
-                            <h2>Fermentadora IPA 01</h2>
+                            <h2 id="title_fermenter">Fermentadora IPA 01</h2>
                             <p class="company-name">Empresa: Moinho de Cevada</p>
                             <p class="sector">Setor: A</p>
                         </div>
@@ -180,10 +187,10 @@
                 </div>
 
                 <div class="container-buttons">
-                    <h3>Selecione a Fermentadora:</h3>
-                    <div class="select-buttons">
-                        <button class="active"><i class="fa-solid fa-beer-mug-empty"></i> Fermentadora 1</button>
-                        <button><i class="fa-solid fa-beer-mug-empty"></i> Fermentadora 2</button>
+                    <h3>Selecione uma Fermentadora:</h3>
+                    <div class="select-buttons" id="select_buttons_fermenter">
+                        <button class="active" onclick="fermentadora1()"><i class="fa-solid fa-beer-mug-empty"></i> Fermentadora 1</button>
+                        <button onclick="fermentadora2()"><i class="fa-solid fa-beer-mug-empty"></i> Fermentadora 2</button>
                         <button><i class="fa-solid fa-beer-mug-empty"></i> Fermentadora 3</button>
                         <button><i class="fa-solid fa-beer-mug-empty"></i> Fermentadora 4</button>
                         <button><i class="fa-solid fa-beer-mug-empty"></i> Fermentadora 5</button>
