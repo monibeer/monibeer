@@ -5,19 +5,23 @@ var data = [6, 87, 7];
 var ipa = btn_ipa;
 var pilsen = btn_pilsen;
 
-function verIPA(){
+function verIPA() {
     chartTemp.data.datasets[0].data = [6, 87, 7];
     chartTemp.data.labels = ['Abaixo de 16°C', '18°C a 22°C', 'Acima de 24°C']
-    ipa.classList.add('check')
-    pilsen.classList.remove('check')
+    filter_ipa_pilsen.innerHTML = `
+        <button class="check" onclick="verIPA()" id="btn_ipa">IPA</button>
+        <button class="" onclick="verPilsen()" id="btn_pilsen">Pilsen</button>
+    `
     chartTemp.update();
 }
 
-function verPilsen(){
+function verPilsen() {
     chartTemp.data.datasets[0].data = [14, 85, 5];
     chartTemp.data.labels = ['Abaixo de 6°C', '8°C a 12°C', 'Acima de 14°C']
-    pilsen.classList.add('check')
-    ipa.classList.remove('check')
+    filter_ipa_pilsen.innerHTML = `
+        <button class="" onclick="verIPA()" id="btn_ipa">IPA</button>
+        <button class="check" onclick="verPilsen()" id="btn_pilsen">Pilsen</button>
+    `
     chartTemp.update();
 }
 
@@ -29,8 +33,8 @@ var chartTemp = new Chart(dataGraphicTempFaixaPercentual, {
             label: 'Distribuição (%) por Faixa de Temperatura',
             data: data,
             borderWidth: 2,
-            borderColor: ['green', 'orange', 'blue'],
-            backgroundColor: ['green', 'orange', 'blue'],
+            borderColor: ['#388e3c', '#0288d1', '#d32f2f'],
+            backgroundColor: ['#a5d6a7', '#81d4fa', '#ef9a9a'],
             barThickness: 50
         }]
     },
@@ -60,7 +64,7 @@ var chartTemp = new Chart(dataGraphicTempFaixaPercentual, {
                     weight: 'bold',
                     size: 12
                 },
-                formatter: function(value) {
+                formatter: function (value) {
                     return value + '%';
                 }
             }
@@ -76,10 +80,10 @@ new Chart(dataGraphicStatusFermentar, {
         datasets: [{
             data: [30, 8, 2],
             backgroundColor: [
-                'rgb(0, 230, 88)',
-                'rgb(225, 26, 0)',
-                'rgb(0, 157, 255)'
-            ],
+                '#66BB6A',
+                '#EF5350',
+                '#FFCA28'
+              ],                         
             hoverOffset: 3
         }]
     },
@@ -100,7 +104,7 @@ new Chart(dataGraphicStatusFermentar, {
                 color: '#000',
                 font: {
                     weight: 'bold',
-                    size: 13
+                    size: 16,
                 }
             }
         }

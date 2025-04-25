@@ -1,4 +1,3 @@
-
 /* DASHBOARD - INFO */
 .container-info-fermenter {
     display: flex;
@@ -7,7 +6,7 @@
 }
 
 .container-info-fermenter .info {
-    width: 840px;
+    width: 820px;
     display: flex;
     flex-direction: column;
 }
@@ -128,7 +127,7 @@
 }
 
 .alert img {
-    height: 70%;
+    height: 60%;
     margin-left: 10px;
     border-radius: 6px;
 }
@@ -162,7 +161,7 @@
 
 
 .section-title {
-    margin-top: 50px;
+    margin-top: 70px;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
@@ -196,7 +195,7 @@
     flex: 1;
 }
 
-.container-graphic{
+.container-graphic {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -214,10 +213,10 @@
     font-size: 23px;
 }
 
-.graphics .container-buttons{
+.graphics .container-buttons {
     display: flex;
     flex-direction: column;
-    width: 250px;
+    width: 270px;
     height: 100%;
 }
 
@@ -250,6 +249,7 @@
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     padding: 10px 0px;
+    font-size: 14px;
 }
 
 .select-buttons button.active {
@@ -263,3 +263,124 @@
 }
 
 
+.container-fermenter-detalhada {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 20px;
+    background-color: #fcfbf4;
+    border: 1px solid #e6e0c9;
+    border-radius: 16px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* FERMENTER INDIVIDUAL */
+
+.container-infos {
+    border: 1px solid #77715c;
+    flex: 1;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: row;
+    height: 245px;
+}
+
+.img-fermenter {
+    height: 100%;
+}
+
+.img-fermenter img {
+    height: 100%;
+}
+
+.info-fermenter {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-weight: 500;
+}
+
+.fermenter-header h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.company-name,
+.sector {
+    font-size: 16px;
+    color: #666;
+    font-weight: 600;
+}
+
+.sensor-info p,
+.status-info p {
+    font-size: 15px;
+    color: #444;
+    font-weight: 500;
+}
+
+.status-info p {
+    font-weight: 600;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.status-indicator .icon {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.status-indicator.ideal {
+    background-color: #e7f6ec;
+    border: 1px solid #b6e2c6;
+    color: #2e8b57;
+}
+
+.status-indicator.atencao {
+    background-color: #fff8e6;
+    border: 1px solid #f5d98b;
+    color: #b38b00;
+}
+
+.status-indicator.critico {
+    background-color: #fce9e9;
+    border: 1px solid #f5b8b8;
+    color: #cc0000;
+}
+
+.mega-container-fermentadora {
+    border: 1px solid #cdcdcd;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.bloco-infos-e-status {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.bloco-infos-e-status .info-fermenter {
+    flex: 1;
+}
+
+.bloco-infos-e-status .container-buttons {
+    width: 350px;
+}

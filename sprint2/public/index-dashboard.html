@@ -86,14 +86,14 @@
             </div>
         </div>
 
-        <p class="datatime-update">Última Atualização - 25/04/2025 ás 12:40</p>
+        <p class="datatime-update">Última Atualização - 25/04/2025 ás 10:40</p>
 
         <div class="container-info-fermenter">
             <div class="info">
                 <h2 class="title-info">Visão Geral do Desempenho</h2>
                 <div class="kpis">
                     <div class="kpi temp">
-                        <h3>Fermentadoras em Alerta Crítico</h3>
+                        <h3>Fermentadoras com Alerta Crítico</h3>
                         <div class="container-data">
                             <p class="data-kpi critical">9</p>
                             <p class="description">/40</p>
@@ -101,7 +101,7 @@
                     </div>
 
                     <div class="kpi fermen">
-                        <h3>Total de Fermentadoras que estão Ativas</h3>
+                        <h3>Fermentadoras Ativas</h3>
                         <div class="container-data">
                             <p class="data-kpi">30</p>
                             <p class="description">/40</p>
@@ -109,27 +109,29 @@
                     </div>
 
                     <div class="kpi abruptas">
-                        <h3>Fermentadoras com Variação de Temperatura durante (7 dias)</h3>
+                        <h3>Fermentadoras com Temperatura Estável</h3>
                         <div class="container-data">
-                            <p class="data-kpi">15</p>
-                            <p class="description" style="font-size: 16px;">Oscilações significativas foram detectadas</p>
+                            <p class="data-kpi">29</p>
+                            <p class="description">/40</p>
                         </div>
                     </div>
+                    
                     
                     
                 </div>
 
                 <div class="container-graphic">
                     <div class="graphics">
-                        <div class="info-graphic">
-                            <h3>Status das Fermentadoras</h3>
+                        <div class="info-graphic status">
+                            <h3>Status Fermentadoras</h3>
+                            <p>Total: 40</p>
                         </div>
                         <canvas id="graphic-statusFermenter" style="width: 100%; height: 100%;"></canvas>
                     </div>
                     <div class="graphics">
                         <div class="info-graphic">
-                            <h3>Percentual de Fermentadoras por Faixa de Temperatura</h3>
-                            <div class="filter-ipa-pilsen">
+                            <h3>Fermentadoras por Faixa de Temperatura</h3>
+                            <div class="filter-ipa-pilsen" id="filter_ipa_pilsen">
                                 <button class="check" onclick="verIPA()" id="btn_ipa">IPA</button>
                                 <button class="" onclick="verPilsen()" id="btn_pilsen">Pilsen</button>
                             </div>
@@ -149,8 +151,8 @@
                         <img src="./assets/alert-critico.png" alt="">
                         <div class="info-alert">
                             <h3>Alerta Crítico</h3>
-                            <p>A fermentadora 1 (IPA) ultrapassou o limite permitido, temperatura em +24°C.
-                                <span class="alert-danger">Verifique imediatamente!</span>
+                            <p>A fermentadora 4 (IPA) ultrapassou o limite máximo permitido, temperatura acima de 26°C.
+                                <span class="alert-danger">Verifique imediatamente</span>
                             </p>
                         </div>
                     </div>
@@ -166,9 +168,9 @@
                             <img src="./assets/alert-critico.png" alt="">
                             <div class="data-history">
                                 <h4>Alerta Crítico</h4>
-                                <p>Fermentadora 10 (IPA) ultrapassou o limite (+24°C)</p>
+                                <p>Fermentadora 10 (IPA) Ultrapassou o limite máximo permitido...</p>
                             </div>
-                            <p class="datatime-history">17/04/25 às 16:58</p>
+                            <p class="datatime-history">25/04/25 às 09:56</p>
                         </div>
                         
                         <div class="history">
@@ -177,16 +179,16 @@
                                 <h4>Atenção</h4>
                                 <p>Fermentadora 2 (IPA) chegou do limite permitido (24°C)</p>
                             </div>
-                            <p class="datatime-history">17/04/25 às 16:58</p>
+                            <p class="datatime-history">25/04/25 às 09:60</p>
                         </div>
                         
                         <div class="history">
                             <img src="https://img.freepik.com/vetores-premium/icone-de-avisos-de-notificacao_1076610-18996.jpg?semt=ais_hybrid&w=740" alt="">
                             <div class="data-history">
                                 <h4>Cuidado</h4>
-                                <p>Fermentadora 4 (IPA) chegou ao limite (22°C)</p>
+                                <p>Fermentadora 4 (IPA) atingiu o limite máximo do ideal 22°C</p>
                             </div>
-                            <p class="datatime-history">17/04/25 às 16:58</p>
+                            <p class="datatime-history">25/04/25 às 10:10</p>
                         </div>
                         
 
@@ -201,15 +203,4 @@
 </body>
 
 </html>
-<script>
-
-var data = [30,20,50];
-    function verIPA() {
-        data = [30, 20, 50]
-    }
-
-    function verPilsen() {
-        data = [5, 5, 90]
-    }
-</script>
 <script src="./js/chartJs-Home.js"></script>

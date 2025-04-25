@@ -103,7 +103,7 @@
 
         if (senha.toLowerCase() != senha) {
             senhaVerificacaoMaiuscula = true;
-            mensagem_senha += `<p style="color: green">✅ Conter no mínimo uma letra Maiúscula</p>`;
+            mensagem_senha += `<p style="color: #00E676">✅ Conter no mínimo uma letra Maiúscula</p>`;
         } else {
             mensagem_senha += `<p>● Conter no mínimo uma letra Maiúscula</p>`;
         }
@@ -114,7 +114,7 @@
             senhaVerificacaoNumero = Number(senha[contador])
             if (!isNaN(senhaVerificacaoNumero)) {
                 senhaVerificacaoNumero = true;
-                mensagem_senha += `<p style="color: green">✅ Conter no mínimo um Número</p>`;
+                mensagem_senha += `<p style="color: #00E676">✅ Conter no mínimo um Número</p>`;
                 temNumeros++;
                 contador = senha.length;
             }
@@ -126,7 +126,7 @@
 
         if (senha.length >= 8) {
             senhaVerificacaoCaracteres = true
-            mensagem_senha += `<p style="color: green">✅ Conter no mínimo 8 caracteres</p>`
+            mensagem_senha += `<p style="color: #00E676">✅ Conter no mínimo 8 caracteres</p>`
         } else {
             mensagem_senha += `<p>● Conter no mínimo 8 caracteres</p>`;
         }

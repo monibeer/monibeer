@@ -92,24 +92,17 @@
                 <h2 class="title-info">Desempenho das Fermentadoras de IPA</h2>
                 <div class="kpis">
                     <div class="kpi temp-max">
-                        <h3>Total de Alertas de Temperatura nas Últimas 24h</h3>
+                        <h3>N° de Alertas nas Últimas 24h</h3>
                         <div class="container-data">
                             <p class="data-kpi">15</p>
                         </div>
                     </div>
 
                     <div class="kpi temp-media">
-                        <h3>Total de Fermentadoras em Alerta Crítico</h3>
+                        <h3>Fermentadoras com Alerta Crítico</h3>
                         <div class="container-data">
                             <p class="data-kpi">4</p>
                             <p class="description">/20</p>
-                        </div>
-                    </div>
-
-                    <div class="kpi temp-min">
-                        <h3>Maior Duração fora da Faixa de uma Fermentadora em 24h</h3>
-                        <div class="container-data">
-                            <p class="data-kpi">1h 10m</p>
                         </div>
                     </div>
                 </div>
@@ -124,8 +117,8 @@
                         <img src="./assets/alert-critico.png" alt="">
                         <div class="info-alert">
                             <h3>Alerta Crítico</h3>
-                            <p>A fermentadora 1 (IPA) ultrapassou o limite permitido, temperatura em +24°C.
-                                <span class="alert-danger">Verifique imediatamente!</span>
+                            <p>A fermentadora 4 (IPA) ultrapassou o limite máximo permitido, temperatura acima de 26°C.
+                                <span class="alert-danger">Verifique imediatamente</span>
                             </p>
                         </div>
                     </div>
@@ -158,65 +151,64 @@
             <div class="bar-style"></div>
         </div>
 
-        <div class="graphics">
-            <div class="container-buttons">
-                <h3>Selecione a Fermentadora:</h3>
-                <div class="select-buttons">
-                    <button class="active">
-                        <i class="fa-solid fa-beer-mug-empty"></i>
-                        Fermentadora 1
-                    </button>
-                    <button class="">
-                        <i class="fa-solid fa-beer-mug-empty"></i>
-                        Fermentadora 2
-                    </button>
-                    <button class="">
-                        <i class="fa-solid fa-beer-mug-empty"></i>
-                        Fermentadora 3
-                    </button>
-                    <button class="">
-                        <i class="fa-solid fa-beer-mug-empty"></i>
-                        Fermentadora 4
-                    </button>
-                    <button class="">
-                        <i class="fa-solid fa-beer-mug-empty"></i>
-                        Fermentadora 5
-                    </button>
-                    <button class="">
-                        <i class="fa-solid fa-beer-mug-empty"></i>
-                        Fermentadora 6
-                    </button>
-                    <button class="">
-                        <i class="fa-solid fa-beer-mug-empty"></i>
-                        Fermentadora 7
-                    </button>
-                    <button class="">
-                        <i class="fa-solid fa-beer-mug-empty"></i>
-                        Fermentadora 8
-                    </button>
-                    <button class="">
-                        <i class="fa-solid fa-beer-mug-empty"></i>
-                        Fermentadora 9
-                    </button>
-                    <button class="">
-                        <i class="fa-solid fa-beer-mug-empty"></i>
-                        Fermentadora 10
-                    </button>
+        <div class="mega-container-fermentadora">
+            <div class="bloco-infos-e-status">
+                <div class="container-infos">
+                    <div class="img-fermenter">
+                        <img src="https://img.freepik.com/vetores-premium/maquina-de-fabricacao-de-cerveja-vintage-conceito-de-processamento-de-cerveja-equipamento-de-maquinas-simbolo-adequado-para_93083-5636.jpg" alt="">
+                    </div>
+                    <div class="info-fermenter">
+                        <div class="fermenter-header">
+                            <h2>Fermentadora IPA 01</h2>
+                            <p class="company-name">Empresa: Moinho de Cevada</p>
+                            <p class="sector">Setor: A</p>
+                        </div>
 
+                        <div class="sensor-info">
+                            <p><strong style="font-weight: 700;">Sensor:</strong> LM35</p>
+                        </div>
+
+                        <div class="status-info">
+                            <p><strong style="font-weight: 700;">Status:</strong> Ativo</p>
+                        </div>
+
+                        <div class="status-indicator ideal">
+                            <span class="icon">✔</span>
+                            <p style="font-weight: 800;">Temperatura no intervalo ideal.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-buttons">
+                    <h3>Selecione a Fermentadora:</h3>
+                    <div class="select-buttons">
+                        <button class="active"><i class="fa-solid fa-beer-mug-empty"></i> Fermentadora 1</button>
+                        <button><i class="fa-solid fa-beer-mug-empty"></i> Fermentadora 2</button>
+                        <button><i class="fa-solid fa-beer-mug-empty"></i> Fermentadora 3</button>
+                        <button><i class="fa-solid fa-beer-mug-empty"></i> Fermentadora 4</button>
+                        <button><i class="fa-solid fa-beer-mug-empty"></i> Fermentadora 5</button>
+                        <button><i class="fa-solid fa-beer-mug-empty"></i> Fermentadora 6</button>
+                        <button><i class="fa-solid fa-beer-mug-empty"></i> Fermentadora 7</button>
+                        <button><i class="fa-solid fa-beer-mug-empty"></i> Fermentadora 8</button>
+                        <button><i class="fa-solid fa-beer-mug-empty"></i> Fermentadora 9</button>
+                        <button><i class="fa-solid fa-beer-mug-empty"></i> Fermentadora 10</button>
+                    </div>
                 </div>
             </div>
+
             <div class="container-graphic">
                 <div class="info-graphic">
                     <h3>Temperatura Atual</h3>
                 </div>
-                <div class="graphic">
+                <div class="graphic" style="height: 300px; margin-top: 20px;">
                     <canvas id="graphic-tempIndividualIPA" style="width: 100%; height: 100%;"></canvas>
                 </div>
             </div>
-
         </div>
+
+
     </div>
-</section>  
+</section>
 
 <body>
 </body>

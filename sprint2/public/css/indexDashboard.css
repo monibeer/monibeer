@@ -116,6 +116,14 @@
     gap: 20px;
 }
 
+.graphics .info-graphic.status{
+    flex-direction: row;
+}
+
+.graphics .info-graphic.status p{
+    font-weight: 800;
+}
+
 .info-graphic h3 {
     font-weight: 500;
     font-size: 18px;
@@ -178,7 +186,7 @@
 }
 
 .alert img {
-    height: 70%;
+    height: 60%;
     margin-left: 10px;
     border-radius: 6px;
 }
