@@ -129,26 +129,26 @@ INSERT INTO setor VALUES
 (DEFAULT, 'Setor D', 3);
 
 INSERT INTO sensor VALUES
-(DEFAULT, 'lm35', 'ativo'),
-(DEFAULT, 'lm35', 'ativo'),
-(DEFAULT, 'lm35', 'manutenção'),
-(DEFAULT, 'lm35', 'ativo'),
-(DEFAULT, 'lm35', 'inativo'),
-(DEFAULT, 'lm35', 'manutenção'),
-(DEFAULT, 'lm35', 'ativo'),
-(DEFAULT, 'lm35', 'ativo'),
-(DEFAULT, 'lm35', 'inativo'),
-(DEFAULT, 'lm35', 'inativo'),
-(DEFAULT, 'lm35', 'ativo'),
-(DEFAULT, 'lm35', 'ativo'),
-(DEFAULT, 'lm35', 'inativo'),
-(DEFAULT, 'lm35', 'ativo'),
-(DEFAULT, 'lm35', 'inativo'),
-(DEFAULT, 'lm35', 'manutenção'),
-(DEFAULT, 'lm35', 'ativo'),
-(DEFAULT, 'lm35', 'ativo'),
-(DEFAULT, 'lm35', 'ativo'),
-(DEFAULT, 'lm35', 'ativo');
+(DEFAULT, 'sensor 1', 'ativo'),
+(DEFAULT, 'sensor 2', 'ativo'),
+(DEFAULT, 'sensor 3', 'manutenção'),
+(DEFAULT, 'sensor 4', 'ativo'),
+(DEFAULT, 'sensor 5', 'inativo'),
+(DEFAULT, 'sensor 6', 'manutenção'),
+(DEFAULT, 'sensor 7', 'ativo'),
+(DEFAULT, 'sensor 8', 'ativo'),
+(DEFAULT, 'sensor 9', 'inativo'),
+(DEFAULT, 'sensor 10', 'inativo'),
+(DEFAULT, 'sensor 11', 'ativo'),
+(DEFAULT, 'sensor 12', 'ativo'),
+(DEFAULT, 'sensor 13', 'inativo'),
+(DEFAULT, 'sensor 14', 'ativo'),
+(DEFAULT, 'sensor 15', 'inativo'),
+(DEFAULT, 'sensor 16', 'manutenção'),
+(DEFAULT, 'sensor 17', 'ativo'),
+(DEFAULT, 'sensor 18', 'ativo'),
+(DEFAULT, 'sensor 19', 'ativo'),
+(DEFAULT, 'sensor 20', 'ativo');
 
 INSERT INTO fermentadora (nome, fkSensor, fkSetor) VALUES
 ('Fermentadora 1', 1, 1),
@@ -176,41 +176,49 @@ INSERT INTO estilo (estiloCerveja, limiteTempMin, limiteTempMax) VALUES
 ('ipa', 18.00, 22.00),
 ('pilsen', 9.00, 12.00);
 
-INSERT INTO historico_fermentadora (fkFermentadora, fkEstilo, dataInicio, dataFim) VALUES
-(1, 1, '2024-11-01 08:00:00', '2024-11-10 08:00:00'),
-(2, 2, '2024-11-02 09:00:00', '2024-11-11 09:00:00'),
-(3, 1, '2024-11-03 10:00:00', '2024-11-12 10:00:00'),
-(4, 2, '2024-11-04 11:00:00', '2024-11-13 11:00:00'),
-(5, 1, '2024-11-05 12:00:00', '2024-11-14 12:00:00'),
-(6, 2, '2024-11-06 13:00:00', '2024-11-15 13:00:00'),
-(7, 1, '2024-11-07 14:00:00', '2024-11-16 14:00:00'),
-(8, 2, '2024-11-08 15:00:00', '2024-11-17 15:00:00'),
-(9, 1, '2024-11-09 16:00:00', '2024-11-18 16:00:00'),
-(10, 2, '2024-11-10 17:00:00', '2024-11-19 17:00:00'),
-(11, 1, '2024-12-01 08:30:00', NULL),
-(12, 2, '2024-12-02 09:30:00', NULL),
-(13, 1, '2024-12-03 10:30:00', NULL),
-(14, 2, '2024-12-04 11:30:00', NULL),
-(15, 1, '2024-12-05 12:30:00', NULL),
-(16, 2, '2024-12-06 13:30:00', NULL),
-(17, 1, '2024-12-07 14:30:00', NULL),
-(18, 2, '2024-12-08 15:30:00', NULL),
-(19, 1, '2024-12-09 16:30:00', NULL),
-(20, 2, '2024-12-10 17:30:00', NULL);
+INSERT INTO historico_fermentadora (fkFermentadora, fkEstilo, dataFim) VALUES
+(1, 1, '2024-11-10 08:00:00'),
+(2, 2, '2024-11-11 09:00:00'),
+(3, 1, '2024-11-12 10:00:00'),
+(4, 2, '2024-11-13 11:00:00'),
+(5, 1, '2024-11-14 12:00:00'),
+(6, 2, '2024-11-15 13:00:00'),
+(7, 1, '2024-11-16 14:00:00'),
+(8, 2, '2024-11-17 15:00:00'),
+(9, 1, '2024-11-18 16:00:00'),
+(10, 2, '2024-11-19 17:00:00'),
+(11, 1, NULL),
+(12, 2, NULL),
+(13, 1, NULL),
+(14, 2, NULL),
+(15, 1, NULL),
+(16, 2, NULL),
+(17, 1, NULL),
+(18, 2, NULL),
+(19, 1, NULL),
+(20, 2, NULL);
+
 
 INSERT INTO captura (temperatura, fkSensor) VALUES
-(18.50, 1),
-(20.45, 2),
-(21.00, 3),
-(22.45, 4),
-(18.69, 5);
+(22.10, 1),
+(17.90, 2),
+(24.45, 4),
+(16.75, 7),
+(27.50, 8),
+(18.90, 11),
+(19.20, 12),
+(20.10, 14),
+(21.50, 17),
+(19.80, 18),
+(20.75, 19),
+(18.60, 20);
 
-INSERT INTO alerta (dtHora, nivel, mensagem, fkCaptura) VALUES
-('2024-12-25 07:21:14', 'Cuidado', 'Atingiu o limite máximo do ideal 22°C ', 1),
-('2024-12-25 12:21:14', 'Cuidado', 'Atingiu o limite mínimo do ideal 18°C', 2),
-('2024-04-01 08:24:01', 'Atenção', 'Está 2 graus celsius acima do limite máximo ideal', 3),
-('2024-04-01 14:24:01', 'Atenção', 'Está 2 graus celsius abaixo do limite mínimo ideal', 4),
-('2024-12-25 07:21:14', 'Crítico', 'Ultrapassou o limite máximo permitido, temperatura acima de 26°C.', 5);
+INSERT INTO alerta (dtHora, nivel, mensagem, fkCaptura) VALUES -- definir mensagens melhores
+('2024-12-25 07:21:14', 'Cuidado', 'Temperatura está acima do limite ideal de 22°C', 1), -- sensor 1
+('2024-12-25 12:21:14', 'Cuidado', 'Temperatura está abaixo do limite ideal 18°C', 2), -- sensor 2
+('2024-04-01 08:24:01', 'Atenção', 'Temperatura está acima de 23°C', 3), -- sensor 4
+('2024-04-01 14:24:01', 'Atenção', 'Temperatura está abaixo de 17°C', 4), -- sensor 7
+('2024-12-25 07:21:14', 'Crítico', 'Temperatura acima de 27°C', 5); -- sensor 8
 
 SHOW TABLES;
 
@@ -224,6 +232,118 @@ SELECT * FROM estilo;
 SELECT * FROM historico_fermentadora;
 SELECT * FROM captura;
 SELECT * FROM alerta;
+
+
+---------- TEMPLATES PARA QUANDO PRECISAR (NÃO APAGUE!) -------------------------
+
+-- ALTER TABLE exemplo ADD COLUMN x x; -- adicionando um campo/coluna
+-- ALTER TABLE exemplo MODIFY COLUMN x x; -- modificando um campo/coluna
+-- ALTER TABLE exemplo DROP COLUMN x; -- excluindo um campo/coluna
+-- DROP TABLE exemplo;
+-- UPDATE exemplo SET x = xx WHERE condição; -- alterar algum dado
+-- DELETE FROM exemplo WHERE condição;
+-- ALTER TABLE exemplo ADD CONSTRAINT chkExemplo CHECK (x in ('exemplo1', 'exemplo2')); -- adicionando check
+
+SELECT * FROM sensor WHERE statusSensor = 'inativo';
+SELECT * FROM empresa WHERE nomeEmpresa LIKE "M%"; -- filtra pela primeira letra
+SELECT * FROM empresa WHERE nomeEmpresa LIKE "%a"; -- filtra pela última
+SELECT * FROM empresa WHERE nomeEmpresa LIKE "%ee%"; -- filtra entre
+SELECT * FROM funcionario ORDER BY nomeFuncionario DESC; -- ASC
+
+-- JOIN
+-- fermentadora, captura e sensor
+SELECT	f.nome AS Fermentadora,
+		c.temperatura AS Temperatura,
+        s.nome AS Sensor,
+       s.statusSensor AS StatusSensor
+FROM fermentadora AS f
+LEFT JOIN sensor AS s
+ON f.fkSensor = s.idSensor
+LEFT JOIN captura AS c
+ON c.fkSensor = s.idSensor;
+
+SELECT	f.nome AS Fermentadora,
+		s.nome AS Sensor,
+		c.temperatura AS Temperatura
+FROM fermentadora AS f
+JOIN sensor AS s
+ON f.fkSensor = s.idSensor
+JOIN captura AS c
+ON c.fkSensor = s.idSensor;
+
+SELECT	f.nome AS fermentadora,
+		s.idSensor AS Sensor,
+		c.temperatura AS Temperatura,
+        c.dtHora AS Horario
+FROM fermentadora AS f
+JOIN sensor AS s
+ON s.idSensor = f.fkSensor
+JOIN captura AS c
+ON s.idSensor = c.fkSensor;
+
+-- sensor, captura
+SELECT	s.idSensor AS Sensor,
+		c.temperatura AS Temperatura,
+        c.dtHora AS Horario
+FROM sensor AS s
+JOIN captura AS c
+ON s.idSensor = c.fkSensor;
+
+-- sensor, captura, alerta
+SELECT	s.idSensor AS Sensor,
+		c.temperatura AS Temperatura,
+        c.dtHora AS Horario,
+        a.nivel AS Alerta,
+        a.mensagem AS Descrição
+FROM sensor AS s
+JOIN captura AS c
+ON s.idSensor = c.fkSensor
+JOIN alerta AS a
+ON c.idCaptura = a.fkCaptura;
+
+-- empresa, funcionario
+SELECT e.nomeEmpresa AS Empresa,
+	f.nomeFuncionario AS Funcionario
+FROM empresa AS e
+JOIN funcionario AS f
+ON e.idEmpresa = f.fkEmpresa;
+
+SELECT e.nomeEmpresa AS Empresa,
+	f.nomeFuncionario AS Funcionario
+FROM empresa AS e
+JOIN funcionario AS f
+ON e.idEmpresa = f.fkEmpresa
+WHERE e.nomeEmpresa = 'Silva Beer';
+
+-- empresa, endereço
+SELECT e.nomeEmpresa AS Empresa,
+	ed.rua AS Rua,
+    ed.numero AS Numero,
+    ed.cidade AS Cidade,
+    ed.uf AS Estado
+FROM empresa AS e
+JOIN endereco AS ed
+ON ed.idEndereco = e.fkEndereco;
+
+-- empresa, setor, fermentadora, estilo
+SELECT e.nomeEmpresa AS Empresa,
+       s.nome AS Setor,
+       f.nome AS Fermentadora,
+       es.estiloCerveja AS Cerveja
+FROM empresa AS e
+JOIN setor AS s
+ON e.idEmpresa = s.fkEmpresa
+JOIN fermentadora AS f
+ON s.idSetor = f.fkSetor
+JOIN historico_fermentadora AS hf
+ON f.idFermentadora = hf.fkFermentadora
+JOIN estilo AS es
+ON hf.fkEstilo = es.idEstilo;
+
+
+
+
+
 
 
 
