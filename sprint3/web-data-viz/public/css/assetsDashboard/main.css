@@ -1,0 +1,32 @@
+@import url(./navbar.css);
+@import url(./sidebar.css);
+
+html,
+body {
+    height: 100%;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+.dashboard {
+    height: 100%;
+    display: flex;
+    background-color: rgb(94, 8, 8);
+}
+
+/*DASHBOARD - HOME*/
+.container-dashboard {
+    flex: 1;
+    height: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px 0px 0px 12px;
+    padding: 30px;
+    padding-top: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+}

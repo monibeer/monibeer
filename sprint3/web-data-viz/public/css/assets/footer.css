@@ -1,0 +1,52 @@
+/* Footer */
+.footer {
+    display: flex;
+    flex-direction: column;
+    background-color: #000;
+    color: white;
+    padding: 60px 40px;
+  }
+  
+  .redes-sociais h3 {
+    font-weight: 700;
+  }
+  
+  .contato h3 {
+    font-weight: 700;
+  }
+  
+  .campo h3 {
+    font-weight: 700;
+  }
+  
+  
+  .container-footer-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .container-footer-top .contato span,
+  .container-footer-top .redes-sociais span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .container-footer-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .container-footer-bottom span {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .footer a {
+    color: white;
+    text-decoration: none;
+  }

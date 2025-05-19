@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Header -->
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/assets/main.css" />
+  <link rel="stylesheet" href="./css/login.css" />
+  <title>Login - Monibeer</title>
+</head>
+
+<body>
+  <div class="login">
+    <div class="header">
+      <div class="container">
+        <a href="./index.html">
+          <img src="./assets/monibeer-logo.png" alt="Logo Monibeer">
+        </a>
+        <div class="navbar">
+          <ul class="menu-center">
+            <li><a id="home" href="./index.html">Home</a></li>
+            <li><a href="./index.html">Sobre Nós</a></li>
+            <li><a href="simulador.html">Simulador</a></li>
+          </ul>
+          <ul class="menu-right">
+            <li><a id="login" href="login.html">Login</a></li>
+            <li><a id="cadastro" href="cadastro.html">Cadastro</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Container com os dados informados -->
+
+    <div class="container-login">
+      <div class="card">
+        <!-- estou criando aqui o balão de cadastro -->
+        <h2>Login</h2>
+        <br /><br />
+        <div class="card-campo">
+          <form id="formLogin">
+            <div class="campo"></div>
+            <div class="campo">
+              <span>Email Corporativo</span>
+              <br /><br />
+              <input type="text" id="input_email" /> <br /><br /><br />
+            </div>
+            <div class="campo"></div>
+            <div class="campo"></div>
+            <div class="campo">
+              <span>Senha</span>
+              <br /><br />
+              <input type="password" id="input_senha" /> <br /><br /><br />
+            </div>
+            <div id="div_mensagemerro"></div>
+            <div class="campo"></div>
+            <div class="confbotao">
+              <button onclick="analisar(event)" class="botao">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="div_mensagem"></div>
+</body>
+
+</html>
+
+<!-- JAVA SCRIPT -->
+<script>
+  function analisar(event) {
+    event.preventDefault(); // Impede o recarregamento da página
+
+    var email = input_email.value;
+    var senha = input_senha.value;
+    var emaillogin = 'rodrigo@hotmail.com';
+    var emailsenha = "monibeer";
+
+    if (email == "" || senha == "") {
+      alert(`Preencha todos os campos obrigatórios`);
+    } else if (!email.includes("@")) {
+      alert(`Preencha com um email válido válida`);
+    } else if (email == emaillogin && senha == emailsenha) {
+      window.location.href = "index-dashboard.html"; // Faz a navegação automática
+    } else {
+      div_mensagemerro.innerHTML = `<span style="color: red;">Matrícula ou Senha incorretos!</span>`;
+    }
+  }
+</script>

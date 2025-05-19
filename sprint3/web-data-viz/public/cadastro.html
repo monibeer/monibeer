@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Header -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/assets/main.css">
+    <link rel="stylesheet" href="./css/cadastro.css">
+    <link rel="icon" href="./assets/Monibeer (1) 1.png">
+    <script src="./js/sessao.js"></script>
+
+    <title>Cadastro - Monibeer</title>
+</head>
+
+<body>
+    <div class="cadastro">
+        <div class="header">
+            <div class="container">
+                <a href="./index.html">
+                    <img src="./assets/monibeer-logo.png" alt="Logo Monibeer">
+                </a>
+                <div class="navbar">
+                    <ul class="menu-center">
+                        <li><a id="home" href="./index.html">Home</a></li>
+                        <li><a href="./index.html">Sobre Nós</a></li>
+                        <li><a href="simulador.html">Simulador</a></li>
+                    </ul>
+                    <ul class="menu-right">
+                        <li><a id="login" href="login.html">Login</a></li>
+                        <li><a id="cadastro" href="cadastro.html">Cadastro</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Container com os dados informados -->
+
+
+        <div class="container-cadastro">
+            <div class="card"> <!-- estou criando aqui o balão de cadastro -->
+                <h2>Cadastre Sua Empresa</h2>
+                <br><br>
+                <div class="card-campo">
+                    <div class="campo">
+                        <span>Razão Social</span>
+                        <br><br>
+                        <input type="text" id="input_nome"> <br><br><br>
+                    </div>
+                    <div class="campo">
+                        <span>E-mail*</span>
+                        <br><br>
+                        <input type="text" id="input_email"> <br><br><br>
+                    </div>
+                    <div class="campo">
+                        <span>CNPJ*</span>
+                        <br><br>
+                        <input type="number" id="input_cnpj"> <br><br><br>
+                    </div>
+                    <div class="campo">
+                        <span>Telefone*</span>
+                        <br><br>
+                        <input type="number" id="input_telefone"> <br><br><br>
+                    </div>
+                    <!-- <div class="campo">
+                        <span> Cadastrar Senha:*</span>
+                        <br><br>
+                        <input type="password" id="input_senha"> <br><br><br>
+                    </div> -->
+                    <div id="div_aguardar" class="loading-div">
+                        <!-- <img src="./assets/circle-loading.gif" id="loading-gif" /> -->
+                    </div>
+
+                    <div class="confbotao">
+                        <button onclick="cadastrar()" class="botao">Cadastro Empresa</button>
+                    </div>
+                     <div class="card_erro" id="cardErro">
+                        <span id="mensagem_erro"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="div_mensagem"></div>
+</body>
+
+</html>
+
+
+<!-- JAVA SCRIPT -->
+<script>
+    function analisar(event) {
+        event.preventDefault(); // Impede o recarregamento da página
+
+        var nome = input_nome.value;
+        var email = input_email.value;
+        var cnpj = input_cnpj.value;
+        var telefone = input_telefone.value;
+        // var senha = input_senha.value;
+
+        if (email == "" || cnpj == "" || telefone == "") {
+            alert(`Preencha todos os campos obrigatórios`)
+
+        } else if (!email.includes("@")) {
+            alert(`Preencha um E-mail válido`)
+
+        } else {
+            alert(`Cadastro de Empresa - Realizado com Sucesso!`)
+
+            window.location.href = "./cadastro-usuario.html"; //faz a navegação automática
+
+        }
+    }
+
+
+  // Array para armazenar empresas cadastradas para validação de código de ativação 
+   // let listaEmpresasCadastradas = [];
+
+  function cadastrar() {
+    //analisar();
+    // aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeVar = input_nome.value;
+    var emailVar = input_email.value;
+    var cnpjVar = input_cnpj.value;
+    var telefoneVar = input_telefone.value;
+    /*var codigoVar = codigo_input.value;
+    var idEmpresaVincular*/
+
+    // Verificando se há algum campo em branco
+    if (
+        nomeVar == "" ||
+        emailVar == "" ||
+        cnpjVar == "" ||
+      telefoneVar == "" 
+    ) {
+      cardErro.style.display = "block";
+        mensagem_erro.innerHTML =
+        "(Mensagem de erro para todos os campos em branco)";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    // Verificando se o código de ativação é de alguma empresa cadastrada
+    /*for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+      if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
+        idEmpresaVincular = listaEmpresasCadastradas[i].id
+        console.log("Código de ativação válido.");
+        break;
+      } else {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
+        finalizarAguardar();
+      }
+    }*/
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        cnpjServer: cnpjVar,
+        emailServer: emailVar,
+        telefoneVar: telefoneVar
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+          finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+
+    return false;
+  }
+
+  // Listando empresas cadastradas 
+  /* function listar() {
+    fetch("/empresas/listar", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((empresas) => {
+          empresas.forEach((empresa) => {
+            listaEmpresasCadastradas.push(empresa);
+
+            console.log("listaEmpresasCadastradas")
+            console.log(listaEmpresasCadastradas[0].codigo_ativacao)
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }*/
+
+  function sumirMensagem() {
+    cardErro.style.display = "none";
+  }
+
+
+</script>

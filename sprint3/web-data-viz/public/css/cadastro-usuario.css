@@ -1,0 +1,122 @@
+     /* -------HEADER------- */
+
+     body {
+         margin: 0;
+         background-image: url("../assets/background.png");
+         width: 100%;
+         height: 740px;
+         background-size: 100%;
+     }
+
+     .cadastro {
+         width: 100%;
+         height: 712px;
+         background-size: 100%;
+     }
+
+
+     #cadastro {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         color: #110f0f;
+         background-color: #ffffff;
+         border-radius: 7px;
+         height: 28px;
+         width: 80px;
+         border: #DCAB20 solid 3px;
+     }
+
+     /* -----Balão de Cadastro------*/
+
+     .container-cadastro {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         color: aliceblue;
+         height: auto;
+     }
+
+     .card {
+         background-color: #2a1110f8;
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         width: 36%;
+         border-radius: 10px;
+         padding: 10px;
+         line-height: 0;
+     }
+
+     .card .card-campo {
+         display: flex;
+         flex-direction: column;
+         width: auto;
+         padding: 60px;
+         padding-bottom: 20px;
+         padding-top: 0px;
+         line-height: 0.4;
+     }
+
+
+     /*------Configuração das input(campos)-----*/
+     .card-campo input {
+         width: 100%;
+         padding: 10px;
+         font-size: 14px;
+         border-radius: 4px;
+         box-sizing: border-box;
+         border: 0;
+         border-bottom: 2px solid rgb(200, 200, 200);
+         background-color: transparent;
+         color: #ffffff;
+         transition: 0.5s ease-in-out;
+     }
+
+     .card-campo .campo {
+         width: 100%;
+     }
+
+     .caracteristica {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background-color: rebeccapurple;
+        margin-bottom: 20px;
+        margin-top: 20px;
+     }
+
+     .card h2 {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         color: #ffffff;
+         font-weight: 560;
+         font-size: 26px;
+         line-height: 3.4;
+     }
+
+     span {
+         font-weight: 550;
+     }
+
+
+     /* ---- Configuração Botão de Cadastro -------*/
+     .confbotao {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         padding-top: 30px;
+     }
+
+     button {
+         background-color: #DCAB20;
+         width: 135px;
+         height: 36px;
+         border: none;
+         border-radius: 5px;
+         font-size: 16px;
+         font-weight: 600;
+         color: #ffffff;
+         opacity: 100%;
+     }

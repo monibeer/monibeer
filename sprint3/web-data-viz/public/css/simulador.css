@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    font-family: "Barlow", sans-serif;
+}
+
+body {
+    /* https://www.w3schools.com/css/css3_gradients.asp */
+    background: linear-gradient(to bottom, #2D2F25, #555A32);
+    margin: 0;
+}
+
+.container-simulador {
+    background-color: #2A1110;
+    width: 50%;
+    margin: auto;
+    padding: 30px 20px;
+    border-radius: 15px;
+    border: #DCAB20 2px solid;
+    /*#F7A620*/
+    color: #FFFFFF;
+    margin-top: 10px;
+    margin-bottom: 100px;
+    transform: scale(0.9);
+}
+
+.container-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.container-logo img {
+    width: 200px;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 4px;
+    margin-left: 12px;
+    filter: brightness(0) invert(1);
+}
+
+.form h3 {
+    text-align: center;
+    color: #FED722;
+    /*#F7A620*/
+    font-size: 28px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.form h4 {
+    color: #FFFFFF;
+    margin-bottom: 10px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    font-weight: 700;
+}
+
+.form {
+    padding: 0 12px;
+}
+
+.form input {
+    width: 97.5%;
+    height: 28px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 20px;
+    font-weight: 600;
+    background-color: #FFFACC;
+    color: #2A1110;
+    margin-bottom: 15px;
+}
+
+.form button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #DCAB20;
+    color: #FFFFFF;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 24px;
+    margin-top: 15px;
+}
+
+.form button:hover {
+    /*https://www.w3schools.com/cssref/sel_hover.php*/
+    background-color: #FED722;
+}
+
+#msg {
+    min-height: 25px;
+    background-color: #2D2F25;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 20px 12px 12px 0px;
+    width: 97%;
+    font-size: 26px;
+}
+
+#msg h3 {
+    font-size: 30px;
+}
+
+#msg p {
+    font-size: 26px;
+    margin: 12px 0;
+    font-size: 26px;
+    border-radius: 8px;
+}
+
+b {
+    color: #FED722;
+    font-weight: 600;
+}
+
+.valor-negativo {
+    color: #FF1744;
+    font-weight: bold;
+}
+
+.valor-positivo {
+    color: #00E676;
+    font-weight: bold;
+}
+
+.msg-erro {
+    color: #FFFACC;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+}

@@ -1,0 +1,126 @@
+     
+     
+     
+     /* -------HEADER------- */
+
+    body {
+        margin: 0;
+        background: url(../assets/background.png);
+        width: 100%;
+        height: 700px;
+        background-size: 100%;
+    }
+
+    .login {
+        width: 100%;
+        height: 712px;
+        background-size: 100%;
+    }
+    
+    #login {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #000000;
+        background-color: #ffffff;
+        border-radius: 7px;
+        height: 28px;
+        width: 80px;
+        border: #DCAB20 solid 3px;
+    }
+
+    .footer a {
+        color: #ffffff;
+        font-weight: 400;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* ---Login---*/
+
+    .container-login {
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       color: aliceblue;
+       height: auto;
+       padding-top: 120px;
+   }
+
+    .card {
+        background-color: rgba(42, 17, 16, 0.95);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 36%;
+        border-radius: 10px;
+        padding: 10px;
+        line-height: 0px;
+    }
+
+    .card .card-campo {
+        display: flex;
+        flex-direction: column;
+        width: auto;
+        padding: 60px;
+        padding-bottom: 20px;
+        padding-top: 0px;
+        line-height: 0.4;
+    }
+
+
+    /*---Configuração das input---*/
+    .card-campo input {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 4px;
+        box-sizing: border-box;
+        border: 0;
+        border-bottom: 2px solid rgb(200, 200, 200);
+        background-color: transparent;
+        color: #ffffff;
+        transition: 0.5s ease-in-out;
+    }
+
+    .card-campo .campo {
+        width: 100%;
+    }
+
+    .card h2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #f7f4d9;
+        font-weight: 600;
+        font-size: 40px;
+        line-height: 2.5;
+    }
+
+    span {
+        font-weight: 400;
+    }
+
+
+    /* - Configuração Botão de Login -*/
+    .confbotao {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 30px;
+    }
+
+    button {
+        background-color: #DCAB20;
+        width: 135px;
+        height: 36px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #ffffff;
+        opacity: 100%;
+    }
+
+
+   
