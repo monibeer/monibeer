@@ -1,4 +1,4 @@
--- DROP DATABASE monibeer;
+DROP DATABASE monibeer;
 CREATE DATABASE monibeer;
 USE monibeer;
 
@@ -114,18 +114,18 @@ INSERT INTO endereco VALUES
 (DEFAULT, 'Alameda Dom Pedro II', '654', 'Salvador', 'BA');
 
 INSERT INTO empresa VALUES  
-(DEFAULT, 'Moinho de Cevada', '11605819000107', 'contato@moinhodecevada.com.br', '(11)98765-4321', 1),
-(DEFAULT, 'Cervejaria Sertão Malteado', '01366303000195', 'contato@sertaomalteado.com.br', '(21)99876-5432', 2),
-(DEFAULT, 'Lupulândia Brewery', '04176513000109', 'contato@lupulandia.com.br', '(31)91234-5678', 3),
-(DEFAULT, 'Silva Beer', '33846612000159', 'contato@silvabeer.com.br', '(11)99123-4567', 4),
-(DEFAULT, 'Cervejaria Cervo da Mata', '56426771000108', 'contato@cervodamata.com.br', '(71)98765-1234', 5);
+(DEFAULT, 'Moinho de Cevada', '11605819000107', 1),
+(DEFAULT, 'Cervejaria Sertão Malteado', '01366303000195', 2),
+(DEFAULT, 'Lupulândia Brewery', '04176513000109', 3),
+(DEFAULT, 'Silva Beer', '33846612000159',  4),
+(DEFAULT, 'Cervejaria Cervo da Mata', '56426771000108', 5);
 
 INSERT INTO funcionario VALUES
-(NULL, 'Silvana', 'silvana.batista@clubedomalte.com.br', 'a123456789b', '(11)91234-5678', 'administrador', 1),
-(NULL, 'Anderson', 'anderson.soares@colorado.com.br', 'c987654321d', '(21)98765-4321', 'administrador', 2),
-(NULL, 'Vitorino', 'vitorino.milchen@eisenbahn.com.br', 'e987654321f', '(31)99876-5432', 'administrador', 3),
-(NULL, 'Rodrigo', 'rodrigo@hotmail.com', 'Monibeer123', '(11)99234-5678', 'administrador', 4),
-(NULL, 'Juan', 'juan.bento@ledmont.com.br', 'g987654321h', '(51)99123-4567', 'administrador', 5);
+(NULL, 'Silvana', 'silvana.batista@clubedomalte.com.br', 'a123456789b', 'administrador', 1),
+(NULL, 'Anderson', 'anderson.soares@colorado.com.br', 'c987654321d', 'administrador', 2),
+(NULL, 'Vitorino', 'vitorino.milchen@eisenbahn.com.br', 'e987654321f','administrador', 3),
+(NULL, 'Rodrigo', 'rodrigo@hotmail.com', 'Monibeer123', 'administrador', 4),
+(NULL, 'Juan', 'juan.bento@ledmont.com.br', 'g987654321h', 'administrador', 5);
 
 INSERT INTO setor VALUES
 (DEFAULT, 'Setor A', 1),
@@ -229,7 +229,3 @@ SELECT * FROM estilo;
 SELECT * FROM historico_fermentadora;
 SELECT * FROM captura;
 SELECT * FROM alerta;
-
-
-
-
