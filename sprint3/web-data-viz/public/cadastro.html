@@ -46,22 +46,12 @@
                     <div class="campo">
                         <span>Razão Social</span>
                         <br><br>
-                        <input type="text" id="input_nome"> <br><br><br>
-                    </div>
-                    <div class="campo">
-                        <span>E-mail*</span>
-                        <br><br>
-                        <input type="text" id="input_email"> <br><br><br>
+                        <input type="text" id="input_razao_social"> <br><br><br>
                     </div>
                     <div class="campo">
                         <span>CNPJ*</span>
                         <br><br>
                         <input type="number" id="input_cnpj"> <br><br><br>
-                    </div>
-                    <div class="campo">
-                        <span>Telefone*</span>
-                        <br><br>
-                        <input type="number" id="input_telefone"> <br><br><br>
                     </div>
                     <!-- <div class="campo">
                         <span> Cadastrar Senha:*</span>
@@ -91,28 +81,23 @@
 
 <!-- JAVA SCRIPT -->
 <script>
-    function analisar(event) {
-        event.preventDefault(); // Impede o recarregamento da página
+    // function analisar(event) {
+    //     event.preventDefault(); // Impede o recarregamento da página
 
-        var nome = input_nome.value;
-        var email = input_email.value;
-        var cnpj = input_cnpj.value;
-        var telefone = input_telefone.value;
-        // var senha = input_senha.value;
+    //     var razaoSocial = input_razao_social.value;
+    //     var cnpj = input_cnpj.value;
+    //     // var senha = input_senha.value;
 
-        if (email == "" || cnpj == "" || telefone == "") {
-            alert(`Preencha todos os campos obrigatórios`)
+    //     if (cnpj == "" || razaoSocial == "") {
+    //         alert(`Preencha todos os campos obrigatórios`)
 
-        } else if (!email.includes("@")) {
-            alert(`Preencha um E-mail válido`)
+    //     } else {
+    //         alert(`Cadastro de Empresa - Realizado com Sucesso!`)
 
-        } else {
-            alert(`Cadastro de Empresa - Realizado com Sucesso!`)
+    //         window.location.href = "./login.html"; //faz a navegação automática
 
-            window.location.href = "./cadastro-usuario.html"; //faz a navegação automática
-
-        }
-    }
+    //     }
+    // }
 
 
   // Array para armazenar empresas cadastradas para validação de código de ativação 
@@ -124,19 +109,15 @@
 
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
-    var nomeVar = input_nome.value;
-    var emailVar = input_email.value;
+    var nomeVar = input_razao_social.value;
     var cnpjVar = input_cnpj.value;
-    var telefoneVar = input_telefone.value;
     /*var codigoVar = codigo_input.value;
     var idEmpresaVincular*/
 
     // Verificando se há algum campo em branco
     if (
         nomeVar == "" ||
-        emailVar == "" ||
-        cnpjVar == "" ||
-      telefoneVar == "" 
+        cnpjVar == "" 
     ) {
       cardErro.style.display = "block";
         mensagem_erro.innerHTML =
@@ -148,21 +129,8 @@
       setInterval(sumirMensagem, 5000);
     }
 
-    // Verificando se o código de ativação é de alguma empresa cadastrada
-    /*for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-      if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
-        idEmpresaVincular = listaEmpresasCadastradas[i].id
-        console.log("Código de ativação válido.");
-        break;
-      } else {
-        cardErro.style.display = "block";
-        mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
-        finalizarAguardar();
-      }
-    }*/
-
     // Enviando o valor da nova input
-    fetch("/usuarios/cadastrar", {
+    fetch("/empresa/cadastrar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -171,9 +139,7 @@
         // crie um atributo que recebe o valor recuperado aqui
         // Agora vá para o arquivo routes/usuario.js
         nomeServer: nomeVar,
-        cnpjServer: cnpjVar,
-        emailServer: emailVar,
-        telefoneVar: telefoneVar
+        cnpjServer: cnpjVar
       }),
     })
       .then(function (resposta) {
@@ -186,7 +152,7 @@
             "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
           setTimeout(() => {
-            window.location = "login.html";
+            window.location = "codigo.html";
           }, "2000");
 
           limparFormulario();
@@ -202,26 +168,6 @@
 
     return false;
   }
-
-  // Listando empresas cadastradas 
-  /* function listar() {
-    fetch("/empresas/listar", {
-      method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((empresas) => {
-          empresas.forEach((empresa) => {
-            listaEmpresasCadastradas.push(empresa);
-
-            console.log("listaEmpresasCadastradas")
-            console.log(listaEmpresasCadastradas[0].codigo_ativacao)
-          });
-        });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-  }*/
 
   function sumirMensagem() {
     cardErro.style.display = "none";
