@@ -4,76 +4,96 @@
 <!-- Header -->
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/assets/main.css">
-    <link rel="stylesheet" href="./css/cadastro.css">
-    <link rel="icon" href="./assets/Monibeer (1) 1.png">
-    <script src="./js/sessao.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/assets/main.css">
+  <link rel="stylesheet" href="./css/cadastro.css">
+  <link rel="icon" href="./assets/Monibeer (1) 1.png">
+  <script src="./js/sessao.js"></script>
 
-    <title>Cadastro - Monibeer</title>
+  <title>Cadastro - Monibeer</title>
 </head>
 
 <body>
-    <div class="cadastro">
-        <div class="header">
-            <div class="container">
-                <a href="./index.html">
-                    <img src="./assets/monibeer-logo.png" alt="Logo Monibeer">
-                </a>
-                <div class="navbar">
-                    <ul class="menu-center">
-                        <li><a id="home" href="./index.html">Home</a></li>
-                        <li><a href="./index.html">Sobre Nós</a></li>
-                        <li><a href="simulador.html">Simulador</a></li>
-                    </ul>
-                    <ul class="menu-right">
-                        <li><a id="login" href="login.html">Login</a></li>
-                        <li><a id="cadastro" href="cadastro.html">Cadastro</a></li>
-                    </ul>
-                </div>
-            </div>
+  <div class="cadastro">
+    <div class="header">
+      <div class="container">
+        <a href="./index.html">
+          <img src="./assets/monibeer-logo.png" alt="Logo Monibeer">
+        </a>
+        <div class="navbar">
+          <ul class="menu-center">
+            <li><a id="home" href="./index.html">Home</a></li>
+            <li><a href="./index.html">Sobre Nós</a></li>
+            <li><a href="simulador.html">Simulador</a></li>
+          </ul>
+          <ul class="menu-right">
+            <li><a id="login" href="login.html">Login</a></li>
+            <li><a id="cadastro" href="cadastro.html">Cadastro</a></li>
+          </ul>
         </div>
+      </div>
+    </div>
 
-        <!-- Container com os dados informados -->
+    <!-- Container com os dados informados -->
 
 
-        <div class="container-cadastro">
-            <div class="card"> <!-- estou criando aqui o balão de cadastro -->
-                <h2>Cadastre Sua Empresa</h2>
-                <br><br>
-                <div class="card-campo">
-                    <div class="campo">
-                        <span>Razão Social</span>
-                        <br><br>
-                        <input type="text" id="input_razao_social"> <br><br><br>
-                    </div>
-                    <div class="campo">
-                        <span>CNPJ*</span>
-                        <br><br>
-                        <input type="number" id="input_cnpj"> <br><br><br>
-                    </div>
-                    <!-- <div class="campo">
+    <div class="container-cadastro">
+      <div class="card"> <!-- estou criando aqui o balão de cadastro -->
+        <h2>Cadastre Sua Empresa</h2>
+        <br><br>
+        <div class="card-campo">
+          <div class="campo">
+            <span>Razão Social</span>
+            <br><br>
+            <input type="text" id="input_razao_social"> <br><br><br>
+          </div>
+          <div class="campo">
+            <span>CNPJ*</span>
+            <br><br>
+            <input type="number" id="input_cnpj"> <br><br><br>
+          </div>
+          <div class="campo">
+            <span>Rua</span>
+            <br><br>
+            <input type="text" id="input_rua"> <br><br><br>
+          </div>
+          <div class="campo">
+            <span>Numero</span>
+            <br><br>
+            <input type="number" id="input_numero"> <br><br><br>
+          </div>
+          <div class="campo">
+            <span>Cidade</span>
+            <br><br>
+            <input type="text" id="input_cidade"> <br><br><br>
+          </div>
+          <div class="campo">
+            <span>UF</span>
+            <br><br>
+            <input type="text" id="input_uf"> <br><br><br>
+          </div>
+          <!-- <div class="campo">
                         <span> Cadastrar Senha:*</span>
                         <br><br>
                         <input type="password" id="input_senha"> <br><br><br>
                     </div> -->
-                    <div id="div_aguardar" class="loading-div">
-                        <!-- <img src="./assets/circle-loading.gif" id="loading-gif" /> -->
-                    </div>
+          <div id="div_aguardar" class="loading-div">
+            <!-- <img src="./assets/circle-loading.gif" id="loading-gif" /> -->
+          </div>
 
-                    <div class="confbotao">
-                        <button onclick="cadastrar()" class="botao">Cadastro Empresa</button>
-                    </div>
-                     <div class="card_erro" id="cardErro">
-                        <span id="mensagem_erro"></span>
-                    </div>
-                </div>
-            </div>
+          <div class="confbotao">
+            <button onclick="cadastrar()" class="botao">Cadastro Empresa</button>
+          </div>
+          <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 
-    <div id="div_mensagem"></div>
+  <div id="div_mensagem"></div>
 </body>
 
 </html>
@@ -81,27 +101,27 @@
 
 <!-- JAVA SCRIPT -->
 <script>
-    // function analisar(event) {
-    //     event.preventDefault(); // Impede o recarregamento da página
+  // function analisar(event) {
+  //     event.preventDefault(); // Impede o recarregamento da página
 
-    //     var razaoSocial = input_razao_social.value;
-    //     var cnpj = input_cnpj.value;
-    //     // var senha = input_senha.value;
+  //     var razaoSocial = input_razao_social.value;
+  //     var cnpj = input_cnpj.value;
+  //     // var senha = input_senha.value;
 
-    //     if (cnpj == "" || razaoSocial == "") {
-    //         alert(`Preencha todos os campos obrigatórios`)
+  //     if (cnpj == "" || razaoSocial == "") {
+  //         alert(`Preencha todos os campos obrigatórios`)
 
-    //     } else {
-    //         alert(`Cadastro de Empresa - Realizado com Sucesso!`)
+  //     } else {
+  //         alert(`Cadastro de Empresa - Realizado com Sucesso!`)
 
-    //         window.location.href = "./login.html"; //faz a navegação automática
+  //         window.location.href = "./login.html"; //faz a navegação automática
 
-    //     }
-    // }
+  //     }
+  // }
 
 
   // Array para armazenar empresas cadastradas para validação de código de ativação 
-   // let listaEmpresasCadastradas = [];
+  // let listaEmpresasCadastradas = [];
 
   function cadastrar() {
     //analisar();
@@ -111,16 +131,20 @@
     // Agora vá para o método fetch logo abaixo
     var nomeVar = input_razao_social.value;
     var cnpjVar = input_cnpj.value;
+    var ruaVar = input_rua.value;
+    var numeroVar = input_numero.value;
+    var cidadeVar = input_cidade.value;
+    var ufVar = input_uf.value;
     /*var codigoVar = codigo_input.value;
     var idEmpresaVincular*/
 
     // Verificando se há algum campo em branco
     if (
-        nomeVar == "" ||
-        cnpjVar == "" 
+      nomeVar == "" ||
+      cnpjVar == ""
     ) {
       cardErro.style.display = "block";
-        mensagem_erro.innerHTML =
+      mensagem_erro.innerHTML =
         "(Mensagem de erro para todos os campos em branco)";
 
       finalizarAguardar();
@@ -130,7 +154,7 @@
     }
 
     // Enviando o valor da nova input
-    fetch("/empresa/cadastrar", {
+    fetch("/empresas/cadastrar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -139,13 +163,23 @@
         // crie um atributo que recebe o valor recuperado aqui
         // Agora vá para o arquivo routes/usuario.js
         nomeServer: nomeVar,
-        cnpjServer: cnpjVar
+        cnpjServer: cnpjVar,
+        ruaServer: ruaVar,
+        numeroServer: numeroVar,
+        cidadeServer: cidadeVar,
+        ufServer: ufVar
+
       }),
     })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
+      .then(async res => {
+        const resposta = await res.json();
 
-        if (resposta.ok) {
+        if (!res.ok) {
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML = `${resposta.mensagem}`;
+          throw new Error(resposta.mensagem);
+        } else if (res.ok) {
           cardErro.style.display = "block";
 
           mensagem_erro.innerHTML =
@@ -155,7 +189,7 @@
             window.location = "codigo.html";
           }, "2000");
 
-          limparFormulario();
+          // limparFormulario();
           finalizarAguardar();
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";

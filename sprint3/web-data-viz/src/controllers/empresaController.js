@@ -23,8 +23,13 @@ function buscarPorId(req, res) {
 }
 
 function cadastrar(req, res) {
-  var cnpj = req.body.cnpj;
-  var razaoSocial = req.body.razaoSocial;
+  var cnpj = req.body.cnpjServer;
+  var razaoSocial = req.body.nomeServer;
+  var rua = req.body.ruaServer;
+  var numero = req.body.numeroServer;
+  var cidade = req.body.cidadeServer;
+  var uf = req.body.ufServer;
+
   var codigoAtivacao = "";
 
   for (var i = 0; i < 8; i++) {
@@ -35,40 +40,75 @@ function cadastrar(req, res) {
 
   empresaModel.buscarPorCnpj(cnpj).then((resultado) => {
     if (resultado.length > 0) {
-      res
-        .status(401)
-        .json({ mensagem: `a empresa com o cnpj ${cnpj} já existe` });
-    } else {
+      return res.status(409).json({ mensagem: `A empresa com o CNPJ ${cnpj} já existe.` });
+    }
 
-      empresaModel.cadastrar(razaoSocial, cnpj, codigoAtivacao).then((resultado) => {
-        res.status(201).json(resultado);
-        var fkEmpresa = resultado.idEmpresa;
-        //id pra fkEmpresa
-        empresaModel.buscarCodigo().then((resultado) => {
-          //enquanto código(bd) igual ao codigoAtivacao gerado, gere um novo
-          var validacao = false;
-          while (validacao == false) {
-              for(var i = 0; i < resultado.length; i++ ){
-                if (codigoAt.codigo = codigoAtivacao) {
-                  codigoAtivacao = "";
-                  for (var j = 0; j < 8; j++) {
-                    var num = parseInt(Math.random() * 10);
-                    codigoAtivacao += num;
-                  }
-                  break;
-                } else{
-                  validacao == true;
-                }
+    empresaModel.cadastrarEndereco(rua, numero, cidade, uf).then((resultadoEndereco) => {
+      if (!resultadoEndereco.insertId) {
+        return res.status(500).json({ mensagem: "Erro ao cadastrar endereço." });
+      }
+
+      let fkEndereco = resultadoEndereco.insertId;
+      console.log("Resultado do cadastro do endereço:", resultadoEndereco);
+
+      empresaModel.cadastrar(razaoSocial, cnpj, fkEndereco).then((resultadoEmpresa) => {
+        if (!resultadoEmpresa.insertId) {
+          return res.status(500).json({ mensagem: "Erro ao cadastrar empresa." });
+        }
+
+        let fkEmpresa = resultadoEmpresa.insertId;
+
+        empresaModel.buscarCodigo().then((codigosExistentes) => {
+          let codigoAtivacao = gerarCodigo();
+          let validacaoCod = false;
+
+          while (validacaoCod != true) {
+            validacaoCod = true;
+
+            for (let i = 0; i < codigosExistentes.length; i++) {
+              if (codigosExistentes[i].codigo == codigoAtivacao) {
+                codigoAtivacao = gerarCodigo();
+                validacaoCod = false;
+                break;
               }
+            }
           }
 
-          empresaModel.cadastrarCodigo(codigoAtivacao, fkEmpresa).then((resultado) => {
-              res.status(201).json(resultado);
-          })
-        })
+          empresaModel.cadastrarCodigo(codigoAtivacao, fkEmpresa).then((resultadoCodigo) => {
+            if (!resultadoCodigo.insertId) {
+              return res.status(500).json({ mensagem: "Erro ao cadastrar código de ativação." });
+            }
+
+            res.status(201).json({
+              mensagem: "Empresa cadastrada com sucesso!",
+              empresa: resultadoEmpresa,
+              codigoAtivacao: codigoAtivacao
+            });
+          }).catch(() => {
+            res.status(500).json({ mensagem: "Erro ao salvar o código de ativação." });
+          });
+
+        }).catch(() => {
+          res.status(500).json({ mensagem: "Erro ao buscar códigos existentes." });
+        });
+      }).catch(() => {
+        res.status(500).json({ mensagem: "Erro ao cadastrar empresa." });
       });
-    }
+    }).catch(() => {
+      res.status(500).json({ mensagem: "Erro ao cadastrar endereço." });
+    });
   });
+
+
+  // função auxiliar para gerar código de ativação
+  function gerarCodigo() {
+    let codigo = "";
+    for (let i = 0; i < 8; i++) {
+      codigo += Math.floor(Math.random() * 10);
+    }
+    return codigo;
+  }
+
 }
 
 module.exports = {

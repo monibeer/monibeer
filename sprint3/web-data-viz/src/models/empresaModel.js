@@ -18,22 +18,36 @@ function buscarPorCnpj(cnpj) {
   return database.executar(instrucaoSql);
 }
 
-function cadastrar(razaoSocial, cnpj, codigoAtivacao) {
-  var instrucaoSql = `INSERT INTO empresa (razaoSocial, cnpj, codigoAtivacao ) VALUES ('${razaoSocial}', '${cnpj}', '${codigoAtivacao}')`;
+function cadastrarEndereco(rua, numero, cidade, uf) {
+  var instrucaoSql = `INSERT INTO endereco (rua, numero, cidade, uf) VALUES ('${rua}','${numero}','${cidade}','${uf}')`;
 
   return database.executar(instrucaoSql);
 }
 
-function buscarCodigo(codigoAtivacao) {
+function cadastrar(razaoSocial, cnpj, fkEndereco) {
+  var instrucaoSql = `INSERT INTO empresa (razaoSocial, cnpj, fkEndereco) VALUES ('${razaoSocial}', '${cnpj}', '${fkEndereco}')`;
+
+  return database.executar(instrucaoSql);
+}
+
+function buscarCodigo() {
   var instrucaoSql = `SELECT * FROM codigo_ativacao`;
 
   return database.executar(instrucaoSql);
 }
 
 function cadastrarCodigo(codigoAtivacao, fkEmpresa) {
-  var instrucaoSql = `INSERT INTO codigo (codigo, fkEmpresa ) VALUES ('${codigoAtivacao}', '${fkEmpresa}')`;
+  var instrucaoSql = `INSERT INTO codigo_ativacao (codigo, fkEmpresa) VALUES ('${codigoAtivacao}', '${fkEmpresa}')`;
 
   return database.executar(instrucaoSql);
 }
 
-module.exports = { buscarPorCnpj, buscarPorId, cadastrar, buscarCodigo, cadastrarCodigo, listar };
+module.exports = {
+  buscarPorCnpj,
+  buscarPorId,
+  cadastrar,
+  cadastrarEndereco,
+  buscarCodigo,
+  cadastrarCodigo,
+  listar
+};
