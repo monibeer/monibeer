@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="./css/assets/main.css" />
   <link rel="stylesheet" href="./css/login.css" />
   <title>Login - Monibeer</title>
+
+  <script src="./js/sessao.js"></script>
 </head>
 
 <body>
@@ -32,8 +34,14 @@
     </div>
     <!-- Container com os dados informados -->
 
+    <div class="alerta_erro">
+      <div class="card_erro" id="cardErro">
+        <span id="mensagem_erro"></span>
+      </div>
+    </div>
+
     <div id="div_aguardar" class="loading-div">
-      <img src="./assets/circle-loading.gif" id="loading-gif">
+      <img src="https://i.gifer.com/ZKZg.gif" id="loading-gif">
     </div>
 
     <div id="div_erros_login"></div>
@@ -61,7 +69,7 @@
             <div id="div_mensagemerro"></div>
             <div class="campo"></div>
             <div class="confbotao">
-              <button onclick="analisar(event)" class="botao">Login</button>
+              <button onclick="entrar(event)" class="botao">Login</button>
             </div>
           </form>
         </div>
@@ -75,12 +83,12 @@
 
 <!-- JAVA SCRIPT -->
 <script>
-
-  function entrar() {
+  function entrar(event) {
+    event.preventDefault();
     aguardar();
 
-    var emailVar = email_input.value;
-    var senhaVar = senha_input.value;
+    var emailVar = input_email.value;
+    var senhaVar = input_senha.value;
 
     if (emailVar == "" || senhaVar == "") {
       cardErro.style.display = "block"
@@ -112,10 +120,10 @@
 
         resposta.json().then(json => {
           console.log(json);
-          console.log(JSON.stringify(json));
+          console.log(JSON.stringify(json.fermentadoras));
           sessionStorage.EMAIL_USUARIO = json.email;
           sessionStorage.NOME_USUARIO = json.nome;
-          sessionStorage.ID_USUARIO = json.idUsuario;
+          sessionStorage.ID_USUARIO = json.id;
           sessionStorage.FERMENTADORAS = JSON.stringify(json.fermentadoras);
 
           setTimeout(function () {
@@ -139,5 +147,9 @@
     })
 
     return false;
+  }
+
+  function sumirMensagem() {
+    cardErro.style.display = "none"
   }
 </script>

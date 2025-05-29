@@ -1,5 +1,5 @@
 var usuarioModel = require("../models/usuarioModel");
-var aquarioModel = require("../models/aquarioModel");
+var fermentadoraModel = require("../models/fermentadoraModel");
 
 function autenticar(req, res) {
     var email = req.body.emailServer;
@@ -20,14 +20,14 @@ function autenticar(req, res) {
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
 
-                        aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
+                        fermentadoraModel.buscarFermentadorasPorEmpresa(resultadoAutenticar[0].empresaId)
                             .then((resultadoFermentadoras) => {
                                 res.json({
-                                    id: resultadoAutenticar[0].id,
+                                    id: resultadoAutenticar[0].idFuncionario,
                                     email: resultadoAutenticar[0].email,
                                     nome: resultadoAutenticar[0].nome,
                                     senha: resultadoAutenticar[0].senha,
-                                    aquarios: resultadoFermentadoras
+                                    fermentadoras: resultadoFermentadoras
                                 });
                             })
                     } else if (resultadoAutenticar.length == 0) {

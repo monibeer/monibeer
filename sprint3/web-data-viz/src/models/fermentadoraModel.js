@@ -1,8 +1,18 @@
 var database = require("../database/config");
 
-function buscarAquariosPorEmpresa(empresaId) {
+function buscarFermentadorasPorEmpresa(empresaId) {
 
-  var instrucaoSql = `SELECT * FROM fermentadora a WHERE fkEmpresa = ${empresaId}`;
+  var instrucaoSql = `
+    SELECT
+      f.*,
+      s.*,
+      sen.* 
+    FROM fermentadora AS f JOIN setor AS s
+	    ON f.fkSetor = s.idSetor
+      JOIN sensor AS sen
+      ON f.fkSensor = sen.idSensor
+    WHERE s.fkEmpresa = ${empresaId};
+      `;
 
   /*
   add empresa 
@@ -26,6 +36,6 @@ function cadastrar(empresaId, descricao) {
 
 
 module.exports = {
-  buscarAquariosPorEmpresa,
+  buscarFermentadorasPorEmpresa,
   cadastrar
 }
