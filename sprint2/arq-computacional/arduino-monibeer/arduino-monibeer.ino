@@ -15,7 +15,7 @@ void loop() {
   // Define temperaturaCelsius a uma equação matemática que devolve a temperatura desejada.
   // temperaturaCelsius = (valorLeitura * 5.0 / 1023.0) / 0.01;
   temperaturaCelsius = ((valorLeitura * 5.8 / 1023.0) / 0.01)- 10;
-
+  
   // Comandos usados para exibirem o gráfico inserindo um limite máximo de 36°C e mínimo de 32°C, temperaturaCelsius é o número da leitura do arduino.
   // Serial.print("Temperatura_Máxima:");
   // Serial.print(36);
