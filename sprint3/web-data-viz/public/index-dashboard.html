@@ -13,15 +13,16 @@
 
 </head>
 
-<section class="dashboard">
-    <div class="sidebar">
-        <a href="./index-dashboard.html">
-            <div class="logotipo">
-                <img src="./assets/monibeer-logo.png" alt="">
-            </div>
-        </a>
+<body onload="pegarDadosDashHome()">
+    <section class="dashboard">
+        <div class="sidebar">
+            <a href="./index-dashboard.html">
+                <div class="logotipo">
+                    <img src="./assets/monibeer-logo.png" alt="">
+                </div>
+            </a>
 
-        <!-- <div class="profile">
+            <!-- <div class="profile">
             <div class="circle-profile">
                 <img src="./assets/image.png" alt="" class="profile-img">
             </div>
@@ -29,175 +30,211 @@
             <p>Administrador</p>
         </div> -->
 
-        <div class="buttons-navegation">
-            <div class="container-item">
-                <a href="./index-dashboard.html">
-                    <div class="navigation-item active">
-                        <i class="fa-solid fa-house"></i>
-                        <p>Home</p>
-                    </div>
-                </a>
+            <div class="buttons-navegation">
+                <div class="container-item">
+                    <a href="./index-dashboard.html">
+                        <div class="navigation-item active">
+                            <i class="fa-solid fa-house"></i>
+                            <p>Home</p>
+                        </div>
+                    </a>
 
-                <a href="./dashboard.html">
-                    <div class="navigation-item">
-                        <i class="fa-solid fa-chart-column"></i>
-                        <p>Dashboard</p>
-                    </div>
-                </a>
+                    <a href="./dashboard.html">
+                        <div class="navigation-item">
+                            <i class="fa-solid fa-chart-column"></i>
+                            <p>Dashboard</p>
+                        </div>
+                    </a>
 
-                <!-- <div class="navigation-item">
+                    <!-- <div class="navigation-item">
                     <i class="fa-solid fa-gear"></i>
                     <p>Configurações</p>
                 </div> -->
-            </div>
-
-            <a href="./login.html">
-                <div class="logout-item navigation-item">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <p>Logout</p>
                 </div>
-            </a>
+
+                <a href="./login.html">
+                    <div class="logout-item navigation-item">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <p>Logout</p>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div>
 
-    <div class="container-dashboard">
-        <div class="header">
-            <div class="container-searchBarGroup">
-                <i class="fa-solid fa-bars"></i>
+        <div class="container-dashboard">
+            <div class="header">
+                <div class="container-searchBarGroup">
+                    <i class="fa-solid fa-bars"></i>
 
-                <h3>Home</h3>
-                <!-- <div class="container-search">
+                    <h3>Home</h3>
+                    <!-- <div class="container-search">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <input type="text" placeholder="Search..">
                 </div> -->
-            </div>
+                </div>
 
 
-            <div class="container-actions">
-                <!-- <div class="container-theme-dark-light">
+                <div class="container-actions">
+                    <!-- <div class="container-theme-dark-light">
                     <img src="https://static-00.iconduck.com/assets.00/sun-symbol-emoji-512x512-qjm8vnpc.png" alt="">
                 </div> -->
-                <i class="fa-solid fa-bell"></i>
-                <span>|</span>
-                <div class="container-mini-profile">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="">
-                    <p>Rodrigo Silva</p>
+                    <i class="fa-solid fa-bell"></i>
+                    <span>|</span>
+                    <div class="container-mini-profile">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="">
+                        <p>Rodrigo Silva</p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <p class="datatime-update">Última Atualização - 25/04/2025 ás 10:40</p>
+            <p class="datatime-update">Última Atualização - 25/04/2025 ás 10:40</p>
 
-        <div class="container-info-fermenter">
-            <div class="info">
-                <h2 class="title-info">Visão Geral do Desempenho</h2>
-                <div class="kpis">
-                    <div class="kpi temp">
-                        <h3>Fermentadoras com Alerta Crítico</h3>
-                        <div class="container-data">
-                            <p class="data-kpi critical">9</p>
-                            <p class="description">/30</p>
-                        </div>
-                    </div>
-
-                    <div class="kpi fermen">
-                        <h3>Fermentadoras Ativas</h3>
-                        <div class="container-data">
-                            <p class="data-kpi">30</p>
-                            <p class="description">/40</p>
-                        </div>
-                    </div>
-
-                    <div class="kpi abruptas">
-                        <h3>Fermentadoras com Temperatura Estável</h3>
-                        <div class="container-data">
-                            <p class="data-kpi">29</p>
-                            <p class="description">/30</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container-graphic">
-                    <div class="graphics">
-                        <div class="info-graphic status">
-                            <h3>Status Fermentadoras</h3>
-                            <p>Total: 40</p>
-                        </div>
-                        <canvas id="graphic-statusFermenter" style="width: 100%; height: 100%;"></canvas>
-                    </div>
-                    <div class="graphics">
-                        <div class="info-graphic">
-                            <h3>Fermentadoras por Faixa de Temperatura</h3>
-                            <div class="filter-ipa-pilsen" id="filter_ipa_pilsen">
-                                <button class="check" onclick="verIPA()" id="btn_ipa">IPA</button>
-                                <button class="" onclick="verPilsen()" id="btn_pilsen">Pilsen</button>
+            <div class="container-info-fermenter">
+                <div class="info">
+                    <h2 class="title-info">Visão Geral do Desempenho</h2>
+                    <div class="kpis">
+                        <div class="kpi temp">
+                            <h3>Fermentadoras com Alerta Crítico</h3>
+                            <div class="container-data">
+                                <p class="data-kpi critical">9</p>
+                                <p class="description">/30</p>
                             </div>
                         </div>
-                        <canvas id="graphic-tempMediaIPA" style="width: 100%; height: 90%;"></canvas>
-                    </div>
-                </div>
 
-            </div>
+                        <div class="kpi fermen">
+                            <h3>Fermentadoras Ativas</h3>
+                            <div class="container-data">
+                                <p class="data-kpi">30</p>
+                                <p class="description">/40</p>
+                            </div>
+                        </div>
 
-            <div class="notifications">
-                <h2 class="title-info">Alerta mais recente</h2>
-
-                <div class="container-alert">
-                    <div class="alert">
-                        <div class="alert-indicator"></div>
-                        <img src="./assets/alert-critico.png" alt="">
-                        <div class="info-alert">
-                            <h3>Alerta Crítico</h3>
-                            <p>A fermentadora 6 (IPA) ultrapassou o limite máximo permitido, temperatura acima de 26°C.
-                                <span class="alert-danger">Verifique imediatamente</span>
-                            </p>
+                        <div class="kpi abruptas">
+                            <h3>Fermentadoras com Temperatura Estável</h3>
+                            <div class="container-data">
+                                <p class="data-kpi">29</p>
+                                <p class="description">/30</p>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="container-graphic">
+                        <div class="graphics">
+                            <div class="info-graphic status">
+                                <h3>Status Fermentadoras</h3>
+                                <p>Total: 40</p>
+                            </div>
+                            <canvas id="graphic-statusFermenter" style="width: 100%; height: 100%;"></canvas>
+                        </div>
+                        <div class="graphics">
+                            <div class="info-graphic">
+                                <h3>Fermentadoras por Faixa de Temperatura</h3>
+                                <div class="filter-ipa-pilsen" id="filter_ipa_pilsen">
+                                    <button class="check" onclick="verIPA()" id="btn_ipa">IPA</button>
+                                    <button class="" onclick="verPilsen()" id="btn_pilsen">Pilsen</button>
+                                </div>
+                            </div>
+                            <canvas id="graphic-tempMediaIPA" style="width: 100%; height: 90%;"></canvas>
+                        </div>
+                    </div>
+
                 </div>
 
-                <div class="container-notification-history">
-                    <div class="info-history">
-                        <h4>Histórico</h4>
-                        <p>Acessar Mais ></p>
-                    </div>
-                    <div class="container-history">
-                        <div class="history">
+                <div class="notifications">
+                    <h2 class="title-info">Alerta mais recente</h2>
+
+                    <div class="container-alert">
+                        <div class="alert">
+                            <div class="alert-indicator"></div>
                             <img src="./assets/alert-critico.png" alt="">
-                            <div class="data-history">
-                                <h4>Alerta Crítico</h4>
-                                <p>Fermentadora 10 (IPA) Ultrapassou o limite máximo permitido...</p>
+                            <div class="info-alert">
+                                <h3>Alerta Crítico</h3>
+                                <p>A fermentadora 6 (IPA) ultrapassou o limite máximo permitido, temperatura acima de
+                                    26°C.
+                                    <span class="alert-danger">Verifique imediatamente</span>
+                                </p>
                             </div>
-                            <p class="datatime-history">25/04/25 às 09:56</p>
                         </div>
-                        
-                        <div class="history">
-                            <img src="https://cdn-icons-png.flaticon.com/512/257/257195.png" alt="">
-                            <div class="data-history">
-                                <h4>Atenção</h4>
-                                <p>Fermentadora 6 (IPA) Está 2 graus celsius acima do limite...</p>
-                            </div>
-                            <p class="datatime-history">25/04/25 às 09:60</p>
-                        </div>
-                        
-                        <div class="history">
-                            <img src="https://img.freepik.com/vetores-premium/icone-de-avisos-de-notificacao_1076610-18996.jpg?semt=ais_hybrid&w=740" alt="">
-                            <div class="data-history">
-                                <h4>Cuidado</h4>
-                                <p>Fermentadora 4 (IPA) atingiu o limite máximo do ideal 22°C</p>
-                            </div>
-                            <p class="datatime-history">25/04/25 às 10:10</p>
-                        </div>
-                        
+                    </div>
 
+                    <div class="container-notification-history">
+                        <div class="info-history">
+                            <h4>Histórico</h4>
+                            <p>Acessar Mais ></p>
+                        </div>
+                        <div class="container-history">
+                            <div class="history">
+                                <img src="./assets/alert-critico.png" alt="">
+                                <div class="data-history">
+                                    <h4>Alerta Crítico</h4>
+                                    <p>Fermentadora 10 (IPA) Ultrapassou o limite máximo permitido...</p>
+                                </div>
+                                <p class="datatime-history">25/04/25 às 09:56</p>
+                            </div>
+
+                            <div class="history">
+                                <img src="https://cdn-icons-png.flaticon.com/512/257/257195.png" alt="">
+                                <div class="data-history">
+                                    <h4>Atenção</h4>
+                                    <p>Fermentadora 6 (IPA) Está 2 graus celsius acima do limite...</p>
+                                </div>
+                                <p class="datatime-history">25/04/25 às 09:60</p>
+                            </div>
+
+                            <div class="history">
+                                <img src="https://img.freepik.com/vetores-premium/icone-de-avisos-de-notificacao_1076610-18996.jpg?semt=ais_hybrid&w=740"
+                                    alt="">
+                                <div class="data-history">
+                                    <h4>Cuidado</h4>
+                                    <p>Fermentadora 4 (IPA) atingiu o limite máximo do ideal 22°C</p>
+                                </div>
+                                <p class="datatime-history">25/04/25 às 10:10</p>
+                            </div>
+
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-<body>
+    </section>
 </body>
 
 </html>
 <script src="./js/chartJs-Home.js"></script>
+<script>
+    const session = sessionStorage.FERMENTADORAS;
+    const idEmpresa = JSON.parse(session)[0].fkEmpresa;
+
+    const dataAtual =new Date();
+
+    const dia = dataAtual.getDate();
+    const mes = dataAtual.getMonth();
+    const ano = dataAtual.getFullYear();
+
+    const dataAtualPC = `${ano}-${mes}-${dia}`
+
+    function pegarDadosDashHome() {
+        fetch('/dashboard/pegarDashboardHome', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idEmpresaServer: idEmpresa,
+                dataAtualServer: dataAtualPC
+            }),
+        }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    sessionStorage.setItem('DASHBOARDHOME', `${JSON.stringify(resposta)}`)
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+</script>
