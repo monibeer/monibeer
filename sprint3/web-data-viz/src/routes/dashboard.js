@@ -8,6 +8,10 @@ router.post("/pegarDashboardHome", function (req, res) {
     empresaController.pegarDashboardHome(req, res);
 })
 
+router.post("/pegarHistoricoAlerta", function (req, res) {
+    empresaController.pegarHistoricoAlerta(req, res);
+})
+
 // router.get("/buscar", function (req, res) {
 //     empresaController.buscarPorCnpj(req, res);
 // });

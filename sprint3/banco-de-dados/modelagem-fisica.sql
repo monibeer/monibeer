@@ -222,6 +222,42 @@ INSERT INTO codigo_ativacao (codigo, fkEmpresa) VALUES
 (12345678, 1),
 (12345677, 2);
 
+-- Para Fermentadora 1 (histórico: 2024-11-01 até 2024-11-10)
+UPDATE alerta SET dtHora = '2024-11-05 07:21:14' WHERE idAlerta = 1;
+
+-- Para Fermentadora 2 (histórico: 2024-11-02 até 2024-11-11)
+UPDATE alerta SET dtHora = '2024-11-06 12:21:14' WHERE idAlerta = 2;
+
+-- Para Fermentadora 3 (histórico: 2024-11-03 até 2024-11-12)
+UPDATE alerta SET dtHora = '2024-11-07 08:24:01' WHERE idAlerta = 3;
+
+-- Para Fermentadora 4 (histórico: 2024-11-04 até 2024-11-13)
+UPDATE alerta SET dtHora = '2024-11-08 14:24:01' WHERE idAlerta = 4;
+
+-- Para Fermentadora 5 (histórico: 2024-11-05 até 2024-11-14)
+UPDATE alerta SET dtHora = '2024-11-09 07:21:14' WHERE idAlerta = 5;
+
+-- Fermentadora 1 (IPA): ALERTA CUIDADO (acima do ideal)
+UPDATE captura SET temperatura = 22.30 WHERE idCaptura = 1;
+UPDATE alerta SET dtHora = '2024-11-05 07:21:14', mensagem = 'Atingiu o limite máximo do ideal 22°C' WHERE idAlerta = 1;
+
+-- Fermentadora 2 (PILSEN): ALERTA CUIDADO (abaixo do ideal)
+UPDATE captura SET temperatura = 8.70 WHERE idCaptura = 2;
+UPDATE alerta SET dtHora = '2024-11-06 12:21:14', mensagem = 'Atingiu o limite mínimo do ideal 9°C' WHERE idAlerta = 2;
+
+-- Fermentadora 3 (IPA): ALERTA ATENÇÃO (acima do ideal em 2°C)
+UPDATE captura SET temperatura = 24.00 WHERE idCaptura = 3;
+UPDATE alerta SET dtHora = '2024-11-07 08:24:01', mensagem = 'Está 2 graus celsius acima do limite máximo ideal' WHERE idAlerta = 3;
+
+-- Fermentadora 4 (PILSEN): ALERTA ATENÇÃO (abaixo do ideal em 2°C)
+UPDATE captura SET temperatura = 7.00 WHERE idCaptura = 4;
+UPDATE alerta SET dtHora = '2024-11-08 14:24:01', mensagem = 'Está 2 graus celsius abaixo do limite mínimo ideal' WHERE idAlerta = 4;
+
+-- Fermentadora 5 (IPA): ALERTA CRÍTICO (bem acima do permitido)
+UPDATE captura SET temperatura = 28.00 WHERE idCaptura = 5;
+UPDATE alerta SET dtHora = '2024-11-09 07:21:14', mensagem = 'Ultrapassou o limite máximo permitido, temperatura acima de 27°C.' WHERE idAlerta = 5;
+
+
 SHOW TABLES;
 
 SELECT * FROM endereco;
@@ -267,3 +303,24 @@ UPDATE codigo_ativacao SET status = 1 WHERE idCodigo_ativacao = 1;
     LEFT JOIN alerta a ON a.fkCaptura = c.idCaptura
     WHERE st.fkEmpresa = 1
     GROUP BY e.estiloCerveja;
+    
+
+
+SELECT 
+    a.nivel AS nivel_alerta,
+    f.nome AS fermentadora,
+    e.estiloCerveja AS tipo_fermentacao,
+    c.temperatura,
+    DATE_FORMAT(a.dtHora, '%d/%m/%y às %H:%i') AS horario_alerta,
+    a.mensagem
+FROM alerta a
+JOIN captura c ON a.fkCaptura = c.idCaptura
+JOIN sensor s ON c.fkSensor = s.idSensor
+JOIN fermentadora f ON f.fkSensor = s.idSensor
+JOIN setor st ON f.fkSetor = st.idSetor
+JOIN historico_fermentadora hf 
+    ON hf.fkFermentadora = f.idFermentadora
+    AND (hf.dataFim IS NULL OR a.dtHora BETWEEN hf.dataInicio AND hf.dataFim)
+JOIN estilo e ON hf.fkEstilo = e.idEstilo
+WHERE st.fkEmpresa = 1
+ORDER BY a.dtHora DESC;

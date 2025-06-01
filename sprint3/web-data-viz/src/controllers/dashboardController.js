@@ -4,18 +4,11 @@ var dashboardModel = require("../models/dashboardModel");
 function pegarDashboardHome(req, res) {
     var idEmpresa = req.body.idEmpresaServer;
     var dataAtual = req.body.dataAtualServer;
-    // var senha = req.body.senhaServer;
-
-    // if (email == undefined) {
-    //     res.status(400).send("Seu email está undefined!");
-    // } else if (senha == undefined) {
-    //     res.status(400).send("Sua senha está indefinida!");
-    // } else {
 
     dashboardModel.pegarDadosHomeDash(idEmpresa, dataAtual)
         .then(
             function (resultadoDashHome) {
-                console.log(`Resultados: ${JSON.stringify(resultadoDashHome)}`); // transforma JSON em String
+                console.log(`Resultados: ${JSON.stringify(resultadoDashHome)}`);
                 if (!resultadoDashHome || resultadoDashHome.length === 0) {
                     res.json({ dadosDashHome: [] });
                 } else {
@@ -29,9 +22,30 @@ function pegarDashboardHome(req, res) {
                 res.status(500).json(erro.sqlMessage);
             }
         );
-
-
 }
+
+function pegarHistoricoAlerta(req, res) {
+    var idEmpresa = req.body.idEmpresaServer;
+
+    dashboardModel.pegarHistoricoAlertasDash(idEmpresa)
+        .then(
+            function (resultadoHistorico) {
+                console.log(`Resultados: ${JSON.stringify(resultadoHistorico)}`);
+                if (!resultadoHistorico || resultadoHistorico.length === 0) {
+                    res.json({ historicoAlerta: [] });
+                } else {
+                    res.json({ historicoAlerta: resultadoHistorico });
+                }
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao pegar o historico de alerta! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 
 // //CADASTRO
 // function cadastrar(req, res) {
@@ -73,5 +87,6 @@ function pegarDashboardHome(req, res) {
 
 module.exports = {
     pegarDashboardHome,
+    pegarHistoricoAlerta
     // cadastrar
 }

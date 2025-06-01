@@ -13,7 +13,7 @@
 
 </head>
 
-<body onload="pegarDadosDashHome(), atualizarKPIs()">
+<body onload="pegarDadosDashHome(), atualizarKPIs(), pegarHistoricoAlerta()">
     <section class="dashboard">
         <div class="sidebar">
             <a href="./index-dashboard.html">
@@ -87,7 +87,7 @@
                 </div>
             </div>
 
-            <p class="datatime-update">Última Atualização - 25/04/2025 ás 10:40</p>
+            <p class="datatime-update" id="ultimaAtualizacao">Última Atualização - 25/04/2025 às 10:40</p>
 
             <div class="container-info-fermenter">
                 <div class="info">
@@ -149,56 +149,28 @@
                     </div>
 
 
+
                     <div class="container-graphic">
                         <div class="graphics">
                             <div class="info-graphic status">
                                 <h3>Status Fermentadoras</h3>
                             </div>
-                            <canvas id="graphic-statusFermenter" style="width: 100%; height: 100%;"></canvas>
+                            <canvas id="graphic-statusFermenter" style="width: 90%; height: 100%;"></canvas>
                         </div>
+
 
                         <div class="container-notification-history">
                             <div class="info-history">
                                 <h4>Histórico</h4>
                                 <p>Acessar Mais ></p>
                             </div>
-                            <div class="container-history">
-                                <div class="history">
-                                    <img src="./assets/alert-critico.png" alt="">
-                                    <div class="data-history">
-                                        <h4>Alerta Crítico</h4>
-                                        <p>Fermentadora 10 (IPA) Ultrapassou o limite máximo permitido...</p>
-                                    </div>
-                                    <p class="datatime-history">25/04/25 às 09:56</p>
-                                </div>
-
-                                <div class="history">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/257/257195.png" alt="">
-                                    <div class="data-history">
-                                        <h4>Atenção</h4>
-                                        <p>Fermentadora 6 (IPA) Está 2 graus celsius acima do limite...</p>
-                                    </div>
-                                    <p class="datatime-history">25/04/25 às 09:60</p>
-                                </div>
-
-                                <div class="history">
-                                    <img src="https://img.freepik.com/vetores-premium/icone-de-avisos-de-notificacao_1076610-18996.jpg?semt=ais_hybrid&w=740"
-                                        alt="">
-                                    <div class="data-history">
-                                        <h4>Cuidado</h4>
-                                        <p>Fermentadora 4 (IPA) atingiu o limite máximo do ideal 22°C</p>
-                                    </div>
-                                    <p class="datatime-history">25/04/25 às 10:10</p>
-                                </div>
-
-
+                            <div class="container-history" id="containerHistoricoAlertas">
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
-        </div>
     </section>
 </body>
 
@@ -228,6 +200,37 @@
             if (response.ok) {
                 response.json().then(function (resposta) {
                     sessionStorage.setItem('DASHBOARDHOME', JSON.stringify(resposta.dadosDashHome));
+                    atualizarKPIs()
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+        atualizarDataHoraAtualizacao();
+
+    }
+
+    function pegarHistoricoAlerta() {
+        const session = sessionStorage.FERMENTADORAS;
+        const idEmpresa = JSON.parse(session)[0].fkEmpresa;
+
+        fetch('/dashboard/pegarHistoricoAlerta', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idEmpresaServer: idEmpresa,
+            }),
+        }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    sessionStorage.setItem('HISTORICO_ALERTA', JSON.stringify(resposta.historicoAlerta));
+                    atualizarHistoricoAlerta();
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -244,13 +247,10 @@
 
         JSON.parse(sessionStorage.DASHBOARDHOME).forEach((estilo) => {
             let tipo = estilo.estiloCerveja.toLowerCase();
-            console.log(tipo)
 
             let foraIdeal = estilo.fermentadoras_fora_do_ideal;
-            console.log(foraIdeal)
             let alertaCritico = estilo.fermentadoras_em_critico;
-            console.log(alertaCritico)
-            
+
             if (tipo == "ipa") {
                 document.getElementById("foraIdealIpa").innerText = foraIdeal;
                 document.getElementById("alertaCriticoIpa").innerText = alertaCritico;
@@ -264,5 +264,62 @@
 
         document.getElementById("totalGeral").innerText = totalGeral;
     }
+
+    function atualizarDataHoraAtualizacao() {
+        const agora = new Date();
+        const dia = String(agora.getDate()).padStart(2, '0');
+        const mes = String(agora.getMonth() + 1).padStart(2, '0');
+        const ano = agora.getFullYear();
+        const horas = String(agora.getHours()).padStart(2, '0');
+        const minutos = String(agora.getMinutes()).padStart(2, '0');
+
+        const texto = `Última Atualização - ${dia}/${mes}/${ano} às ${horas}:${minutos}`;
+        document.getElementById("ultimaAtualizacao").innerText = texto;
+    }
+
+    function atualizarHistoricoAlerta() {
+        var historico = JSON.parse(sessionStorage.getItem('HISTORICO_ALERTA'));
+        var container = document.getElementById("containerHistoricoAlertas");
+
+        container.innerHTML = "";
+
+        historico.forEach(function (alerta) {
+            var tipo_alerta = alerta.nivel_alerta;
+            console.log(tipo_alerta)
+            var mensagem = alerta.mensagem;
+            var horario = alerta.horario_alerta;
+
+            var icone = "";
+            if (tipo_alerta === "Crítico") {
+                icone = "./assets/alert-critico.png";
+            } else if (tipo_alerta === "Atenção") {
+                icone = "https://cdn-icons-png.flaticon.com/512/257/257195.png";
+            } else {
+                icone = "https://img.freepik.com/vetores-premium/icone-de-avisos-de-notificacao_1076610-18996.jpg?semt=ais_hybrid&w=740";
+            }
+
+            var alertaHTML =
+                '<div class="history">' +
+                '<img src="' + icone + '" alt="">' +
+                '<div class="data-history">' +
+                '<h4>' + tipo_alerta + '</h4>' +
+                '<p>' + mensagem + '</p>' +
+                '</div>' +
+                '<p class="datatime-history">' + horario + '</p>' +
+                '</div>';
+
+            container.innerHTML += alertaHTML;
+        });
+    }
+
+
+    setInterval(() => {
+        pegarDadosDashHome();
+        pegarHistoricoAlerta();
+        atualizarKPIs();
+        atualizarHistoricoAlerta();
+        gerarDadosGrafico();
+    }, 60000);
+
 
 </script>

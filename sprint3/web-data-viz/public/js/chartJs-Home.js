@@ -18,10 +18,8 @@ function gerarDadosGrafico() {
     return [totalAtivo, totalInativo, totalManutencao];
 }
 
-// Obtém os dados dinâmicos
-const dadosGrafico = gerarDadosGrafico();
+let dadosGrafico = gerarDadosGrafico();
 
-// Seleciona o canvas do gráfico
 const ctx = document.getElementById('graphic-statusFermenter').getContext('2d');
 
 // Cria o gráfico

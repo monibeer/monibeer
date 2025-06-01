@@ -37,6 +37,34 @@ function pegarDadosHomeDash(idEmpresa, dataAtual) {
     return database.executar(instrucaoSql);
 }
 
+function pegarHistoricoAlertasDash(idEmpresa) {
+
+    var instrucaoSql = `
+    SELECT 
+        a.nivel AS nivel_alerta,
+        f.nome AS fermentadora,
+        e.estiloCerveja AS tipo_fermentacao,
+        c.temperatura,
+        DATE_FORMAT(a.dtHora, '%d/%m/%y às %H:%i') AS horario_alerta,
+        a.mensagem
+    FROM alerta a
+        JOIN captura c ON a.fkCaptura = c.idCaptura
+        JOIN sensor s ON c.fkSensor = s.idSensor
+        JOIN fermentadora f ON f.fkSensor = s.idSensor
+        JOIN setor st ON f.fkSetor = st.idSetor
+        JOIN historico_fermentadora hf 
+        ON hf.fkFermentadora = f.idFermentadora
+            AND (hf.dataFim IS NULL OR a.dtHora BETWEEN hf.dataInicio AND hf.dataFim)
+        JOIN estilo e ON hf.fkEstilo = e.idEstilo
+    WHERE st.fkEmpresa = ${idEmpresa}
+    ORDER BY a.dtHora DESC;
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
 // function buscarMedidasEmTempoReal(idAquario) {
 
 //     var instrucaoSql = `SELECT 
@@ -52,6 +80,7 @@ function pegarDadosHomeDash(idEmpresa, dataAtual) {
 // }
 
 module.exports = {
-    pegarDadosHomeDash
+    pegarDadosHomeDash,
+    pegarHistoricoAlertasDash
     // buscarMedidasEmTempoReal
 }

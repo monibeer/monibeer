@@ -212,7 +212,8 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    height: 400px;
+    max-height: 220px;
+    overflow-y: auto;
 }
 
 .container-history .history {
