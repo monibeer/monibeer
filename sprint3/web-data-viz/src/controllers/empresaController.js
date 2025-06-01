@@ -111,9 +111,54 @@ function cadastrar(req, res) {
 
 }
 
+function ativarCodigo(req, res) {
+  const codigoAtivacao = req.body.codigoServer;
+
+  empresaModel.buscarCodigoEspecifico(codigoAtivacao)
+    .then((resultado) => {
+      if (resultado.length > 0) {
+        const codigoEncontrado = resultado[0];
+
+        if (codigoEncontrado.status == 0) {
+          empresaModel.atualizarStatusCodigo(codigoEncontrado.idCodigo_ativacao)
+            .then(() => {
+              empresaModel.buscarCodigoEspecifico(codigoAtivacao)
+                .then((codigoAtualizado) => {
+                  res.status(200).json({
+                    mensagem: "Código ativado com sucesso!",
+                    codigoAtivado: codigoAtualizado[0]
+                  });
+                })
+                .catch(erro => {
+                  console.error("Erro ao buscar código atualizado:", erro);
+                  res.status(500).json({ mensagem: "Erro ao buscar código atualizado." });
+                });
+            })
+            .catch((erro) => {
+              console.error("Erro ao ativar código:", erro);
+              res.status(500).json({ mensagem: "Erro ao ativar código." });
+            });
+        } else {
+          res.status(409).json({ mensagem: "Este código já foi ativado anteriormente." });
+        }
+      } else {
+        res.status(404).json({ mensagem: "Código inválido. Nenhum resultado encontrado." });
+      }
+    })
+    .catch((erro) => {
+      console.error("Erro ao buscar código:", erro);
+      res.status(500).json({ mensagem: "Erro ao buscar código." });
+    });
+}
+
+
+
+
+
 module.exports = {
   buscarPorCnpj,
   buscarPorId,
   cadastrar,
   listar,
+  ativarCodigo
 };

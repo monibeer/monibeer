@@ -1,4 +1,4 @@
-DROP DATABASE monibeer;
+-- DROP DATABASE monibeer;
 CREATE DATABASE monibeer;
 USE monibeer;
 
@@ -21,8 +21,9 @@ CREATE TABLE empresa (
 );
 
 CREATE TABLE codigo_ativacao (
-idCodigo_ativacao INT PRIMARY KEY,
+idCodigo_ativacao INT PRIMARY KEY AUTO_INCREMENT,
 codigo INT, 
+status TINYINT default 0,
 fkEmpresa INT,
 	CONSTRAINT fkCodigoEmpresa FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa)
 );
@@ -217,6 +218,10 @@ INSERT INTO alerta (dtHora, nivel, mensagem, fkCaptura) VALUES
 ('2024-04-01 14:24:01', 'Atenção', 'Está 2 graus celsius abaixo do limite mínimo ideal', 4),
 ('2024-12-25 07:21:14', 'Crítico', 'Ultrapassou o limite máximo permitido, temperatura acima de 26°C.', 5);
 
+INSERT INTO codigo_ativacao (codigo, fkEmpresa) VALUES 
+(12345678, 1),
+(12345677, 2);
+
 SHOW TABLES;
 
 SELECT * FROM endereco;
@@ -225,7 +230,12 @@ SELECT * FROM funcionario;
 SELECT * FROM setor;
 SELECT * FROM sensor;
 SELECT * FROM fermentadora;
+SELECT * FROM codigo_ativacao;
 SELECT * FROM estilo;
 SELECT * FROM historico_fermentadora;
 SELECT * FROM captura;
 SELECT * FROM alerta;
+
+SELECT idCodigo_ativacao, codigo, fkEmpresa, status FROM codigo_ativacao WHERE codigo = 12345678;
+UPDATE codigo_ativacao SET status = 1 WHERE idCodigo_ativacao = 1;
+

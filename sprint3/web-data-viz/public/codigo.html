@@ -1,12 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/Monibeer (1) 1.png">
     <title>Ativação Código - Monibeer</title>
+    <style>
+        #modalFuncionario {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+        }
+    </style>
 </head>
+
 <body>
     <h1>Ativar seu código</h1>
-    <input type="text">
+    <input type="text" id="inputCodigo" placeholder="Digite seu código" />
+    <button onclick="ativarCodigo()">Ativar Código</button>
+
+    <p id="mensagem"></p>
+
+    <!-- MODAL DE CADASTRO -->
+    <div id="modalFuncionario">
+        <div class="modal-content">
+            <h2>Cadastro do Primeiro Funcionário</h2>
+            <input type="text" id="inputNome" placeholder="Nome" /><br /><br />
+            <input type="email" id="inputEmail" placeholder="Email" /><br /><br />
+            <input type="password" id="inputSenha" placeholder="Senha" /><br /><br />
+            <button onclick="cadastrarFuncionario()">Cadastrar</button>
+        </div>
+    </div>
+
+    <script>
+        let empresaId = null;
+
+        function ativarCodigo() {
+            const codigo = document.getElementById("inputCodigo").value.trim();
+            const mensagem = document.getElementById("mensagem");
+
+            if (!codigo) {
+                mensagem.innerText = "Por favor, insira um código.";
+                return;
+            }
+
+            fetch("/empresas/ativar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ codigoServer: codigo })
+            })
+                .then(res => res.json())
+                .then(dados => {
+                    if (dados.mensagem === "Código ativado com sucesso!") {
+                        mensagem.innerText = dados.mensagem;
+
+                        if (dados.codigoAtivado && dados.codigoAtivado.fkEmpresa) {
+                            empresaId = dados.codigoAtivado.fkEmpresa;
+                            document.getElementById("modalFuncionario").style.display = "flex";
+                            document.getElementById("inputCodigo").value = "";
+                        } else {
+                            mensagem.innerText = "Código ativado, mas empresa não encontrada.";
+                        }
+                    } else {
+                        mensagem.innerText = dados.mensagem || "Erro ao ativar código.";
+                    }
+                })
+                .catch(erro => {
+                    console.error("Erro ao ativar código:", erro);
+                    mensagem.innerText = "Erro ao conectar com o servidor.";
+                });
+        }
+
+        function cadastrarFuncionario() {
+            const nome = document.getElementById("inputNome").value.trim();
+            const email = document.getElementById("inputEmail").value.trim();
+            const senha = document.getElementById("inputSenha").value;
+
+            if (!nome || !email || !senha) {
+                alert("Por favor, preencha todos os campos.");
+                return;
+            }
+
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    nomeServer: nome,
+                    emailServer: email,
+                    senhaServer: senha,
+                    empresaServer: empresaId
+                })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    alert(data.mensagem || "Funcionário cadastrado com sucesso!");
+                    document.getElementById("modalFuncionario").style.display = "none";
+
+                    document.getElementById("inputNome").value = "";
+                    document.getElementById("inputEmail").value = "";
+                    document.getElementById("inputSenha").value = "";
+                })
+                .catch(err => {
+                    console.error("Erro ao cadastrar funcionário:", err);
+                    alert("Erro ao cadastrar funcionário.");
+                });
+        }
+    </script>
 </body>
+
 </html>

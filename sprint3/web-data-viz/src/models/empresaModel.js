@@ -42,6 +42,24 @@ function cadastrarCodigo(codigoAtivacao, fkEmpresa) {
   return database.executar(instrucaoSql);
 }
 
+function buscarCodigoEspecifico(codigoAtivacao) {
+  const instrucaoSql = `
+    SELECT idCodigo_ativacao, codigo, fkEmpresa, status 
+    FROM codigo_ativacao 
+    WHERE codigo = ${codigoAtivacao};
+  `;
+  return database.executar(instrucaoSql);
+}
+
+function atualizarStatusCodigo(idCodigo) {
+  const instrucaoSql = `
+    UPDATE codigo_ativacao 
+    SET status = 1 
+    WHERE idCodigo_ativacao = ${idCodigo};
+  `;
+  return database.executar(instrucaoSql);
+}
+
 module.exports = {
   buscarPorCnpj,
   buscarPorId,
@@ -49,5 +67,7 @@ module.exports = {
   cadastrarEndereco,
   buscarCodigo,
   cadastrarCodigo,
-  listar
+  listar,
+  buscarCodigoEspecifico,
+  atualizarStatusCodigo
 };
