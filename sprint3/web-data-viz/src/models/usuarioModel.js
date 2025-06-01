@@ -3,7 +3,7 @@ var database = require("../database/config")
 // LOGIN
 function autenticar(email, senha) {
     var instrucaoSql = `
-        SELECT idFuncionario, nome, email, fkEmpresa as empresaId 
+        SELECT idFuncionario, nome, email, fkEmpresa as empresaId, tipoUsuario
         FROM funcionario 
         WHERE email = '${email}' AND senha = '${senha}';
     `;
@@ -11,10 +11,17 @@ function autenticar(email, senha) {
 }
 
 // CADASTRO
-function cadastrar(nome, email, senha, fkEmpresa) {
-    var instrucaoSql = `
-        INSERT INTO funcionario (nome, email, senha, fkEmpresa) 
-        VALUES ('${nome}', '${email}', '${senha}', ${fkEmpresa});
+// function cadastrar(nome, email, senha, fkEmpresa) {
+//     var instrucaoSql = `
+//         INSERT INTO funcionario (nome, email, senha, fkEmpresa) 
+//         VALUES ('${nome}', '${email}', '${senha}', ${fkEmpresa});
+//     `;
+//     return database.executar(instrucaoSql);
+// }
+function cadastrar(nome, email, senha, fkEmpresa, tipoUsuario = 'funcionario') {
+    const instrucaoSql = `
+        INSERT INTO funcionario (nome, email, senha, fkEmpresa, tipoUsuario) 
+        VALUES ('${nome}', '${email}', '${senha}', ${fkEmpresa}, '${tipoUsuario}');
     `;
     return database.executar(instrucaoSql);
 }

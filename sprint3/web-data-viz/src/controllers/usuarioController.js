@@ -21,6 +21,7 @@ function autenticar(req, res) {
                                 id: usuario.idFuncionario,
                                 email: usuario.email,
                                 nome: usuario.nome,
+                                tipoUsuario: usuario.tipoUsuario,
                                 fermentadoras: resultadoFermentadoras
                             });
                         });
@@ -38,31 +39,53 @@ function autenticar(req, res) {
 }
 
 // CADASTRO
-function cadastrar(req, res) {
-    var nome = req.body.nomeServer;
-    var email = req.body.emailServer;
-    var senha = req.body.senhaServer;
-    var fkEmpresa = req.body.empresaServer;
+// function cadastrar(req, res) {
+//     var nome = req.body.nomeServer;
+//     var email = req.body.emailServer;
+//     var senha = req.body.senhaServer;
+//     var fkEmpresa = req.body.empresaServer;
 
-    if (!nome) {
-        res.status(400).send("Seu nome está undefined!");
-    } else if (!email) {
-        res.status(400).send("Seu email está undefined!");
-    } else if (!senha) {
-        res.status(400).send("Sua senha está undefined!");
-    } else if (!fkEmpresa) {
-        res.status(400).send("O ID da empresa está undefined!");
-    } else {
-        usuarioModel.cadastrar(nome, email, senha, fkEmpresa)
-            .then(function (resultado) {
-                res.status(201).json({ mensagem: "Funcionário cadastrado com sucesso!", resultado });
-            })
-            .catch(function (erro) {
-                console.log("Erro ao cadastrar funcionário:", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
-            });
+//     if (!nome) {
+//         res.status(400).send("Seu nome está undefined!");
+//     } else if (!email) {
+//         res.status(400).send("Seu email está undefined!");
+//     } else if (!senha) {
+//         res.status(400).send("Sua senha está undefined!");
+//     } else if (!fkEmpresa) {
+//         res.status(400).send("O ID da empresa está undefined!");
+//     } else {
+//         usuarioModel.cadastrar(nome, email, senha, fkEmpresa)
+//             .then(function (resultado) {
+//                 res.status(201).json({ mensagem: "Funcionário cadastrado com sucesso!", resultado });
+//             })
+//             .catch(function (erro) {
+//                 console.log("Erro ao cadastrar funcionário:", erro.sqlMessage);
+//                 res.status(500).json(erro.sqlMessage);
+//             });
+//     }
+// }
+
+function cadastrar(req, res) {
+    const nome = req.body.nomeServer;
+    const email = req.body.emailServer;
+    const senha = req.body.senhaServer;
+    const fkEmpresa = req.body.empresaServer;
+    const tipoUsuario = req.body.tipoUsuarioServer || 'funcionario'; 
+
+    if (!nome || !email || !senha || !fkEmpresa) {
+        return res.status(400).send("Dados incompletos para cadastro!");
     }
+
+    usuarioModel.cadastrar(nome, email, senha, fkEmpresa, tipoUsuario)
+        .then(resultado => {
+            res.status(201).json({ mensagem: "Funcionário cadastrado com sucesso!", resultado });
+        })
+        .catch(erro => {
+            console.log("Erro ao cadastrar funcionário:", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
 }
+
 
 module.exports = {
     autenticar,

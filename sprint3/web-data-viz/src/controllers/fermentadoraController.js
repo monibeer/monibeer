@@ -18,29 +18,22 @@ function buscarFermentadorasPorEmpresa(req, res) {
 
 
 function cadastrar(req, res) {
-  var descricao = req.body.descricao;
-  var idUsuario = req.body.idUsuario;
+  var nome = req.body.nome;
+  var fkSensor = req.body.fkSensor;
+  var fkSetor = req.body.fkSetor;
 
-  if (descricao == undefined) {
-    res.status(400).send("descricao está undefined!");
-  } else if (idUsuario == undefined) {
-    res.status(400).send("idUsuario está undefined!");
-  } else {
-
-
-    aquarioModel.cadastrar(descricao, idUsuario)
-      .then((resultado) => {
-        res.status(201).json(resultado);
-      }
-      ).catch((erro) => {
-        console.log(erro);
-        console.log(
-          "\nHouve um erro ao realizar o cadastro! Erro: ",
-          erro.sqlMessage
-        );
-        res.status(500).json(erro.sqlMessage);
-      });
+  if (!nome || !fkSensor || !fkSetor) {
+      return res.status(400).send("Campos obrigatórios não informados.");
   }
+
+  fermentadoraModel.cadastrar(nome, fkSensor, fkSetor)
+      .then(resultado => {
+          res.status(201).json({ mensagem: "Fermentadora cadastrada com sucesso!", resultado });
+      })
+      .catch(erro => {
+          console.error("Erro ao cadastrar fermentadora:", erro.sqlMessage);
+          res.status(500).json(erro.sqlMessage);
+      });
 }
 
 module.exports = {

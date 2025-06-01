@@ -102,13 +102,15 @@
                     nomeServer: nome,
                     emailServer: email,
                     senhaServer: senha,
-                    empresaServer: empresaId
+                    empresaServer: empresaId,
+                    tipoUsuarioServer: "administrador"
                 })
             })
                 .then(res => res.json())
                 .then(data => {
                     alert(data.mensagem || "Funcionário cadastrado com sucesso!");
                     document.getElementById("modalFuncionario").style.display = "none";
+                    window.location.href = "login.html";
 
                     document.getElementById("inputNome").value = "";
                     document.getElementById("inputEmail").value = "";

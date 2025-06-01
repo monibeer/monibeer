@@ -26,9 +26,11 @@ function buscarFermentadorasPorEmpresa(empresaId) {
   return database.executar(instrucaoSql);
 }
 
-function cadastrar(empresaId, descricao) {
-  
-  var instrucaoSql = `INSERT INTO (descricao, fk_empresa) aquario VALUES (${descricao}, ${empresaId})`;
+function cadastrar(nome, fkSensor, fkSetor) {
+  var instrucaoSql = `
+      INSERT INTO fermentadora (nome, fkSensor, fkSetor)
+      VALUES ('${nome}', ${fkSensor}, ${fkSetor});
+  `;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);

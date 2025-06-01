@@ -8,7 +8,7 @@ router.get("/:empresaId", function (req, res) {
 });
 
 router.post("/cadastrar", function (req, res) {
-  aquarioController.cadastrar(req, res);
-})
+  fermentadoraController.cadastrar(req, res);
+});
 
 module.exports = router;
