@@ -16,10 +16,11 @@ function pegarDashboardHome(req, res) {
         .then(
             function (resultadoDashHome) {
                 console.log(`Resultados: ${JSON.stringify(resultadoDashHome)}`); // transforma JSON em String
-
-                            res.json({
-                                dadosDashHome: resultadoDashHome
-                            });
+                if (!resultadoDashHome || resultadoDashHome.length === 0) {
+                    res.json({ dadosDashHome: [] });
+                } else {
+                    res.json({ dadosDashHome: resultadoDashHome });
+                }
             }
         ).catch(
             function (erro) {

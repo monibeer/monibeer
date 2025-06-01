@@ -7,7 +7,7 @@ function buscarFermentadorasPorEmpresa(req, res) {
     if (resultado.length > 0) {
       res.status(200).json(resultado);
     } else {
-      res.status(204).json([]);
+      res.status(200).json([]);
     }
   }).catch(function (erro) {
     console.log(erro);

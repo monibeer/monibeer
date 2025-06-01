@@ -13,7 +13,7 @@ CREATE TABLE endereco (
 
 CREATE TABLE empresa (
     idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(50) NOT NULL,
+    razaoSocial VARCHAR(50) NOT NULL,
     cnpj CHAR(14) NOT NULL UNIQUE,
     fkEndereco INT NOT NULL,
     CONSTRAINT fkEnderecoEmpresa FOREIGN KEY (fkEndereco)
@@ -239,3 +239,31 @@ SELECT * FROM alerta;
 SELECT idCodigo_ativacao, codigo, fkEmpresa, status FROM codigo_ativacao WHERE codigo = 12345678;
 UPDATE codigo_ativacao SET status = 1 WHERE idCodigo_ativacao = 1;
 
+ SELECT
+        e.estiloCerveja,
+        COUNT(DISTINCT f.idFermentadora) AS total_ferm,
+        (SELECT COUNT(*) FROM sensor WHERE statusSensor = 'ativo') AS sensor_ativo,
+        (SELECT COUNT(*) FROM sensor WHERE statusSensor = 'inativo') AS sensor_inativo,
+        (SELECT COUNT(*) FROM sensor WHERE statusSensor = 'manutenção') AS sensor_manutencao,
+        COUNT(DISTINCT CASE 
+            WHEN (c.temperatura < e.limiteTempMin OR c.temperatura > e.limiteTempMax) THEN f.idFermentadora
+        END) AS fermentadoras_fora_do_ideal,
+        COUNT(DISTINCT CASE
+            WHEN (
+                c.temperatura < (e.limiteTempMin - 5) OR
+                c.temperatura > (e.limiteTempMax + 5)
+            ) THEN f.idFermentadora
+        END) AS fermentadoras_em_critico
+    FROM fermentadora f 
+    JOIN sensor s ON f.fkSensor = s.idSensor
+    JOIN setor st ON f.fkSetor = st.idSetor
+    JOIN historico_fermentadora hf 
+        ON hf.fkFermentadora = f.idFermentadora
+    JOIN estilo e ON hf.fkEstilo = e.idEstilo
+    LEFT JOIN captura c 
+        ON c.fkSensor = s.idSensor
+        AND c.dtHora >= '2025-06-01 00:00:00' 
+        AND c.dtHora < '2025-06-01 00:00:00'
+    LEFT JOIN alerta a ON a.fkCaptura = c.idCaptura
+    WHERE st.fkEmpresa = 1
+    GROUP BY e.estiloCerveja;
