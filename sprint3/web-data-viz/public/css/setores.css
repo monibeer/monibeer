@@ -1,0 +1,94 @@
+.container-info-fermenter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  padding: 32px;
+  justify-content: center;
+}
+
+.card-fermenter {
+  display: flex;
+  max-width: 600px;
+  height: 300px;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.card-fermenter:hover {
+  transform: scale(1.02);
+}
+
+/* Lado esquerdo com imagem ou ícone */
+.card-fermenter .visual {
+  flex: 1;
+  background: linear-gradient(to bottom, #a5e65a, #7ec850);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.card-fermenter .visual img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+/* Lado direito com dados */
+.card-fermenter .info {
+  flex: 2;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-fermenter .info h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.card-fermenter .info .meta {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 16px;
+}
+
+.card-fermenter .info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+}
+
+.card-fermenter .info ul li {
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.card-fermenter .info button {
+  align-self: flex-start;
+  padding: 10px 20px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.card-fermenter.red .visual {
+  background: linear-gradient(to bottom, #ff5e5e, #ff3d3d);
+}
+
+.card-fermenter.yellow .visual {
+  background: linear-gradient(to bottom, #ffe082, #ffc107);
+}
+
+.card-fermenter.green .visual {
+  background: linear-gradient(to bottom, #a5e65a, #7ec850);
+}

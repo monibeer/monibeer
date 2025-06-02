@@ -64,6 +64,14 @@ function pegarHistoricoAlertasDash(idEmpresa) {
     return database.executar(instrucaoSql);
 }
 
+function pegarSetoresDados(idEmpresa) {
+
+    var instrucaoSql = `SELECT * FROM vw_fermentadoras_status_setor_empresa WHERE fkEmpresa = ${idEmpresa};`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 
 // function buscarMedidasEmTempoReal(idAquario) {
 
@@ -81,6 +89,7 @@ function pegarHistoricoAlertasDash(idEmpresa) {
 
 module.exports = {
     pegarDadosHomeDash,
-    pegarHistoricoAlertasDash
+    pegarHistoricoAlertasDash,
+    pegarSetoresDados
     // buscarMedidasEmTempoReal
 }

@@ -13,7 +13,7 @@
 
 </head>
 
-<body onload="pegarDadosDashHome(), atualizarKPIs(), pegarHistoricoAlerta()">
+<body onload="pegarDadosDashHome(), pegarHistoricoAlerta()">
     <section class="dashboard">
         <div class="sidebar">
             <a href="./index-dashboard.html">
@@ -39,7 +39,7 @@
                         </div>
                     </a>
 
-                    <a href="./dashboard.html">
+                    <a href="./setores.html">
                         <div class="navigation-item">
                             <i class="fa-solid fa-chart-column"></i>
                             <p>Dashboard</p>
@@ -82,7 +82,7 @@
                     <span>|</span>
                     <div class="container-mini-profile">
                         <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="">
-                        <p>Rodrigo Silva</p>
+                        <p id="header_usuario">Rodrigo Silva</p>
                     </div>
                 </div>
             </div>
@@ -177,6 +177,8 @@
 </html>
 <script src="./js/chartJs-Home.js"></script>
 <script>
+    header_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
     const dataAtual = new Date();
     const dia = String(dataAtual.getDate()).padStart(2, '0');
     const mes = String(dataAtual.getMonth() + 1).padStart(2, '0');

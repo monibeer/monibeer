@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Setores</title>
+    <link rel="stylesheet" href="./css/assets/main.css">
+    <link rel="stylesheet" href="./css/assetsDashboard/main.css">
+    <link rel="stylesheet" href="./css/indexDashboard.css">
+    <link rel="stylesheet" href="./css/setores.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+</head>
+
+<body onload="pegarDadosSetoresDash()">
+    <section class="dashboard">
+        <div class="sidebar">
+            <a href="./index-dashboard.html">
+                <div class="logotipo">
+                    <img src="./assets/monibeer-logo.png" alt="">
+                </div>
+            </a>
+
+            <!-- <div class="profile">
+            <div class="circle-profile">
+                <img src="./assets/image.png" alt="" class="profile-img">
+            </div>
+            <h3>Rodrigo Souza</h3>
+            <p>Administrador</p>
+        </div> -->
+
+            <div class="buttons-navegation">
+                <div class="container-item">
+                    <a href="./index-dashboard.html">
+                        <div class="navigation-item">
+                            <i class="fa-solid fa-house"></i>
+                            <p>Home</p>
+                        </div>
+                    </a>
+
+                    <a href="./setores.html">
+                        <div class="navigation-item active">
+                            <i class="fa-solid fa-chart-column"></i>
+                            <p>Dashboard</p>
+                        </div>
+                    </a>
+
+                    <!-- <div class="navigation-item">
+                    <i class="fa-solid fa-gear"></i>
+                    <p>Configurações</p>
+                </div> -->
+                </div>
+
+                <a href="./login.html">
+                    <div class="logout-item navigation-item">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <p>Logout</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="container-dashboard">
+            <div class="header">
+                <div class="container-searchBarGroup">
+                    <i class="fa-solid fa-bars"></i>
+
+                    <h3>Meus Setores</h3>
+                    <!-- <div class="container-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search..">
+                </div> -->
+                </div>
+
+
+                <div class="container-actions">
+                    <!-- <div class="container-theme-dark-light">
+                    <img src="https://static-00.iconduck.com/assets.00/sun-symbol-emoji-512x512-qjm8vnpc.png" alt="">
+                </div> -->
+                    <i class="fa-solid fa-bell"></i>
+                    <span>|</span>
+                    <div class="container-mini-profile">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="">
+                        <p id="header_usuario">Rodrigo Silva</p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="datatime-update" id="ultimaAtualizacao">Última Atualização - 25/04/2025 às 10:40</p>
+
+            <div class="container-info-fermenter">
+            </div>
+    </section>
+</body>
+
+</html>
+<script>
+    header_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
+    function pegarDadosSetoresDash() {
+        const session = sessionStorage.FERMENTADORAS;
+        const idEmpresa = JSON.parse(session)[0].fkEmpresa;
+
+        fetch('/dashboard/pegarDadosSetores', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idEmpresaServer: idEmpresa,
+            }),
+        }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    sessionStorage.setItem('DADOS_SETORES', JSON.stringify(resposta.setorDados));
+                    exibirSetores()
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+        atualizarDataHoraAtualizacao();
+
+    }
+
+    function atualizarDataHoraAtualizacao() {
+        const agora = new Date();
+        const dia = String(agora.getDate()).padStart(2, '0');
+        const mes = String(agora.getMonth() + 1).padStart(2, '0');
+        const ano = agora.getFullYear();
+        const horas = String(agora.getHours()).padStart(2, '0');
+        const minutos = String(agora.getMinutes()).padStart(2, '0');
+
+        const texto = `Última Atualização - ${dia}/${mes}/${ano} às ${horas}:${minutos}`;
+        document.getElementById("ultimaAtualizacao").innerText = texto;
+    }
+
+    function exibirSetores() {
+        const container = document.querySelector(".container-info-fermenter");
+        const setores = JSON.parse(sessionStorage.DADOS_SETORES) || [];
+        container.innerHTML = ''
+
+        setores.forEach(setor => {
+            let statusClass = "green";
+            if (setor.fermentadoras_em_alerta_critico > 0) {
+                statusClass = "red";
+            } else if (setor.fermentadoras_fora_do_ideal > 0) {
+                statusClass = "yellow";
+            }
+
+            container.innerHTML += `
+            <div class="card-fermenter ${statusClass}">
+        <div class="visual">
+          <img src="https://img.icons8.com/fluency/96/beer.png" alt="Tanque">
+        </div>
+        <div class="info">
+          <div>
+            <h2>${setor.nome_setor}</h2>
+            <div class="meta">Empresa #${setor.fkEmpresa}</div>
+            <ul>
+              <li>🧪 Total: <strong>${setor.total_fermentadoras}</strong></li>
+              <li>✅ Ativas: <strong>${setor.total_fermentadoras_ativas}</strong></li>
+              <li>⚠️ Fora do ideal: <strong>${setor.fermentadoras_fora_do_ideal}</strong></li>
+              <li>🚨 Crítico: <strong>${setor.fermentadoras_em_alerta_critico}</strong></li>
+            </ul>
+          </div>
+          <button>Ver Detalhes</button>
+        </div>
+        </div>
+      `;
+        });
+    }
+
+    setInterval(() => {
+        pegarDadosSetoresDash();
+    }, 60000);
+
+
+</script>

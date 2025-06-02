@@ -46,6 +46,28 @@ function pegarHistoricoAlerta(req, res) {
         );
 }
 
+function pegarSetorDadosDash(req, res) {
+    var idEmpresa = req.body.idEmpresaServer;
+
+    dashboardModel.pegarSetoresDados(idEmpresa)
+        .then(
+            function (resultadoSetorDados) {
+                console.log(`Resultados: ${JSON.stringify(resultadoSetorDados)}`);
+                if (!resultadoSetorDados || resultadoSetorDados.length === 0) {
+                    res.json({ setorDados: [] });
+                } else {
+                    res.json({ setorDados: resultadoSetorDados });
+                }
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao pegar o historico de alerta! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 
 // //CADASTRO
 // function cadastrar(req, res) {
@@ -87,6 +109,7 @@ function pegarHistoricoAlerta(req, res) {
 
 module.exports = {
     pegarDashboardHome,
-    pegarHistoricoAlerta
+    pegarHistoricoAlerta,
+    pegarSetorDadosDash
     // cadastrar
 }

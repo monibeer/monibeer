@@ -12,6 +12,10 @@ router.post("/pegarHistoricoAlerta", function (req, res) {
     empresaController.pegarHistoricoAlerta(req, res);
 })
 
+router.post("/pegarDadosSetores", function (req, res) {
+    empresaController.pegarSetorDadosDash(req, res);
+})
+
 // router.get("/buscar", function (req, res) {
 //     empresaController.buscarPorCnpj(req, res);
 // });
