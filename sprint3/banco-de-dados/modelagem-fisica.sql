@@ -390,3 +390,26 @@ FROM vw_fermentadoras_status_setor_empresa
 WHERE data_captura = CURRENT_DATE
   AND fkEmpresa = 1;
   
+INSERT INTO captura (temperatura, fkSensor) VALUES
+(18.50, 1),
+(18.70, 1),
+(19.10, 1),
+(19.50, 1),
+(20.00, 1),
+(20.30, 1),
+(20.60, 1),
+(21.00, 1),
+(21.20, 1),
+(21.50, 1);
+
+INSERT INTO captura (temperatura, fkSensor) VALUES
+(21.70, 1),
+(22.00, 1),
+(22.30, 1),
+(22.50, 1),
+(22.70, 1),
+(23.00, 1),
+(23.20, 1),
+(23.50, 1),
+(23.70, 1),
+(24.00, 1);
