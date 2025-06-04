@@ -355,6 +355,9 @@ INSERT INTO captura (temperatura, fkSensor) VALUES
 (18.50, 1),
 (18.70, 1),
 (19.10, 1),
+
+
+
 (19.50, 1),
 (20.00, 1),
 (20.30, 1),
@@ -364,11 +367,12 @@ INSERT INTO captura (temperatura, fkSensor) VALUES
 (21.50, 1);
 
 INSERT INTO captura (temperatura, fkSensor) VALUES
+(24.70, 2),
+(24.00, 2),
+(24.30, 2),
+(24.50, 2),
 (24.70, 1),
-(24.00, 1),
-(24.30, 1),
-(24.50, 1),
-(24.70, 1),
+
 (23.00, 1),
 (24.20, 1),
 (24.50, 1),
@@ -379,23 +383,30 @@ INSERT INTO captura (temperatura, fkSensor) VALUES
 INSERT INTO historico_fermentadora (idHistorico, fkFermentadora, fkEstilo, dataInicio, dataFim)
 VALUES (default, 1, 1, '2025-06-01 08:00:00', NULL);
 
-
+CREATE VIEW vw_captura_estilo AS
 SELECT 
-    c.fkSensor,
-    c.dtHora,
-    c.temperatura,
-    e.estiloCerveja AS nomeCerveja,
-    e.limiteTempMin,
-    e.limiteTempMax
+    c.fkSensor, 
+    c.dtHora, 
+    c.temperatura, 
+    e.estiloCerveja AS nomeCerveja, 
+    e.limiteTempMin, 
+    e.limiteTempMax,
+    st.fkEmpresa
 FROM captura c
-JOIN sensor s ON s.idSensor = c.fkSensor
-JOIN fermentadora f ON f.fkSensor = s.idSensor
+JOIN fermentadora f ON f.fkSensor = c.fkSensor
 JOIN setor st ON f.fkSetor = st.idSetor
-JOIN historico_fermentadora hf ON hf.fkFermentadora = f.idFermentadora
-    AND hf.dataFim IS NULL
-JOIN estilo e ON e.idEstilo = hf.fkEstilo
-WHERE st.fkEmpresa = 1
-ORDER BY c.dtHora DESC
-LIMIT 30;
+JOIN historico_fermentadora hf ON hf.fkFermentadora = f.idFermentadora AND hf.dataFim IS NULL
+JOIN estilo e ON e.idEstilo = hf.fkEstilo;
+
+CREATE VIEW vw_ultimos_30_por_sensor AS
+SELECT fkSensor, dtHora, temperatura, nomeCerveja, limiteTempMin, limiteTempMax, fkEmpresa
+FROM (
+    SELECT *,
+        ROW_NUMBER() OVER (PARTITION BY fkSensor ORDER BY dtHora DESC) AS rn
+    FROM vw_captura_estilo
+) sub
+WHERE rn <= 30
+ORDER BY fkSensor, dtHora DESC;
 
 
+SELECT * FROM vw_ultimos_30_por_sensor;

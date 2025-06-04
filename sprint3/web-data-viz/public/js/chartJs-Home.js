@@ -6,13 +6,13 @@ function gerarDadosGrafico() {
     let totalManutencao = 0;
 
     dashboard.forEach(estilo => {
-        const total = estilo.total_ferm || 0;
+        const total = estilo.sensor_ativo || 0;
         const inativo = estilo.sensor_inativo || 0;
         const manutencao = estilo.sensor_manutencao || 0;
 
-        totalInativo += inativo;
-        totalManutencao += manutencao;
-        totalAtivo += total - (inativo + manutencao);
+        totalInativo = inativo;
+        totalManutencao = manutencao;
+        totalAtivo = total
     });
 
     return [totalAtivo, totalInativo, totalManutencao];
