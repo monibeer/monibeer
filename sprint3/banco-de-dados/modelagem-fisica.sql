@@ -325,31 +325,6 @@ JOIN estilo e ON hf.fkEstilo = e.idEstilo
 WHERE st.fkEmpresa = 1
 ORDER BY a.dtHora DESC;
 
-
-
-CREATE VIEW vw_fermentadoras_status_setor_empresa AS
-SELECT 
-    s.idSetor,
-    CAST(MAX(c.dtHora) AS DATE) AS data_captura,
-    s.nome AS nome_setor,
-    s.fkEmpresa,
-    COUNT(DISTINCT f.idFermentadora) AS total_fermentadoras,
-    COUNT(DISTINCT CASE WHEN sn.statusSensor = 'ativo' THEN f.idFermentadora END) AS total_fermentadoras_ativas,
-    COUNT(DISTINCT CASE 
-        WHEN c.temperatura < e.limiteTempMin OR c.temperatura > e.limiteTempMax THEN f.idFermentadora 
-    END) AS fermentadoras_fora_do_ideal,
-    COUNT(DISTINCT CASE 
-        WHEN c.temperatura < (e.limiteTempMin - 5) OR c.temperatura > (e.limiteTempMax + 5) THEN f.idFermentadora 
-    END) AS fermentadoras_em_alerta_critico
-FROM setor s
-LEFT JOIN fermentadora f ON f.fkSetor = s.idSetor
-LEFT JOIN sensor sn ON sn.idSensor = f.fkSensor
-LEFT JOIN captura c ON c.fkSensor = sn.idSensor
-LEFT JOIN historico_fermentadora hf ON hf.fkFermentadora = f.idFermentadora
-    AND (hf.dataFim IS NULL OR c.dtHora BETWEEN hf.dataInicio AND hf.dataFim)
-LEFT JOIN estilo e ON hf.fkEstilo = e.idEstilo
-GROUP BY s.idSetor, s.nome, s.fkEmpresa;
-
 CREATE VIEW vw_fermentadoras_status_setor_empresa AS
 SELECT 
     s.idSetor,
@@ -381,14 +356,7 @@ LEFT JOIN historico_fermentadora hf
 LEFT JOIN estilo e ON hf.fkEstilo = e.idEstilo
 GROUP BY s.idSetor, s.nome, s.fkEmpresa;
 
-
-drop VIEW vw_fermentadoras_status_setor_empresa;
-
 SELECT * FROM vw_fermentadoras_status_setor_empresa WHERE fkEmpresa = 1;
-SELECT *
-FROM vw_fermentadoras_status_setor_empresa
-WHERE data_captura = CURRENT_DATE
-  AND fkEmpresa = 1;
   
 INSERT INTO captura (temperatura, fkSensor) VALUES
 (18.50, 1),
@@ -413,3 +381,25 @@ INSERT INTO captura (temperatura, fkSensor) VALUES
 (23.50, 1),
 (23.70, 1),
 (24.00, 1);
+
+
+INSERT INTO historico_fermentadora (idHistorico, fkFermentadora, fkEstilo, dataInicio, dataFim)
+VALUES (default, 1, 1, '2025-06-01 08:00:00', NULL);
+
+
+SELECT 
+    c.fkSensor,
+    c.dtHora,
+    c.temperatura,
+    e.estiloCerveja AS nomeCerveja,
+    e.limiteTempMin,
+    e.limiteTempMax
+FROM captura c
+JOIN sensor s ON s.idSensor = c.fkSensor
+JOIN fermentadora f ON f.fkSensor = s.idSensor
+JOIN historico_fermentadora hf ON hf.fkFermentadora = f.idFermentadora
+    AND hf.dataFim IS NULL
+JOIN estilo e ON e.idEstilo = hf.fkEstilo
+ORDER BY c.dtHora DESC
+LIMIT 50;
+
