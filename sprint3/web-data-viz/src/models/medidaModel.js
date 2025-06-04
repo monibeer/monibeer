@@ -32,7 +32,33 @@ function buscarMedidasEmTempoReal(idAquario) {
     return database.executar(instrucaoSql);
 }
 
+function buscarMedidasDeValidacaoAlerta(idAquario) {
+    var instrucaoSql = `
+            SELECT 
+                c.fkSensor,
+                c.dtHora,
+                c.temperatura,
+                e.estiloCerveja AS nomeCerveja,
+                e.limiteTempMin,
+                e.limiteTempMax
+            FROM captura c
+                JOIN sensor s ON s.idSensor = c.fkSensor
+                JOIN fermentadora f ON f.fkSensor = s.idSensor
+                JOIN setor st ON f.fkSetor = st.idSetor
+                JOIN historico_fermentadora hf ON hf.fkFermentadora = f.idFermentadora
+                    AND hf.dataFim IS NULL
+                JOIN estilo e ON e.idEstilo = hf.fkEstilo
+            WHERE st.fkEmpresa = ${idAquario}
+            ORDER BY c.dtHora DESC
+            LIMIT 30;`;
+
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    buscarMedidasEmTempoReal,
+    buscarMedidasDeValidacaoAlerta
 }

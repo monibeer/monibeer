@@ -298,8 +298,8 @@ UPDATE codigo_ativacao SET status = 1 WHERE idCodigo_ativacao = 1;
     JOIN estilo e ON hf.fkEstilo = e.idEstilo
     LEFT JOIN captura c 
         ON c.fkSensor = s.idSensor
-        AND c.dtHora >= '2025-06-01 00:00:00' 
-        AND c.dtHora < '2025-06-01 00:00:00'
+        AND c.dtHora >= '2025-06-03 00:00:00' 
+        AND c.dtHora < '2025-06-03 00:00:00'
     LEFT JOIN alerta a ON a.fkCaptura = c.idCaptura
     WHERE st.fkEmpresa = 1
     GROUP BY e.estiloCerveja;
@@ -325,7 +325,8 @@ JOIN estilo e ON hf.fkEstilo = e.idEstilo
 WHERE st.fkEmpresa = 1
 ORDER BY a.dtHora DESC;
 
-CREATE VIEW vw_fermentadoras_status_setor_empresa AS
+
+CREATE OR REPLACE VIEW vw_fermentadoras_status_setor_empresa AS
 SELECT 
     s.idSetor,
     s.nome AS nome_setor,
@@ -335,26 +336,18 @@ SELECT
         WHEN sn.statusSensor = 'ativo' THEN f.idFermentadora 
     END) AS total_fermentadoras_ativas,
     COUNT(DISTINCT CASE 
-        WHEN c.temperatura < e.limiteTempMin 
-          OR c.temperatura > e.limiteTempMax 
-        THEN f.idFermentadora 
+        WHEN a.nivel = 'moderado' AND DATE(a.dtHora) = CURRENT_DATE THEN f.idFermentadora
     END) AS fermentadoras_fora_do_ideal,
     COUNT(DISTINCT CASE 
-        WHEN c.temperatura < (e.limiteTempMin - 5) 
-          OR c.temperatura > (e.limiteTempMax + 5) 
-        THEN f.idFermentadora 
+        WHEN a.nivel = 'crítico' AND DATE(a.dtHora) = CURRENT_DATE THEN f.idFermentadora
     END) AS fermentadoras_em_alerta_critico
 FROM setor s
 LEFT JOIN fermentadora f ON f.fkSetor = s.idSetor
 LEFT JOIN sensor sn ON sn.idSensor = f.fkSensor
-LEFT JOIN captura c 
-  ON c.fkSensor = sn.idSensor 
-  AND CAST(c.dtHora AS DATE) = CURRENT_DATE
-LEFT JOIN historico_fermentadora hf 
-  ON hf.fkFermentadora = f.idFermentadora
-  AND (hf.dataFim IS NULL OR c.dtHora BETWEEN hf.dataInicio AND hf.dataFim)
-LEFT JOIN estilo e ON hf.fkEstilo = e.idEstilo
+LEFT JOIN captura c ON c.fkSensor = sn.idSensor
+LEFT JOIN alerta a ON a.fkCaptura = c.idCaptura
 GROUP BY s.idSetor, s.nome, s.fkEmpresa;
+
 
 SELECT * FROM vw_fermentadoras_status_setor_empresa WHERE fkEmpresa = 1;
   
@@ -371,15 +364,15 @@ INSERT INTO captura (temperatura, fkSensor) VALUES
 (21.50, 1);
 
 INSERT INTO captura (temperatura, fkSensor) VALUES
-(21.70, 1),
-(22.00, 1),
-(22.30, 1),
-(22.50, 1),
-(22.70, 1),
+(24.70, 1),
+(24.00, 1),
+(24.30, 1),
+(24.50, 1),
+(24.70, 1),
 (23.00, 1),
-(23.20, 1),
-(23.50, 1),
-(23.70, 1),
+(24.20, 1),
+(24.50, 1),
+(24.70, 1),
 (24.00, 1);
 
 
@@ -397,9 +390,12 @@ SELECT
 FROM captura c
 JOIN sensor s ON s.idSensor = c.fkSensor
 JOIN fermentadora f ON f.fkSensor = s.idSensor
+JOIN setor st ON f.fkSetor = st.idSetor
 JOIN historico_fermentadora hf ON hf.fkFermentadora = f.idFermentadora
     AND hf.dataFim IS NULL
 JOIN estilo e ON e.idEstilo = hf.fkEstilo
+WHERE st.fkEmpresa = 1
 ORDER BY c.dtHora DESC
-LIMIT 50;
+LIMIT 30;
+
 

@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 
-<body>
+<body onload="iniciarVerificacaoApos1Min30()">
     <section class="dashboard">
         <div class="sidebar">
             <a href="./index-dashboard.html">
@@ -196,6 +196,98 @@
         window.onload = () => {
             obterDadosGrafico(1);
         };
+
+
+        function iniciarVerificacaoApos1Min30() {
+            const chave = "tempoEntrada";
+            const agora = Date.now();
+
+            if (!localStorage.getItem(chave)) {
+                localStorage.setItem(chave, agora);
+            }
+
+            const tempoSalvo = parseInt(localStorage.getItem(chave), 10);
+            const tempoDecorrido = agora - tempoSalvo;
+            const umMinMeio = 1.5 * 60 * 1000;
+            console.log("Tempo necessário:", umMinMeio, "ms");
+
+            if (tempoDecorrido >= umMinMeio) {
+                console.log('oier if');
+                buscarDadosEVerificar();
+                iniciarRepeticao(); // inicia loop após a 1ª execução
+            } else {
+                console.log('oier else');
+                const restante = umMinMeio - tempoDecorrido;
+                setTimeout(function () {
+                    buscarDadosEVerificar();
+                    iniciarRepeticao(); // inicia loop após o delay
+                }, restante);
+            }
+        }
+
+        function iniciarRepeticao() {
+            setInterval(buscarDadosEVerificar, 1.5 * 60 * 1000);
+        }
+
+        function buscarDadosEVerificar() {
+            console.log('Buscando dados e verificando...');
+            const session = sessionStorage.FERMENTADORAS;
+            const idEmpresa = JSON.parse(session)[0].fkEmpresa;
+
+            fetch(`/medidas/validacaoTemp/${idEmpresa}`, { cache: 'no-store' }).then(response => {
+                if (response.ok) {
+                    response.json().then(resposta => {
+                        verificarAlerta(resposta);
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado');
+                }
+            }).catch(error => {
+                console.error('Erro na API:', error);
+            });
+        }
+
+        function verificarAlerta(dados) {
+            var sensores = {};
+
+            for (var i = 0; i < dados.length; i++) {
+                var dado = dados[i];
+                var sensorId = dado.fkSensor;
+
+                if (!sensores[sensorId]) {
+                    sensores[sensorId] = [];
+                }
+                sensores[sensorId].push(dado);
+            }
+
+            var listaSensores = Object.keys(sensores);
+
+            for (var i = 0; i < listaSensores.length; i++) {
+                var sensorId = listaSensores[i];
+                var registros = sensores[sensorId];
+                var total = registros.length;
+                var fora = 0;
+
+                for (var j = 0; j < registros.length; j++) {
+                    var r = registros[j];
+                    if (r.temperatura < r.limiteTempMin || r.temperatura > r.limiteTempMax) {
+                        fora++;
+                    }
+                }
+
+                var percentual = (fora / total) * 100;
+
+                if (percentual >= 40) {
+                    alert("⚠️ Sensor " + sensorId + ": " + percentual.toFixed(1) + "% fora do ideal!");
+                } else {
+                    console.log("Sensor " + sensorId + ": tudo certo (" + percentual.toFixed(1) + "% fora).");
+                }
+            }
+        }
+
+        // Iniciar tudo
+        iniciarVerificacaoApos1Min30();
+
     </script>
 </body>
 
