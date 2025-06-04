@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+</head>
+<style>
+    #modal {
+        display: none;
+        position: fixed;
+        z-index: 10;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    #modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 300px;
+        margin: 10% auto;
+        position: relative;
+    }
+
+
+</style>
+
+<body>
+    <section class="dashboard">
+        <div class="sidebar">
+            <a href="./index-dashboard.html">
+                <div class="logotipo">
+                    <img src="./assets/monibeer-logo.png" alt="Logo Monibeer" />
+                </div>
+            </a>
+
+            <div class="buttons-navegation">
+                <div class="container-item">
+                    <a href="./index-dashboard.html">
+                        <div class="navigation-item">
+                            <i class="fa-solid fa-house"></i>
+                            <p>Home</p>
+                        </div>
+                    </a>
+                    <a href="./setores.html">
+                        <div class="navigation-item active">
+                            <i class="fa-solid fa-chart-column"></i>
+                            <p>Dashboard</p>
+                        </div>
+                    </a>
+                    <!-- Fe coloca o link para a tela de admin caso admin no session storage-->
+                </div>
+
+                <a href="./login.html">
+                    <div class="logout-item navigation-item">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <p>Logout</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="container-dashboard">
+            <h1>Lista de Funcionários</h1>
+            <div id="usuarios"></div>
+        
+            <div id="modal">
+                <div id="modal-content">
+                    <h3>Atualizar Funcionário</h3>
+                    <input type="text" id="inputNome" placeholder="Nome">
+                    <input type="email" id="inputEmail" placeholder="Email">
+                    <input type="password" id="inputSenha" placeholder="Senha">
+                    <input type="text" id="inputTipo" placeholder="Tipo de Usuário (administrador/funcionario)">
+                    <button onclick="confirmarAtualizacao()">Salvar</button>
+                    <button onclick="fecharModal()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>
+</body>
+
+</html>
+<script>
+    const idAdmin = sessionStorage.getItem("ID_USUARIO");
+    const isAdmin = sessionStorage.getItem("TIPO_USUARIO");
+    let funcionarioAtualId = null;
+
+    if (isAdmin !== 'administrador') {
+        alert("Você precisa estar logado como administrador.");
+        window.location.href = "/index-dashboard.html";
+    }
+
+    fetch(`/usuarios/buscar/${idAdmin}`)
+        .then(res => res.json())
+        .then(admin => {
+            const fkEmpresa = admin.fkEmpresa;
+
+            fetch(`/usuarios/listar/${fkEmpresa}`)
+                .then(res => res.json())
+                .then(funcionarios => {
+                    const container = document.getElementById("usuarios");
+
+                    funcionarios.forEach(user => {
+                        const div = document.createElement("div");
+                        div.innerHTML = `
+                <p><strong>Nome:</strong> ${user.nome}</p>
+                <p><strong>Email:</strong> ${user.email}</p>
+                <p><strong>Tipo:</strong> ${user.tipoUsuario}</p>
+                <button onclick="deletarUsuario(${user.idFuncionario})">Deletar</button>
+                <button onclick="abrirModal(${user.idFuncionario}, '${user.nome}', '${user.email}', '${user.tipoUsuario}')">Atualizar</button>
+                <hr>
+              `;
+                        container.appendChild(div);
+                    });
+                });
+        });
+
+    function abrirModal(id, nome, email, tipo) {
+        funcionarioAtualId = id;
+        document.getElementById("inputNome").value = nome;
+        document.getElementById("inputEmail").value = email;
+        document.getElementById("inputSenha").value = "";
+        document.getElementById("inputTipo").value = tipo;
+
+        document.getElementById("modal").style.display = "block";
+    }
+
+    function fecharModal() {
+        document.getElementById("modal").style.display = "none";
+        funcionarioAtualId = null;
+    }
+
+    function confirmarAtualizacao() {
+        const nome = document.getElementById("inputNome").value;
+        const email = document.getElementById("inputEmail").value;
+        const senha = document.getElementById("inputSenha").value;
+        const tipo = document.getElementById("inputTipo").value;
+
+        if (!nome || !email || !senha || !tipo) {
+            return alert("Preencha todos os campos!");
+        }
+
+        fetch(`/usuarios/atualizar/${funcionarioAtualId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nomeServer: nome,
+                emailServer: email,
+                senhaServer: senha,
+                tipoUsuarioServer: tipo
+            })
+        })
+            .then(res => {
+                if (res.ok) {
+                    alert("Usuário atualizado com sucesso!");
+                    fecharModal();
+                    location.reload();
+                } else {
+                    alert("Erro ao atualizar.");
+                }
+            });
+    }
+
+    function deletarUsuario(id) {
+        fetch(`/usuarios/deletar/${id}`, { method: "DELETE" })
+            .then(res => {
+                if (res.ok) {
+                    alert("Usuário deletado.");
+                    location.reload();
+                } else {
+                    alert("Erro ao deletar usuário.");
+                }
+            });
+    }
+</script>

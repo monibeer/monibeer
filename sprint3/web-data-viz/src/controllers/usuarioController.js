@@ -86,8 +86,76 @@ function cadastrar(req, res) {
         });
 }
 
+function listarPorEmpresa(req, res) {
+    const fkEmpresa = req.params.fkEmpresa;
+
+    usuarioModel.listarPorEmpresa(fkEmpresa)
+        .then(resultado => {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum funcionário encontrado para essa empresa.");
+            }
+        })
+        .catch(erro => {
+            console.log("Erro ao listar funcionários:", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+function deletar(req, res) {
+    const idFuncionario = req.params.idFuncionario;
+
+    usuarioModel.deletar(idFuncionario)
+        .then(resultado => {
+            res.status(200).json({ mensagem: "Funcionário deletado com sucesso!", resultado });
+        })
+        .catch(erro => {
+            console.log("Erro ao deletar funcionário:", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+function atualizar(req, res) {
+    const idFuncionario = req.params.idFuncionario;
+    const { nomeServer, emailServer, senhaServer, tipoUsuarioServer } = req.body;
+
+    if (!nomeServer || !emailServer || !senhaServer || !tipoUsuarioServer) {
+        return res.status(400).send("Dados incompletos para atualização!");
+    }
+
+    usuarioModel.atualizar(idFuncionario, nomeServer, emailServer, senhaServer, tipoUsuarioServer)
+        .then(resultado => {
+            res.status(200).json({ mensagem: "Funcionário atualizado com sucesso!", resultado });
+        })
+        .catch(erro => {
+            console.log("Erro ao atualizar funcionário:", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+function buscarPorId(req, res) {
+    const idFuncionario = req.params.idFuncionario;
+
+    usuarioModel.buscarPorId(idFuncionario)
+        .then(resultado => {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado[0]);
+            } else {
+                res.status(404).send("Funcionário não encontrado.");
+            }
+        })
+        .catch(erro => {
+            console.log("Erro ao buscar funcionário por ID:", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
 
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    deletar,
+    listarPorEmpresa,
+    atualizar,
+    buscarPorId
 };

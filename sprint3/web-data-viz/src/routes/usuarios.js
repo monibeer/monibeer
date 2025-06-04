@@ -11,4 +11,20 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
+router.get("/listar/:fkEmpresa", function (req, res) {
+    usuarioController.listarPorEmpresa(req, res);
+});
+
+router.delete("/deletar/:idFuncionario", function (req, res) {
+    usuarioController.deletar(req, res);
+});
+
+router.put("/atualizar/:idFuncionario", function (req, res) {
+    usuarioController.atualizar(req, res);
+});
+
+router.get("/buscar/:idFuncionario", function (req, res) {
+    usuarioController.buscarPorId(req, res);
+});
+
 module.exports = router;
