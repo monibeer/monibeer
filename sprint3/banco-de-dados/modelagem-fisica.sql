@@ -25,7 +25,7 @@ idCodigo_ativacao INT PRIMARY KEY AUTO_INCREMENT,
 codigo INT, 
 status TINYINT default 0,
 fkEmpresa INT,
-	CONSTRAINT fkCodigoEmpresa FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa)
+	CONSTRAINT fkCodigoEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 );
 
 CREATE TABLE funcionario (
