@@ -6,57 +6,81 @@
   justify-content: center;
 }
 
+.todo-container{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
 .card-fermenter {
   display: flex;
-  max-width: 600px;
-  height: 300px;
+  flex-direction: column;
+  width: 350px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 30px;
+  height: 250px;
   background: white;
-  border-radius: 16px;
+  border-radius: 10px;
+  border-top: rgb(62, 30, 10) solid 10px ;
   overflow: hidden;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease;
+  gap: 30px;
 }
 
 .card-fermenter:hover {
   transform: scale(1.02);
 }
 
+.card-fermenter .visual-lateral{
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+
 /* Lado esquerdo com imagem ou ícone */
 .card-fermenter .visual {
-  flex: 1;
   background: linear-gradient(to bottom, #a5e65a, #7ec850);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding-left: 30px;
 }
 
-.card-fermenter .visual img {
+.card-fermenter .visual-lateral h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #333;
+}
+
+
+.card-fermenter .todo-container img {
   width: 100px;
-  height: 100px;
+  height: 160px;
+  margin-left: 10px;
   object-fit: contain;
 }
 
 /* Lado direito com dados */
 .card-fermenter .info {
-  flex: 2;
-  padding: 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
 }
 
-.card-fermenter .info h2 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 6px;
-  color: #333;
-}
-
-.card-fermenter .info .meta {
-  font-size: 0.85rem;
-  color: #888;
-  margin-bottom: 16px;
+.card-fermenter .visual-lateral .meta {
+  font-size: 1rem;
+  color: #b6b4b4;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  margin-left: auto;
+  margin-right: 20px;
 }
 
 .card-fermenter .info ul {
@@ -66,14 +90,31 @@
 }
 
 .card-fermenter .info ul li {
-  font-size: 0.95rem;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 700;
+  gap: 8px;
+  color: #484848;
   margin-bottom: 6px;
 }
 
-.card-fermenter .info button {
+.card-fermenter .info ul li strong {
+  font-weight: 500;
+}
+
+.card-fermenter .info .quantidade-fermentadoras .quantidade{
+  display: flex;
+  margin-top: 30px;
+  gap: 45px;
+  
+}
+
+.card-fermenter .button button {
   align-self: flex-start;
-  padding: 10px 20px;
-  background-color: #f44336;
+  width: 100%;
+  height: 40px;
+  align-items: center;
+  background-color: #ca6b1d;
   color: white;
   border: none;
   border-radius: 8px;
@@ -90,5 +131,9 @@
 }
 
 .card-fermenter.green .visual {
-  background: linear-gradient(to bottom, #a5e65a, #7ec850);
+  display: flex;
+  padding: 15px;
+  border-radius: 50%;
+  margin-left: 40px;
+  background: linear-gradient(to bottom, #6ca52a, #7ec850);
 }

@@ -153,24 +153,37 @@
             } else if (setor.fermentadoras_fora_do_ideal > 0) {
                 statusClass = "yellow";
             }
-
+            
+//          
+//<div class="meta">Empresa #${setor.fkEmpresa}</div>
             container.innerHTML += `
-            <div class="card-fermenter ${statusClass}">
-        <div class="visual">
-          <img src="https://img.icons8.com/fluency/96/beer.png" alt="Tanque">
-        </div>
-        <div class="info">
-          <div>
+        <div class="card-fermenter ${statusClass}">
+        <div class="todo-container">
+        <img src="assets/setor A.png" alt="Tanque">
+        <div class="container-div">
+        <div class="visual-lateral">
             <h2>${setor.nome_setor}</h2>
-            <div class="meta">Empresa #${setor.fkEmpresa}</div>
-            <ul>
-              <li>🧪 Total: <strong>${setor.total_fermentadoras}</strong></li>
-              <li>✅ Ativas: <strong>${setor.total_fermentadoras_ativas}</strong></li>
+            <div class="visual"></div>
+        </div>
+        
+        <div class="info">
+            <div class="quantidade-fermentadoras">
+                <ul class="quantidade">
+                    <li>Total: <strong>${setor.total_fermentadoras}</strong></li>
+                    <li>Ativas: <strong>${setor.total_fermentadoras_ativas}</strong></li>
+                </ul>
+            </div>
+            <div class="lista-itens">
+            <ul class="avisos">
               <li>⚠️ Fora do ideal: <strong>${setor.fermentadoras_fora_do_ideal}</strong></li>
               <li>🚨 Crítico: <strong>${setor.fermentadoras_em_alerta_critico}</strong></li>
             </ul>
-          </div>
-          <button>Ver Detalhes</button>
+            </div>
+        </div>
+        </div>
+        </div>
+        <div class="button">
+            <button>Ver Detalhes</button>
         </div>
         </div>
       `;
