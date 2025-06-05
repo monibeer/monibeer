@@ -2,7 +2,7 @@
 .container-info-fermenter {
     display: flex;
     flex: 1;
-    margin-top: 10px;
+    margin-top: 30px;
 }
 
 .container-data-filters {
@@ -11,404 +11,174 @@
     align-items: center;
 }
 
-.filter-ipa-pilsen {
+/* Painel de lista de fermentadoras */
+.fermenter-list-panel {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    margin-right: 15px;
+    width: 500px;
+}
+
+.panel-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.fermenter-list {
     display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.fermenter-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: #f9fafb;
+    transition: background 0.3s ease;
+}
+
+.fermenter-item:hover {
+    background: #f3f4f6;
+}
+
+.fermenter-item.critical {
+    background-color: #fee2e2;
+    border: 1px solid #fecaca;
+}
+
+.fermenter-item.warning {
+    background-color: #fef3c7;
+    border: 1px solid #fde68a;
+}
+
+.fermenter-label {
+    display: flex;
+    align-items: center;
     gap: 10px;
 }
 
-.filter-ipa-pilsen button {
-    padding: 5px 20px;
-    height: 33px;
-    width: 80px;
-    font-weight: 800;
-    border-radius: 50px;
-    border: 2px solid black;
-    background-color: white;
-    cursor: pointer;
+.fermenter-icon {
+    width: 24px;
+    height: 24px;
 }
 
-.filter-ipa-pilsen button.check {
-    background-color: rgb(130, 113, 28);
-    color: white;
-    border-color: #3b2000;
-}
-
-.container-info-fermenter .info {
-    width: 820px;
-    display: flex;
-    flex-direction: column;
-}
-
-.title-info {
-    font-size: 24px;
+.fermenter-name {
     font-weight: 500;
 }
 
-.kpis {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0px;
-    gap: 20px;
-}
-
-.kpi {
-    width: 100%;
-    border-radius: 10px;
-    padding: 12px;
-    max-height: 108px;
-    border: 1px solid rgb(202, 202, 202);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-.kpi {
-    background-color: #ffae00;
-}
-
-.kpi.temp-media {
-    border: 1px solid rgb(142, 140, 80);
-    background-color: rgb(255, 254, 236);
-}
-
-.kpi.temp-max {
-    border: 1px solid rgb(142, 80, 120);
-    background-color: rgb(253, 236, 255);
-}
-
-.kpi.temp-min {
-    border: 1px solid rgb(72, 104, 137);
-    background-color: rgb(238, 251, 255);
-}
-
-.kpi canvas {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    display: block;
-}
-
-.kpi h3 {
-    font-size: 17px;
+.fermenter-temp {
+    font-size: 0.875rem;
     font-weight: 600;
 }
 
-.container-data {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 20px 10px;
-    justify-content: center;
+/* Painel de informações em grid */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
 }
 
-.container-data .data-kpi {
-    font-size: 35px;
-    font-weight: 650;
-    color: black;
+/* Cartões */
+.card {
+    background-color: #ffffff;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.container-data .description {
-    font-weight: 400;
-    font-size: 26px;
+.card-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 12px;
 }
 
-.datatime-update {
-    font-size: 16px;
-    color: rgb(161, 161, 161);
+.card-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.card-text {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+/* Status */
+.status-badge {
+    margin-top: 16px;
+    font-size: 0.75rem;
+    padding: 4px 12px;
+    border-radius: 8px;
+    display: inline-block;
     font-weight: 500;
-    margin: 10px 0px;
 }
 
-
-.container-info-fermenter .notifications {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    padding-left: 20px;
+.status-badge.success {
+    color: #15803d;
+    background-color: #dcfce7;
 }
 
-.notifications .container-alert {
-    height: 130px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border-radius: 10px;
-    border: 1px solid rgb(184, 184, 184);
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
-    margin-top: 20px;
-    background-color: #fff8f8;
-    overflow: hidden;
-}
-
-.container-alert .alert {
-    height: 100%;
+.placeholder-card {
     display: flex;
     align-items: center;
-    position: relative;
-}
-
-.alert-indicator {
-    width: 20px;
-    height: 100%;
-    background-color: #cc0000;
-}
-
-.alert img {
-    height: 60%;
-    margin-left: 10px;
-    border-radius: 6px;
-}
-
-.alert .info-alert {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
-    gap: 10px;
-    padding: 10px 15px;
+    font-style: italic;
+    color: #9ca3af;
 }
 
-.info-alert h3 {
-    font-size: 18px;
+.alert-card {
+    border-left: 4px solid #dc2626;
+}
+
+.alert-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.alert-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.alert-title {
+    font-size: 1rem;
     font-weight: 700;
-    color: #cc0000;
+    color: #dc2626;
 }
 
-.info-alert p {
-    font-size: 15px;
-    text-align: justify;
-    color: #333;
-    font-weight: 500;
+.alert-text {
+    font-size: 0.875rem;
 }
 
-.alert-danger {
-    font-weight: bold;
-    color: rgb(128, 0, 0);
-}
-
-
-.section-title {
-    margin-top: 70px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.section-title h2 {
+.alert-text .highlight {
+    color: #dc2626;
     font-weight: 600;
 }
 
-.section-title .bar-style {
-    flex: 1;
-    height: 5px;
-    background-color: brown;
+.graph-card {
+    grid-column: span 3;
 }
 
-/* GRAFICO 1 */
-.graphics {
+.graph-placeholder {
+    height: 200px;
+    border: 2px dashed #d1d5db;
+    border-radius: 12px;
     display: flex;
-    flex-direction: row;
+    align-items: center;
     justify-content: center;
-    padding: 20px;
-    border: 1px solid rgb(184, 184, 184);
-    border-radius: 10px;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
-    height: 300px;
-    gap: 20px;
-}
-
-.graphics .graphic {
-    flex: 1;
-}
-
-.container-graphic {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.graphics .info-graphic {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.info-graphic h3 {
-    font-weight: 500;
-    font-size: 23px;
-}
-
-.graphics .container-buttons {
-    display: flex;
-    flex-direction: column;
-    width: 270px;
-    height: 100%;
-}
-
-.container-buttons h3 {
-    font-weight: 600;
-    padding: 0px 10px;
-    flex: 1;
-}
-
-.container-buttons .select-buttons {
-    background-color: #f4edd3;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    color: #9ca3af;
+    font-style: italic;
     margin-top: 20px;
-    height: 250px;
-    padding: 12px;
-    border-radius: 12px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
-    overflow-y: auto;
 }
 
-.select-buttons button {
-    max-height: 38px;
-    font-weight: 600;
-    border-radius: 8px;
-    background-color: #c2a500;
-    border: 2px solid #a68d00;
-    color: white;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    padding: 10px 0px;
-    font-size: 14px;
-}
-
-.select-buttons button.active {
-    background-color: #eab000;
-    border-color: #b89400;
-}
-
-.select-buttons button:hover {
-    background-color: #eab000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-
-.container-fermenter-detalhada {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    padding: 20px;
-    background-color: #fcfbf4;
-    border: 1px solid #e6e0c9;
-    border-radius: 16px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* FERMENTER INDIVIDUAL */
-
-.container-infos {
-    border: 1px solid #77715c;
-    flex: 1;
-    border-radius: 12px;
-    padding: 20px;
-    margin-top: 45px;
-    display: flex;
-    flex-direction: row;
-    height: 230px;
-}
-
-.img-fermenter {
+.graph-placeholder canvas{
     height: 100%;
-}
-
-.img-fermenter img {
-    height: 100%;
-}
-
-.info-fermenter {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    font-weight: 500;
-}
-
-.fermenter-header h2 {
-    font-size: 22px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 5px;
-}
-
-.company-name,
-.sector {
-    font-size: 16px;
-    color: #666;
-    font-weight: 600;
-}
-
-.sensor-info p,
-.status-info p {
-    font-size: 15px;
-    color: #444;
-    font-weight: 500;
-}
-
-.status-info p {
-    font-weight: 600;
-}
-
-.status-indicator {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    border-radius: 8px;
-    font-size: 15px;
-}
-
-.status-indicator .icon {
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.status-indicator.ideal {
-    background-color: #e7f6ec;
-    border: 1px solid #b6e2c6;
-    color: #2e8b57;
-}
-
-.status-indicator.atencao {
-    background-color: #fff8e6;
-    border: 1px solid #f5d98b;
-    color: #b38b00;
-}
-
-.status-indicator.critico {
-    background-color: #fce9e9;
-    border: 1px solid #f5b8b8;
-    color: #cc0000;
-}
-
-.mega-container-fermentadora {
-    border: 1px solid #cdcdcd;
-    border-radius: 16px;
-    padding: 25px;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    margin: 30px 0;
-}
-
-.bloco-infos-e-status {
-    display: flex;
-    justify-content: space-between;
-    gap: 30px;
-}
-
-.bloco-infos-e-status .info-fermenter {
-    flex: 1;
-}
-
-.bloco-infos-e-status .container-buttons {
-    width: 350px;
 }

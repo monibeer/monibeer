@@ -272,6 +272,7 @@ SELECT * FROM historico_fermentadora;
 SELECT * FROM captura;
 SELECT * FROM alerta;
 
+
 SELECT idCodigo_ativacao, codigo, fkEmpresa, status FROM codigo_ativacao WHERE codigo = 12345678;
 UPDATE codigo_ativacao SET status = 1 WHERE idCodigo_ativacao = 1;
 
@@ -307,6 +308,7 @@ UPDATE codigo_ativacao SET status = 1 WHERE idCodigo_ativacao = 1;
 
 
 SELECT 
+	f.idFermentadora,
     a.nivel AS nivel_alerta,
     f.nome AS fermentadora,
     e.estiloCerveja AS tipo_fermentacao,

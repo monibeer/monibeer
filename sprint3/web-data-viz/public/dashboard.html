@@ -54,14 +54,16 @@
         <div class="container-dashboard">
             <div class="header">
                 <div class="container-searchBarGroup">
-                    <i class="fa-solid fa-bars"></i>
+                    <i class="fa-solid fa-arrow-left" style="color: #000000; cursor: pointer;"
+                        onclick="window.history.back()"></i>
                     <h3>Dashboard</h3>
                 </div>
                 <div class="container-actions">
                     <i class="fa-solid fa-bell"></i>
                     <span>|</span>
                     <div class="container-mini-profile">
-                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Avatar" />
+                        <img src="https://media.istockphoto.com/id/1091291084/pt/vetorial/neutral-profile-picture.jpg?s=612x612&w=0&k=20&c=D5UkG2zMnMuM6XwHQjhY61tNIk_1kyiEu4XcgcI5lQs="
+                            alt="Avatar" />
                         <p>Rodrigo Silva</p>
                     </div>
                 </div>
@@ -72,8 +74,70 @@
             </div>
 
             <div class="container-info-fermenter">
-                <canvas id="myChartCanvas"></canvas>
-                <div id="avisoCaptura1" style="margin-top: 10px; color: red;"></div>
+                <section class="fermenter-list-panel">
+                    <h2 class="panel-title">Setor A</h2>
+                    <div class="fermenter-list">
+                        <!-- Fermentadora 1 -->
+                        <div class="fermenter-item critical">
+                            <div class="fermenter-label">
+                                <img src="https://cdn-icons-png.flaticon.com/512/584/584953.png" alt="Fermentadora"
+                                    class="fermenter-icon" />
+                                <span class="fermenter-name">Fermentadora 1</span>
+                            </div>
+                            <span class="fermenter-temp">-1344 ↓</span>
+                        </div>
+
+                        <!-- Fermentadora 2 -->
+                        <div class="fermenter-item warning">
+                            <div class="fermenter-label">
+                                <img src="https://cdn-icons-png.flaticon.com/512/584/584953.png" alt="Fermentadora"
+                                    class="fermenter-icon" />
+                                <span class="fermenter-name">Fermentadora 2</span>
+                            </div>
+                            <span class="fermenter-temp">Alerta ↓</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Painel de Informações e Alertas -->
+                <section class="info-grid">
+
+                    <!-- Informações da Fermentadora -->
+                    <div class="card info-card">
+                        <div class="container-info-card">
+                            <h3 class="card-title">Fermentadora IPA 01</h3>
+                            <p class="card-text">Empresa: Moinho da Cevada</p>
+                            <p class="card-text">Setor: A</p>
+                            <p class="card-text">Sensor: LM35</p>
+                        </div>
+                    </div>
+
+                    <!-- Placeholder -->
+                    <!-- Alerta Crítico -->
+                    <div class="card alert-card">
+                        <div class="alert-header">
+                            <img src="https://cdn-icons-png.flaticon.com/512/564/564619.png" alt="Alerta"
+                                class="alert-icon" />
+                            <h4 class="alert-title">Alerta Crítico</h4>
+                        </div>
+                        <p class="alert-text">
+                            A <strong>fermentadora 4 (IPA)</strong> ultrapassou o limite máximo permitido,
+                            <span class="highlight">temperatura acima de 26ºC</span>.
+                            <strong>Verifique imediatamente.</strong>
+                        </p>
+                    </div>
+
+
+                    <!-- Gráfico -->
+                    <div class="card graph-card">
+                        <h5 class="card-title">Temperatura Atual</h5>
+                        <div class="graph-placeholder">
+                            <canvas id="myChartCanvas" width="200%" height="60%"></canvas>
+                            <div id="avisoCaptura1" style="margin-top: 10px; color: red; position: absolute;"></div>
+                        </div>
+                    </div>
+
+                </section>
             </div>
         </div>
     </section>

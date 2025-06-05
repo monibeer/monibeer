@@ -40,7 +40,8 @@ function pegarDadosHomeDash(idEmpresa, dataAtual) {
 function pegarHistoricoAlertasDash(idEmpresa) {
 
     var instrucaoSql = `
-    SELECT 
+    SELECT
+    	f.idFermentadora,
         a.nivel AS nivel_alerta,
         f.nome AS fermentadora,
         e.estiloCerveja AS tipo_fermentacao,
