@@ -6,13 +6,19 @@ function buscarFermentadorasPorEmpresa(empresaId) {
     SELECT
       f.*,
       s.*,
-      sen.* 
-    FROM fermentadora AS f JOIN setor AS s
-	    ON f.fkSetor = s.idSetor
-      JOIN sensor AS sen
+      sen.*,
+      e.estiloCerveja
+    FROM fermentadora AS f
+	    JOIN setor AS s 
+      ON f.fkSetor = s.idSetor
+	    JOIN sensor AS sen 
       ON f.fkSensor = sen.idSensor
-    WHERE s.fkEmpresa = ${empresaId};
-      `;
+	    JOIN historico_fermentadora AS hf 
+      ON hf.fkFermentadora = f.idFermentadora
+	    JOIN estilo AS e ON e.idEstilo = hf.fkEstilo
+	  WHERE s.fkEmpresa = 1
+	  ORDER BY f.idFermentadora ASC;
+    `;
 
   /*
   add empresa 

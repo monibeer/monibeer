@@ -218,8 +218,8 @@ INSERT INTO alerta (dtHora, nivel, mensagem, fkCaptura) VALUES
 ('2024-04-01 14:24:01', 'Atenção', 'Está 2 graus celsius abaixo do limite mínimo ideal', 4),
 ('2024-12-25 07:21:14', 'Crítico', 'Ultrapassou o limite máximo permitido, temperatura acima de 26°C.', 5);
 
-INSERT INTO alerta (dtHora, nivel, mensagem, fkCaptura) VALUES
-(now(), 'Crítico', 'Atingiu o limite máximo do ideal 22°C ', 124);
+-- INSERT INTO alerta (dtHora, nivel, mensagem, fkCaptura) VALUES
+-- (now(), 'Crítico', 'Atingiu o limite máximo do ideal 22°C ', 124);
 
 INSERT INTO codigo_ativacao (codigo, fkEmpresa) VALUES 
 (12345678, 1),
@@ -385,9 +385,7 @@ INSERT INTO captura (temperatura, fkSensor) VALUES
 
 
 INSERT INTO historico_fermentadora (idHistorico, fkFermentadora, fkEstilo, dataInicio, dataFim)
-VALUES (default, 1, 1, '2025-06-01 08:00:00', NULL);
-
-DROP VIEW vw_captura_estilo;
+VALUES (default, 1, 1, '2025-06-05 08:00:00', NULL);
 
 CREATE VIEW vw_captura_estilo AS
 SELECT 
@@ -405,7 +403,6 @@ JOIN setor st ON f.fkSetor = st.idSetor
 JOIN historico_fermentadora hf ON hf.fkFermentadora = f.idFermentadora AND hf.dataFim IS NULL
 JOIN estilo e ON e.idEstilo = hf.fkEstilo;
 
-DROP VIEW vw_ultimos_30_por_sensor;
 
 CREATE VIEW vw_ultimos_30_por_sensor AS
 SELECT idCaptura, fkSensor, dtHora, temperatura, nomeCerveja, limiteTempMin, limiteTempMax, fkEmpresa
@@ -443,4 +440,19 @@ SELECT
     ) THEN 1
     ELSE 0
   END AS status;
-
+    
+    SELECT
+    f.*,
+    s.*,
+    sen.*,
+    e.estiloCerveja
+FROM fermentadora AS f
+	JOIN setor AS s 
+    ON f.fkSetor = s.idSetor
+	JOIN sensor AS sen 
+    ON f.fkSensor = sen.idSensor
+	JOIN historico_fermentadora AS hf 
+    ON hf.fkFermentadora = f.idFermentadora
+	JOIN estilo AS e ON e.idEstilo = hf.fkEstilo
+	WHERE s.fkEmpresa = 1
+	ORDER BY f.idFermentadora ASC;

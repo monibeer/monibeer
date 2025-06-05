@@ -26,7 +26,6 @@ function iniciarVerificacaoApos1Min30() {
 }
 
 function iniciarRepeticao() {
-    // Repete buscarDadosEVerificar a cada 1.5 minutos
     setInterval(buscarDadosEVerificar, 1.5 * 60 * 1000);
 }
 
@@ -65,6 +64,13 @@ function verificarAlerta(dados) {
         sensores[sensorId].push(dado);
     }
 
+    var idFermen;
+    JSON.parse(sessionStorage.FERMENTADORAS).forEach(element => {
+        if (element.fkSensor == sensorId) {
+            idFermen = element.idFermentadora;
+        }
+    });
+
     const listaSensores = Object.keys(sensores);
 
     for (let i = 0; i < listaSensores.length; i++) {
@@ -72,107 +78,129 @@ function verificarAlerta(dados) {
         var registros = sensores[sensorId];
         var total = registros.length;
 
-        // Inicializa os contadores
-        let maxCritico = 0;
-        let minCritico = 0;
-        let maxAtencao = 0;
-        let minAtencao = 0;
-        let maxCuidado = 0;
-        let minCuidado = 0;
+        let alertas = {
+            maxCritico: { contador: 0, idCapturaTemp: 0, temp: 0 },
+            minCritico: { contador: 0, idCapturaTemp: 0, temp: 0 },
+            maxAtencao: { contador: 0, idCapturaTemp: 0, temp: 0 },
+            minAtencao: { contador: 0, idCapturaTemp: 0, temp: 0 },
+            maxCuidado: { contador: 0, idCapturaTemp: 0, temp: 0 },
+            minCuidado: { contador: 0, idCapturaTemp: 0, temp: 0 }
+        };
 
         for (let j = 0; j < registros.length; j++) {
             var r = registros[j];
-            var idCapturaTemp = registros[0].idCaptura
-            var temp = r.temperatura;
-            var min = r.limiteTempMin;
-            var max = r.limiteTempMax;
+            var temperatura = r.temperatura;
+            var limiteMin = r.limiteTempMin;
+            var limiteMax = r.limiteTempMax;
+            var idCapturaTemp = r.idCapturaTemp;
 
-            if (temp < min || temp > max) {
-                if (temp <= min - 5) {
-                    minCritico++;
-                } else if (temp >= max + 5) {
-                    maxCritico++;
-                } else if (temp <= min - 3) {
-                    minAtencao++;
-                } else if (temp >= max + 3) {
-                    maxAtencao++;
-                } else if (temp <= min - 1) {
-                    minCuidado++;
-                } else if (temp >= max + 1) {
-                    maxCuidado++;
+            if (temperatura < limiteMin || temperatura > limiteMax) {
+                if (temperatura <= limiteMin - 5) {
+                    alertas.minCritico.contador++;
+                    alertas.minCritico.temp = temperatura;
+                    if (!alertas.minCritico.idCapturaTemp) {
+                        alertas.minCritico.idCapturaTemp = idCapturaTemp;
+                    }
+                } else if (temperatura >= limiteMax + 5) {
+                    alertas.maxCritico.contador++;
+                    alertas.maxCritico.temp = temperatura;
+                    if (!alertas.maxCritico.idCapturaTemp) {
+                        alertas.maxCritico.idCapturaTemp = idCapturaTemp;
+                    }
+                } else if (temperatura <= limiteMin - 3) {
+                    alertas.minAtencao.contador++;
+                    alertas.minAtencao.temp = temperatura;
+                    if (!alertas.minAtencao.idCapturaTemp) {
+                        alertas.minAtencao.idCapturaTemp = idCapturaTemp;
+                    }
+                } else if (temperatura >= limiteMax + 3) {
+                    alertas.maxAtencao.contador++;
+                    alertas.maxAtencao.temp = temperatura;
+                    if (!alertas.maxAtencao.idCapturaTemp) {
+                        alertas.maxAtencao.idCapturaTemp = idCapturaTemp;
+                    }
+                } else if (temperatura <= limiteMin - 1) {
+                    alertas.minCuidado.contador++;
+                    alertas.minCuidado.temp = temperatura;
+                    if (!alertas.minCuidado.idCapturaTemp) {
+                        alertas.minCuidado.idCapturaTemp = idCapturaTemp;
+                    }
+                } else if (temperatura >= limiteMax + 1) {
+                    alertas.maxCuidado.contador++;
+                    alertas.maxCuidado.temp = temperatura;
+                    if (!alertas.maxCuidado.idCapturaTemp) {
+                        alertas.maxCuidado.idCapturaTemp = idCapturaTemp;
+                    }
                 }
             }
         }
 
-        let totalFora = maxCritico + minCritico + maxAtencao + minAtencao + maxCuidado + minCuidado;
+        let totalFora = alertas.maxCritico.contador + alertas.minCritico.contador + alertas.maxAtencao.contador + alertas.minAtencao.contador + alertas.maxCuidado.contador + alertas.minCuidado.contador;
         let percentual = (totalFora / total) * 100;
 
         if (percentual >= 80) {
-            // Total de alertas por grupo
-            let totalMax = maxCritico + maxAtencao + maxCuidado;
-            let totalMin = minCritico + minAtencao + minCuidado;
-
-            let tipoPrincipal = "";
             let categoria = "";
             let mensagem = '';
+            let idCapturaTempAlerta = null;
 
-            if (totalMax > totalMin) {
-                if (maxCritico >= maxAtencao && maxCritico >= maxCuidado) {
-                    categoria = "Crítico";
-                    mensagem = 'Ultrapassou o limite máximo permitido, temperatura 5°C graus acima do ideal';
-                } else if (maxAtencao >= maxCritico && maxAtencao >= maxCuidado) {
-                    categoria = "Atenção";
-                    mensagem = 'Atenção! Temperatura 3°C graus acima do ideal.';
-                } else {
-                    categoria = "Cuidado";
-                    mensagem = 'Cuidado! Temperatura 1°C grau levemente acima do ideal.';
-                }
-            } else if (totalMin > totalMax) {
-                if (minCritico >= minAtencao && minCritico >= minCuidado) {
-                    categoria = "Crítico";
-                    mensagem = 'Ultrapassou o limite mínimo permitido, temperatura 5°C graus abaixo do ideal.';
-                } else if (minAtencao >= minCritico && minAtencao >= minCuidado) {
-                    categoria = "Atenção";
-                    mensagem = 'Atenção! Temperatura 3°C graus bem abaixo do ideal.';
-                } else {
-                    categoria = "Cuidado";
-                    mensagem = 'Cuidado! Temperatura 1°C grau levemente abaixo do ideal.';
-                }
+            if (alertas.maxCritico.contador > alertas.minCritico.contador && alertas.maxCritico.contador > alertas.maxAtencao.contador && alertas.maxCritico.contador > alertas.maxCuidado.contador) {
+                categoria = "Crítico";
+                mensagem = `Urgente! Temperatura da fermentadora ${idFermen}(${alertas.maxCritico.temp}°C) está ${(alertas.maxCritico.temp - limiteMax).toFixed(1)}°C acima do limite ideal de ${limiteMax}°C`;
+                idCapturaTempAlerta = alertas.maxCritico.idCapturaTemp;
+            } else if (alertas.minCritico.contador > alertas.maxCritico.contador && alertas.minCritico.contador > alertas.minAtencao.contador && alertas.minCritico.contador > alertas.minCuidado.contador) {
+                categoria = "Crítico";
+                mensagem = `Urgente! Temperatura da fermentadora ${idFermen}(${alertas.minCritico.temp}°C) está ${(limiteMin - alertas.minCritico.temp).toFixed(1)}°C abaixo do limite ideal de ${limiteMin}°C`;
+                idCapturaTempAlerta = alertas.minCritico.idCapturaTemp;
+            } else if (alertas.maxAtencao.contador > alertas.minAtencao.contador && alertas.maxAtencao.contador > alertas.maxCuidado.contador) {
+                categoria = "Atenção";
+                mensagem = `Atenção! Temperatura da fermentadora ${idFermen}(${alertas.maxAtencao.temp}°C) está ${(alertas.maxAtencao.temp - limiteMax).toFixed(1)}°C acima do limite ideal de ${limiteMax}°C`;
+                idCapturaTempAlerta = alertas.maxAtencao.idCapturaTemp;
+            } else if (alertas.minAtencao.contador > alertas.maxAtencao.contador && alertas.minAtencao.contador > alertas.minCuidado.contador) {
+                categoria = "Atenção";
+                mensagem = `Atenção! Temperatura da fermentadora ${idFermen}(${alertas.minAtencao.temp}°C) está ${(limiteMin - alertas.minAtencao.temp).toFixed(1)}°C abaixo do limite ideal de ${limiteMin}°C`;
+                idCapturaTempAlerta = alertas.minAtencao.idCapturaTemp;
+            } else if (alertas.maxCuidado.contador > alertas.minCuidado.contador) {
+                categoria = "Cuidado";
+                mensagem = `Cuidado! Temperatura da fermentadora ${idFermen}(${alertas.maxCuidado.temp}°C) está ${(alertas.maxCuidado.temp - limiteMax).toFixed(1)}°C acima do limite ideal de ${limiteMax}°C`;
+                idCapturaTempAlerta = alertas.maxCuidado.idCapturaTemp;
+            } else if (alertas.minCuidado.contador > alertas.maxCuidado.contador) {
+                categoria = "Cuidado";
+                mensagem = `Cuidado! Temperatura da fermentadora ${idFermen}(${alertas.minCuidado.temp}°C) está ${(limiteMin - alertas.minCuidado.temp).toFixed(1)}°C abaixo do limite ideal de ${limiteMin}°C`;
+                idCapturaTempAlerta = alertas.minCuidado.idCapturaTemp;
             }
 
-            if (mensagem != '') {
-                // cadastrarAlerta(categoria, mensagem, idCapturaTemp)
-                console.log('to cadastrando viu')
+            if (mensagem !== '' && idCapturaTempAlerta !== null) {
+                cadastrarAlerta(categoria, mensagem, idCapturaTempAlerta);
+                console.log('tem alerta')
             }
-
         }
     }
-}
 
-// Inicia o processo
-iniciarVerificacaoApos1Min30();
 
-function cadastrarAlerta(categoriaAlerta, mensagem, idCaptura) {
-    fetch('/alerta/cadastrarAlerta', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            idCapturaServer: idCaptura,
-            mensagemServer: mensagem,
-            nivelServer: categoriaAlerta
-        }),
-    }).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (resposta) {
-                console.log(resposta)
+    iniciarVerificacaoApos1Min30();
+
+    function cadastrarAlerta(categoriaAlerta, mensagem, idCaptura) {
+        fetch('/alerta/cadastrarAlerta', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idCapturaServer: idCaptura,
+                mensagemServer: mensagem,
+                nivelServer: categoriaAlerta
+            }),
+        }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(resposta)
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
-        } else {
-            console.error('Nenhum dado encontrado ou erro na API');
-        }
-    })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-        });
+    }
 }

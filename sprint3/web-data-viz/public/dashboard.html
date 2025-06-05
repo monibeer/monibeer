@@ -160,6 +160,22 @@
         }
 
         function plotarGrafico(resposta, id) {
+            var maxTemp = 0;
+            var minTemp = 0;
+
+            JSON.parse(sessionStorage.FERMENTADORAS).forEach(fermen => {
+                if (fermen.fkSensor == id) {
+                    if (fermen.estiloCerveja == 'ipa') {
+                        maxTemp = 29;
+                        minTemp = 13;
+                    } else {
+                        maxTemp = 17;
+                        minTemp = 3;
+                    }
+                }
+            });
+
+
             let labels = [];
 
             let dados = {
@@ -174,14 +190,14 @@
                     },
                     {
                         label: 'Temperatura Máx.',
-                        data: new Array(resposta.length).fill(22),
+                        data: new Array(resposta.length).fill(maxTemp - 5),
                         fill: false,
                         borderColor: 'red',
                         tension: 0.1
                     },
                     {
                         label: 'Temperatura Mín.',
-                        data: new Array(resposta.length).fill(18),
+                        data: new Array(resposta.length).fill(minTemp + 5),
                         fill: false,
                         borderColor: 'blue',
                         tension: 0.1
@@ -200,8 +216,8 @@
                 options: {
                     scales: {
                         y: {
-                            min: 13,
-                            max: 29,
+                            min: minTemp,
+                            max: maxTemp,
                             ticks: {
                                 stepSize: 1
                             }
@@ -260,6 +276,36 @@
             obterDadosGrafico(1);
         };
 
+        // function modeloListaFermen(resposta) {
+        //     div_fermentadora.innerHTML += `
+        //         <div class="fermenter-item critical">
+        //             <div class="fermenter-label">
+        //                         <img src="https://cdn-icons-png.flaticon.com/512/584/584953.png" alt="Fermentadora"
+        //                             class="fermenter-icon" />
+        //                         <span class="fermenter-name">Fermentadora 1</span>
+        //                     </div>
+        //             <span class="fermenter-temp">-1344 ↓</span>
+        //         </div>
+        //     `
+
+        // }
+        // function exibirFermentadora() {
+        //     JSON.parse(sessionStorage.FERMENTADORAS).forEach(fermen => {
+        //         fetch(`/alerta/validarStatusFermenAlerta/${id}`, { cache: 'no-store' }).then(response => {
+        //             if (response.ok) {
+        //                 response.json().then(resposta => {
+
+        //                 });
+        //             } else {
+        //                 console.error('Nenhum dado encontrado');
+        //             }
+        //         }).catch(error => {
+        //             console.error('Erro na API:', error);
+        //         });
+        //     })
+        // }
+
+        
 
     </script>
 </body>
