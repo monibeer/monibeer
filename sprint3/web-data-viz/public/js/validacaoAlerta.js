@@ -175,9 +175,38 @@ function verificarAlerta(dados) {
 
             if (mensagem !== '' && idCapturaTempAlerta !== null) {
                 cadastrarAlerta(categoria, mensagem, idCapturaTempAlerta);
-                console.log('tem alerta')
+                mostrarAlerta(categoria, mensagem, 4000)
             }
         }
+    }
+
+    function mostrarAlerta(tipo, mensagem, tempo) {
+        if (tipo == 'Cuidado') {
+            iconTipo = 'fa-circle-info';
+        } else if (tipo == 'Atenção') {
+            iconTipo = 'fa-circle-exclamation'
+        } else if (tipo == 'Crítico') {
+            iconTipo = 'a-triangle-exclamation';
+        }
+
+        list_alert.innerHTML = `
+        <div class="container-alerta ${tipo} active">
+            <div class="img-icon-alerta" aria-hidden="true">
+                <i class="fa-solid ${iconTipo}"></i>
+            </div>
+            <div class="text-alerta">
+                <strong>${mensagem}</strong>
+            </div>
+        </div>
+        `;
+
+
+        list_alert.classList.add('active');
+
+        setTimeout(() => {
+            list_alert.classList.remove('active');
+            list_alert.classList.add('fade-out');
+        }, tempo);
     }
 
     function cadastrarAlerta(categoriaAlerta, mensagem, idCaptura) {
@@ -206,4 +235,4 @@ function verificarAlerta(dados) {
     }
 }
 
-// iniciarVerificacaoApos1Min30();
+iniciarVerificacaoApos1Min30();

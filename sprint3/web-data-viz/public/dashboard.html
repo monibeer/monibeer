@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="./css/assets/main.css" />
     <link rel="stylesheet" href="./css/assetsDashboard/main.css" />
     <link rel="stylesheet" href="./css/dashboard.css" />
+    <link rel="stylesheet" href="./css/alerta.css" />
+    <link rel="icon" href="./assets/Monibeer (1) 1.png" />
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
@@ -130,6 +132,8 @@
             </div>
           </section>
         </div>
+
+        <div class="list-alert" id="list_alert"></div>
       </div>
     </section>
 
@@ -141,6 +145,7 @@
           .then((response) => {
             if (response.ok) {
               response.json().then((resposta) => {
+                console.log(resposta)
                 resposta.reverse();
                 plotarGrafico(resposta, id);
               });
@@ -271,25 +276,35 @@
           });
       }
 
-      document.getElementById("dataAtualizacao").innerText =
-        new Date().toLocaleString();
-
       window.onload = () => {
         obterDadosGrafico(1);
       };
 
-      function modeloListaFermen(resposta) {
-        div_fermentadora.innerHTML += `
-                <div class="fermenter-item">
+      function modeloListaFermen(resposta, numFermen, status) {
+        var classeFermen = "";
+
+        if (resposta.statusFermentadora == 3) {
+          classeFermen = "critico";
+        } else if (resposta.statusFermentadora == 1) {
+          classeFermen = "fora_ideal";
+        } else {
+          classeFermen = "";
+        }
+
+        if (status == "ativo") {
+          div_fermentadora.innerHTML += `
+            <a onclick="obterDadosGrafico(${numFermen});")>
+                <div class="fermenter-item ${classeFermen}">
                     <div class="fermenter-label">
-                                <img src="https://cdn-icons-png.flaticon.com/512/584/584953.png" alt="Fermentadora"
-                                    class="fermenter-icon" />
-                                <span class="fermenter-name">Fermentadora 1</span>
-                            </div>
-                    <span class="fermenter-temp">-1344 ↓</span>
+                        <img src="https://cdn-icons-png.flaticon.com/512/1748/1748107.png" alt="" class="fermenter-icon" />
+                        <span class="fermenter-name">Fermentadora ${numFermen}</span>
+                    </div>
                 </div>
+            </a>
             `;
+        }
       }
+
       function exibirFermentadora() {
         JSON.parse(sessionStorage.FERMENTADORAS).forEach((fermen) => {
           fetch(`/alerta/validarStatusFermenAlerta/${fermen.idFermentadora}`, {
@@ -298,8 +313,11 @@
             .then((response) => {
               if (response.ok) {
                 response.json().then((resposta) => {
-                  console.log(resposta.statusFermentadora);
-                  modeloListaFermen(resposta);
+                  modeloListaFermen(
+                    resposta,
+                    fermen.idFermentadora,
+                    fermen.statusSensor
+                  );
                 });
               } else {
                 console.error("Nenhum dado encontrado");
