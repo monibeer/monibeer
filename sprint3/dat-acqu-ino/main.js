@@ -18,7 +18,7 @@ const serial = async (
   // conexão com o banco de dados MySQL
   let poolBancoDados = mysql
     .createPool({
-      host: "localhost",
+      host: "10.18.33.19",
       user: "aluno",
       password: "Sptech#2024",
       database: "monibeer",
@@ -68,10 +68,84 @@ const serial = async (
       // insere os dados no banco de dados (se habilitado)
       if (HABILITAR_OPERACAO_INSERIR) {  /*---------------6° BLOCO------------------*/ 
         // este insert irá inserir os dados na tabela "medida"
+
+// Captura 1
+
+
         await poolBancoDados.execute(
           //'INSERT INTO medida (sensor_analogico, sensor_digital) VALUES (?, ?)',
-          "INSERT INTO captura (idfermentadora , temperatura) VALUES (1, ?)",
+          "INSERT INTO captura (fkSensor , temperatura) VALUES (1, ?)",
           [sensorAnalogico]
+        );
+
+//Captura 2
+        await poolBancoDados.execute(
+          //'INSERT INTO medida (sensor_analogico, sensor_digital) VALUES (?, ?)',
+          "INSERT INTO captura (fkSensor , temperatura) VALUES (2, ?)",
+          [sensorAnalogico - 0.8]
+        );
+
+//Captura 3
+
+        await poolBancoDados.execute(
+          //'INSERT INTO medida (sensor_analogico, sensor_digital) VALUES (?, ?)',
+          "INSERT INTO captura (fkSensor , temperatura) VALUES (3, ?)",
+          [sensorAnalogico + 0.2]
+        );
+
+// Captura 4
+      await poolBancoDados.execute(
+          //'INSERT INTO medida (sensor_analogico, sensor_digital) VALUES (?, ?)',
+          "INSERT INTO captura (fkSensor , temperatura) VALUES (4, ?)",
+          [sensorAnalogico + 0.4]
+        );
+
+// Captura 5
+
+        await poolBancoDados.execute(
+          //'INSERT INTO medida (sensor_analogico, sensor_digital) VALUES (?, ?)',
+          "INSERT INTO captura (fkSensor , temperatura) VALUES (5, ?)",
+          [sensorAnalogico - 0.4]
+        );
+
+// Captura 6 
+
+        await poolBancoDados.execute(
+          //'INSERT INTO medida (sensor_analogico, sensor_digital) VALUES (?, ?)',
+          "INSERT INTO captura (fkSensor , temperatura) VALUES (6, ?)",
+          [sensorAnalogico - 0.6]
+        );
+
+// Captura 7
+      
+        await poolBancoDados.execute(
+          //'INSERT INTO medida (sensor_analogico, sensor_digital) VALUES (?, ?)',
+          "INSERT INTO captura (fkSensor , temperatura) VALUES (7, ?)",
+          [sensorAnalogico + 0.9]
+        );
+
+// Captura 8
+
+        await poolBancoDados.execute(
+          //'INSERT INTO medida (sensor_analogico, sensor_digital) VALUES (?, ?)',
+          "INSERT INTO captura (fkSensor , temperatura) VALUES (8, ?)",
+          [sensorAnalogico - 0.85]
+        );
+
+// Captura 9
+
+        await poolBancoDados.execute(
+          //'INSERT INTO medida (sensor_analogico, sensor_digital) VALUES (?, ?)',
+          "INSERT INTO captura (fkSensor , temperatura) VALUES (9, ?)",
+          [sensorAnalogico + 0.63]
+        );
+
+// Captura 10
+
+        await poolBancoDados.execute(
+          //'INSERT INTO medida (sensor_analogico, sensor_digital) VALUES (?, ?)',
+          "INSERT INTO captura (fkSensor , temperatura) VALUES (10, ?)",
+          [sensorAnalogico - 0.15]
         );
         console.log("valores inseridos no banco: ", sensorAnalogico);
       }
