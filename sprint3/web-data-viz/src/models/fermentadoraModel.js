@@ -16,7 +16,7 @@ function buscarFermentadorasPorEmpresa(empresaId) {
 	    JOIN historico_fermentadora AS hf 
       ON hf.fkFermentadora = f.idFermentadora
 	    JOIN estilo AS e ON e.idEstilo = hf.fkEstilo
-	  WHERE s.fkEmpresa = 1
+	  WHERE s.fkEmpresa = ${empresaId}
 	  ORDER BY f.idFermentadora ASC;
     `;
 

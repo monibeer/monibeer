@@ -331,8 +331,6 @@ WHERE st.fkEmpresa = 1
 ORDER BY a.dtHora DESC;
 
 
-DROP VIEW vw_fermentadoras_status_setor_empresa;
-
 CREATE OR REPLACE VIEW vw_fermentadoras_status_setor_empresa AS
 SELECT 
     s.idSetor,
@@ -367,6 +365,9 @@ INSERT INTO captura (temperatura, fkSensor) VALUES
 (20.00, 1),
 (20.30, 1),
 (20.60, 1),
+
+
+
 (21.00, 1),
 (21.20, 1),
 (21.50, 1);

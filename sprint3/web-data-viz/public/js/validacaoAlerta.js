@@ -53,10 +53,12 @@ function buscarDadosEVerificar() {
 
 function verificarAlerta(dados) {
     const sensores = {};
+    var idSensor = 0;
 
     for (let i = 0; i < dados.length; i++) {
         const dado = dados[i];
         const sensorId = dado.fkSensor;
+        idSensor = sensorId
 
         if (!sensores[sensorId]) {
             sensores[sensorId] = [];
@@ -64,9 +66,9 @@ function verificarAlerta(dados) {
         sensores[sensorId].push(dado);
     }
 
-    var idFermen;
+    var idFermen = 0;
     JSON.parse(sessionStorage.FERMENTADORAS).forEach(element => {
-        if (element.fkSensor == sensorId) {
+        if (element.fkSensor == idSensor) {
             idFermen = element.idFermentadora;
         }
     });
@@ -92,7 +94,7 @@ function verificarAlerta(dados) {
             var temperatura = r.temperatura;
             var limiteMin = r.limiteTempMin;
             var limiteMax = r.limiteTempMax;
-            var idCapturaTemp = r.idCapturaTemp;
+            var idCapturaTemp = r.idCaptura;
 
             if (temperatura < limiteMin || temperatura > limiteMax) {
                 if (temperatura <= limiteMin - 5) {
@@ -135,6 +137,8 @@ function verificarAlerta(dados) {
             }
         }
 
+        console.log(alertas)
+
         let totalFora = alertas.maxCritico.contador + alertas.minCritico.contador + alertas.maxAtencao.contador + alertas.minAtencao.contador + alertas.maxCuidado.contador + alertas.minCuidado.contador;
         let percentual = (totalFora / total) * 100;
 
@@ -176,9 +180,6 @@ function verificarAlerta(dados) {
         }
     }
 
-
-    iniciarVerificacaoApos1Min30();
-
     function cadastrarAlerta(categoriaAlerta, mensagem, idCaptura) {
         fetch('/alerta/cadastrarAlerta', {
             method: "POST",
@@ -204,3 +205,5 @@ function verificarAlerta(dados) {
             });
     }
 }
+
+iniciarVerificacaoApos1Min30();
