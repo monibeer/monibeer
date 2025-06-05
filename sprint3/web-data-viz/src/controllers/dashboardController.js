@@ -1,4 +1,5 @@
 var dashboardModel = require("../models/dashboardModel");
+var alertaModel = require("../models/alertaModel");
 // var fermentadoraModel = require("../models/fermentadoraModel");
 
 function pegarDashboardHome(req, res) {
@@ -68,6 +69,26 @@ function pegarSetorDadosDash(req, res) {
         );
 }
 
+function cadastrarAlertaTemp(req, res) {
+    var idCaptura = req.body.idCapturaServer;
+    var mensagem = req.body.mensagemServer;
+    var nivelAlerta = req.body.nivelServer;
+
+    alertaModel.inserirAlertaTemp(idCaptura, mensagem, nivelAlerta)
+        .then(
+            function (resultado) {
+                console.log(`Resultados: ${JSON.stringify(resultado)}`);
+                res.status(201).json({ mensagem: "Alerta cadastrado com sucesso!", resultado });
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao cadastrar alerta! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 
 // //CADASTRO
 // function cadastrar(req, res) {
@@ -110,6 +131,7 @@ function pegarSetorDadosDash(req, res) {
 module.exports = {
     pegarDashboardHome,
     pegarHistoricoAlerta,
-    pegarSetorDadosDash
+    pegarSetorDadosDash,
+    cadastrarAlertaTemp
     // cadastrar
 }
