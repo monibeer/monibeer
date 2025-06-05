@@ -1,0 +1,7 @@
+.container-alerta{
+    padding: 80px;
+    width: 200px;
+    position: absolute;
+    border-radius: 3px;
+    background-color: rgb(189, 38, 38);
+}

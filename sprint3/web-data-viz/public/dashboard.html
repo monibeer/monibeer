@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard - Home</title>
@@ -13,252 +12,274 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <script src="./js/validacaoAlerta.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <section class="dashboard">
-        <div class="sidebar">
+      <div class="sidebar">
+        <a href="./index-dashboard.html">
+          <div class="logotipo">
+            <img src="./assets/monibeer-logo.png" alt="Logo Monibeer" />
+          </div>
+        </a>
+
+        <div class="buttons-navegation">
+          <div class="container-item">
             <a href="./index-dashboard.html">
-                <div class="logotipo">
-                    <img src="./assets/monibeer-logo.png" alt="Logo Monibeer" />
-                </div>
+              <div class="navigation-item">
+                <i class="fa-solid fa-house"></i>
+                <p>Home</p>
+              </div>
             </a>
+            <a href="./setores.html">
+              <div class="navigation-item">
+                <i class="fa-solid fa-building"></i>
+                <p>Meus Setores</p>
+              </div>
+            </a>
+          </div>
 
-            <div class="buttons-navegation">
-                <div class="container-item">
-                    <a href="./index-dashboard.html">
-                        <div class="navigation-item">
-                            <i class="fa-solid fa-house"></i>
-                            <p>Home</p>
-                        </div>
-                    </a>
-                    <a href="./setores.html">
-                        <div class="navigation-item">
-                            <i class="fa-solid fa-building"></i>
-                            <p>Meus Setores</p>
-                        </div>
-                    </a>
-                </div>
-
-                <a href="./login.html">
-                    <div class="logout-item navigation-item">
-                        <i class="fa-solid fa-right-from-bracket"></i>
-                        <p>Logout</p>
-                    </div>
-                </a>
+          <a href="./login.html">
+            <div class="logout-item navigation-item">
+              <i class="fa-solid fa-right-from-bracket"></i>
+              <p>Logout</p>
             </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="container-dashboard">
+        <div class="header">
+          <div class="container-searchBarGroup">
+            <i
+              class="fa-solid fa-arrow-left"
+              style="color: #000000; cursor: pointer"
+              onclick="window.history.back()"
+            ></i>
+            <h3>Dashboard</h3>
+          </div>
+          <div class="container-actions">
+            <i class="fa-solid fa-bell"></i>
+            <span>|</span>
+            <div class="container-mini-profile">
+              <img
+                src="https://media.istockphoto.com/id/1091291084/pt/vetorial/neutral-profile-picture.jpg?s=612x612&w=0&k=20&c=D5UkG2zMnMuM6XwHQjhY61tNIk_1kyiEu4XcgcI5lQs="
+                alt="Avatar"
+              />
+              <p>Rodrigo Silva</p>
+            </div>
+          </div>
         </div>
 
-        <div class="container-dashboard">
-            <div class="header">
-                <div class="container-searchBarGroup">
-                    <i class="fa-solid fa-arrow-left" style="color: #000000; cursor: pointer;"
-                        onclick="window.history.back()"></i>
-                    <h3>Dashboard</h3>
-                </div>
-                <div class="container-actions">
-                    <i class="fa-solid fa-bell"></i>
-                    <span>|</span>
-                    <div class="container-mini-profile">
-                        <img src="https://media.istockphoto.com/id/1091291084/pt/vetorial/neutral-profile-picture.jpg?s=612x612&w=0&k=20&c=D5UkG2zMnMuM6XwHQjhY61tNIk_1kyiEu4XcgcI5lQs="
-                            alt="Avatar" />
-                        <p>Rodrigo Silva</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container-data-filters">
-                <p class="datatime-update">Última Atualização - <span id="dataAtualizacao"></span></p>
-            </div>
-
-            <div class="container-info-fermenter">
-                <section class="fermenter-list-panel">
-                    <h2 class="panel-title">Setor A</h2>
-                    <div class="fermenter-list" id="div_fermentadora"></div>
-                </section>
-
-                <section class="info-grid">
-
-                    <div class="card info-card">
-                        <div class="container-info-card">
-                            <div class="image"><img src="assets/setor A.png" alt=""></div>
-                            <div class="info">
-                                <h3 class="card-title">Fermentadora IPA 01</h3>
-                                <p class="card-text">Empresa: Moinho da Cevada</p>
-                                <p class="card-text">Setor: A</p>
-                                <p class="card-text">Sensor: LM35</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card alert-card">
-                        <div class="alert-header">
-                            <img src="https://cdn-icons-png.flaticon.com/512/564/564619.png" alt="Alerta"
-                                class="alert-icon" />
-                            <h4 class="alert-title">Alerta Crítico</h4>
-                        </div>
-                        <p class="alert-text">
-                            A <strong>fermentadora 4 (IPA)</strong> ultrapassou o limite máximo permitido,
-                            <span class="highlight">temperatura acima de 26ºC</span>.
-                            <strong>Verifique imediatamente.</strong>
-                        </p>
-                    </div>
-
-
-                    <div class="card graph-card">
-                        <h5 class="card-title">Temperatura Atual</h5>
-                        <div class="graph-placeholder">
-                            <canvas id="myChartCanvas" width="200%" height="60%"></canvas>
-                            <div id="avisoCaptura1" style="margin-top: 10px; color: red; position: absolute;"></div>
-                        </div>
-                    </div>
-
-                </section>
-            </div>
+        <div class="container-data-filters">
+          <p class="datatime-update">
+            Última Atualização - <span id="dataAtualizacao"></span>
+          </p>
         </div>
+
+        <div class="container-info-fermenter">
+          <section class="fermenter-list-panel">
+            <h2 class="panel-title">Setor A</h2>
+            <div class="fermenter-list" id="div_fermentadora"></div>
+          </section>
+
+          <section class="info-grid">
+            <div class="card info-card">
+              <div class="container-info-card">
+                <div class="image"><img src="assets/setor A.png" alt="" /></div>
+                <div class="info">
+                  <h3 class="card-title">Fermentadora IPA 01</h3>
+                  <p class="card-text">Empresa: Moinho da Cevada</p>
+                  <p class="card-text">Setor: A</p>
+                  <p class="card-text">Sensor: LM35</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card alert-card">
+              <div class="alert-header">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/564/564619.png"
+                  alt="Alerta"
+                  class="alert-icon"
+                />
+                <h4 class="alert-title">Alerta Crítico</h4>
+              </div>
+              <p class="alert-text">
+                A <strong>fermentadora 4 (IPA)</strong> ultrapassou o limite
+                máximo permitido,
+                <span class="highlight">temperatura acima de 26ºC</span>.
+                <strong>Verifique imediatamente.</strong>
+              </p>
+            </div>
+
+            <div class="card graph-card">
+              <h5 class="card-title">Temperatura Atual</h5>
+              <div class="graph-placeholder">
+                <canvas id="myChartCanvas" width="200%" height="60%"></canvas>
+                <div
+                  id="avisoCaptura1"
+                  style="margin-top: 10px; color: red; position: absolute"
+                ></div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
     </section>
 
     <script>
+      let proximaAtualizacao;
 
-        let proximaAtualizacao;
+      function obterDadosGrafico(id) {
+        fetch(`/medidas/ultimas/${id}`, { cache: "no-store" })
+          .then((response) => {
+            if (response.ok) {
+              response.json().then((resposta) => {
+                resposta.reverse();
+                plotarGrafico(resposta, id);
+              });
+            } else {
+              console.error("Nenhum dado encontrado");
+            }
+          })
+          .catch((error) => {
+            console.error("Erro na API:", error);
+          });
+      }
 
-        function obterDadosGrafico(id) {
-            fetch(`/medidas/ultimas/${id}`, { cache: 'no-store' }).then(response => {
-                if (response.ok) {
-                    response.json().then(resposta => {
-                        resposta.reverse();
-                        plotarGrafico(resposta, id);
-                    });
-                } else {
-                    console.error('Nenhum dado encontrado');
-                }
-            }).catch(error => {
-                console.error('Erro na API:', error);
-            });
-        }
+      function plotarGrafico(resposta, id) {
+        var maxTemp = 0;
+        var minTemp = 0;
 
-        function plotarGrafico(resposta, id) {
-            var maxTemp = 0;
-            var minTemp = 0;
+        JSON.parse(sessionStorage.FERMENTADORAS).forEach((fermen) => {
+          if (fermen.fkSensor == id) {
+            if (fermen.estiloCerveja == "ipa") {
+              maxTemp = 29;
+              minTemp = 13;
+            } else {
+              maxTemp = 17;
+              minTemp = 3;
+            }
+          }
+        });
 
-            JSON.parse(sessionStorage.FERMENTADORAS).forEach(fermen => {
-                if (fermen.fkSensor == id) {
-                    if (fermen.estiloCerveja == 'ipa') {
-                        maxTemp = 29;
-                        minTemp = 13;
-                    } else {
-                        maxTemp = 17;
-                        minTemp = 3;
-                    }
-                }
-            });
+        let labels = [];
 
-
-            let labels = [];
-
-            let dados = {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Temperatura',
-                        data: [],
-                        fill: false,
-                        borderColor: 'rgb(255, 165, 0)',
-                        tension: 0.1
-                    },
-                    {
-                        label: 'Temperatura Máx.',
-                        data: new Array(resposta.length).fill(maxTemp - 5),
-                        fill: false,
-                        borderColor: 'red',
-                        tension: 0.1
-                    },
-                    {
-                        label: 'Temperatura Mín.',
-                        data: new Array(resposta.length).fill(minTemp + 5),
-                        fill: false,
-                        borderColor: 'blue',
-                        tension: 0.1
-                    }
-                ],
-            };
-
-            resposta.forEach(reg => {
-                labels.push(reg.momento_grafico);
-                dados.datasets[0].data.push(reg.temperatura);
-            });
-
-            const config = {
-                type: 'line',
-                data: dados,
-                options: {
-                    scales: {
-                        y: {
-                            min: minTemp,
-                            max: maxTemp,
-                            ticks: {
-                                stepSize: 1
-                            }
-                        }
-                    }
-                }
-
-            };
-
-            let myChart = new Chart(
-                document.getElementById(`myChartCanvas`),
-                config
-            );
-
-            proximaAtualizacao = setTimeout(() => atualizarGrafico(id, dados, myChart), 5000);
-        }
-
-        function atualizarGrafico(id, dados, myChart) {
-            fetch(`/medidas/tempo-real/${id}`, { cache: 'no-store' }).then(response => {
-                if (response.ok) {
-                    response.json().then(novoRegistro => {
-                        const aviso = document.getElementById(`avisoCaptura${id}`);
-                        aviso.innerHTML = "";
-
-                        const novo = novoRegistro[0];
-                        if (novo.momento_grafico === dados.labels[dados.labels.length - 1]) {
-                            aviso.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Sem dados novos.`;
-                        } else {
-                            dados.labels.shift();
-                            dados.labels.push(novo.momento_grafico);
-
-                            dados.datasets[0].data.shift();
-                            dados.datasets[0].data.push(novo.temperatura);
-
-                            dados.datasets[1].data.shift();
-                            dados.datasets[1].data.push(maxTemp - 5);
-
-                            dados.datasets[2].data.shift();
-                            dados.datasets[2].data.push(minTemp + 5);
-
-                            myChart.update();
-                        }
-
-                        proximaAtualizacao = setTimeout(() => atualizarGrafico(id, dados, myChart), 5000);
-                    });
-                }
-            }).catch(error => {
-                console.error("Erro na atualização:", error);
-            });
-        }
-
-        document.getElementById("dataAtualizacao").innerText = new Date().toLocaleString();
-
-
-        window.onload = () => {
-            obterDadosGrafico(1);
+        let dados = {
+          labels: labels,
+          datasets: [
+            {
+              label: "Temperatura",
+              data: [],
+              fill: false,
+              borderColor: "rgb(255, 165, 0)",
+              tension: 0.1,
+            },
+            {
+              label: "Temperatura Máx.",
+              data: new Array(resposta.length).fill(maxTemp - 5),
+              fill: false,
+              borderColor: "red",
+              tension: 0.1,
+            },
+            {
+              label: "Temperatura Mín.",
+              data: new Array(resposta.length).fill(minTemp + 5),
+              fill: false,
+              borderColor: "blue",
+              tension: 0.1,
+            },
+          ],
         };
 
+        resposta.forEach((reg) => {
+          labels.push(reg.momento_grafico);
+          dados.datasets[0].data.push(reg.temperatura);
+        });
 
-        function modeloListaFermen(resposta) {
-            div_fermentadora.innerHTML += `
+        const config = {
+          type: "line",
+          data: dados,
+          options: {
+            scales: {
+              y: {
+                min: minTemp,
+                max: maxTemp,
+                ticks: {
+                  stepSize: 1,
+                },
+              },
+            },
+          },
+        };
+
+        let myChart = new Chart(
+          document.getElementById(`myChartCanvas`),
+          config
+        );
+
+        proximaAtualizacao = setTimeout(
+          () => atualizarGrafico(id, dados, myChart, maxTemp, minTemp),
+          5000
+        );
+      }
+
+      function atualizarGrafico(id, dados, myChart, max, min) {
+        fetch(`/medidas/tempo-real/${id}`, { cache: "no-store" })
+          .then((response) => {
+            if (response.ok) {
+              response.json().then((novoRegistro) => {
+                const aviso = document.getElementById(`avisoCaptura${id}`);
+                aviso.innerHTML = "";
+
+                const novo = novoRegistro[0];
+                if (
+                  novo.momento_grafico === dados.labels[dados.labels.length - 1]
+                ) {
+                  aviso.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Sem dados novos.`;
+                } else {
+                  dados.labels.shift();
+                  dados.labels.push(novo.momento_grafico);
+
+                  dados.datasets[0].data.shift();
+                  dados.datasets[0].data.push(novo.temperatura);
+
+                  dados.datasets[1].data.shift();
+                  dados.datasets[1].data.push(max - 5);
+
+                  dados.datasets[2].data.shift();
+                  dados.datasets[2].data.push(min + 5);
+
+                  myChart.update();
+                }
+
+                proximaAtualizacao = setTimeout(
+                  () => atualizarGrafico(id, dados, myChart, max, min),
+                  5000
+                );
+              });
+            }
+          })
+          .catch((error) => {
+            console.error("Erro na atualização:", error);
+          });
+      }
+
+      document.getElementById("dataAtualizacao").innerText =
+        new Date().toLocaleString();
+
+      window.onload = () => {
+        obterDadosGrafico(1);
+      };
+
+      function modeloListaFermen(resposta) {
+        div_fermentadora.innerHTML += `
                 <div class="fermenter-item">
                     <div class="fermenter-label">
                                 <img src="https://cdn-icons-png.flaticon.com/512/584/584953.png" alt="Fermentadora"
@@ -267,28 +288,30 @@
                             </div>
                     <span class="fermenter-temp">-1344 ↓</span>
                 </div>
-            `
-
-        }
-        function exibirFermentadora() {
-            JSON.parse(sessionStorage.FERMENTADORAS).forEach(fermen => {
-                fetch(`/alerta/validarStatusFermenAlerta/${fermen.idFermentadora}`, { cache: 'no-store' }).then(response => {
-                    if (response.ok) {
-                        response.json().then(resposta => {
-                            console.log(resposta.statusFermentadora)
-                            modeloListaFermen(resposta)
-                        });
-                    } else {
-                        console.error('Nenhum dado encontrado');
-                    }
-                }).catch(error => {
-                    console.error('Erro na API:', error);
+            `;
+      }
+      function exibirFermentadora() {
+        JSON.parse(sessionStorage.FERMENTADORAS).forEach((fermen) => {
+          fetch(`/alerta/validarStatusFermenAlerta/${fermen.idFermentadora}`, {
+            cache: "no-store",
+          })
+            .then((response) => {
+              if (response.ok) {
+                response.json().then((resposta) => {
+                  console.log(resposta.statusFermentadora);
+                  modeloListaFermen(resposta);
                 });
+              } else {
+                console.error("Nenhum dado encontrado");
+              }
             })
-        }
+            .catch((error) => {
+              console.error("Erro na API:", error);
+            });
+        });
+      }
 
-        exibirFermentadora()
+      exibirFermentadora();
     </script>
-</body>
-
+  </body>
 </html>
