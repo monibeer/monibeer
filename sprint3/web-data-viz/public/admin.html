@@ -4,30 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="./css/assets/main.css">
+    <link rel="stylesheet" href="./css/assetsDashboard/main.css">
+    <link rel="stylesheet" href="./css/indexDashboard.css">
+    <link rel="stylesheet" href="./css/admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <title>Admin</title>
 </head>
 <style>
-    #modal {
-        display: none;
-        position: fixed;
-        z-index: 10;
-        left: 0;
-        top: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.6);
-    }
-
-    #modal-content {
-        background: white;
-        padding: 20px;
-        border-radius: 8px;
-        width: 300px;
-        margin: 10% auto;
-        position: relative;
-    }
-
-
+    
 </style>
 
 <body>
@@ -53,6 +39,12 @@
                             <p>Meus Setores</p>
                         </div>
                     </a>
+                     <a href="./admin.html">
+                        <div class="navigation-item">
+                            <i class="fa-solid fa-building"></i>
+                            <p>funcionario</p>
+                        </div>
+                    </a>
                     <!-- Fe coloca o link para a tela de admin caso admin no session storage-->
                 </div>
 
@@ -66,23 +58,74 @@
         </div>
 
         <div class="container-dashboard">
+            <div class="header">
+                <div class="container-searchBarGroup">
+                    <i class="fa-solid fa-bars"></i>
+
+                    <h3>Funcionarios</h3>
+                    <!-- <div class="container-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search..">
+                </div> -->
+                </div>
+                <div class="container-actions">
+                    <!-- <div class="container-theme-dark-light">
+                    <img src="https://static-00.iconduck.com/assets.00/sun-symbol-emoji-512x512-qjm8vnpc.png" alt="">
+                </div> -->
+                    <i class="fa-solid fa-bell"></i>
+                    <span>|</span>
+                    <div class="container-mini-profile">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="">
+                        <p id="header_usuario">Rodrigo Silva</p>
+                    </div>
+                </div>
+            </div>
+
+
+        
+
+        <div class="container-dashboard">
+            <div class="container-cadastro">
+            <strong id="texto-cadastro-funcionario">cadastro funcionario</strong>
             <h1>Lista de Funcionários</h1>
+            <div class="row-buttons">
+                <button id="button-adm" onclick="cadastrar()">Administrador</button>
+                <button id="button-funcionario" onclick="listar()">Funcionarios</button>
+                <div class="input-icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input id="input_nome_funcionario" type="text" placeholder="Buscar funcionário" />
+                </div>
+            </div>
+
+            
             <div id="usuarios"></div>
         
             <div id="modal">
                 <div id="modal-content">
                     <h3>Atualizar Funcionário</h3>
-                    <input type="text" id="inputNome" placeholder="Nome">
-                    <input type="email" id="inputEmail" placeholder="Email">
-                    <input type="password" id="inputSenha" placeholder="Senha">
-                    <input type="text" id="inputTipo" placeholder="Tipo de Usuário (administrador/funcionario)">
-                    <button onclick="confirmarAtualizacao()">Salvar</button>
-                    <button onclick="fecharModal()">Cancelar</button>
+                    <div class="atualizar-dados">
+                        <strong>Nome:</strong>
+                        <input type="text" id="inputNome" placeholder="Nome">
+                        <strong>Email:</strong>
+                        <input type="email" id="inputEmail" placeholder="Email">
+                        <strong>Senha:</strong>
+                        <input type="password" id="inputSenha" placeholder="Senha">
+                        <strong>Tipo funcionario:</strong>
+                        <input type="text" id="inputTipo" placeholder="Tipo de Usuário (administrador/funcionario)">
+                    </div>
+                    <div class="button-atualizar">
+                        <button id="cancelar" onclick="fecharModal()">Cancelar</button>
+                    <button id="salvar" onclick="confirmarAtualizacao()">Salvar</button>
+                    </div>
+                    
                 </div>
             </div>
         </div>
     </section>
     </div>
+</div>
+
+   
 </body>
 
 </html>
@@ -109,18 +152,34 @@
                     funcionarios.forEach(user => {
                         const div = document.createElement("div");
                         div.innerHTML = `
-                <p><strong>Nome:</strong> ${user.nome}</p>
-                <p><strong>Email:</strong> ${user.email}</p>
-                <p><strong>Tipo:</strong> ${user.tipoUsuario}</p>
-                <button onclick="deletarUsuario(${user.idFuncionario})">Deletar</button>
-                <button onclick="abrirModal(${user.idFuncionario}, '${user.nome}', '${user.email}', '${user.tipoUsuario}')">Atualizar</button>
-                <hr>
-              `;
+
+                        <div class="registro">
+                        <table border="1">
+                            <thead>
+                                <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Tipo</th>
+                                <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                <td>${user.nome}</td>
+                                <td> ${user.email}</td>
+                                <td> ${user.tipoUsuario}</td>
+                                <td class="td-buttons" style=" justify-content: flex-end; gap: 15px;"><button id="button-deletar" onclick="deletarUsuario(${user.idFuncionario})">Deletar</button>
+                                    <button id="button-atualizar" onclick="abrirModal(${user.idFuncionario}, '${user.nome}', '${user.email}', '${user.tipoUsuario}')">Atualizar</button>
+                                </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>`;
                         container.appendChild(div);
                     });
                 });
         });
-
+    
     function abrirModal(id, nome, email, tipo) {
         funcionarioAtualId = id;
         document.getElementById("inputNome").value = nome;
@@ -170,9 +229,14 @@
     }
 
     function deletarUsuario(id) {
+        const confirmar = confirm("Tem certeza que deseja deletar este usuário?");
+
+        if(!confirmar) return;
+
         fetch(`/usuarios/deletar/${id}`, { method: "DELETE" })
             .then(res => {
                 if (res.ok) {
+                    
                     alert("Usuário deletado.");
                     location.reload();
                 } else {

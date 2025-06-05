@@ -1,0 +1,181 @@
+.container-cadastro{
+    display: flex;
+    flex-direction: column;
+padding: 20px;
+
+}
+
+#texto-cadastro-funcionario{
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: rgb(45, 45, 45);
+    margin-bottom: 30px;
+}
+h1{
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+button{
+    border: none;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: 400;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.input-icon #input_nome_funcionario{
+    width: 300px;
+    height: 40px;
+    border-radius: 5px;
+    padding-left: 20px;
+    margin-left: 15px;
+    background-color: #eaeaea;
+    border: none;
+    font-weight: 400;
+    color: rgba(20, 20, 20, 0.715);
+  
+}
+
+#button-adm{
+    background-color: rgb(27, 154, 27);
+    color: white;
+}
+
+.registro-lista{
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+}
+
+
+
+
+
+
+
+#modal {
+        display: none;
+        position: fixed;
+        z-index: 10;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.551);
+}
+
+    #modal-content {
+        background: rgb(255, 255, 255);
+        padding-top: 30px;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-bottom: 30px;
+        border-radius: 8px;
+        width: 320px;
+        margin: 6% auto;
+        position: relative;
+    }
+
+    #modal-content h3{
+        text-align: center;
+        margin-bottom: 20px;
+        font-weight:700;
+        font-size: 1.5rem;
+    }
+
+    .atualizar-dados{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .atualizar-dados strong{
+        font-weight: 600;
+    }
+
+    .atualizar-dados input{
+        background-color: #fbfbfb;
+        border-top: #ccc solid 1px;
+        border-left: #ccc solid 1px;
+        border-right: #ccc solid 1px;
+        border-bottom: #063d5a 4px solid;
+        font-weight: 400;
+        height: 40px;
+        border-radius: 5px;
+        padding-left: 20px;
+    }
+
+    .button-atualizar{
+        gap: 10px;
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        flex: 1;
+    }
+
+    #salvar{
+        background-color: #2c99c1;
+        color: white;
+        width: 100px;
+    }
+
+    #cancelar{
+        width: 100px;
+        background-color: #d7d7d7;
+    }
+
+  table {
+    border-collapse: collapse;
+    margin-top: 25px;
+    width: 100%;
+    font-family: sans-serif;
+    border-left: 1px solid rgb(227, 227, 227);
+    border-right: 1px solid rgb(227, 227, 227);
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+
+  }
+
+  th, td {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #f0efef;
+    border-left: none;
+    border-right: none;
+    padding: 10px;
+    font-weight: 400;
+    text-align: left;
+  }
+
+  thead {
+    background-color: #3e2507;
+    color: white;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  .row-buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .input-icon{
+    margin-left: auto;
+  }
+
+  #button-deletar{
+    background-color: red;
+    color: #eaeaea;
+    font-weight: 500;
+  }
+
+  #button-atualizar{
+    background-color: rgb(254, 195, 0);
+    color: #eaeaea;
+    font-weight: 500;
+  }
