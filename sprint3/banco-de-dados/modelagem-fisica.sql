@@ -272,6 +272,7 @@ SELECT * FROM historico_fermentadora;
 SELECT * FROM captura;
 SELECT * FROM alerta;
 
+
 SELECT idCodigo_ativacao, codigo, fkEmpresa, status FROM codigo_ativacao WHERE codigo = 12345678;
 UPDATE codigo_ativacao SET status = 1 WHERE idCodigo_ativacao = 1;
 
@@ -307,6 +308,7 @@ UPDATE codigo_ativacao SET status = 1 WHERE idCodigo_ativacao = 1;
 
 
 SELECT 
+	f.idFermentadora,
     a.nivel AS nivel_alerta,
     f.nome AS fermentadora,
     e.estiloCerveja AS tipo_fermentacao,
@@ -383,8 +385,11 @@ INSERT INTO captura (temperatura, fkSensor) VALUES
 INSERT INTO historico_fermentadora (idHistorico, fkFermentadora, fkEstilo, dataInicio, dataFim)
 VALUES (default, 1, 1, '2025-06-01 08:00:00', NULL);
 
+DROP VIEW vw_captura_estilo;
+
 CREATE VIEW vw_captura_estilo AS
 SELECT 
+	c.idCaptura,
     c.fkSensor, 
     c.dtHora, 
     c.temperatura, 
@@ -398,8 +403,10 @@ JOIN setor st ON f.fkSetor = st.idSetor
 JOIN historico_fermentadora hf ON hf.fkFermentadora = f.idFermentadora AND hf.dataFim IS NULL
 JOIN estilo e ON e.idEstilo = hf.fkEstilo;
 
+DROP VIEW vw_ultimos_30_por_sensor;
+
 CREATE VIEW vw_ultimos_30_por_sensor AS
-SELECT fkSensor, dtHora, temperatura, nomeCerveja, limiteTempMin, limiteTempMax, fkEmpresa
+SELECT idCaptura, fkSensor, dtHora, temperatura, nomeCerveja, limiteTempMin, limiteTempMax, fkEmpresa
 FROM (
     SELECT *,
         ROW_NUMBER() OVER (PARTITION BY fkSensor ORDER BY dtHora DESC) AS rn

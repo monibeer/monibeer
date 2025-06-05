@@ -6,32 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./assets/Monibeer (1) 1.png">
     <title>Ativação Código - Monibeer</title>
-    <style>
-        #modalFuncionario {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            width: 300px;
-        }
-    </style>
+    <link rel="stylesheet" href="../public/css/codigo.css">
 </head>
 
 <body>
-    <h1>Ativar seu código</h1>
-    <input type="text" id="inputCodigo" placeholder="Digite seu código" />
-    <button onclick="ativarCodigo()">Ativar Código</button>
+    <div class="container-codigo">
+        <div class="card-campo">
+            <h1>Ativar seu código</h1>
+            <input type="text" id="inputCodigo" placeholder="Digite seu código" />
+            <button onclick="ativarCodigo()">Ativar Código</button>
+        </div>
+    </div>
 
     <p id="mensagem"></p>
 

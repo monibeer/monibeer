@@ -14,6 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="./js/validacaoAlerta.js"></script>
 </head>
 
 <body onload="iniciarVerificacaoApos1Min30()">
@@ -53,14 +54,16 @@
         <div class="container-dashboard">
             <div class="header">
                 <div class="container-searchBarGroup">
-                    <i class="fa-solid fa-bars"></i>
+                    <i class="fa-solid fa-arrow-left" style="color: #000000; cursor: pointer;"
+                        onclick="window.history.back()"></i>
                     <h3>Dashboard</h3>
                 </div>
                 <div class="container-actions">
                     <i class="fa-solid fa-bell"></i>
                     <span>|</span>
                     <div class="container-mini-profile">
-                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Avatar" />
+                        <img src="https://media.istockphoto.com/id/1091291084/pt/vetorial/neutral-profile-picture.jpg?s=612x612&w=0&k=20&c=D5UkG2zMnMuM6XwHQjhY61tNIk_1kyiEu4XcgcI5lQs="
+                            alt="Avatar" />
                         <p>Rodrigo Silva</p>
                     </div>
                 </div>
@@ -71,8 +74,70 @@
             </div>
 
             <div class="container-info-fermenter">
-                <canvas id="myChartCanvas"></canvas>
-                <div id="avisoCaptura1" style="margin-top: 10px; color: red;"></div>
+                <section class="fermenter-list-panel">
+                    <h2 class="panel-title">Setor A</h2>
+                    <div class="fermenter-list">
+                        <!-- Fermentadora 1 -->
+                        <div class="fermenter-item critical">
+                            <div class="fermenter-label">
+                                <img src="https://cdn-icons-png.flaticon.com/512/584/584953.png" alt="Fermentadora"
+                                    class="fermenter-icon" />
+                                <span class="fermenter-name">Fermentadora 1</span>
+                            </div>
+                            <span class="fermenter-temp">-1344 ↓</span>
+                        </div>
+
+                        <!-- Fermentadora 2 -->
+                        <div class="fermenter-item warning">
+                            <div class="fermenter-label">
+                                <img src="https://cdn-icons-png.flaticon.com/512/584/584953.png" alt="Fermentadora"
+                                    class="fermenter-icon" />
+                                <span class="fermenter-name">Fermentadora 2</span>
+                            </div>
+                            <span class="fermenter-temp">Alerta ↓</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Painel de Informações e Alertas -->
+                <section class="info-grid">
+
+                    <!-- Informações da Fermentadora -->
+                    <div class="card info-card">
+                        <div class="container-info-card">
+                            <h3 class="card-title">Fermentadora IPA 01</h3>
+                            <p class="card-text">Empresa: Moinho da Cevada</p>
+                            <p class="card-text">Setor: A</p>
+                            <p class="card-text">Sensor: LM35</p>
+                        </div>
+                    </div>
+
+                    <!-- Placeholder -->
+                    <!-- Alerta Crítico -->
+                    <div class="card alert-card">
+                        <div class="alert-header">
+                            <img src="https://cdn-icons-png.flaticon.com/512/564/564619.png" alt="Alerta"
+                                class="alert-icon" />
+                            <h4 class="alert-title">Alerta Crítico</h4>
+                        </div>
+                        <p class="alert-text">
+                            A <strong>fermentadora 4 (IPA)</strong> ultrapassou o limite máximo permitido,
+                            <span class="highlight">temperatura acima de 26ºC</span>.
+                            <strong>Verifique imediatamente.</strong>
+                        </p>
+                    </div>
+
+
+                    <!-- Gráfico -->
+                    <div class="card graph-card">
+                        <h5 class="card-title">Temperatura Atual</h5>
+                        <div class="graph-placeholder">
+                            <canvas id="myChartCanvas" width="200%" height="60%"></canvas>
+                            <div id="avisoCaptura1" style="margin-top: 10px; color: red; position: absolute;"></div>
+                        </div>
+                    </div>
+
+                </section>
             </div>
         </div>
     </section>
@@ -197,146 +262,7 @@
             obterDadosGrafico(1);
         };
 
-        function iniciarVerificacaoApos1Min30() {
-            const chave = "tempoEntrada";
-            const agora = Date.now();
 
-            if (!localStorage.getItem(chave)) {
-                localStorage.setItem(chave, agora);
-            }
-
-            const tempoSalvo = parseInt(localStorage.getItem(chave), 10);
-            const tempoDecorrido = agora - tempoSalvo;
-            const umMinMeio = 1.5 * 60 * 1000; // 1 minuto e meio em milissegundos
-            console.log("Tempo necessário:", umMinMeio, "ms");
-
-            if (tempoDecorrido >= umMinMeio) {
-                console.log('Executando verificação imediatamente');
-                buscarDadosEVerificar();
-                iniciarRepeticao(); // inicia repetição após 1ª execução
-            } else {
-                console.log('Aguardando o tempo restante antes da primeira execução');
-                const restante = umMinMeio - tempoDecorrido;
-                setTimeout(function () {
-                    buscarDadosEVerificar();
-                    iniciarRepeticao(); // inicia repetição após o delay
-                }, restante);
-            }
-        }
-
-        // function iniciarRepeticao() {
-        //     // Repete buscarDadosEVerificar a cada 1.5 minutos
-        //     setInterval(buscarDadosEVerificar, 1.5 * 60 * 1000);
-        // }
-
-        function buscarDadosEVerificar() {
-            console.log('Buscando dados e verificando...');
-            const session = sessionStorage.FERMENTADORAS;
-
-            const idEmpresa = JSON.parse(session)[0].fkEmpresa;
-
-            fetch(`/medidas/validacaoTemp/${idEmpresa}`, { cache: 'no-store' })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Nenhum dado encontrado');
-                    }
-                })
-                .then(resposta => {
-                    verificarAlerta(resposta);
-                })
-                .catch(error => {
-                    console.error('Erro na API:', error);
-                });
-        }
-
-        function verificarAlerta(dados) {
-            const sensores = {};
-
-            for (let i = 0; i < dados.length; i++) {
-                const dado = dados[i];
-                const sensorId = dado.fkSensor;
-
-                if (!sensores[sensorId]) {
-                    sensores[sensorId] = [];
-                }
-                sensores[sensorId].push(dado);
-            }
-
-            console.log('Sensores agrupados:', sensores);
-
-            const listaSensores = Object.keys(sensores);
-            console.log('Lista de sensores:', listaSensores);
-
-            for (let i = 0; i < listaSensores.length; i++) {
-                const sensorId = listaSensores[i];
-                const registros = sensores[sensorId];
-                const total = registros.length;
-
-                let criteriosAlerta = {
-                    maxCritico,
-                    minCritico,
-                    maxAtencao,
-                    minAtencao,
-                    maxCuidado,
-                    minCuidado
-                }
-
-
-                for (let j = 0; j < registros.length; j++) {
-                    const registroCerveja = registros[j];
-                    if (registroCerveja.temperatura < registroCerveja.limiteTempMin || registroCerveja.temperatura > registroCerveja.limiteTempMax) {
-                        if (registroCerveja.temperatura <= registroCerveja.limiteTempMin - 5) {
-                            criteriosAlerta.maxCritico += 1;
-                        } else if (registroCerveja.temperatura >= registroCerveja.limiteTempMin + 5) {
-                            criteriosAlerta.maxCritico += 1;
-                        } else if (registroCerveja.temperatura <= registroCerveja.limiteTempMin - 3) {
-                            criteriosAlerta.minAtencao += 1;
-                        } else if (registroCerveja.temperatura >= registroCerveja.limiteTempMin + 3) {
-                            criteriosAlerta.maxAtencao += 1;
-                        } else if (registroCerveja.temperatura <= registroCerveja.limiteTempMin - 1) {
-                            criteriosAlerta.minCuidado += 1;
-                        } else if (registroCerveja.temperatura >= registroCerveja.limiteTempMin + 1) {
-                            criteriosAlerta.maxCuidado += 1;
-                        }
-                    }
-                }
-
-                var totalForaDoIdeal = criteriosAlerta.minCuidado + criteriosAlerta.maxCuidado + criteriosAlerta.minAtencao + criteriosAlerta.maxAtencao + criteriosAlerta.minCritico + criteriosAlerta.maxCritico;
-
-                const percentual = (totalForaDoIdeal / total) * 100;
-
-                if (percentual >= 80) {
-                    alert(`⚠️ Sensor ${sensorId}: ${percentual.toFixed(1)}% fora do ideal!`);
-                } else {
-                    console.log(`Sensor ${sensorId}: tudo certo (${percentual.toFixed(1)}% fora).`);
-                }
-            }
-        }
-
-        // Inicia o processo
-        // iniciarVerificacaoApos1Min30();
-
-        function cadastrarAlerta() {
-            const session = sessionStorage.FERMENTADORAS;
-            const idEmpresa = JSON.parse(session)[0].fkEmpresa;
-
-            fetch(`/medidas/validacaoTemp/${idEmpresa}`, { cache: 'no-store' })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Nenhum dado encontrado');
-                    }
-                })
-                .then(resposta => {
-                    verificarAlerta(resposta);
-                })
-                .catch(error => {
-                    console.error('Erro na API:', error);
-                });
-        }
     </script>
 </body>
 

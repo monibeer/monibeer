@@ -42,7 +42,7 @@
 
                     <a href="./setores.html">
                         <div class="navigation-item">
-                            <i class="fa-solid fa-building"></i>
+                            <i class="fa-solid fa-layer-group"></i>
                             <p>Meus Setores</p>
                         </div>
                     </a>
@@ -86,10 +86,10 @@
                     <!-- <div class="container-theme-dark-light">
                     <img src="https://static-00.iconduck.com/assets.00/sun-symbol-emoji-512x512-qjm8vnpc.png" alt="">
                 </div> -->
-                    <i class="fa-solid fa-bell"></i>
                     <span>|</span>
                     <div class="container-mini-profile">
-                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="">
+                        <img src="https://media.istockphoto.com/id/1091291084/pt/vetorial/neutral-profile-picture.jpg?s=612x612&w=0&k=20&c=D5UkG2zMnMuM6XwHQjhY61tNIk_1kyiEu4XcgcI5lQs="
+                            alt="">
                         <p id="header_usuario">Rodrigo Silva</p>
                     </div>
                 </div>
@@ -160,39 +160,40 @@
             } else if (setor.fermentadoras_fora_do_ideal > 0) {
                 statusClass = "yellow";
             }
-            
-//          
-//<div class="meta">Empresa #${setor.fkEmpresa}</div>
+
+            //          
+            //<div class="meta">Empresa #${setor.fkEmpresa}</div>
             container.innerHTML += `
-        <div class="card-fermenter ${statusClass}">
-        <div class="todo-container">
-        <img src="assets/setor A.png" alt="Tanque">
-        <div class="container-div">
-        <div class="visual-lateral">
-            <h2>${setor.nome_setor}</h2>
-            <div class="visual"></div>
-        </div>
+                <div class="card-fermenter ${statusClass}">
+                    <div class="todo-container">
+                        <img src="assets/setor A.png" alt="Tanque">
+                        <div class="container-div">
+                            <div class="visual-lateral">
+                                <h2>${setor.nome_setor}</h2>
+                                <div class="visual"></div>
+                            </div>
         
-        <div class="info">
-            <div class="quantidade-fermentadoras">
-                <ul class="quantidade">
-                    <li>Total: <strong>${setor.total_fermentadoras}</strong></li>
-                    <li>Ativas: <strong>${setor.total_fermentadoras_ativas}</strong></li>
-                </ul>
-            </div>
-            <div class="lista-itens">
-            <ul class="avisos">
-              <li>⚠️ Fora do ideal: <strong>${setor.fermentadoras_fora_do_ideal}</strong></li>
-              <li>🚨 Crítico: <strong>${setor.fermentadoras_em_alerta_critico}</strong></li>
-            </ul>
-            </div>
-        </div>
-        </div>
-        </div>
-        <div class="button">
-            <button>Ver Detalhes</button>
-        </div>
-        </div>
+                            <div class="info">
+                                <div class="quantidade-fermentadoras">
+                                    <ul class="quantidade">
+                                        <li>Total: <strong>${setor.total_fermentadoras}</strong></li>
+                                        <li>Ativas: <strong>${setor.total_fermentadoras_ativas}</strong></li>
+                                    </ul>
+                                </div>
+
+                                <div class="lista-itens">
+                                    <ul class="avisos">
+                                        <li>⚠️ Fora do ideal: <strong>${setor.fermentadoras_fora_do_ideal}</strong></li>
+                                        <li>🚨 Crítico: <strong>${setor.fermentadoras_em_alerta_critico}</strong></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button">
+                        <a onclick="locationSetor(${setor.idSetor})"> <button>Ver Detalhes</button> </a>
+                    </div>
+                </div>
       `;
         });
     }
@@ -200,6 +201,11 @@
     setInterval(() => {
         pegarDadosSetoresDash();
     }, 60000);
+
+    function locationSetor(idSetor) {
+        sessionStorage.setItem('CREDENCIAIS_DASH_SETOR', idSetor)
+        window.location.href = './dashboard.html'
+    }
 
 
 </script>
