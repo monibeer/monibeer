@@ -8,6 +8,10 @@ router.post("/cadastrarAlerta", function (req, res) {
     empresaController.cadastrarAlertaTemp(req, res);
 })
 
+router.get("/validarStatusFermenAlerta/:idFermentadora", function (req, res) {
+    empresaController.validarStatusFermenAlerta(req, res);
+})
+
 // router.get("/buscar", function (req, res) {
 //     empresaController.buscarPorCnpj(req, res);
 // });

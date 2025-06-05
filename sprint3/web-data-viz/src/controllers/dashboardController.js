@@ -89,6 +89,24 @@ function cadastrarAlertaTemp(req, res) {
         );
 }
 
+function validarStatusFermenAlerta(req, res) {
+    var idFermen = req.params.idFermentadora;
+
+    alertaModel.validarStatusFermen(idFermen)
+        .then(
+            function (resultado) {
+                console.log(`Resultados: ${JSON.stringify(resultado)}`);
+                res.status(200).json({ statusFermentadora: resultado[0].status});
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao validar Fermentadora! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 
 // //CADASTRO
 // function cadastrar(req, res) {
@@ -132,6 +150,7 @@ module.exports = {
     pegarDashboardHome,
     pegarHistoricoAlerta,
     pegarSetorDadosDash,
-    cadastrarAlertaTemp
+    cadastrarAlertaTemp,
+    validarStatusFermenAlerta
     // cadastrar
 }

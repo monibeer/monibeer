@@ -76,27 +76,7 @@
             <div class="container-info-fermenter">
                 <section class="fermenter-list-panel">
                     <h2 class="panel-title">Setor A</h2>
-                    <div class="fermenter-list">
-                        <!-- Fermentadora 1 -->
-                        <div class="fermenter-item critical">
-                            <div class="fermenter-label">
-                                <img src="https://cdn-icons-png.flaticon.com/512/584/584953.png" alt="Fermentadora"
-                                    class="fermenter-icon" />
-                                <span class="fermenter-name">Fermentadora 1</span>
-                            </div>
-                            <span class="fermenter-temp">-1344 ↓</span>
-                        </div>
-
-                        <!-- Fermentadora 2 -->
-                        <div class="fermenter-item warning">
-                            <div class="fermenter-label">
-                                <img src="https://cdn-icons-png.flaticon.com/512/584/584953.png" alt="Fermentadora"
-                                    class="fermenter-icon" />
-                                <span class="fermenter-name">Fermentadora 2</span>
-                            </div>
-                            <span class="fermenter-temp">Alerta ↓</span>
-                        </div>
-                    </div>
+                    <div class="fermenter-list" id="div_fermentadora"></div>
                 </section>
 
                 <section class="info-grid">
@@ -253,10 +233,10 @@
                             dados.datasets[0].data.push(novo.temperatura);
 
                             dados.datasets[1].data.shift();
-                            dados.datasets[1].data.push(22);
+                            dados.datasets[1].data.push(maxTemp - 5);
 
                             dados.datasets[2].data.shift();
-                            dados.datasets[2].data.push(18);
+                            dados.datasets[2].data.push(minTemp + 5);
 
                             myChart.update();
                         }
@@ -277,34 +257,37 @@
         };
 
 
-        // function modeloListaFermen(resposta) {
-        //     div_fermentadora.innerHTML += `
-        //         <div class="fermenter-item critical">
-        //             <div class="fermenter-label">
-        //                         <img src="https://cdn-icons-png.flaticon.com/512/584/584953.png" alt="Fermentadora"
-        //                             class="fermenter-icon" />
-        //                         <span class="fermenter-name">Fermentadora 1</span>
-        //                     </div>
-        //             <span class="fermenter-temp">-1344 ↓</span>
-        //         </div>
-        //     `
+        function modeloListaFermen(resposta) {
+            div_fermentadora.innerHTML += `
+                <div class="fermenter-item">
+                    <div class="fermenter-label">
+                                <img src="https://cdn-icons-png.flaticon.com/512/584/584953.png" alt="Fermentadora"
+                                    class="fermenter-icon" />
+                                <span class="fermenter-name">Fermentadora 1</span>
+                            </div>
+                    <span class="fermenter-temp">-1344 ↓</span>
+                </div>
+            `
 
-        // }
-        // function exibirFermentadora() {
-        //     JSON.parse(sessionStorage.FERMENTADORAS).forEach(fermen => {
-        //         fetch(`/alerta/validarStatusFermenAlerta/${id}`, { cache: 'no-store' }).then(response => {
-        //             if (response.ok) {
-        //                 response.json().then(resposta => {
+        }
+        function exibirFermentadora() {
+            JSON.parse(sessionStorage.FERMENTADORAS).forEach(fermen => {
+                fetch(`/alerta/validarStatusFermenAlerta/${fermen.idFermentadora}`, { cache: 'no-store' }).then(response => {
+                    if (response.ok) {
+                        response.json().then(resposta => {
+                            console.log(resposta.statusFermentadora)
+                            modeloListaFermen(resposta)
+                        });
+                    } else {
+                        console.error('Nenhum dado encontrado');
+                    }
+                }).catch(error => {
+                    console.error('Erro na API:', error);
+                });
+            })
+        }
 
-        //                 });
-        //             } else {
-        //                 console.error('Nenhum dado encontrado');
-        //             }
-        //         }).catch(error => {
-        //             console.error('Erro na API:', error);
-        //         });
-        //     })
-        // }
+        exibirFermentadora()
     </script>
 </body>
 

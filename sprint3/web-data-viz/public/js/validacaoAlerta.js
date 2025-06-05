@@ -206,4 +206,4 @@ function verificarAlerta(dados) {
     }
 }
 
-iniciarVerificacaoApos1Min30();
+// iniciarVerificacaoApos1Min30();
