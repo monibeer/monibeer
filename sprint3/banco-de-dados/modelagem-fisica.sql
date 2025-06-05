@@ -218,6 +218,9 @@ INSERT INTO alerta (dtHora, nivel, mensagem, fkCaptura) VALUES
 ('2024-04-01 14:24:01', 'Atenção', 'Está 2 graus celsius abaixo do limite mínimo ideal', 4),
 ('2024-12-25 07:21:14', 'Crítico', 'Ultrapassou o limite máximo permitido, temperatura acima de 26°C.', 5);
 
+INSERT INTO alerta (dtHora, nivel, mensagem, fkCaptura) VALUES
+(now(), 'Crítico', 'Atingiu o limite máximo do ideal 22°C ', 124);
+
 INSERT INTO codigo_ativacao (codigo, fkEmpresa) VALUES 
 (12345678, 1),
 (12345677, 2);
@@ -328,6 +331,8 @@ WHERE st.fkEmpresa = 1
 ORDER BY a.dtHora DESC;
 
 
+DROP VIEW vw_fermentadoras_status_setor_empresa;
+
 CREATE OR REPLACE VIEW vw_fermentadoras_status_setor_empresa AS
 SELECT 
     s.idSetor,
@@ -338,10 +343,11 @@ SELECT
         WHEN sn.statusSensor = 'ativo' THEN f.idFermentadora 
     END) AS total_fermentadoras_ativas,
     COUNT(DISTINCT CASE 
-        WHEN a.nivel = 'moderado' AND DATE(a.dtHora) = CURRENT_DATE THEN f.idFermentadora
+        WHEN a.nivel IN ('Atenção', 'Cuidado', 'Crítico') 
+             AND DATE(a.dtHora) = CURRENT_DATE THEN f.idFermentadora
     END) AS fermentadoras_fora_do_ideal,
     COUNT(DISTINCT CASE 
-        WHEN a.nivel = 'crítico' AND DATE(a.dtHora) = CURRENT_DATE THEN f.idFermentadora
+        WHEN a.nivel = 'Crítico' AND DATE(a.dtHora) = CURRENT_DATE THEN f.idFermentadora
     END) AS fermentadoras_em_alerta_critico
 FROM setor s
 LEFT JOIN fermentadora f ON f.fkSetor = s.idSetor
@@ -357,9 +363,6 @@ INSERT INTO captura (temperatura, fkSensor) VALUES
 (18.50, 1),
 (18.70, 1),
 (19.10, 1),
-
-
-
 (19.50, 1),
 (20.00, 1),
 (20.30, 1),
@@ -374,7 +377,6 @@ INSERT INTO captura (temperatura, fkSensor) VALUES
 (24.30, 2),
 (24.50, 2),
 (24.70, 1),
-
 (23.00, 1),
 (24.20, 1),
 (24.50, 1),
@@ -417,3 +419,28 @@ ORDER BY fkSensor, dtHora DESC;
 
 
 SELECT * FROM vw_ultimos_30_por_sensor;
+
+SELECT
+  CASE
+    WHEN EXISTS (
+      SELECT 1
+      FROM alerta a
+      JOIN captura c ON a.fkCaptura = c.idCaptura
+      JOIN sensor sen ON c.fkSensor = sen.idSensor
+      JOIN fermentadora f ON f.fkSensor = sen.idSensor
+      WHERE f.idFermentadora = 1
+        AND DATE(a.dtHora) = CURRENT_DATE
+        AND a.nivel = 'Crítico'
+    ) THEN 3
+    WHEN EXISTS (
+      SELECT 1
+      FROM alerta a
+      JOIN captura c ON a.fkCaptura = c.idCaptura
+      JOIN sensor sen ON c.fkSensor = sen.idSensor
+      JOIN fermentadora f ON f.fkSensor = sen.idSensor
+      WHERE f.idFermentadora = 1
+        AND DATE(a.dtHora) = CURRENT_DATE
+    ) THEN 1
+    ELSE 0
+  END AS status;
+

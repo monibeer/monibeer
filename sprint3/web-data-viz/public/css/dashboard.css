@@ -77,19 +77,34 @@
     font-weight: 600;
 }
 
-/* Painel de informações em grid */
+/* PAINEL */
 .info-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 24px;
 }
 
-/* Cartões */
+/* CARTÕES */
 .card {
     background-color: #ffffff;
     padding: 24px;
     border-radius: 16px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    height: 150px;
+    width: 320px;
+}
+
+.container-info-card{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.container-info-card .image{
+    height: 100%;
+}
+
+.container-info-card .image img{
+    width: 80px;
 }
 
 .card-icon {
@@ -165,6 +180,8 @@
 
 .graph-card {
     grid-column: span 3;
+    height: 250px;
+    width: 715px;
 }
 
 .graph-placeholder {
