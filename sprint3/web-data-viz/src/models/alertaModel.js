@@ -15,7 +15,7 @@ function validarStatusFermen(idFermentadora) {
       JOIN captura c ON a.fkCaptura = c.idCaptura
       JOIN sensor sen ON c.fkSensor = sen.idSensor
       JOIN fermentadora f ON f.fkSensor = sen.idSensor
-      WHERE f.idFermentadora = 1
+      WHERE f.idFermentadora = ${idFermentadora}
         AND DATE(a.dtHora) = CURRENT_DATE
         AND a.nivel = 'Crítico'
     ) THEN 3
@@ -25,7 +25,7 @@ function validarStatusFermen(idFermentadora) {
       JOIN captura c ON a.fkCaptura = c.idCaptura
       JOIN sensor sen ON c.fkSensor = sen.idSensor
       JOIN fermentadora f ON f.fkSensor = sen.idSensor
-      WHERE f.idFermentadora = 1
+      WHERE f.idFermentadora = ${idFermentadora}
         AND DATE(a.dtHora) = CURRENT_DATE
     ) THEN 1
     ELSE 0
