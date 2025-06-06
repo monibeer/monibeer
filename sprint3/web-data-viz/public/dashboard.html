@@ -194,11 +194,11 @@
     JSON.parse(sessionStorage.FERMENTADORAS).forEach((fermen) => {
       if (fermen.fkSensor == id) {
         if (fermen.estiloCerveja == "ipa") {
-          maxTemp = 29;
-          minTemp = 13;
+          maxTemp = 28;
+          minTemp = 12;
         } else {
-          maxTemp = 17;
-          minTemp = 3;
+          maxTemp = 18;
+          minTemp = 2;
         }
       }
     });
@@ -211,26 +211,24 @@
         {
           label: "Temperatura",
           data: [],
-          fill: false,
-          borderColor: "rgb(255, 165, 0)",
-          tension: 0.1,
+          borderColor: "rgb(138, 43, 226)",
+          tension: 0.4,
         },
         {
           label: "Temperatura Máx.",
           data: new Array(resposta.length).fill(maxTemp - 5),
-          fill: false,
-          borderColor: "red",
-          tension: 0.1,
+          borderColor: "rgba(255, 0, 0, 0.3)",
+          pointRadius: 0,
         },
         {
           label: "Temperatura Mín.",
           data: new Array(resposta.length).fill(minTemp + 5),
-          fill: false,
-          borderColor: "blue",
-          tension: 0.1,
+          borderColor: "rgba(0, 0, 255, 0.3)",
+          pointRadius: 0,
         },
       ],
     };
+
 
     resposta.forEach((reg) => {
       labels.push(reg.momento_grafico);
@@ -250,6 +248,7 @@
             },
           },
         },
+
       },
     };
 
