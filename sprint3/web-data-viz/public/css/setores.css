@@ -1,4 +1,3 @@
-
 .container-info-fermenter {
   display: flex;
   flex-wrap: wrap;
@@ -7,10 +6,10 @@
   justify-content: center;
 }
 
-.todo-container{
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
+.todo-container {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
 }
 
 .card-fermenter {
@@ -23,7 +22,7 @@
   height: 250px;
   background: white;
   border-radius: 10px;
-  border-top: rgb(62, 30, 10) solid 10px ;
+  border-top: rgb(62, 30, 10) solid 10px;
   overflow: hidden;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease;
@@ -34,13 +33,12 @@
   transform: scale(1.02);
 }
 
-.card-fermenter .visual-lateral{
+.card-fermenter .visual-lateral {
   display: flex;
   flex-direction: row;
   gap: 40px;
 }
 
-/* Lado esquerdo com imagem ou ícone */
 .card-fermenter .visual {
   background: linear-gradient(to bottom, #a5e65a, #7ec850);
   display: flex;
@@ -53,11 +51,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.6rem;
+  font-size: 26px; 
   font-weight: bold;
   color: #333;
 }
-
 
 .card-fermenter .todo-container img {
   width: 100px;
@@ -66,16 +63,14 @@
   object-fit: contain;
 }
 
-/* Lado direito com dados */
 .card-fermenter .info {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
 }
 
 .card-fermenter .visual-lateral .meta {
-  font-size: 1rem;
+  font-size: 16px;
   color: #b6b4b4;
   display: flex;
   align-items: center;
@@ -92,7 +87,7 @@
 
 .card-fermenter .info ul li {
   display: flex;
-  font-size: 1rem;
+  font-size: 16px; 
   font-weight: 700;
   gap: 8px;
   color: #484848;
@@ -103,11 +98,10 @@
   font-weight: 500;
 }
 
-.card-fermenter .info .quantidade-fermentadoras .quantidade{
+.card-fermenter .info .quantidade-fermentadoras .quantidade {
   display: flex;
   margin-top: 30px;
   gap: 45px;
-  
 }
 
 .card-fermenter .button button {
@@ -125,16 +119,30 @@
 
 .card-fermenter.red .visual {
   background: linear-gradient(to bottom, #ff5e5e, #ff3d3d);
+  padding: 15px;
+  border-radius: 50%;
+  margin-left: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-fermenter.yellow .visual {
   background: linear-gradient(to bottom, #ffe082, #ffc107);
-}
-
-.card-fermenter.green .visual {
-  display: flex;
   padding: 15px;
   border-radius: 50%;
   margin-left: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-fermenter.green .visual {
   background: linear-gradient(to bottom, #6ca52a, #7ec850);
+  padding: 15px;
+  border-radius: 50%;
+  margin-left: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -209,6 +209,8 @@ INSERT INTO captura (temperatura, fkSensor) VALUES
 (21.00, 3),
 (22.45, 4),
 (18.69, 5),
+
+
 (18.50, 1),
 (18.70, 1),
 (19.10, 1),
@@ -284,34 +286,30 @@ SELECT * FROM alerta;
 SELECT idCodigo_ativacao, codigo, fkEmpresa, status FROM codigo_ativacao WHERE codigo = 12345678;
 UPDATE codigo_ativacao SET status = 1 WHERE idCodigo_ativacao = 1;
 
- SELECT
-        e.estiloCerveja,
-        COUNT(DISTINCT f.idFermentadora) AS total_ferm,
-        (SELECT COUNT(*) FROM sensor WHERE statusSensor = 'ativo') AS sensor_ativo,
-        (SELECT COUNT(*) FROM sensor WHERE statusSensor = 'inativo') AS sensor_inativo,
-        (SELECT COUNT(*) FROM sensor WHERE statusSensor = 'manutenção') AS sensor_manutencao,
-        COUNT(DISTINCT CASE 
-            WHEN (c.temperatura < e.limiteTempMin OR c.temperatura > e.limiteTempMax) THEN f.idFermentadora
-        END) AS fermentadoras_fora_do_ideal,
-        COUNT(DISTINCT CASE
-            WHEN (
-                c.temperatura < (e.limiteTempMin - 5) OR
-                c.temperatura > (e.limiteTempMax + 5)
-            ) THEN f.idFermentadora
-        END) AS fermentadoras_em_critico
-    FROM fermentadora f 
-    JOIN sensor s ON f.fkSensor = s.idSensor
-    JOIN setor st ON f.fkSetor = st.idSetor
-    JOIN historico_fermentadora hf 
-        ON hf.fkFermentadora = f.idFermentadora
-    JOIN estilo e ON hf.fkEstilo = e.idEstilo
-    LEFT JOIN captura c 
-        ON c.fkSensor = s.idSensor
-        AND c.dtHora >= '2025-06-03 00:00:00' 
-        AND c.dtHora < '2025-06-03 00:00:00'
-    LEFT JOIN alerta a ON a.fkCaptura = c.idCaptura
-    WHERE st.fkEmpresa = 1
-    GROUP BY e.estiloCerveja;
+SELECT
+    e.estiloCerveja,
+    COUNT(DISTINCT f.idFermentadora) AS total_ferm,
+    (SELECT COUNT(*) FROM sensor WHERE statusSensor = 'ativo') AS sensor_ativo,
+    (SELECT COUNT(*) FROM sensor WHERE statusSensor = 'inativo') AS sensor_inativo,
+    (SELECT COUNT(*) FROM sensor WHERE statusSensor = 'manutenção') AS sensor_manutencao,
+    COUNT(DISTINCT CASE
+        WHEN a.nivel IN ('Cuidado', 'Atenção', 'Crítico') THEN f.idFermentadora
+    END) AS fermentadoras_fora_do_ideal,
+    COUNT(DISTINCT CASE
+        WHEN a.nivel = 'Crítico' THEN f.idFermentadora
+    END) AS fermentadoras_em_critico
+FROM fermentadora f
+JOIN sensor s ON f.fkSensor = s.idSensor
+JOIN setor st ON f.fkSetor = st.idSetor
+JOIN historico_fermentadora hf ON hf.fkFermentadora = f.idFermentadora
+JOIN estilo e ON hf.fkEstilo = e.idEstilo
+LEFT JOIN captura c 
+  ON c.fkSensor = s.idSensor
+  AND c.dtHora >= '2025-06-06 00:00:00'
+  AND c.dtHora <  '2025-06-07 00:00:00'
+LEFT JOIN alerta a ON a.fkCaptura = c.idCaptura
+WHERE st.fkEmpresa = 1
+GROUP BY e.estiloCerveja;
 
 SELECT 
 	f.idFermentadora,
@@ -358,9 +356,9 @@ GROUP BY s.idSetor, s.nome, s.fkEmpresa;
 
 SELECT * FROM vw_fermentadoras_status_setor_empresa WHERE fkEmpresa = 1;
 
-CREATE VIEW vw_captura_estilo AS
+CREATE OR REPLACE VIEW vw_captura_estilo AS
 SELECT 
-	c.idCaptura,
+    c.idCaptura,
     c.fkSensor, 
     c.dtHora, 
     c.temperatura, 
@@ -374,19 +372,13 @@ JOIN setor st ON f.fkSetor = st.idSetor
 JOIN historico_fermentadora hf ON hf.fkFermentadora = f.idFermentadora AND hf.dataFim IS NULL
 JOIN estilo e ON e.idEstilo = hf.fkEstilo;
 
+SELECT *
+FROM vw_captura_estilo
+WHERE fkSensor = 1 AND fkEmpresa = 1
+ORDER BY dtHora DESC
+LIMIT 30;
 
-CREATE OR REPLACE VIEW vw_ultimos_30_por_sensor AS
-SELECT
-    idCaptura, fkSensor, dtHora, temperatura, nomeCerveja, limiteTempMin, limiteTempMax, fkEmpresa
-FROM (
-    SELECT
-        v.*,
-        ROW_NUMBER() OVER (PARTITION BY v.fkSensor ORDER BY v.dtHora DESC) AS rn
-    FROM vw_captura_estilo v
-) sub
-WHERE rn <= 30;
 
-SELECT * FROM vw_ultimos_30_por_sensor;
 
 SELECT
   CASE

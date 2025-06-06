@@ -8,25 +8,31 @@ function iniciarVerificacaoApos1Min30() {
 
     const tempoSalvo = parseInt(localStorage.getItem(chave), 10);
     const tempoDecorrido = agora - tempoSalvo;
-    const umMinMeio = 1.5 * 60 * 1000; // 1 minuto e meio em ms
+    const umMinMeio = 1.5 * 60 * 1000;
     console.log("Tempo necessário:", umMinMeio, "ms");
 
     if (tempoDecorrido >= umMinMeio) {
         console.log('Executando verificação imediatamente');
         buscarDadosEVerificar();
-        iniciarRepeticao(); // inicia repetição depois da 1ª execução
+        iniciarRepeticao();
+        atualizarDataHoraAtualizacao()
     } else {
         console.log('Aguardando o tempo restante antes da primeira execução');
         const restante = umMinMeio - tempoDecorrido;
         setTimeout(() => {
             buscarDadosEVerificar();
             iniciarRepeticao();
+            atualizarDataHoraAtualizacao()
         }, restante);
     }
 }
 
 function iniciarRepeticao() {
-    setInterval(buscarDadosEVerificar, 1.5 * 60 * 1000);
+    setInterval(() => {
+        buscarDadosEVerificar()
+        div_fermentadora.innerHTML = ''
+        exibirFermentadora()
+    }, 1.5 * 60 * 1000);
 }
 
 function buscarDadosEVerificar() {
@@ -52,7 +58,7 @@ function buscarDadosEVerificar() {
                 if (!response.ok) {
                     throw new Error(`Erro HTTP ${response.status}`);
                 }
-                return response.text(); // ← lê como texto
+                return response.text();
             })
             .then(texto => {
                 let dados;
@@ -219,17 +225,17 @@ function processarFilaAlertas() {
         return;
     }
     exibindoAlerta = true;
-    const alerta = filaAlertas.shift(); // pega o próximo alerta
+    const alerta = filaAlertas.shift();
 
     mostrarAlerta(alerta.tipo, alerta.mensagem);
 
-    // Aguarda 1 segundo antes de mostrar o próximo alerta da fila
+
     setTimeout(() => {
         processarFilaAlertas();
-    }, 1000);
+    }, 4000);
 }
 
-// Função para criar o alerta visual na tela
+
 function mostrarAlerta(tipo, mensagem, tempo = 3000) {
     var iconTipo = '';
     var classAlert = '';
@@ -292,5 +298,20 @@ function cadastrarAlerta(categoriaAlerta, mensagem, idCaptura) {
 }
 
 
-// Iniciar o processo (exemplo)
 iniciarVerificacaoApos1Min30();
+
+
+function atualizarDataHoraAtualizacao() {
+    const agora = new Date();
+    const dia = String(agora.getDate()).padStart(2, "0");
+    const mes = String(agora.getMonth() + 1).padStart(2, "0");
+    const ano = agora.getFullYear();
+    const horas = String(agora.getHours()).padStart(2, "0");
+    const minutos = String(agora.getMinutes()).padStart(2, "0");
+
+    const texto = `Última Atualização - ${dia}/${mes}/${ano} às ${horas}:${minutos}`;
+    const dataUltimaAtt = document.querySelector('.datatime-update');
+    console.log(dataUltimaAtt)
+
+    dataUltimaAtt.textContent = texto;
+}

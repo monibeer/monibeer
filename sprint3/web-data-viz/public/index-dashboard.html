@@ -8,9 +8,10 @@
     <link rel="stylesheet" href="./css/assets/main.css">
     <link rel="stylesheet" href="./css/assetsDashboard/main.css">
     <link rel="stylesheet" href="./css/indexDashboard.css">
+    <link rel="icon" href="./assets/Monibeer (1) 1.png" />
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-
 </head>
 
 <body onload="pegarDadosDashHome(), pegarHistoricoAlerta(), gerarDadosGrafico()">
@@ -53,7 +54,7 @@
                     </a>
 
                     <!-- Inserir link do jira -->
-                    <a href="https://monibeer.atlassian.net/servicedesk/customer/portal/35">
+                    <a href="https://monibeer.atlassian.net/servicedesk/customer/portal/35" target="_blank">
                         <div class="navigation-item">
                             <i class="fa-solid fa-headset"></i>
                             <p>Suporte</p>
@@ -78,7 +79,7 @@
         <div class="container-dashboard">
             <div class="header">
                 <div class="container-searchBarGroup">
-                    <i class="fa-solid fa-bars"></i>
+                    <i class="fa-solid fa-beer-mug-empty"></i>
 
                     <h3>Home</h3>
                     <!-- <div class="container-search">
@@ -188,6 +189,9 @@
                         </div>
 
                     </div>
+
+                    <div class="list-alert" id="list_alert"></div>
+
                 </div>
             </div>
     </section>
@@ -231,7 +235,6 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
 
-        atualizarDataHoraAtualizacao();
 
     }
 
@@ -286,17 +289,6 @@
         document.getElementById("totalGeral").innerText = totalGeral;
     }
 
-    function atualizarDataHoraAtualizacao() {
-        const agora = new Date();
-        const dia = String(agora.getDate()).padStart(2, '0');
-        const mes = String(agora.getMonth() + 1).padStart(2, '0');
-        const ano = agora.getFullYear();
-        const horas = String(agora.getHours()).padStart(2, '0');
-        const minutos = String(agora.getMinutes()).padStart(2, '0');
-
-        const texto = `Última Atualização - ${dia}/${mes}/${ano} às ${horas}:${minutos}`;
-        document.getElementById("ultimaAtualizacao").innerText = texto;
-    }
 
     function atualizarHistoricoAlerta() {
         var historico = JSON.parse(sessionStorage.getItem('HISTORICO_ALERTA'));
@@ -352,3 +344,4 @@
 
 
 </script>
+<script src="./js/validacaoAlerta.js"></script>

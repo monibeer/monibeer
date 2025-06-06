@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="./css/assetsDashboard/main.css">
     <link rel="stylesheet" href="./css/indexDashboard.css">
     <link rel="stylesheet" href="./css/admin.css">
+    <link rel="icon" href="./assets/Monibeer (1) 1.png" />
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
     <title>Admin</title>
 </head>
 <style>
@@ -18,7 +21,7 @@
 
 <body>
     <section class="dashboard">
-         <div class="sidebar">
+        <div class="sidebar">
             <a href="./index-dashboard.html">
                 <div class="logotipo">
                     <img src="./assets/monibeer-logo.png" alt="">
@@ -56,7 +59,7 @@
                     </a>
 
                     <!-- Inserir link do jira -->
-                    <a href="https://monibeer.atlassian.net/servicedesk/customer/portal/35">
+                    <a href="https://monibeer.atlassian.net/servicedesk/customer/portal/35" target="_blank">
                         <div class="navigation-item">
                             <i class="fa-solid fa-headset"></i>
                             <p>Suporte</p>
@@ -81,7 +84,7 @@
         <div class="container-dashboard">
             <div class="header">
                 <div class="container-searchBarGroup">
-                    <i class="fa-solid fa-bars"></i>
+                    <i class="fa-solid fa-beer-mug-empty"></i>
 
                     <h3>Funcionarios</h3>
                     <!-- <div class="container-search">
@@ -153,7 +156,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tabelaFuncionarios">
-    
+
                                 </tbody>
                             </table>
                         </div>
@@ -181,9 +184,12 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="list-alert" id="list_alert"></div>
+
+            </div>
+        </div>
     </section>
-    </div>
-    </div>
 
 
 </body>
@@ -211,7 +217,7 @@
                 .then(res => res.json())
                 .then(funcionarios => {
                     const tbody = document.getElementById("tabelaFuncionarios");
-                    tbody.innerHTML = ""; 
+                    tbody.innerHTML = "";
 
                     funcionarios.forEach(user => {
                         const tr = document.createElement("tr");
@@ -225,7 +231,7 @@
                                     onclick="abrirModal(${user.idFuncionario}, '${user.nome}', '${user.email}', '${user.tipoUsuario}')">Atualizar</button>
                             </td>
             `;
-            tbody.appendChild(tr);
+                        tbody.appendChild(tr);
                     });
                 });
         });
@@ -356,3 +362,4 @@
     }
 
 </script>
+<script src="./js/validacaoAlerta.js"></script>

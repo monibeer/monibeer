@@ -1,36 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard - Home</title>
 
-    <link rel="stylesheet" href="./css/assets/main.css" />
-    <link rel="stylesheet" href="./css/assetsDashboard/main.css" />
-    <link rel="stylesheet" href="./css/dashboard.css" />
-    <link rel="stylesheet" href="./css/alerta.css" />
-    <link rel="icon" href="./assets/Monibeer (1) 1.png" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Home</title>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  <link rel="stylesheet" href="./css/assets/main.css" />
+  <link rel="stylesheet" href="./css/assetsDashboard/main.css" />
+  <link rel="stylesheet" href="./css/dashboard.css" />
+  <link rel="stylesheet" href="./css/alerta.css" />
+  <link rel="icon" href="./assets/Monibeer (1) 1.png" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
-    <script src="./js/validacaoAlerta.js"></script>
-  </head>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
-  <body>
-    <section class="dashboard">
-      <div class="sidebar">
-        <a href="./index-dashboard.html">
-          <div class="logotipo">
-            <img src="./assets/monibeer-logo.png" alt="" />
-          </div>
-        </a>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
 
-        <!-- <div class="profile">
+<body>
+  <section class="dashboard">
+    <div class="sidebar">
+      <a href="./index-dashboard.html">
+        <div class="logotipo">
+          <img src="./assets/monibeer-logo.png" alt="" />
+        </div>
+      </a>
+
+      <!-- <div class="profile">
             <div class="circle-profile">
                 <img src="./assets/image.png" alt="" class="profile-img">
             </div>
@@ -38,133 +35,117 @@
             <p>Administrador</p>
         </div> -->
 
-        <div class="buttons-navegation">
-          <div class="container-item">
-            <a href="./index-dashboard.html">
-              <div class="navigation-item active">
-                <i class="fa-solid fa-house"></i>
-                <p>Home</p>
-              </div>
-            </a>
+      <div class="buttons-navegation">
+        <div class="container-item">
+          <a href="./index-dashboard.html">
+            <div class="navigation-item">
+              <i class="fa-solid fa-house"></i>
+              <p>Home</p>
+            </div>
+          </a>
 
-            <a href="./setores.html">
-              <div class="navigation-item">
-                <i class="fa-solid fa-layer-group"></i>
-                <p>Meus Setores</p>
-              </div>
-            </a>
-            <a href="./admin.html">
-              <div class="navigation-item">
-                <i class="fa-solid fa-building"></i>
-                <p>Funcionario</p>
-              </div>
-            </a>
+          <a href="./setores.html">
+            <div class="navigation-item active">
+              <i class="fa-solid fa-layer-group"></i>
+              <p>Meus Setores</p>
+            </div>
+          </a>
+          <a href="./admin.html">
+            <div class="navigation-item">
+              <i class="fa-solid fa-building"></i>
+              <p>Funcionario</p>
+            </div>
+          </a>
 
-            <!-- Inserir link do jira -->
-            <a href="https://monibeer.atlassian.net/servicedesk/customer/portal/35">
-              <div class="navigation-item">
-                <i class="fa-solid fa-headset"></i>
-                <p>Suporte</p>
-              </div>
-            </a>
+          <!-- Inserir link do jira -->
+          <a href="https://monibeer.atlassian.net/servicedesk/customer/portal/35"  target="_blank">
+            <div class="navigation-item">
+              <i class="fa-solid fa-headset"></i>
+              <p>Suporte</p>
+            </div>
+          </a>
 
-            <!-- <div class="navigation-item">
+          <!-- <div class="navigation-item">
                     <i class="fa-solid fa-gear"></i>
                     <p>Configurações</p>
                 </div> -->
-          </div>
+        </div>
 
-          <a href="./login.html">
-            <div class="logout-item navigation-item">
-              <i class="fa-solid fa-right-from-bracket"></i>
-              <p>Logout</p>
-            </div>
-          </a>
+        <a href="./login.html">
+          <div class="logout-item navigation-item">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <p>Logout</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="container-dashboard">
+      <div class="header">
+        <div class="container-searchBarGroup">
+          <i class="fa-solid fa-arrow-left" style="color: #000000; cursor: pointer" onclick="window.history.back()"></i>
+          <h3>
+            <span onclick="window.history.back()" style="font-weight: 600; cursor: pointer">Setores</span>
+            > Dashboard
+          </h3>
+        </div>
+        <div class="container-actions">
+          <span>|</span>
+          <div class="container-mini-profile">
+            <img
+              src="https://media.istockphoto.com/id/1091291084/pt/vetorial/neutral-profile-picture.jpg?s=612x612&w=0&k=20&c=D5UkG2zMnMuM6XwHQjhY61tNIk_1kyiEu4XcgcI5lQs="
+              alt="Avatar" />
+            <p>Rodrigo Silva</p>
+          </div>
         </div>
       </div>
 
-      <div class="container-dashboard">
-        <div class="header">
-          <div class="container-searchBarGroup">
-            <i
-              class="fa-solid fa-arrow-left"
-              style="color: #000000; cursor: pointer"
-              onclick="window.history.back()"
-            ></i>
-            <h3>
-              <span
-                onclick="window.history.back()"
-                style="font-weight: 600; cursor: pointer"
-                >Setores</span
-              >
-              > Dashboard
-            </h3>
-          </div>
-          <div class="container-actions">
-            <i class="fa-solid fa-bell"></i>
-            <span>|</span>
-            <div class="container-mini-profile">
-              <img
-                src="https://media.istockphoto.com/id/1091291084/pt/vetorial/neutral-profile-picture.jpg?s=612x612&w=0&k=20&c=D5UkG2zMnMuM6XwHQjhY61tNIk_1kyiEu4XcgcI5lQs="
-                alt="Avatar"
-              />
-              <p>Rodrigo Silva</p>
+      <p class="datatime-update" id="ultimaAtualizacao">Última Atualização - 25/04/2025 às 10:40</p>
+
+      <div class="container-info-fermenter">
+        <section class="fermenter-list-panel">
+          <h2 class="panel-title">Minhas Fermentadoras</h2>
+          <div class="fermenter-list" id="div_fermentadora"></div>
+        </section>
+
+        <section class="info-grid">
+          <div class="card info-card">
+            <div class="container-info-card">
+              <div class="image"><img src="assets/setor A.png" alt="" /></div>
+              <div class="info" id="info_card_fer">
+                <h3 class="card-title">Fermentadora IPA 01</h3>
+                <p class="card-text">Empresa: Moinho da Cevada</p>
+                <p class="card-text">Setor: A</p>
+                <p class="card-text">Sensor: LM35</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="container-data-filters">
-          <p class="datatime-update">
-            Última Atualização - <span id="dataAtualizacao"></span>
-          </p>
-        </div>
-
-        <div class="container-info-fermenter">
-          <section class="fermenter-list-panel">
-            <h2 class="panel-title">Setor A</h2>
-            <div class="fermenter-list" id="div_fermentadora"></div>
-          </section>
-
-          <section class="info-grid">
-            <div class="card info-card">
-              <div class="container-info-card">
-                <div class="image"><img src="assets/setor A.png" alt="" /></div>
-                <div class="info">
-                  <h3 class="card-title">Fermentadora IPA 01</h3>
-                  <p class="card-text">Empresa: Moinho da Cevada</p>
-                  <p class="card-text">Setor: A</p>
-                  <p class="card-text">Sensor: LM35</p>
-                </div>
-              </div>
+          <div class="kpi-card">
+            <div class="kpi-header">
+              <h4 class="kpi-title">Tempo Fora do Ideal</h4>
             </div>
+            <div class="kpi-value">2h 30m</div>
+            <div class="kpi-desc">Total acumulado hoje</div>
+          </div>
 
-            <div class="kpi-card">
-              <div class="kpi-header">
-                <h4 class="kpi-title">Tempo Fora do Ideal</h4>
-              </div>
-              <div class="kpi-value">2h 30m</div>
-              <div class="kpi-desc">Total acumulado hoje</div>
+          <div class="card graph-card">
+            <h5 class="card-title">Temperatura Atual</h5>
+            <div class="graph-placeholder">
+              <canvas id="myChartCanvas" width="200%" height="60%"></canvas>
+              <div id="avisoCaptura1" style="margin-top: 10px; color: red; position: absolute"></div>
             </div>
-
-            <div class="card graph-card">
-              <h5 class="card-title">Temperatura Atual</h5>
-              <div class="graph-placeholder">
-                <canvas id="myChartCanvas" width="200%" height="60%"></canvas>
-                <div
-                  id="avisoCaptura1"
-                  style="margin-top: 10px; color: red; position: absolute"
-                ></div>
-              </div>
-            </div>
-          </section>
-        </div>
-
-        <div class="list-alert" id="list_alert"></div>
+          </div>
+        </section>
       </div>
-    </section>
-  </body>
+
+      <div class="list-alert" id="list_alert"></div>
+    </div>
+  </section>
+</body>
+
 </html>
-
+<script src="./js/validacaoAlerta.js"></script>
 <script>
   let proximaAtualizacao;
   let myChart;
@@ -305,7 +286,9 @@
             }
 
             proximaAtualizacao = setTimeout(
-              () => atualizarGrafico(id, dados, myChart, max, min),
+              () => {
+                atualizarGrafico(id, dados, myChart, max, min)
+              },
               5000
             );
           });
@@ -331,7 +314,7 @@
 
     if (status == "ativo") {
       div_fermentadora.innerHTML += `
-        <a onclick="obterDadosGrafico(${numFermen})" style="color: black;">
+        <a onclick="obterDadosGrafico(${numFermen}), atualizarInfoFermenterKpi(${numFermen})" style="color: black;">
           <div class="fermenter-item ${classeFermen}">
             <div class="fermenter-label">
               <img src="https://cdn-icons-png.flaticon.com/512/1748/1748107.png" alt="" class="fermenter-icon" />
@@ -341,6 +324,8 @@
         </a>
       `;
     }
+
+    selectedFermenter()
   }
 
   function exibirFermentadora() {
@@ -367,17 +352,40 @@
     });
   }
 
-  function atualizarDataHoraAtualizacao() {
-    const agora = new Date();
-    const dia = String(agora.getDate()).padStart(2, "0");
-    const mes = String(agora.getMonth() + 1).padStart(2, "0");
-    const ano = agora.getFullYear();
-    const horas = String(agora.getHours()).padStart(2, "0");
-    const minutos = String(agora.getMinutes()).padStart(2, "0");
 
-    const texto = `Última Atualização - ${dia}/${mes}/${ano} às ${horas}:${minutos}`;
-    document.getElementById("ultimaAtualizacao").innerText = texto;
+  function atualizarInfoFermenterKpi(id) {
+    JSON.parse(sessionStorage.FERMENTADORAS).forEach(fermentadora => {
+      if (fermentadora.idFermentadora == id) {
+        var nomeSetor = '';
+        JSON.parse(sessionStorage.DADOS_SETORES).forEach(setor => {
+          if (setor.idSetor == fermentadora.idSetor) {
+            nomeSetor = setor.nome_setor;
+          }
+        })
+
+        info_card_fer.innerHTML = `
+                <h3 class="card-title">Fermentadora ${fermentadora.idFermentadora}</h3>
+                <p class="card-text">Empresa: Moinho da Cevada</p>
+                <p class="card-text">Setor: A</p>
+                <p class="card-text">Sensor: ${fermentadora.nome}</p>
+        `
+      }
+    })
   }
 
-  exibirFermentadora();
+  function selectedFermenter() {
+    let optionFermenter = document.querySelectorAll('.fermenter-item');
+
+    optionFermenter.forEach(element => {
+      element.addEventListener('click', () => {
+        optionFermenter.forEach(el => { el.classList.remove('selected') });
+
+        element.classList.add('selected');
+      });
+    });
+  }
+
+
+  atualizarInfoFermenterKpi(1)
 </script>
+<script src="./js/request.js"></script>

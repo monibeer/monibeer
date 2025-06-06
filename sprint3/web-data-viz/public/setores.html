@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="./css/assets/main.css">
     <link rel="stylesheet" href="./css/assetsDashboard/main.css">
     <link rel="stylesheet" href="./css/indexDashboard.css">
+    <link rel="icon" href="./assets/Monibeer (1) 1.png" />
+
     <link rel="stylesheet" href="./css/setores.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
@@ -16,10 +18,10 @@
 
 <body onload="pegarDadosSetoresDash()">
     <section class="dashboard">
-         <div class="sidebar">
+        <div class="sidebar">
             <a href="./index-dashboard.html">
                 <div class="logotipo">
-                    <img src="./assets/monibeer-logo.png" alt="">
+                    <img src="./assets/monibeer-logo.png" alt="" target="_blank">
                 </div>
             </a>
 
@@ -79,7 +81,7 @@
         <div class="container-dashboard">
             <div class="header">
                 <div class="container-searchBarGroup">
-                    <i class="fa-solid fa-bars"></i>
+                    <i class="fa-solid fa-beer-mug-empty"></i>
 
                     <h3>Meus Setores</h3>
                     <!-- <div class="container-search">
@@ -105,6 +107,8 @@
             <p class="datatime-update" id="ultimaAtualizacao">Última Atualização - 25/04/2025 às 10:40</p>
 
             <div class="container-info-fermenter">
+                <div class="list-alert" id="list_alert"></div>
+
             </div>
     </section>
 </body>
@@ -216,3 +220,4 @@
 
 
 </script>
+<script src="./js/validacaoAlerta.js"></script>
