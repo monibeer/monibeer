@@ -1,5 +1,6 @@
 @import url(./navbar.css);
 @import url(./sidebar.css);
+@import url(../alerta.css);
 
 html,
 body {
