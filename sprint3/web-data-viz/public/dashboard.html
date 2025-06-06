@@ -91,7 +91,14 @@
               style="color: #000000; cursor: pointer"
               onclick="window.history.back()"
             ></i>
-            <h3> <span onclick="window.history.back()">Setores</span> > Dashboard</h3>
+            <h3>
+              <span
+                onclick="window.history.back()"
+                style="font-weight: 600; cursor: pointer"
+                >Setores</span
+              >
+              > Dashboard
+            </h3>
           </div>
           <div class="container-actions">
             <i class="fa-solid fa-bell"></i>
@@ -358,6 +365,18 @@
           console.error("Erro na API:", error);
         });
     });
+  }
+
+  function atualizarDataHoraAtualizacao() {
+    const agora = new Date();
+    const dia = String(agora.getDate()).padStart(2, "0");
+    const mes = String(agora.getMonth() + 1).padStart(2, "0");
+    const ano = agora.getFullYear();
+    const horas = String(agora.getHours()).padStart(2, "0");
+    const minutos = String(agora.getMinutes()).padStart(2, "0");
+
+    const texto = `Última Atualização - ${dia}/${mes}/${ano} às ${horas}:${minutos}`;
+    document.getElementById("ultimaAtualizacao").innerText = texto;
   }
 
   exibirFermentadora();
