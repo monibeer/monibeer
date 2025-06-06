@@ -5,6 +5,12 @@ padding: 20px;
 
 }
 
+#button-addfuncionario{
+  width: 190px;
+  background-color: rgb(42, 124, 10);
+  color: white;
+}
+
 #texto-cadastro-funcionario{
     font-size: 1.5rem;
     font-weight: 400;
@@ -53,8 +59,16 @@ button{
 
 
 
-
-
+#modalFuncionario{
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.551);
+}
 
 #modal {
         display: none;
@@ -101,7 +115,7 @@ button{
         border-top: #ccc solid 1px;
         border-left: #ccc solid 1px;
         border-right: #ccc solid 1px;
-        border-bottom: #063d5a 4px solid;
+        border-bottom: #3e2507 4px solid;
         font-weight: 400;
         height: 40px;
         border-radius: 5px;
@@ -118,7 +132,7 @@ button{
     }
 
     #salvar{
-        background-color: #2c99c1;
+        background-color: #f9aa00;
         color: white;
         width: 100px;
     }
@@ -154,10 +168,6 @@ button{
     color: white;
   }
 
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-
   .row-buttons{
     display: flex;
     flex-direction: row;
@@ -176,6 +186,26 @@ button{
 
   #button-atualizar{
     background-color: rgb(254, 195, 0);
-    color: #eaeaea;
+    color: #ffffff;
     font-weight: 500;
+  }
+
+  #selectTipoCadastro{
+        margin-bottom: 15px;
+        background-color: #fbfbfb;
+        border-top: #ccc solid 1px;
+        border-left: #ccc solid 1px;
+        border-right: #ccc solid 1px;
+        border-bottom: #3e2507 4px solid;
+        font-weight: 400;
+        height: 40px;
+        border-radius: 5px;
+        padding-left: 20px;
+  }
+
+  .button-cadastrar{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 10px;
   }

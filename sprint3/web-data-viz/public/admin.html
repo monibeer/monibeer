@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="./css/assets/main.css">
+    <link rel="stylesheet" href="./css/assets/main.css">
     <link rel="stylesheet" href="./css/assetsDashboard/main.css">
     <link rel="stylesheet" href="./css/indexDashboard.css">
     <link rel="stylesheet" href="./css/admin.css">
@@ -13,7 +13,7 @@
     <title>Admin</title>
 </head>
 <style>
-    
+
 </style>
 
 <body>
@@ -39,7 +39,7 @@
                             <p>Meus Setores</p>
                         </div>
                     </a>
-                     <a href="./admin.html">
+                    <a href="./admin.html">
                         <div class="navigation-item">
                             <i class="fa-solid fa-building"></i>
                             <p>funcionario</p>
@@ -82,50 +82,89 @@
             </div>
 
 
-        
+            <div class="container-dashboard">
+                <div class="container-cadastro">
+                    <strong id="texto-cadastro-funcionario">cadastro funcionario</strong>
+                    <div id="modalFuncionario" style="display: none;">
 
-        <div class="container-dashboard">
-            <div class="container-cadastro">
-            <strong id="texto-cadastro-funcionario">cadastro funcionario</strong>
-            <h1>Lista de Funcionários</h1>
-            <div class="row-buttons">
-                <button id="button-adm" onclick="cadastrar()">Administrador</button>
-                <button id="button-funcionario" onclick="listar()">Funcionarios</button>
-                <div class="input-icon">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input id="input_nome_funcionario" type="text" placeholder="Buscar funcionário" />
-                </div>
-            </div>
+                        <!--cadastro funcionario-->
+                        <div id="modal-content">
+                            <h3>Cadastrar Funcionário</h3>
+                            <div class="atualizar-dados">
+                                <strong>Nome:</strong>
+                                <input type="text" id="inputNomeCadastro" placeholder="Nome">
+                                <strong>Email:</strong>
+                                <input type="email" id="inputEmailCadastro" placeholder="Email">
+                                <strong>Senha:</strong>
+                                <input type="password" id="inputSenhaCadastro" placeholder="Senha">
+                                <strong>Tipo funcionario:</strong>
+                                <select id="selectTipoCadastro">
+                                    <option value="administrador">Administrador</option>
+                                    <option value="funcionario">Funcionário</option>
+                                </select>
+                            </div>
+                            <div class="button-cadastrar">
+                                <button id="cancelar" onclick="fecharModalCadastro()">Cancelar</button>
+                                <button id="salvar" onclick="cadastrarFuncionario()">Salvar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
 
-            
-            <div id="usuarios"></div>
-        
-            <div id="modal">
-                <div id="modal-content">
-                    <h3>Atualizar Funcionário</h3>
-                    <div class="atualizar-dados">
-                        <strong>Nome:</strong>
-                        <input type="text" id="inputNome" placeholder="Nome">
-                        <strong>Email:</strong>
-                        <input type="email" id="inputEmail" placeholder="Email">
-                        <strong>Senha:</strong>
-                        <input type="password" id="inputSenha" placeholder="Senha">
-                        <strong>Tipo funcionario:</strong>
-                        <input type="text" id="inputTipo" placeholder="Tipo de Usuário (administrador/funcionario)">
+                    <h1>Lista de Funcionários</h1>
+                    <div class="row-buttons">
+                        <button id="button-addfuncionario" onclick="abrirModalCadastro()">Adicionar funcionário</button>
+
+                        <!-- <div class="input-icon">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input id="input_nome_funcionario" type="text" placeholder="Buscar funcionário" />
+                        </div> -->
                     </div>
-                    <div class="button-atualizar">
-                        <button id="cancelar" onclick="fecharModal()">Cancelar</button>
-                    <button id="salvar" onclick="confirmarAtualizacao()">Salvar</button>
+                    <div id="usuarios">
+                        <div class="registro">
+                            <table border="1">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Email</th>
+                                        <th>Tipo</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabelaFuncionarios">
+    
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    
+
+                    <div id="modal">
+                        <div id="modal-content">
+                            <h3>Atualizar Funcionário</h3>
+                            <div class="atualizar-dados">
+                                <strong>Nome:</strong>
+                                <input type="text" id="inputNome" placeholder="Nome">
+                                <strong>Email:</strong>
+                                <input type="email" id="inputEmail" placeholder="Email">
+                                <strong>Senha:</strong>
+                                <input type="password" id="inputSenha" placeholder="Senha">
+                                <strong>Tipo funcionario:</strong>
+                                <input type="text" id="inputTipo"
+                                    placeholder="Tipo de Usuário (administrador/funcionario)">
+                            </div>
+                            <div class="button-atualizar">
+                                <button id="cancelar" onclick="fecharModal()">Cancelar</button>
+                                <button id="salvar" onclick="confirmarAtualizacao()">Salvar</button>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
     </section>
     </div>
-</div>
+    </div>
 
-   
+
 </body>
 
 </html>
@@ -147,39 +186,26 @@
             fetch(`/usuarios/listar/${fkEmpresa}`)
                 .then(res => res.json())
                 .then(funcionarios => {
-                    const container = document.getElementById("usuarios");
+                    const tbody = document.getElementById("tabelaFuncionarios");
+                    tbody.innerHTML = ""; 
 
                     funcionarios.forEach(user => {
-                        const div = document.createElement("div");
-                        div.innerHTML = `
-
-                        <div class="registro">
-                        <table border="1">
-                            <thead>
-                                <tr>
-                                <th>Nome</th>
-                                <th>Email</th>
-                                <th>Tipo</th>
-                                <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                <td>${user.nome}</td>
-                                <td> ${user.email}</td>
-                                <td> ${user.tipoUsuario}</td>
-                                <td class="td-buttons" style=" justify-content: flex-end; gap: 15px;"><button id="button-deletar" onclick="deletarUsuario(${user.idFuncionario})">Deletar</button>
-                                    <button id="button-atualizar" onclick="abrirModal(${user.idFuncionario}, '${user.nome}', '${user.email}', '${user.tipoUsuario}')">Atualizar</button>
-                                </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        </div>`;
-                        container.appendChild(div);
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `
+                            <td>${user.nome}</td>
+                            <td>${user.email}</td>
+                            <td>${user.tipoUsuario}</td>
+                            <td class="td-buttons" style="justify-content: flex-end; gap: 15px;">
+                                <button id="button-deletar" onclick="deletarUsuario(${user.idFuncionario})">Deletar</button>
+                                <button id="button-atualizar"
+                                    onclick="abrirModal(${user.idFuncionario}, '${user.nome}', '${user.email}', '${user.tipoUsuario}')">Atualizar</button>
+                            </td>
+            `;
+            tbody.appendChild(tr);
                     });
                 });
         });
-    
+
     function abrirModal(id, nome, email, tipo) {
         funcionarioAtualId = id;
         document.getElementById("inputNome").value = nome;
@@ -194,6 +220,20 @@
         document.getElementById("modal").style.display = "none";
         funcionarioAtualId = null;
     }
+
+    function abrirModalCadastro() {
+        document.getElementById("modalFuncionario").style.display = "block";
+    }
+
+    function fecharModalCadastro() {
+        document.getElementById("modalFuncionario").style.display = "none";
+
+        document.getElementById("inputNomeCadastro").value = "";
+        document.getElementById("inputEmailCadastro").value = "";
+        document.getElementById("inputSenhaCadastro").value = "";
+        document.getElementById("selectTipoCadastro").value = "";
+    }
+
 
     function confirmarAtualizacao() {
         const nome = document.getElementById("inputNome").value;
@@ -231,12 +271,12 @@
     function deletarUsuario(id) {
         const confirmar = confirm("Tem certeza que deseja deletar este usuário?");
 
-        if(!confirmar) return;
+        if (!confirmar) return;
 
         fetch(`/usuarios/deletar/${id}`, { method: "DELETE" })
             .then(res => {
                 if (res.ok) {
-                    
+
                     alert("Usuário deletado.");
                     location.reload();
                 } else {
@@ -244,4 +284,51 @@
                 }
             });
     }
+
+    function cadastrarFuncionario() {
+        const nome = document.getElementById("inputNomeCadastro").value;
+        const email = document.getElementById("inputEmailCadastro").value;
+        const senha = document.getElementById("inputSenhaCadastro").value;
+        const tipoUsuario = document.getElementById("selectTipoCadastro").value;
+
+        if (!nome || !email || !senha || !tipoUsuario) {
+            alert("Por favor, preencha todos os campos.");
+            return;
+        }
+
+        const idAdmin = sessionStorage.getItem("ID_USUARIO");
+
+        fetch(`/usuarios/buscar/${idAdmin}`)
+            .then(res => res.json())
+            .then(admin => {
+                const empresaId = admin.fkEmpresa;
+
+                fetch("/usuarios/cadastrar", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        nomeServer: nome,
+                        emailServer: email,
+                        senhaServer: senha,
+                        empresaServer: empresaId,
+                        tipoUsuarioServer: tipoUsuario
+                    })
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        alert(data.mensagem || "Funcionário cadastrado com sucesso!");
+                        fecharModalCadastro();
+                        location.reload();
+                    })
+                    .catch(err => {
+                        console.error("Erro ao cadastrar funcionário:", err);
+                        alert("Erro ao cadastrar funcionário.");
+                    });
+            })
+            .catch(err => {
+                console.error("Erro ao buscar admin:", err);
+                alert("Erro ao obter dados da empresa.");
+            });
+    }
+
 </script>
