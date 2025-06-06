@@ -137,7 +137,6 @@ function verificarAlerta(dados) {
             }
         }
 
-        console.log(alertas)
 
         let totalFora = alertas.maxCritico.contador + alertas.minCritico.contador + alertas.maxAtencao.contador + alertas.minAtencao.contador + alertas.maxCuidado.contador + alertas.minCuidado.contador;
         let percentual = (totalFora / total) * 100;
@@ -149,50 +148,56 @@ function verificarAlerta(dados) {
 
             if (alertas.maxCritico.contador > alertas.minCritico.contador && alertas.maxCritico.contador > alertas.maxAtencao.contador && alertas.maxCritico.contador > alertas.maxCuidado.contador) {
                 categoria = "Crítico";
-                mensagem = `Urgente! Temperatura da fermentadora ${idFermen}(${alertas.maxCritico.temp}°C) está ${(alertas.maxCritico.temp - limiteMax).toFixed(1)}°C acima do limite ideal de ${limiteMax}°C`;
+                mensagem = `Urgente! Temperatura da fermentadora ${idFermen} (${alertas.maxCritico.temp}°C) está ${(alertas.maxCritico.temp - limiteMax).toFixed(1)}°C acima do limite ideal de ${limiteMax}°C`;
                 idCapturaTempAlerta = alertas.maxCritico.idCapturaTemp;
             } else if (alertas.minCritico.contador > alertas.maxCritico.contador && alertas.minCritico.contador > alertas.minAtencao.contador && alertas.minCritico.contador > alertas.minCuidado.contador) {
                 categoria = "Crítico";
-                mensagem = `Urgente! Temperatura da fermentadora ${idFermen}(${alertas.minCritico.temp}°C) está ${(limiteMin - alertas.minCritico.temp).toFixed(1)}°C abaixo do limite ideal de ${limiteMin}°C`;
+                mensagem = `Urgente! Temperatura da fermentadora ${idFermen} (${alertas.minCritico.temp}°C) está ${(limiteMin - alertas.minCritico.temp).toFixed(1)}°C abaixo do limite ideal de ${limiteMin}°C`;
                 idCapturaTempAlerta = alertas.minCritico.idCapturaTemp;
             } else if (alertas.maxAtencao.contador > alertas.minAtencao.contador && alertas.maxAtencao.contador > alertas.maxCuidado.contador) {
                 categoria = "Atenção";
-                mensagem = `Atenção! Temperatura da fermentadora ${idFermen}(${alertas.maxAtencao.temp}°C) está ${(alertas.maxAtencao.temp - limiteMax).toFixed(1)}°C acima do limite ideal de ${limiteMax}°C`;
+                mensagem = `Atenção! Temperatura da fermentadora ${idFermen} (${alertas.maxAtencao.temp}°C) está ${(alertas.maxAtencao.temp - limiteMax).toFixed(1)}°C acima do limite ideal de ${limiteMax}°C`;
                 idCapturaTempAlerta = alertas.maxAtencao.idCapturaTemp;
             } else if (alertas.minAtencao.contador > alertas.maxAtencao.contador && alertas.minAtencao.contador > alertas.minCuidado.contador) {
                 categoria = "Atenção";
-                mensagem = `Atenção! Temperatura da fermentadora ${idFermen}(${alertas.minAtencao.temp}°C) está ${(limiteMin - alertas.minAtencao.temp).toFixed(1)}°C abaixo do limite ideal de ${limiteMin}°C`;
+                mensagem = `Atenção! Temperatura da fermentadora ${idFermen} (${alertas.minAtencao.temp}°C) está ${(limiteMin - alertas.minAtencao.temp).toFixed(1)}°C abaixo do limite ideal de ${limiteMin}°C`;
                 idCapturaTempAlerta = alertas.minAtencao.idCapturaTemp;
             } else if (alertas.maxCuidado.contador > alertas.minCuidado.contador) {
                 categoria = "Cuidado";
-                mensagem = `Cuidado! Temperatura da fermentadora ${idFermen}(${alertas.maxCuidado.temp}°C) está ${(alertas.maxCuidado.temp - limiteMax).toFixed(1)}°C acima do limite ideal de ${limiteMax}°C`;
+                mensagem = `Cuidado! Temperatura da fermentadora ${idFermen} (${alertas.maxCuidado.temp}°C) está ${(alertas.maxCuidado.temp - limiteMax).toFixed(1)}°C acima do limite ideal de ${limiteMax}°C`;
                 idCapturaTempAlerta = alertas.maxCuidado.idCapturaTemp;
             } else if (alertas.minCuidado.contador > alertas.maxCuidado.contador) {
                 categoria = "Cuidado";
-                mensagem = `Cuidado! Temperatura da fermentadora ${idFermen}(${alertas.minCuidado.temp}°C) está ${(limiteMin - alertas.minCuidado.temp).toFixed(1)}°C abaixo do limite ideal de ${limiteMin}°C`;
+                mensagem = `Cuidado! Temperatura da fermentadora ${idFermen} (${alertas.minCuidado.temp}°C) está ${(limiteMin - alertas.minCuidado.temp).toFixed(1)}°C abaixo do limite ideal de ${limiteMin}°C`;
                 idCapturaTempAlerta = alertas.minCuidado.idCapturaTemp;
             }
 
             if (mensagem !== '' && idCapturaTempAlerta !== null) {
+                mostrarAlerta(categoria, mensagem)
                 cadastrarAlerta(categoria, mensagem, idCapturaTempAlerta);
-                mostrarAlerta(categoria, mensagem, 4000)
             }
         }
     }
 
-    function mostrarAlerta(tipo, mensagem, tempo) {
+    function mostrarAlerta(tipo, mensagem, tempo = 1000) {
+        var iconTipo = '';
+        var classAlert = '';
+
         if (tipo == 'Cuidado') {
-            iconTipo = 'fa-circle-info';
+            iconTipo = '<i class="fa-solid fa-circle-info"></i>';
+            classAlert = 'cuidado';
         } else if (tipo == 'Atenção') {
-            iconTipo = 'fa-circle-exclamation'
+            iconTipo = '<i class="fa-solid fa-circle-exclamation"></i>';
+            classAlert = 'atencao';
         } else if (tipo == 'Crítico') {
-            iconTipo = 'a-triangle-exclamation';
+            iconTipo = '<i class="fa-solid fa-triangle-exclamation"></i>';
+            classAlert = 'critico';
         }
 
-        list_alert.innerHTML = `
-        <div class="container-alerta ${tipo} active">
+        list_alert.innerHTML += `
+        <div class="container-alerta ${classAlert} active">
             <div class="img-icon-alerta" aria-hidden="true">
-                <i class="fa-solid ${iconTipo}"></i>
+                ${iconTipo}
             </div>
             <div class="text-alerta">
                 <strong>${mensagem}</strong>
@@ -204,8 +209,9 @@ function verificarAlerta(dados) {
         list_alert.classList.add('active');
 
         setTimeout(() => {
+            console.log(list_alert.classList)
             list_alert.classList.remove('active');
-            list_alert.classList.add('fade-out');
+            console.log('olar')
         }, tempo);
     }
 

@@ -23,7 +23,7 @@
 }
 
 .container-alerta i {
-    font-size: 36px;
+    font-size: 47px;
     color: #fff;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
@@ -32,19 +32,18 @@
     color: #fff;
     font-size: 16px;
     line-height: 1.4;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
     max-width: 220px;
 }
 
-.cuidado {
+.container-alerta.cuidado {
     background-color: #0077b6;
 }
 
-.atencao {
+.container-alerta.atencao {
     background-color: #ffa200;
 }
 
-.critico {
+.container-alerta.critico {
     background-color: #e63946;
 }
 
@@ -59,9 +58,4 @@
     opacity: 1;
     transform: translateY(0);
     pointer-events: all;
-}
-
-.container-alerta.fade-out {
-    opacity: 0;
-    transform: translateY(-10px);
 }
