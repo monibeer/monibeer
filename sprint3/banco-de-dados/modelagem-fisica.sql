@@ -241,8 +241,6 @@ INSERT INTO codigo_ativacao (codigo, fkEmpresa) VALUES
 (12345678, 1),
 (12345677, 2);
 
-INSERT INTO historico_fermentadora (fkFermentadora, fkEstilo, dataInicio, dataFim)
-VALUES (DEFAULT, 1, 1, '2025-06-05 08:00:00', NULL);
 
 UPDATE alerta SET dtHora = '2024-11-05 07:21:14' WHERE idAlerta = 1; 
 

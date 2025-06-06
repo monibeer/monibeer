@@ -32,8 +32,9 @@ function buscarMedidasEmTempoReal(idAquario) {
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasDeValidacaoAlerta(idAquario) {
-    var instrucaoSql = `SELECT * FROM vw_ultimos_30_por_sensor WHERE fkEmpresa = ${idAquario};`;
+function buscarMedidasDeValidacaoAlerta(fkEmpresa, fkSensor) {
+    var instrucaoSql = `SELECT * FROM vw_captura_estilo WHERE fkSensor = ${fkSensor} AND fkEmpresa = ${fkEmpresa} ORDER BY dtHora DESC LIMIT 30;
+`;
 
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);

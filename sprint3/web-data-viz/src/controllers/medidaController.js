@@ -45,10 +45,11 @@ function buscarMedidasEmTempoReal(req, res) {
 function buscarMedidasValidacaoAlerta(req, res) {
 
     var idEmpresa = req.params.idEmpresa;
+    var idSensor = req.params.idSensor;
 
     console.log(`Recuperando medidas para validacão`);
 
-    medidaModel.buscarMedidasDeValidacaoAlerta(idEmpresa).then(function (resultado) {
+    medidaModel.buscarMedidasDeValidacaoAlerta(idEmpresa, idSensor).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {

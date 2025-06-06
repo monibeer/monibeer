@@ -11,7 +11,7 @@ router.get("/tempo-real/:id", function (req, res) {
     medidaController.buscarMedidasEmTempoReal(req, res);
 })
 
-router.get("/validacaoTemp/:idEmpresa", function (req, res) {
+router.get("/validacaoTemp/:idEmpresa/:idSensor", function (req, res) {
     medidaController.buscarMedidasValidacaoAlerta(req, res);
 })
 
