@@ -1,11 +1,12 @@
 .list-alert{
-    width: 350px;
+    width: 360px;
     display: flex;
     flex-direction: column;
-    height: 100%;
     position: absolute;
     right: 30px;
     overflow-y: auto;
+    overflow-x: hidden;
+    height: 80%;
 }
 
 .container-alerta {
