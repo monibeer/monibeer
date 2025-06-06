@@ -51,7 +51,28 @@ function buscarMedidasValidacaoAlerta(req, res) {
 
     medidaModel.buscarMedidasDeValidacaoAlerta(idEmpresa, idSensor).then(function (resultado) {
         if (resultado.length > 0) {
-            res.status(200).json(resultado);
+            res.status(200).json(resultado[0].total_segundos);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+function buscarTempoForaDoIdeal(req, res) {
+    var idSensor = req.params.idSensor;
+    var data = req.params.dataAtual;
+
+    console.log(`Recuperando medidas para validacão`);
+
+    medidaModel.buscarTempoForaDoIdeal(idSensor, data).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json({tempo: resultado[0].total_segundos});
         } else {
             res.status(204).send("Nenhum resultado encontrado!")
         }
@@ -66,6 +87,7 @@ function buscarMedidasValidacaoAlerta(req, res) {
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
-    buscarMedidasValidacaoAlerta
+    buscarMedidasValidacaoAlerta,
+    buscarTempoForaDoIdeal
 
 }

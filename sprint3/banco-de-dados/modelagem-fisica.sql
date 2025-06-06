@@ -419,3 +419,18 @@ FROM fermentadora AS f
 	JOIN estilo AS e ON e.idEstilo = hf.fkEstilo
 	WHERE s.fkEmpresa = 1
 	ORDER BY f.idFermentadora ASC;
+    
+    SELECT 
+  ROUND(COUNT(*) * 90 / 3600.0, 2) AS total_horas_alerta
+FROM 
+  alerta a
+JOIN 
+  sensor s ON a.idSensor = s.idSensor
+JOIN 
+  fermentadora f ON s.idFermentadora = f.idFermentadora
+JOIN 
+  empresa e ON f.idEmpresa = e.idEmpresa
+WHERE 
+  DATE(a.dtHora) = CURRENT_DATE
+  AND f.idFermentadora = 1
+  AND e.idEmpresa = 1;

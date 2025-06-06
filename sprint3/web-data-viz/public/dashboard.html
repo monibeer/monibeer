@@ -58,7 +58,7 @@
           </a>
 
           <!-- Inserir link do jira -->
-          <a href="https://monibeer.atlassian.net/servicedesk/customer/portal/35"  target="_blank">
+          <a href="https://monibeer.atlassian.net/servicedesk/customer/portal/35" target="_blank">
             <div class="navigation-item">
               <i class="fa-solid fa-headset"></i>
               <p>Suporte</p>
@@ -125,7 +125,7 @@
             <div class="kpi-header">
               <h4 class="kpi-title">Tempo Fora do Ideal</h4>
             </div>
-            <div class="kpi-value">2h 30m</div>
+            <div class="kpi-value" id="kpi_value_hrs">2h 30m</div>
             <div class="kpi-desc">Total acumulado hoje</div>
           </div>
 
@@ -149,6 +149,12 @@
 <script>
   let proximaAtualizacao;
   let myChart;
+
+  const dataAtual = new Date();
+  const dia = String(dataAtual.getDate()).padStart(2, '0');
+  const mes = String(dataAtual.getMonth() + 1).padStart(2, '0');
+  const ano = dataAtual.getFullYear();
+  const dataAtualPC = `${ano}-${mes}-${dia}`;
 
   function obterDadosGrafico(id) {
     if (myChart) {
@@ -314,7 +320,7 @@
 
     if (status == "ativo") {
       div_fermentadora.innerHTML += `
-        <a onclick="obterDadosGrafico(${numFermen}), atualizarInfoFermenterKpi(${numFermen})" style="color: black;">
+        <a onclick="obterDadosGrafico(${numFermen}), atualizarInfoFermenterKpi(${numFermen}), pegarKpiTempoForaDoIdeal(${numFermen})" style="color: black;">
           <div class="fermenter-item ${classeFermen}">
             <div class="fermenter-label">
               <img src="https://cdn-icons-png.flaticon.com/512/1748/1748107.png" alt="" class="fermenter-icon" />
@@ -352,7 +358,6 @@
     });
   }
 
-
   function atualizarInfoFermenterKpi(id) {
     JSON.parse(sessionStorage.FERMENTADORAS).forEach(fermentadora => {
       if (fermentadora.idFermentadora == id) {
@@ -385,7 +390,35 @@
     });
   }
 
+  function pegarKpiTempoForaDoIdeal(id) {
+    var idSensor = 0;
+
+    JSON.parse(sessionStorage.FERMENTADORAS).forEach(fermen => {
+      if (fermen.idFermentadora == id) {
+        idSen = fermen.idSensor;
+      }
+    })
+
+    fetch(`/medidas/tempo-foraIdeal/${idSen}/${dataAtualPC}`, { cache: "no-store" })
+      .then((response) => {
+        if (response.ok) {
+          response.json().then((resposta) => {
+            formatarHora(resposta.tempo);
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Erro na API:", error);
+      });
+  }
+
+  function formatarHora(resposta) {
+    const horas = Math.floor(resposta / 3600);
+    const minutos = Math.floor((resposta % 3600) / 60);
+    kpi_value_hrs.innerHTML = `${horas}h ${minutos}min`;
+  }
 
   atualizarInfoFermenterKpi(1)
+  pegarKpiTempoForaDoIdeal(1)
 </script>
 <script src="./js/request.js"></script>

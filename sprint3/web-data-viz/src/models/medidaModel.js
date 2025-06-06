@@ -41,8 +41,24 @@ function buscarMedidasDeValidacaoAlerta(fkEmpresa, fkSensor) {
     return database.executar(instrucaoSql);
 }
 
+function buscarTempoForaDoIdeal(fkSensor, dataAtual) {
+    var instrucaoSql = `
+    SELECT 
+        ROUND(COUNT(*) * 90) AS total_segundos
+    FROM alerta a JOIN captura c ON a.fkCaptura = c.idCaptura
+    WHERE c.dtHora >= '${dataAtual} 00:00:00'
+            AND c.dtHora <  '${dataAtual} 23:59:59'
+            AND c.fkSensor = ${fkSensor};
+`;
+
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
-    buscarMedidasDeValidacaoAlerta
+    buscarMedidasDeValidacaoAlerta,
+    buscarTempoForaDoIdeal
 }

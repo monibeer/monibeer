@@ -15,4 +15,8 @@ router.get("/validacaoTemp/:idEmpresa/:idSensor", function (req, res) {
     medidaController.buscarMedidasValidacaoAlerta(req, res);
 })
 
+router.get("/tempo-foraIdeal/:idSensor/:dataAtual", function (req, res) {
+    medidaController.buscarTempoForaDoIdeal(req, res);
+})
+
 module.exports = router;
