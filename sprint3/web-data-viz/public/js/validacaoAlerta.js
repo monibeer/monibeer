@@ -238,7 +238,7 @@ function processarFilaAlertas() {
 }
 
 
-function mostrarAlerta(tipo, mensagem, tempo = 30000) {
+function mostrarAlerta(tipo, mensagem, tempo = 15000) {
     var iconTipo = '';
     var classAlert = '';
 
