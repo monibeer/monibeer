@@ -420,17 +420,13 @@ FROM fermentadora AS f
 	WHERE s.fkEmpresa = 1
 	ORDER BY f.idFermentadora ASC;
     
-    SELECT 
-  ROUND(COUNT(*) * 90 / 3600.0, 2) AS total_horas_alerta
+SELECT 
+  ROUND(COUNT(*) * 90) AS total_minutos
 FROM 
   alerta a
 JOIN 
-  sensor s ON a.idSensor = s.idSensor
-JOIN 
-  fermentadora f ON s.idFermentadora = f.idFermentadora
-JOIN 
-  empresa e ON f.idEmpresa = e.idEmpresa
+  captura c ON a.fkCaptura = c.idCaptura
 WHERE 
-  DATE(a.dtHora) = CURRENT_DATE
-  AND f.idFermentadora = 1
-  AND e.idEmpresa = 1;
+  c.dtHora >= '2025-06-06 00:00:00'
+  AND c.dtHora <  '2025-06-07 00:00:00'
+  AND c.fkSensor = 5;
