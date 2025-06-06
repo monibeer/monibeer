@@ -2,7 +2,6 @@
 CREATE DATABASE monibeer;
 USE monibeer;
 
-
 CREATE TABLE endereco (
     idEndereco INT PRIMARY KEY AUTO_INCREMENT,
     rua VARCHAR(100),
@@ -183,16 +182,16 @@ INSERT INTO estilo (estiloCerveja, limiteTempMin, limiteTempMax) VALUES
 ('pilsen', 9.00, 12.00);
 
 INSERT INTO historico_fermentadora (fkFermentadora, fkEstilo, dataInicio, dataFim) VALUES
-(1, 1, '2024-11-01 08:00:00', '2024-11-10 08:00:00'),
-(2, 2, '2024-11-02 09:00:00', '2024-11-11 09:00:00'),
-(3, 1, '2024-11-03 10:00:00', '2024-11-12 10:00:00'),
-(4, 2, '2024-11-04 11:00:00', '2024-11-13 11:00:00'),
-(5, 1, '2024-11-05 12:00:00', '2024-11-14 12:00:00'),
-(6, 2, '2024-11-06 13:00:00', '2024-11-15 13:00:00'),
-(7, 1, '2024-11-07 14:00:00', '2024-11-16 14:00:00'),
-(8, 2, '2024-11-08 15:00:00', '2024-11-17 15:00:00'),
-(9, 1, '2024-11-09 16:00:00', '2024-11-18 16:00:00'),
-(10, 2, '2024-11-10 17:00:00', '2024-11-19 17:00:00'),
+(1, 1, '2024-11-01 08:00:00', NULL),
+(2, 2, '2024-11-02 09:00:00', NULL),
+(3, 1, '2024-11-03 10:00:00', NULL),
+(4, 2, '2024-11-04 11:00:00', NULL),
+(5, 1, '2024-11-05 12:00:00', NULL),
+(6, 2, '2024-11-06 13:00:00', NULL),
+(7, 1, '2024-11-07 14:00:00', NULL),
+(8, 2, '2024-11-08 15:00:00', NULL),
+(9, 1, '2024-11-09 16:00:00', NULL),
+(10, 2, '2024-11-10 17:00:00', NULL),
 (11, 1, '2024-12-01 08:30:00', NULL),
 (12, 2, '2024-12-02 09:30:00', NULL),
 (13, 1, '2024-12-03 10:30:00', NULL),
@@ -209,57 +208,66 @@ INSERT INTO captura (temperatura, fkSensor) VALUES
 (20.45, 2),
 (21.00, 3),
 (22.45, 4),
-(18.69, 5);
+(18.69, 5),
+(18.50, 1),
+(18.70, 1),
+(19.10, 1),
+(19.50, 1),
+(20.00, 1),
+(20.30, 1),
+(20.60, 1),
+(21.00, 1),
+(21.20, 1),
+(21.50, 1),
+(24.70, 2),
+(24.00, 2),
+(24.30, 2),
+(24.50, 2),
+(24.70, 1),
+(23.00, 1),
+(24.20, 1),
+(24.50, 1),
+(24.70, 1),
+(24.00, 1);
 
 INSERT INTO alerta (dtHora, nivel, mensagem, fkCaptura) VALUES
-('2024-12-25 07:21:14', 'Cuidado', 'Atingiu o limite máximo do ideal 22°C ', 1),
-('2024-12-25 12:21:14', 'Cuidado', 'Atingiu o limite mínimo do ideal 18°C', 2),
-('2024-04-01 08:24:01', 'Atenção', 'Está 2 graus celsius acima do limite máximo ideal', 3),
-('2024-04-01 14:24:01', 'Atenção', 'Está 2 graus celsius abaixo do limite mínimo ideal', 4),
-('2024-12-25 07:21:14', 'Crítico', 'Ultrapassou o limite máximo permitido, temperatura acima de 26°C.', 5);
-
--- INSERT INTO alerta (dtHora, nivel, mensagem, fkCaptura) VALUES
--- (now(), 'Crítico', 'Atingiu o limite máximo do ideal 22°C ', 124);
+('2024-12-25 07:21:14', 'Cuidado', 'Cuidado! Temperatura da fermentadora está 1°C acima do limite ideal.', 1),
+('2024-12-25 12:21:14', 'Cuidado', 'Cuidado! Temperatura da fermentadora está 1°C abaixo do limite ideal.', 2),
+('2024-04-01 08:24:01', 'Atenção', 'Atenção! Temperatura da fermentadora está 3°C acima do limite ideal.', 3),
+('2024-04-01 14:24:01', 'Atenção', 'Atenção! Temperatura da fermentadora está 3°C abaixo do limite ideal.', 4),
+('2024-12-25 07:21:14', 'Crítico', 'Urgente! Temperatura da fermentadora está 5°C acima  do limite ideal.', 5);
 
 INSERT INTO codigo_ativacao (codigo, fkEmpresa) VALUES 
 (12345678, 1),
 (12345677, 2);
 
--- Para Fermentadora 1 (histórico: 2024-11-01 até 2024-11-10)
-UPDATE alerta SET dtHora = '2024-11-05 07:21:14' WHERE idAlerta = 1;
+INSERT INTO historico_fermentadora (fkFermentadora, fkEstilo, dataInicio, dataFim)
+VALUES (DEFAULT, 1, 1, '2025-06-05 08:00:00', NULL);
 
--- Para Fermentadora 2 (histórico: 2024-11-02 até 2024-11-11)
+UPDATE alerta SET dtHora = '2024-11-05 07:21:14' WHERE idAlerta = 1; 
+
 UPDATE alerta SET dtHora = '2024-11-06 12:21:14' WHERE idAlerta = 2;
 
--- Para Fermentadora 3 (histórico: 2024-11-03 até 2024-11-12)
 UPDATE alerta SET dtHora = '2024-11-07 08:24:01' WHERE idAlerta = 3;
 
--- Para Fermentadora 4 (histórico: 2024-11-04 até 2024-11-13)
 UPDATE alerta SET dtHora = '2024-11-08 14:24:01' WHERE idAlerta = 4;
 
--- Para Fermentadora 5 (histórico: 2024-11-05 até 2024-11-14)
 UPDATE alerta SET dtHora = '2024-11-09 07:21:14' WHERE idAlerta = 5;
 
--- Fermentadora 1 (IPA): ALERTA CUIDADO (acima do ideal)
 UPDATE captura SET temperatura = 22.30 WHERE idCaptura = 1;
-UPDATE alerta SET dtHora = '2024-11-05 07:21:14', mensagem = 'Atingiu o limite máximo do ideal 22°C' WHERE idAlerta = 1;
+UPDATE alerta SET dtHora = '2024-11-05 07:21:14', mensagem = 'Cuidado! Temperatura da fermentadora está 1°C acima do limite ideal.' WHERE idAlerta = 1;
 
--- Fermentadora 2 (PILSEN): ALERTA CUIDADO (abaixo do ideal)
 UPDATE captura SET temperatura = 8.70 WHERE idCaptura = 2;
-UPDATE alerta SET dtHora = '2024-11-06 12:21:14', mensagem = 'Atingiu o limite mínimo do ideal 9°C' WHERE idAlerta = 2;
+UPDATE alerta SET dtHora = '2024-11-06 12:21:14', mensagem = 'Cuidado! Temperatura da fermentadora está 1°C abaixo do limite ideal.' WHERE idAlerta = 2;
 
--- Fermentadora 3 (IPA): ALERTA ATENÇÃO (acima do ideal em 2°C)
 UPDATE captura SET temperatura = 24.00 WHERE idCaptura = 3;
-UPDATE alerta SET dtHora = '2024-11-07 08:24:01', mensagem = 'Está 2 graus celsius acima do limite máximo ideal' WHERE idAlerta = 3;
+UPDATE alerta SET dtHora = '2024-11-07 08:24:01', mensagem = 'Atenção! Temperatura da fermentadora está 3°C acima do limite ideal.' WHERE idAlerta = 3;
 
--- Fermentadora 4 (PILSEN): ALERTA ATENÇÃO (abaixo do ideal em 2°C)
 UPDATE captura SET temperatura = 7.00 WHERE idCaptura = 4;
-UPDATE alerta SET dtHora = '2024-11-08 14:24:01', mensagem = 'Está 2 graus celsius abaixo do limite mínimo ideal' WHERE idAlerta = 4;
+UPDATE alerta SET dtHora = '2024-11-08 14:24:01', mensagem = 'Atenção! Temperatura da fermentadora está 3°C abaixo do limite ideal.' WHERE idAlerta = 4;
 
--- Fermentadora 5 (IPA): ALERTA CRÍTICO (bem acima do permitido)
 UPDATE captura SET temperatura = 28.00 WHERE idCaptura = 5;
-UPDATE alerta SET dtHora = '2024-11-09 07:21:14', mensagem = 'Ultrapassou o limite máximo permitido, temperatura acima de 27°C.' WHERE idAlerta = 5;
-
+UPDATE alerta SET dtHora = '2024-11-09 07:21:14', mensagem = 'Urgente! Temperatura da fermentadora está 5°C acima  do limite ideal.' WHERE idAlerta = 5;
 
 SHOW TABLES;
 
@@ -274,7 +282,6 @@ SELECT * FROM estilo;
 SELECT * FROM historico_fermentadora;
 SELECT * FROM captura;
 SELECT * FROM alerta;
-
 
 SELECT idCodigo_ativacao, codigo, fkEmpresa, status FROM codigo_ativacao WHERE codigo = 12345678;
 UPDATE codigo_ativacao SET status = 1 WHERE idCodigo_ativacao = 1;
@@ -307,8 +314,6 @@ UPDATE codigo_ativacao SET status = 1 WHERE idCodigo_ativacao = 1;
     LEFT JOIN alerta a ON a.fkCaptura = c.idCaptura
     WHERE st.fkEmpresa = 1
     GROUP BY e.estiloCerveja;
-    
-
 
 SELECT 
 	f.idFermentadora,
@@ -329,7 +334,6 @@ JOIN historico_fermentadora hf
 JOIN estilo e ON hf.fkEstilo = e.idEstilo
 WHERE st.fkEmpresa = 1
 ORDER BY a.dtHora DESC;
-
 
 CREATE OR REPLACE VIEW vw_fermentadoras_status_setor_empresa AS
 SELECT 
@@ -354,39 +358,7 @@ LEFT JOIN captura c ON c.fkSensor = sn.idSensor
 LEFT JOIN alerta a ON a.fkCaptura = c.idCaptura
 GROUP BY s.idSetor, s.nome, s.fkEmpresa;
 
-
 SELECT * FROM vw_fermentadoras_status_setor_empresa WHERE fkEmpresa = 1;
-  
-INSERT INTO captura (temperatura, fkSensor) VALUES
-(18.50, 1),
-(18.70, 1),
-(19.10, 1),
-(19.50, 1),
-(20.00, 1),
-(20.30, 1),
-(20.60, 1),
-
-
-
-(21.00, 1),
-(21.20, 1),
-(21.50, 1);
-
-INSERT INTO captura (temperatura, fkSensor) VALUES
-(24.70, 2),
-(24.00, 2),
-(24.30, 2),
-(24.50, 2),
-(24.70, 1),
-(23.00, 1),
-(24.20, 1),
-(24.50, 1),
-(24.70, 1),
-(24.00, 1);
-
-
-INSERT INTO historico_fermentadora (idHistorico, fkFermentadora, fkEstilo, dataInicio, dataFim)
-VALUES (default, 1, 1, '2025-06-05 08:00:00', NULL);
 
 CREATE VIEW vw_captura_estilo AS
 SELECT 
@@ -405,16 +377,16 @@ JOIN historico_fermentadora hf ON hf.fkFermentadora = f.idFermentadora AND hf.da
 JOIN estilo e ON e.idEstilo = hf.fkEstilo;
 
 
-CREATE VIEW vw_ultimos_30_por_sensor AS
-SELECT idCaptura, fkSensor, dtHora, temperatura, nomeCerveja, limiteTempMin, limiteTempMax, fkEmpresa
+CREATE OR REPLACE VIEW vw_ultimos_30_por_sensor AS
+SELECT
+    idCaptura, fkSensor, dtHora, temperatura, nomeCerveja, limiteTempMin, limiteTempMax, fkEmpresa
 FROM (
-    SELECT *,
-        ROW_NUMBER() OVER (PARTITION BY fkSensor ORDER BY dtHora DESC) AS rn
-    FROM vw_captura_estilo
+    SELECT
+        v.*,
+        ROW_NUMBER() OVER (PARTITION BY v.fkSensor ORDER BY v.dtHora DESC) AS rn
+    FROM vw_captura_estilo v
 ) sub
-WHERE rn <= 30
-ORDER BY fkSensor, dtHora DESC;
-
+WHERE rn <= 30;
 
 SELECT * FROM vw_ultimos_30_por_sensor;
 
@@ -440,7 +412,7 @@ SELECT
         AND DATE(a.dtHora) = CURRENT_DATE
     ) THEN 1
     ELSE 0
-  END AS status;
+  END AS STATUS;
     
     SELECT
     f.*,
