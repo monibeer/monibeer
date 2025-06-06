@@ -53,33 +53,35 @@ function buscarDadosEVerificar() {
     const idEmpresa = fermentadoras[0].fkEmpresa;
 
     fermentadoras.forEach(fermentadora => {
-        fetch(`/medidas/validacaoTemp/${idEmpresa}/${fermentadora.idSensor}`, { cache: 'no-store' })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Erro HTTP ${response.status}`);
-                }
-                return response.text();
-            })
-            .then(texto => {
-                let dados;
-                try {
-                    dados = JSON.parse(texto);
-                } catch (e) {
-                    console.error('JSON inválido:', texto);
-                    return;
-                }
+        if (fermentadora.statusSensor == 'ativo') {
+            fetch(`/medidas/validacaoTemp/${idEmpresa}/${fermentadora.idSensor}`, { cache: 'no-store' })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Erro HTTP ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then(texto => {
+                    let dados;
+                    try {
+                        dados = JSON.parse(texto);
+                        console.log(dados)
+                    } catch (e) {
+                        console.error('JSON inválido:', texto);
+                        return;
+                    }
 
-                if (!Array.isArray(dados) || dados.length === 0) {
-                    console.log(`Sem dados JSON para sensor ${idSensor}`);
-                    return;
-                }
+                    if (!Array.isArray(dados) || dados.length === 0) {
+                        console.log(`Sem dados JSON para sensor ${idSensor}`);
+                        return;
+                    }
 
-                verificarAlerta(dados);
-            })
-            .catch(error => {
-                console.error('Erro na API:', error.message);
-            });
-
+                    verificarAlerta(dados);
+                })
+                .catch(error => {
+                    console.error('Erro na API:', error.message);
+                });
+        }
     });
 }
 
@@ -236,7 +238,7 @@ function processarFilaAlertas() {
 }
 
 
-function mostrarAlerta(tipo, mensagem, tempo = 3000) {
+function mostrarAlerta(tipo, mensagem, tempo = 30000) {
     var iconTipo = '';
     var classAlert = '';
 

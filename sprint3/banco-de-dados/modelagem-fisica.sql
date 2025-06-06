@@ -182,26 +182,26 @@ INSERT INTO estilo (estiloCerveja, limiteTempMin, limiteTempMax) VALUES
 ('pilsen', 9.00, 12.00);
 
 INSERT INTO historico_fermentadora (fkFermentadora, fkEstilo, dataInicio, dataFim) VALUES
-(1, 1, '2024-11-01 08:00:00', NULL),
-(2, 2, '2024-11-02 09:00:00', NULL),
-(3, 1, '2024-11-03 10:00:00', NULL),
-(4, 2, '2024-11-04 11:00:00', NULL),
-(5, 1, '2024-11-05 12:00:00', NULL),
-(6, 2, '2024-11-06 13:00:00', NULL),
-(7, 1, '2024-11-07 14:00:00', NULL),
-(8, 2, '2024-11-08 15:00:00', NULL),
-(9, 1, '2024-11-09 16:00:00', NULL),
-(10, 2, '2024-11-10 17:00:00', NULL),
-(11, 1, '2024-12-01 08:30:00', NULL),
-(12, 2, '2024-12-02 09:30:00', NULL),
-(13, 1, '2024-12-03 10:30:00', NULL),
-(14, 2, '2024-12-04 11:30:00', NULL),
-(15, 1, '2024-12-05 12:30:00', NULL),
-(16, 2, '2024-12-06 13:30:00', NULL),
-(17, 1, '2024-12-07 14:30:00', NULL),
-(18, 2, '2024-12-08 15:30:00', NULL),
-(19, 1, '2024-12-09 16:30:00', NULL),
-(20, 2, '2024-12-10 17:30:00', NULL);
+(1, 1, now(), NULL),
+(2, 2, now(), NULL),
+(3, 1, now(), NULL),
+(4, 2, now(), NULL),
+(5, 1, now(), NULL),
+(6, 2, now(), NULL),
+(7, 1, now(), NULL),
+(8, 2, now(), NULL),
+(9, 1, now(), NULL),
+(10, 2, now(), NULL),
+(11, 1, now(), NULL),
+(12, 2, now(), NULL),
+(13, 1, now(), NULL),
+(14, 2, now(), NULL),
+(15, 1, now(), NULL),
+(16, 2, now(), NULL),
+(17, 1, now(), NULL),
+(18, 2, now(), NULL),
+(19, 1, now(), NULL),
+(20, 2, now(), NULL);
 
 INSERT INTO captura (temperatura, fkSensor) VALUES
 (18.50, 1),
@@ -209,8 +209,6 @@ INSERT INTO captura (temperatura, fkSensor) VALUES
 (21.00, 3),
 (22.45, 4),
 (18.69, 5),
-
-
 (18.50, 1),
 (18.70, 1),
 (19.10, 1),
@@ -430,3 +428,19 @@ WHERE
   c.dtHora >= '2025-06-06 00:00:00'
   AND c.dtHora <  '2025-06-07 00:00:00'
   AND c.fkSensor = 5;
+  
+  SELECT
+      f.*,
+      s.*,
+      sen.*,
+      e.estiloCerveja
+    FROM fermentadora AS f
+	    JOIN setor AS s 
+      ON f.fkSetor = s.idSetor
+	    JOIN sensor AS sen 
+      ON f.fkSensor = sen.idSensor
+	    JOIN historico_fermentadora AS hf 
+      ON hf.fkFermentadora = f.idFermentadora
+	    JOIN estilo AS e ON e.idEstilo = hf.fkEstilo
+	  WHERE s.fkEmpresa = 1
+	  ORDER BY f.idFermentadora ASC;

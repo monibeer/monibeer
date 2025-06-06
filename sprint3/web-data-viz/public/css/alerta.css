@@ -5,6 +5,7 @@
     height: 100%;
     position: absolute;
     right: 30px;
+    overflow-y: auto;
 }
 
 .container-alerta {

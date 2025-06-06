@@ -308,6 +308,7 @@
     obterDadosGrafico(1);
   };
 
+
   function modeloListaFermen(resposta, numFermen, status) {
     var classeFermen = "";
 
@@ -333,6 +334,7 @@
     selectedFermenter()
   }
 
+
   function exibirFermentadora() {
     JSON.parse(sessionStorage.FERMENTADORAS).forEach((fermen) => {
       fetch(`/alerta/validarStatusFermenAlerta/${fermen.idFermentadora}`, {
@@ -355,6 +357,7 @@
           console.error("Erro na API:", error);
         });
     });
+
   }
 
   function atualizarInfoFermenterKpi(id) {
