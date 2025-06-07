@@ -22,7 +22,8 @@ function autenticar(req, res) {
                                 email: usuario.email,
                                 nome: usuario.nome,
                                 tipoUsuario: usuario.tipoUsuario,
-                                fermentadoras: resultadoFermentadoras
+                                fermentadoras: resultadoFermentadoras,
+                                fkEmpresa: usuario.empresaId
                             });
                         });
                 } else if (resultadoAutenticar.length === 0) {

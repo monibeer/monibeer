@@ -43,6 +43,9 @@ function cadastrar(nome, fkSensor, fkSetor) {
 }
 
 
+
+
+
 module.exports = {
   buscarFermentadorasPorEmpresa,
   cadastrar

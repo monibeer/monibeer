@@ -60,6 +60,12 @@ function atualizarStatusCodigo(idCodigo) {
   return database.executar(instrucaoSql);
 }
 
+function buscarSetores(fkEmpresa) {
+  var instrucaoSql = `SELECT nome FROM setor WHERE fkEmpresa = '${fkEmpresa}'`;
+
+  return database.executar(instrucaoSql);
+}
+
 module.exports = {
   buscarPorCnpj,
   buscarPorId,
@@ -69,5 +75,6 @@ module.exports = {
   cadastrarCodigo,
   listar,
   buscarCodigoEspecifico,
-  atualizarStatusCodigo
+  atualizarStatusCodigo,
+  buscarSetores
 };

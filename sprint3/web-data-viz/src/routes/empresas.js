@@ -23,4 +23,8 @@ router.post("/ativar", function (req, res) {
   empresaController.ativarCodigo(req, res);
 });
 
+router.get("/buscarSetores/:fkEmpresa", function (req, res) {
+  empresaController.buscarSetores(req, res);
+});
+
 module.exports = router;
