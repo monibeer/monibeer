@@ -144,7 +144,7 @@
 </body>
 
 </html>
-<script src="./js/validacaoAlerta.js"></script>
+<!-- <script src="./js/validacaoAlerta.js"></script> -->
 <script>
   let proximaAtualizacao;
   let myChart;
@@ -167,12 +167,15 @@
 
     clearTimeout(proximaAtualizacao);
 
+    console.log("oi grafuci dnv");
+
     fetch(`/medidas/ultimas/${id}`, { cache: "no-store" })
       .then((response) => {
         if (response.ok) {
           response.json().then((resposta) => {
             console.log(resposta);
             resposta.reverse();
+            console.log("plotar dnv")
             plotarGrafico(resposta, id);
           });
         }
@@ -264,16 +267,12 @@
       .then((response) => {
         if (response.ok) {
           response.json().then((novoRegistro) => {
-            const aviso = document.getElementById(`avisoCaptura${id}`);
-            aviso.innerHTML = "";
+          
 
             const novo = novoRegistro[0];
             if (
-              novo.momento_grafico === dados.labels[dados.labels.length - 1]
+              novo.momento_grafico !== dados.labels[dados.labels.length - 1]
             ) {
-              aviso.innerHTML =
-                '<i class="fa-solid fa-triangle-exclamation"></i> Sem dados novos.';
-            } else {
               dados.labels.shift();
               dados.labels.push(novo.momento_grafico);
 
@@ -291,6 +290,7 @@
 
             proximaAtualizacao = setTimeout(
               () => {
+                console.log("chamando atualizar")
                 atualizarGrafico(id, dados, myChart, max, min)
               },
               5000
@@ -373,6 +373,7 @@
                 <h3 class="card-title">Fermentadora ${fermentadora.idFermentadora}</h3>
                 <p class="card-text">Empresa: Moinho da Cevada</p>
                 <p class="card-text">Setor: A</p>
+                <p class="card-text">Estilo: <span style="font-weight: 800">${fermentadora.estiloCerveja}</span></p>
                 <p class="card-text">Sensor: ${fermentadora.nome}</p>
         `
       }

@@ -85,6 +85,7 @@ function buscarDadosEVerificar() {
     });
 }
 
+
 function verificarAlerta(dados) {
     let sensores = {};
     let idSensorUltimo = 0;
@@ -202,7 +203,7 @@ function verificarAlerta(dados) {
             }
 
             if (mensagem !== '') {
-                mostrarAlerta(categoria, mensagem);
+                enfileirarAlerta(categoria, mensagem);
                 cadastrarAlerta(categoria, mensagem, idCapturaTempAlerta)
             }
         } else {
@@ -234,11 +235,11 @@ function processarFilaAlertas() {
 
     setTimeout(() => {
         processarFilaAlertas();
-    }, 4000);
+    }, 3700);
 }
 
 
-function mostrarAlerta(tipo, mensagem, tempo = 15000) {
+function mostrarAlerta(tipo, mensagem, tempo = 6000) {
     var iconTipo = '';
     var classAlert = '';
 
@@ -270,7 +271,7 @@ function mostrarAlerta(tipo, mensagem, tempo = 15000) {
 
     setTimeout(() => {
         alerta.classList.remove('active');
-        setTimeout(() => alerta.remove(), 300);
+        setTimeout(() => alerta.remove(), 1000);
     }, tempo);
 }
 

@@ -19,4 +19,8 @@ router.get("/tempo-foraIdeal/:idSensor/:dataAtual", function (req, res) {
     medidaController.buscarTempoForaDoIdeal(req, res);
 })
 
+router.post('/gerar-dados', function (req, res) {
+    medidaController.gerarDados(req, res);
+}, )
+
 module.exports = router;

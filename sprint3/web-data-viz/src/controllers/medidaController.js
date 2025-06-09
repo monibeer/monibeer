@@ -84,10 +84,21 @@ function buscarTempoForaDoIdeal(req, res) {
 }
 
 
+function gerarDados(req, res) {
+    medidaModel.gerarDados()
+    .then(function (dados) {
+        console.log(dados);
+        res.status(200).send(dados)
+    }).catch(function (erro) {
+        res.status(500).send(erro)
+    })
+}
+
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
     buscarMedidasValidacaoAlerta,
-    buscarTempoForaDoIdeal
+    buscarTempoForaDoIdeal,
+    gerarDados
 
 }

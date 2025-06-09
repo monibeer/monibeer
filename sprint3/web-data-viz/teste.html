@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+</body>
+</html>
+
+<script>
+
+    function gerarDados() {
+        fetch(`http://localhost:3333/medidas/gerar-dados`, {
+            method: 'POST',
+        })
+        .then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json()
+                .then(function (dados) {
+                    console.log(dados);
+                })
+            }
+        })
+    }
+
+    const intervalo = setInterval(gerarDados, 5000);
+    clearInterval(intervalo)
+
+</script>
