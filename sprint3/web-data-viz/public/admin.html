@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/assetsDashboard/main.css">
     <link rel="stylesheet" href="./css/indexDashboard.css">
     <link rel="stylesheet" href="./css/admin.css">
+   
     <link rel="icon" href="./assets/Monibeer (1) 1.png" />
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -108,7 +109,15 @@
 
             <div class="container-dashboard">
                 <div class="container-cadastro">
-                    <strong id="texto-cadastro-funcionario">cadastro funcionario</strong>
+                    <div class="cadastros">
+                        <strong style="margin: 0;" id="texto-cadastro-funcionario">cadastro funcionario</strong>
+                        <div class="botoes-paginas">
+                            <a href="admin.html"><button style="background-color: #352000; color: rgb(252, 252, 252); border-radius: 3px;">Funcionário</button></a>
+                            <a href="fermentadoras.html"><button style="background-color: #DCAB20; color: white; border-radius: 3px;">Fermentadora</button></a>
+                        </div>
+                        
+                    </div>
+                    
                     <div id="modalFuncionario" style="display: none;">
 
                         <!--cadastro funcionario-->
@@ -137,7 +146,7 @@
 
                     <h1>Lista de Funcionários</h1>
                     <div class="row-buttons">
-                        <button id="button-addfuncionario" onclick="abrirModalCadastro()">Adicionar funcionário</button>
+                        <button id="button-addfuncionario" onclick="abrirModalCadastro()">+ Adicionar funcionário</button>
 
                         <!-- <div class="input-icon">
                             <i class="fa-solid fa-magnifying-glass"></i>

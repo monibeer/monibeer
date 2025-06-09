@@ -47,7 +47,7 @@ new Chart(ctx, {
                 }
             },
             datalabels: {
-                color: '#000',
+                color: '#ffff',
                 font: {
                     weight: 'bold',
                     size: 16,

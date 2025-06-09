@@ -130,6 +130,8 @@
           sessionStorage.ID_USUARIO = json.id;
           sessionStorage.TIPO_USUARIO = json.tipoUsuario;
           sessionStorage.FERMENTADORAS = JSON.stringify(json.fermentadoras);
+          sessionStorage.FK_EMPRESA = json.fkEmpresa;
+        
 
           setTimeout(function () {
             window.location = "./index-dashboard.html";

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/assets/main.css" />
+    <link rel="stylesheet" href="./css/assetsDashboard/main.css" />
+    <link rel="stylesheet" href="./css/indexDashboard.css" />
+     <link rel="stylesheet" href="./css/fermentadora.css">
+    <link rel="icon" href="./assets/Monibeer (1) 1.png" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  </head>
+  <body>
+    <section class="dashboard">
+      <div class="sidebar">
+        <a href="./index-dashboard.html">
+          <div class="logotipo">
+            <img src="./assets/monibeer-logo.png" alt="" />
+          </div>
+        </a>
+
+        <div class="buttons-navegation">
+          <div class="container-item">
+            <a href="./index-dashboard.html">
+              <div class="navigation-item">
+                <i class="fa-solid fa-house"></i>
+                <p>Home</p>
+              </div>
+            </a>
+
+            <a href="./setores.html">
+              <div class="navigation-item">
+                <i class="fa-solid fa-layer-group"></i>
+                <p>Meus Setores</p>
+              </div>
+            </a>
+            <a href="./admin.html">
+              <div class="navigation-item active">
+                <i class="fa-solid fa-building"></i>
+                <p>Funcionario</p>
+              </div>
+            </a>
+
+            <!-- Inserir link do jira -->
+            <a
+              href="https://monibeer.atlassian.net/servicedesk/customer/portal/35"
+              target="_blank"
+            >
+              <div class="navigation-item">
+                <i class="fa-solid fa-headset"></i>
+                <p>Suporte</p>
+              </div>
+            </a>
+
+          </div>
+
+          <a href="./login.html">
+            <div class="logout-item navigation-item">
+              <i class="fa-solid fa-right-from-bracket"></i>
+              <p>Logout</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="container-dashboard">
+        <div class="header">
+          <div class="container-searchBarGroup">
+            <i class="fa-solid fa-beer-mug-empty"></i>
+
+            <h3>Fermentadoras</h3>
+          </div>
+          <div class="container-actions">
+            <span>|</span>
+            <div class="container-mini-profile">
+              <img
+                src="https://media.istockphoto.com/id/1091291084/pt/vetorial/neutral-profile-picture.jpg?s=612x612&w=0&k=20&c=D5UkG2zMnMuM6XwHQjhY61tNIk_1kyiEu4XcgcI5lQs="
+                alt=""
+              />
+              <p id="header_usuario">Rodrigo Silva</p>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="container-dashboard">
+          <div class="container-cadastro">
+            <div class="cadastros">
+                        <strong style="margin: 0;" id="texto-cadastro-funcionario">cadastro fermentadora</strong>
+                        <div class="botoes-paginas">
+                            <a href="admin.html"><button style="background-color: #DCAB20; color: rgb(252, 252, 252); border-radius: 3px;">Funcionário</button></a>
+                            <a href="fermentadoras.html"><button style="background-color: #261800; color: white; border-radius: 3px;">Fermentadora</button></a>
+                        </div>
+                        
+                    </div>
+         
+            <div id="modalFuncionario" style="display: none">
+              <!--cadastro fermentadora-->
+              <div id="modal-content">
+                <h3>Cadastrar Fermentadoras</h3>
+                <div class="atualizar-dados">
+                  <strong>Nome:</strong>
+                  <input
+                    type="text"
+                    id="inputNome"
+                    placeholder="Nome fermentadora"
+                  />
+                  <strong>Setor:</strong>
+                  <select name="" id="selectSetor"></select>
+                  <!-- <input
+                    type="text"
+                    id="inputSetor"
+                    placeholder="Setor fermentadora"
+                  /> -->
+                  <strong>Estilo:</strong>
+                  <select name="" id="statusSensor">
+                    <option value="">IPA</option>
+                    <option value="">PILSEN</option>
+                  </select>
+
+                 
+                </div>
+                <div class="button-cadastrar">
+                  <button id="cancelar" onclick="fecharModalCadastro()">
+                    Cancelar
+                  </button>
+                  <button id="salvar" onclick="cadastrarFuncionario()">
+                    Salvar
+                  </button>
+                </div>
+              </div>
+            </div>
+            <br/>
+
+            <h1>Lista de Fermentadoras</h1>
+            <div class="row-buttons">
+              <button id="button-addfuncionario" onclick="abrirModalCadastro()">
+                + Adicionar fermentadora 
+              </button>
+    
+
+              <!-- <div class="input-icon">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input id="input_nome_funcionario" type="text" placeholder="Buscar funcionário" />
+                        </div> -->
+            </div>
+            <div id="usuarios">
+              <div class="registro">
+                <table border="1">
+                  <thead>
+                    <tr>
+                      <th>Nome</th>
+                      <th>Setor</th>
+                      <th>Estilo</th>
+                      <th>Status</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="tabelafermentadora">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div id="modal">
+              <div id="modal-content">
+                <h3>Atualizar Funcionário</h3>
+                <div class="atualizar-dados">
+                    
+                  Setor:   
+                  <select name="" id="selectSetor"></select>
+                  <!-- <input
+                    type="text"
+                    id="inputSetor"
+                    placeholder="Setor fermentadora"
+                  /> -->
+                  <strong>Estilo:</strong>
+                  <select name="" id="statusSensor">
+                    <option value="">IPA</option>
+                    <option value="">PILSEN</option>
+                  </select>
+
+                 
+                   <strong>Status Fermentadora</strong>
+                  <select name="" id="statusSensor">
+                    <option value="">ativo</option>
+                    <option value="">Inativo</option>
+                  </select>
+                </div>
+                <div class="button-atualizar">
+                  <button id="cancelar" onclick="fecharModal()">
+                    Cancelar
+                  </button>
+                  <button id="salvar" onclick="confirmarAtualizacao()">
+                    Salvar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
+<script>
+  header_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
+  const idAdmin = sessionStorage.getItem("ID_USUARIO");
+  const isAdmin = sessionStorage.getItem("TIPO_USUARIO");
+  const fkEmpresa = sessionStorage.getItem("FK_EMPRESA");
+
+  let funcionarioAtualId = null;
+
+  if (isAdmin !== "administrador") {
+    alert("Você precisa estar logado como administrador.");
+    window.location.href = "/index-dashboard.html";
+  }
+
+
+  //mecher aqui!! colocar para pegar os dados da fermentadoras e status sensor
+
+  fetch(`/empresa/buscarSetores/${fkEmpresa}`)
+    .then((res) => res.json())
+    .then((setor) => {
+      const select_setor = document.getElementById("selectSetor");
+      select_setor.innerHTML = "";
+
+      console.log(select_setor)
+      fermentadora.forEach((setor) => {
+        select_setor.innerHTML = `
+                <option value="">${setor.nome}</option>
+            `;
+        select_setor.appendChild(Option);
+      });
+    });
+
+  function abrirModal(id, nome, setor, estilo, status) {
+    funcionarioAtualId = id;
+    document.getElementById("inputNome").value = nome;
+    document.getElementById("inputSetor").value = setor;
+    document.getElementById("inputEstilo").value = estilo;
+    document.getElementById("inputStatus").value = status;
+
+    document.getElementById("modal").style.display = "block";
+  }
+
+  function fecharModal() {
+    document.getElementById("modal").style.display = "none";
+    funcionarioAtualId = null;
+  }
+
+  function abrirModalCadastro() {
+    document.getElementById("modalFuncionario").style.display = "block";
+  }
+
+  function fecharModalCadastro() {
+    document.getElementById("modalFuncionario").style.display = "none";
+
+    document.getElementById("inputNomeCadastro").value = "";
+    document.getElementById("inputEmailCadastro").value = "";
+    document.getElementById("inputSenhaCadastro").value = "";
+    document.getElementById("selectTipoCadastro").value = "";
+  }
+
+  function confirmarAtualizacao() {
+    const nome = document.getElementById("inputNome").value;
+    const email = document.getElementById("inputEmail").value;
+    const senha = document.getElementById("inputSenha").value;
+    const tipo = document.getElementById("inputTipo").value;
+
+    if (!nome || !email || !senha || !tipo) {
+      return alert("Preencha todos os campos!");
+    }
+
+    fetch(`/usuarios/atualizar/${funcionarioAtualId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nomeServer: nome,
+        emailServer: email,
+        senhaServer: senha,
+        tipoUsuarioServer: tipo,
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        alert("Usuário atualizado com sucesso!");
+        fecharModal();
+        location.reload();
+      } else {
+        alert("Erro ao atualizar.");
+      }
+    });
+  }
+
+  function deletarUsuario(id) {
+    const confirmar = confirm("Tem certeza que deseja deletar este usuário?");
+
+    if (!confirmar) return;
+
+    fetch(`/usuarios/deletar/${id}`, { method: "DELETE" }).then((res) => {
+      if (res.ok) {
+        alert("Usuário deletado.");
+        location.reload();
+      } else {
+        alert("Erro ao deletar usuário.");
+      }
+    });
+  }
+
+  function cadastrarFuncionario() {
+    const nome = document.getElementById("inputNomeCadastro").value;
+    const email = document.getElementById("inputEmailCadastro").value;
+    const senha = document.getElementById("inputSenhaCadastro").value;
+    const tipoUsuario = document.getElementById("selectTipoCadastro").value;
+
+    if (!nome || !email || !senha || !tipoUsuario) {
+      alert("Por favor, preencha todos os campos.");
+      return;
+    }
+
+    const idAdmin = sessionStorage.getItem("ID_USUARIO");
+
+    fetch(`/usuarios/buscar/${idAdmin}`)
+      .then((res) => res.json())
+      .then((admin) => {
+        const empresaId = admin.fkEmpresa;
+
+        fetch("/usuarios/cadastrar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            nomeServer: nome,
+            emailServer: email,
+            senhaServer: senha,
+            empresaServer: empresaId,
+            tipoUsuarioServer: tipoUsuario,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            alert(data.mensagem || "Funcionário cadastrado com sucesso!");
+            fecharModalCadastro();
+            location.reload();
+          })
+          .catch((err) => {
+            console.error("Erro ao cadastrar funcionário:", err);
+            alert("Erro ao cadastrar funcionário.");
+          });
+      })
+      .catch((err) => {
+        console.error("Erro ao buscar admin:", err);
+        alert("Erro ao obter dados da empresa.");
+      });
+  }
+</script>
+<script src="./js/validacaoAlerta.js"></script>
