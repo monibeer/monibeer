@@ -152,12 +152,18 @@ function ativarCodigo(req, res) {
 }
 
 
-function buscarSetores(req, res) {
-  var fkEmpresa = req.params.id;
 
-  empresaModel.buscarSetores(fkEmpresa).then((resultado) => {
-    res.status(200).json(resultado);
-  });
+function buscarSetores(req, res) {
+  var fkEmpresa = req.params.fkEmpresa;
+
+  empresaModel.buscarSetores(fkEmpresa)
+    .then((resultado) => {
+      res.status(200).json(resultado);
+    })
+    .catch((erro) => {
+      console.log("Erro ao buscar setores:", erro);
+      res.status(500).json({ erro: "Erro ao buscar setores" });
+    });
 }
 
 

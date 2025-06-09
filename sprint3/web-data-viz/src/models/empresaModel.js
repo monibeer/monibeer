@@ -61,10 +61,15 @@ function atualizarStatusCodigo(idCodigo) {
 }
 
 function buscarSetores(fkEmpresa) {
-  var instrucaoSql = `SELECT nome FROM setor WHERE fkEmpresa = '${fkEmpresa}'`;
+  var instrucaoSql = `
+    SELECT idSetor, nome 
+    FROM setor 
+    WHERE fkEmpresa = '${fkEmpresa}'
+  `;
 
   return database.executar(instrucaoSql);
 }
+
 
 module.exports = {
   buscarPorCnpj,

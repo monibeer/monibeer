@@ -1,14 +1,19 @@
 var express = require("express");
 var router = express.Router();
 
-var aquarioController = require("../controllers/fermentadoraController");
+var fermentadoraController = require("../controllers/fermentadoraController");
 
 router.get("/:empresaId", function (req, res) {
-  aquarioController.buscarFermentadorasPorEmpresa(req, res);
+  fermentadoraController.buscarFermentadorasPorEmpresa(req, res);
 });
 
-router.post("/cadastrar", function (req, res) {
-  fermentadoraController.cadastrar(req, res);
-});
+
+router.post('/cadastrar', fermentadoraController.cadastrarFermentadora);
+
+router.post("/cadastrarCompleto", fermentadoraController.cadastrarCompleto);
+
+router.get("/empresa/:fkEmpresa", fermentadoraController.listarFermentadorasPorEmpresa);
+
+
 
 module.exports = router;
