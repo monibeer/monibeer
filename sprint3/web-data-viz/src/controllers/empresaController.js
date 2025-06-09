@@ -152,7 +152,13 @@ function ativarCodigo(req, res) {
 }
 
 
+function buscarSetores(req, res) {
+  var fkEmpresa = req.params.id;
 
+  empresaModel.buscarSetores(fkEmpresa).then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
 
 
 module.exports = {
@@ -160,5 +166,6 @@ module.exports = {
   buscarPorId,
   cadastrar,
   listar,
-  ativarCodigo
+  ativarCodigo,
+  buscarSetores
 };

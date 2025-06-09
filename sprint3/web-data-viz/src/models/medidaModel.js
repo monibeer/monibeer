@@ -60,7 +60,7 @@ function gerarDados() {
     const dado = parseInt(Math.random() * 5 + 8);
     const dados = [];
 
-    for (var i = 0; i < 12; i++) {
+    for (var i = 0; i < 20; i++) {
         const variacao = parseInt(Math.random() * 20 - 10);
         
         dados.push(dado + (dado * variacao/100));
